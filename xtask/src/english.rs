@@ -29,6 +29,8 @@ pub struct Exception {
     pub path: String,
     /// Why the text is allowed; never empty.
     pub reason: String,
+    /// One exact line, when only canonical metadata on that line is exempt.
+    pub line: Option<String>,
 }
 
 impl Exception {
@@ -43,8 +45,8 @@ impl Exception {
 
 /// Reads the allowlist file.
 ///
-/// The file holds `[[exception]]` tables, each with a `path` and a `reason` string and nothing
-/// else.
+/// The file holds `[[exception]]` tables, each with a `path`, a `reason` and optionally one exact `line`.
+/// A line-specific exception never excuses other lines in the same file.
 ///
 /// # Errors
 ///
@@ -66,11 +68,23 @@ pub fn parse_allowlist(text: &str) -> Result<Vec<Exception>, String> {
             "{ALLOWLIST_PATH}: `exception` must be an array of tables"
         ));
     };
-    entries
+    let parsed: Vec<Exception> = entries
         .iter()
         .enumerate()
         .map(|(index, entry)| parse_entry(index + 1, entry))
-        .collect()
+        .collect::<Result<_, _>>()?;
+    for (index, entry) in parsed.iter().enumerate() {
+        if parsed.iter().take(index).any(|previous| {
+            previous.path == entry.path
+                && (previous.line == entry.line || previous.line.is_none() || entry.line.is_none())
+        }) {
+            return Err(format!(
+                "{ALLOWLIST_PATH}: duplicate or redundant exception for `{}`",
+                entry.path
+            ));
+        }
+    }
+    Ok(parsed)
 }
 
 fn parse_entry(number: usize, entry: &toml::Value) -> Result<Exception, String> {
@@ -80,7 +94,7 @@ fn parse_entry(number: usize, entry: &toml::Value) -> Result<Exception, String> 
     };
     if let Some(key) = entry
         .keys()
-        .find(|key| !matches!(key.as_str(), "path" | "reason"))
+        .find(|key| !matches!(key.as_str(), "path" | "reason" | "line"))
     {
         return Err(fail(&format!("has the unknown key `{key}`")));
     }
@@ -99,7 +113,25 @@ fn parse_entry(number: usize, entry: &toml::Value) -> Result<Exception, String> 
             "the path must be relative to the repository root with `/` separators",
         ));
     }
-    Ok(Exception { path, reason })
+    let line = entry
+        .get("line")
+        .map(|value| {
+            value
+                .as_str()
+                .filter(|line| !line.trim().is_empty())
+                .map(str::to_owned)
+                .ok_or_else(|| fail("needs a non-empty `line` string"))
+        })
+        .transpose()?;
+    if line
+        .as_ref()
+        .is_some_and(|line| line.contains(['\n', '\r']) || path.ends_with('/'))
+    {
+        return Err(fail(
+            "an exact line needs a file path and must contain no line break",
+        ));
+    }
+    Ok(Exception { path, reason, line })
 }
 
 /// Names the German text in `files` that no entry of `allowlist` excuses.
@@ -112,7 +144,7 @@ pub fn violations(files: &[SourceFile], allowlist: &[Exception]) -> Vec<String> 
     let mut found = Vec::new();
     let mut used = vec![false; allowlist.len()];
     for file in files {
-        let excusing: Vec<usize> = allowlist
+        let matching_path: Vec<usize> = allowlist
             .iter()
             .enumerate()
             .filter(|(_, exception)| exception.covers(&file.path))
@@ -122,6 +154,15 @@ pub fn violations(files: &[SourceFile], allowlist: &[Exception]) -> Vec<String> 
             let Some(evidence) = german_evidence(line) else {
                 continue;
             };
+            let excusing: Vec<_> = matching_path
+                .iter()
+                .copied()
+                .filter(|&position| {
+                    allowlist.get(position).is_some_and(|exception| {
+                        exception.line.as_deref().is_none_or(|exact| exact == line)
+                    })
+                })
+                .collect();
             if excusing.is_empty() {
                 found.push(format!(
                     "{}:{}: German text ({evidence})",
@@ -178,6 +219,7 @@ mod tests {
         Exception {
             path: path.to_owned(),
             reason: "a verbatim quote".to_owned(),
+            line: None,
         }
     }
 
@@ -308,7 +350,8 @@ mod tests {
             allow[0],
             Exception {
                 path: "docs/a.md".into(),
-                reason: "verbatim quote".into()
+                reason: "verbatim quote".into(),
+                line: None,
             }
         );
         assert_eq!(allow[1].path, "corpus/");
@@ -351,5 +394,64 @@ mod tests {
         assert!(parse_allowlist("[other]\nx = 1\n").is_err());
         assert!(parse_allowlist("exception = 3\n").is_err());
         assert!(parse_allowlist("[[exception]\n").is_err());
+    }
+    #[test]
+    fn exact_metadata_line_exceptions_keep_other_lines_and_files_enforced() {
+        let first = "user-id = 91569 # Martin Kr\u{00f6}ning (mkroening)";
+        let second = "user-id = 6134 # Bastian K\u{00f6}cher (bkchr)";
+        let text = format!(
+            r#"[[exception]]
+path = "supply-chain/audits.toml"
+line = "{first}"
+reason = "Canonical generated publisher identity."
+[[exception]]
+path = "supply-chain/audits.toml"
+line = "{second}"
+reason = "Canonical generated publisher identity."
+"#
+        );
+        let parsed = parse_allowlist(&text);
+        assert!(parsed.is_ok(), "{parsed:?}");
+        let exceptions = parsed.unwrap();
+        let metadata = format!("{first}\n{second}");
+        assert!(violations(&[file("supply-chain/audits.toml", &metadata)], &exceptions).is_empty());
+        let changed = format!("{metadata}\nDas ist nicht erlaubt.");
+        assert_eq!(
+            violations(&[file("supply-chain/audits.toml", &changed)], &exceptions).len(),
+            1
+        );
+        assert_eq!(
+            violations(&[file("other.toml", &metadata)], &exceptions).len(),
+            4
+        );
+        assert_eq!(
+            violations(&[file("supply-chain/audits.toml", first)], &exceptions).len(),
+            1
+        );
+        let changed = metadata.replace("mkroening", "changed");
+        assert_eq!(
+            violations(&[file("supply-chain/audits.toml", &changed)], &exceptions).len(),
+            2
+        );
+    }
+
+    #[test]
+    fn exact_line_entries_reject_duplicates_redundancy_and_invalid_lines() {
+        let valid = "[[exception]]\npath = 'a.toml'\nline = 'a line'\nreason = 'metadata'\n";
+        assert!(parse_allowlist(&format!("{valid}{valid}")).is_err());
+        let spaced = parse_allowlist(&valid.replace("'a line'", "' a line '")).unwrap();
+        assert_eq!(
+            spaced.first().and_then(|entry| entry.line.as_deref()),
+            Some(" a line ")
+        );
+        let whole_file = "[[exception]]\npath = 'a.toml'\nreason = 'metadata'\n";
+        assert!(parse_allowlist(&format!("{valid}{whole_file}")).is_err());
+        for invalid in [
+            valid.replace("'a.toml'", "'a/'"),
+            valid.replace("'a line'", "''"),
+            valid.replace("'a line'", "12"),
+        ] {
+            assert!(parse_allowlist(&invalid).is_err(), "{invalid}");
+        }
     }
 }

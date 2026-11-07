@@ -8,6 +8,18 @@
 pub enum Step {
     /// The supply-chain guard of 10 S-4 over the repository files; it runs before any Cargo call.
     SupplyChainGuard,
+    /// The exact approved bundled SQLite source, features and build-input boundary.
+    SqliteNative,
+    /// The approved disabled-feature and off-target native package restrictions.
+    NativeScope,
+    /// The exact owner-approved literal assembly inventory and activation scope.
+    NativeAssembly,
+    /// Fresh canonical inputs bound by the approved packaging legal profiles.
+    PackageLegalSources,
+    /// The reviewed build-script and procedural-macro inventory of S-12.
+    BuildCode,
+    /// Line coverage for the documented core crates.
+    CoreCoverage,
     /// The justification rule of 10 S-6 over the suppressions in `deny.toml`.
     DenySuppressions,
     /// The bootstrap rule of 10 S-6 over the `cargo-vet` exemptions in `supply-chain/`.
@@ -20,7 +32,7 @@ pub enum Step {
     SourceHeaders,
     /// The English check over the tracked files (ADR-0005 D12).
     English,
-    /// The Cargo dependency edges against the architecture context map.
+    /// Cargo context-map edges and the persistence-only reconstruction boundary.
     Architecture,
     /// A Cargo invocation that must exit successfully.
     Cargo {
@@ -44,6 +56,12 @@ impl Step {
     pub fn name(&self) -> &'static str {
         match self {
             Self::SupplyChainGuard => "supply-chain guard",
+            Self::SqliteNative => "sqlite native scope",
+            Self::NativeScope => "native scope",
+            Self::NativeAssembly => "native assembly",
+            Self::PackageLegalSources => "packaging legal source bindings",
+            Self::BuildCode => "build-time code",
+            Self::CoreCoverage => "core coverage",
             Self::DenySuppressions => "cargo-deny suppressions",
             Self::VetExemptions => "cargo-vet exemptions",
             Self::Dependabot => "dependabot",
@@ -70,6 +88,11 @@ fn cargo(name: &'static str, args: &[&str]) -> Step {
 pub fn plan() -> Vec<Step> {
     vec![
         Step::SupplyChainGuard,
+        Step::SqliteNative,
+        Step::BuildCode,
+        Step::NativeScope,
+        Step::NativeAssembly,
+        Step::PackageLegalSources,
         cargo(
             "cargo-deny",
             &["deny", "--locked", "check", "licenses", "sources", "bans"],
@@ -102,6 +125,7 @@ pub fn plan() -> Vec<Step> {
             env: vec![("RUSTDOCFLAGS", "-D warnings")],
         },
         cargo("tests", &["test", "--workspace", "--locked"]),
+        Step::CoreCoverage,
         Step::RequirementTags {
             list: ["test", "--workspace", "--locked", "--", "--list"]
                 .map(str::to_owned)
@@ -126,13 +150,19 @@ mod tests {
             Step::Cargo { args, .. } => args.iter().map(String::as_str).collect(),
             Step::RequirementTags { list } => list.iter().map(String::as_str).collect(),
             Step::SupplyChainGuard
+            | Step::SqliteNative
+            | Step::BuildCode
+            | Step::NativeScope
+            | Step::NativeAssembly
+            | Step::PackageLegalSources
             | Step::DenySuppressions
             | Step::VetExemptions
             | Step::Dependabot
             | Step::LicenceCopy
             | Step::SourceHeaders
             | Step::English
-            | Step::Architecture => Vec::new(),
+            | Step::Architecture
+            | Step::CoreCoverage => Vec::new(),
         }
     }
 
@@ -163,6 +193,11 @@ mod tests {
             names,
             [
                 "supply-chain guard",
+                "sqlite native scope",
+                "build-time code",
+                "native scope",
+                "native assembly",
+                "packaging legal source bindings",
                 "cargo-deny",
                 "cargo-deny suppressions",
                 "cargo-vet exemptions",
@@ -175,6 +210,7 @@ mod tests {
                 "clippy",
                 "rustdoc",
                 "tests",
+                "core coverage",
                 "requirement tags"
             ]
         );

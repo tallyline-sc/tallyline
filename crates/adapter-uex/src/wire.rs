@@ -26,13 +26,13 @@ const CONTAINER_SIZE_SEPARATOR: char = ',';
 /// A number that UEX may send as a JSON number or as a numeric string.
 #[derive(Deserialize)]
 #[serde(untagged)]
-enum Numeric {
+pub(crate) enum Numeric {
     Number(Number),
     Text(String),
 }
 
 impl Numeric {
-    fn whole(&self, field: &str) -> Result<u64, ReadError> {
+    pub(crate) fn whole(&self, field: &str) -> Result<u64, ReadError> {
         let parsed = match self {
             Self::Number(number) => number.as_u64(),
             Self::Text(text) => text.trim().parse().ok(),
@@ -40,17 +40,37 @@ impl Numeric {
         parsed.ok_or_else(|| malformed(&format!("{field} is not a whole number")))
     }
 
-    fn is_positive(&self, field: &str) -> Result<bool, ReadError> {
+    pub(crate) fn price(
+        &self,
+        field: &str,
+    ) -> Result<tallyline_shared_kernel::api::model::PricePerScu, ReadError> {
         let parsed = match self {
-            Self::Number(number) => number.as_f64(),
-            Self::Text(text) => text.trim().parse().ok(),
+            Self::Number(number) => number.to_string().parse(),
+            Self::Text(text) => text.trim().parse(),
         };
-        parsed
-            .map(|value: f64| value > 0.0)
-            .ok_or_else(|| malformed(&format!("{field} is not a number")))
+        parsed.map_err(|_| {
+            malformed(&format!(
+                "{field} is not a supported non-negative exact price"
+            ))
+        })
     }
 
-    fn flag(&self, field: &str) -> Result<bool, ReadError> {
+    pub(crate) fn quantity(
+        &self,
+        field: &str,
+    ) -> Result<tallyline_shared_kernel::api::model::ScuQuantity, ReadError> {
+        let parsed = match self {
+            Self::Number(number) => number.to_string().parse(),
+            Self::Text(text) => text.trim().parse(),
+        };
+        parsed.map_err(|_| {
+            malformed(&format!(
+                "{field} is not a supported non-negative exact SCU quantity"
+            ))
+        })
+    }
+
+    pub(crate) fn flag(&self, field: &str) -> Result<bool, ReadError> {
         match self.whole(field)? {
             0 => Ok(false),
             1 => Ok(true),
@@ -152,8 +172,10 @@ fn status_level(wire: StatusLevelWire) -> Result<StatusLevel, ReadError> {
 }
 
 fn price_row(wire: PriceRowWire) -> Result<PriceRow, ReadError> {
-    let buys = wire.price_buy.is_positive("price_buy")?;
-    let sells = wire.price_sell.is_positive("price_sell")?;
+    let buy_price = wire.price_buy.price("price_buy")?;
+    let sell_price = wire.price_sell.price("price_sell")?;
+    let buys = !buy_price.is_zero();
+    let sells = !sell_price.is_zero();
     let side = match (buys, sells) {
         (true, false) => TradedSide::Buy,
         (false, true) => TradedSide::Sell,
@@ -169,6 +191,11 @@ fn price_row(wire: PriceRowWire) -> Result<PriceRow, ReadError> {
         terminal: TerminalId(wire.id_terminal.whole("id_terminal")?),
         commodity: CommodityId(wire.id_commodity.whole("id_commodity")?),
         side,
+        price: match side {
+            TradedSide::Buy => Some(buy_price),
+            TradedSide::Sell => Some(sell_price),
+            TradedSide::Both | TradedSide::Neither => None,
+        },
         status,
         container_sizes: container_sizes(wire.container_sizes.as_deref().unwrap_or_default())?,
     })
@@ -188,7 +215,7 @@ fn optional_level(value: &Numeric, field: &str) -> Result<Option<u8>, ReadError>
     level(value, field).map(Some)
 }
 
-fn container_sizes(csv: &str) -> Result<Vec<ContainerSize>, ReadError> {
+pub(crate) fn container_sizes(csv: &str) -> Result<Vec<ContainerSize>, ReadError> {
     if csv.trim().is_empty() {
         return Ok(Vec::new());
     }
@@ -204,7 +231,7 @@ fn container_sizes(csv: &str) -> Result<Vec<ContainerSize>, ReadError> {
         .collect()
 }
 
-fn unescaped(text: &str) -> String {
+pub(crate) fn unescaped(text: &str) -> String {
     let mut result = String::with_capacity(text.len());
     let mut rest = text;
     while let Some(start) = rest.find('&') {
@@ -224,7 +251,7 @@ fn unescaped(text: &str) -> String {
     result
 }
 
-fn parse<T: DeserializeOwned>(data: Value, resource: &str) -> Result<T, ReadError> {
+pub(crate) fn parse<T: DeserializeOwned>(data: Value, resource: &str) -> Result<T, ReadError> {
     serde_json::from_value(data).map_err(|_| {
         malformed(&format!(
             "{resource} data does not match the documented shape"
@@ -232,7 +259,7 @@ fn parse<T: DeserializeOwned>(data: Value, resource: &str) -> Result<T, ReadErro
     })
 }
 
-fn malformed(detail: &str) -> ReadError {
+pub(crate) fn malformed(detail: &str) -> ReadError {
     ReadError::Malformed {
         detail: detail.to_owned(),
     }

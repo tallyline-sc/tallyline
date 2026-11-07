@@ -1,0 +1,15 @@
+[package]
+name = "tallyline-reporting"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+tallyline-reference-data.workspace = true
+tallyline-shared-kernel.workspace = true
+tallyline-game = { path = "../game" }
+
+[lints]
+workspace = true

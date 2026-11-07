@@ -9,7 +9,6 @@ use std::fmt;
 use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
-use std::process::Command;
 
 use crate::hashlist::{
     BuildError, Difference, HashList, ListError, build, compare, sha256_hex, tree_hash,
@@ -89,7 +88,13 @@ pub fn regenerate(root: &Path, cargo: &OsStr, work_dir: &Path) -> io::Result<Pat
     let vendor_dir = work_dir.join("vendor");
     let cargo_home = work_dir.join("cargo-home");
     fs::create_dir_all(&cargo_home)?;
-    let output = Command::new(cargo)
+    let paths = crate::work_paths::WorkPaths::resolve(
+        root,
+        &std::env::current_dir()?,
+        std::env::var_os("CARGO_TARGET_DIR").as_deref(),
+    )?;
+    let output = paths
+        .command(cargo)
         .args(["vendor", "--locked", "--versioned-dirs"])
         .arg(&vendor_dir)
         .current_dir(root)

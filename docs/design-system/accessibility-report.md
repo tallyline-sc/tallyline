@@ -1,6 +1,6 @@
 # Accessibility report
 
-> **Doc type:** Living reference — draft (JavaFX handoff stage 2; contrast and icon feature width so far). Last reviewed: 2026-10-12.
+> **Doc type:** Living reference — draft (JavaFX handoff stage 2; contrast and icon feature width so far). Last reviewed: 2026-11-03.
 
 > **Note 2026-10-12:** [ADR-0005](../adr/0005-rust-and-egui.md) replaces JavaFX with egui. The contrast results below are computed on the token values and stand unchanged; the egui rendition replaces the mechanism the "rendered JavaFX sheets" row and the JavaFX rendering of icon strokes refer to (Modena, mechanism A, `SVGPath`), so those checks are re-aimed at the egui rendition once open point O-112 adopts it. The crate's own `tests/contrast.rs` checks text, focus ring and control borders against the same floors. The screen-reader part of the manual protocol is now `R-UI-17a`, a Could without a gate, spike or milestone (ADR-0005 D5, O-111); contrast, keyboard operation, text size and "colour is never the only signal" remain binding (R-UI-17). The generator named below (`Contrast.java`) is replaced by an `xtask` task once O-112 is settled; until then it stays the way to regenerate the generated section.
 
@@ -872,3 +872,11 @@ Thinnest ink: `hdr_off` and `hdr_on` 0.73 px, `rule_settings` 0.79 px, `fiber_ne
 **Decision (O-107, @greluc, 2026-10-09):** the icons stay at wght 400. Instead of the fixed 1.5 px floor, the manual protocol checks the anti-aliased JavaFX rendering at 100, 125 and 150 %, and a glyph that is not legible there is replaced through Claude Design; the first candidates are `point_of_sale`, `hdr_on`, `hdr_off`, `fiber_new` and `rule_settings`. Not yet checked: how JavaFX's anti-aliased `SVGPath` renders these widths at 100 %, 125 % and 150 % (stage 4, manual protocol).
 
 **Note 2026-10-12:** under ADR-0005 the icons are glyphs of a font rendered by egui, not JavaFX `SVGPath`, so the rendering check at 100, 125 and 150 % is repeated on the egui rendition; the measured geometric widths above stand. The delivered crate's icon font is modified and subset (open condition of O-112).
+
+## Drawn egui foundation checkpoint (2026-11-03)
+
+Corrected 2026-11-03: the recreated crate had no `tests/contrast.rs` despite the earlier note. Drawn contracts observe token colours, custom widget geometry, keyboard button focus, muted text, selection and dialog surfaces across three themes and two densities. Actual installed/shaped faces are checked against the DTCG ramp. A public confirmation-dialog contract observes its scrim; exact-decimal review contracts inspect Mono text. These are egui paint contracts, not measured pixel contrast or native/manual acceptance. Historical token contrast results stand; the native scale/text-size protocol and independent TextEdit focus remain open. See [component adoption](components.md).
+
+## Restored font contract coverage — 2026-11-03
+
+Corrected 2026-11-03: the exact historically approved Material Symbols subset is restored; it is no longer unavailable. Headless egui contracts draw the nine semantic state icons as their named glyphs across Dark, Light and High contrast at 100, 125 and 150 percent, and compare actual atlas areas of all 156 named symbols with the missing-glyph box. A successful glyph lookup alone is not the oracle. This checks resource loading and absence of missing boxes; it does not establish O-107 manual magnified legibility or native/wgpu acceptance. Those checks remain open, including the named thin-feature candidates above.

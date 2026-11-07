@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "reviewed": "2026-11-02",
+  "version": "1.31.0",
+  "decision": "ADR-0007 exact accepted official libraries; no replacement build or provider",
+  "source_commit": "402979ac1bef89dcd55add41eaa7277c407599eb",
+  "archives": [
+    {
+      "platform": "windows-x64",
+      "url": "https://github.com/microsoft/onnxruntime/releases/download/v1.31.0/onnxruntime-win-x64-1.31.0.zip",
+      "sha256": "3958d8a44984160692c1b4ffd0de3cb48f8c39f9d34bb31e433db06e30b82195"
+    },
+    {
+      "platform": "linux-x64",
+      "url": "https://github.com/microsoft/onnxruntime/releases/download/v1.31.0/onnxruntime-linux-x64-1.31.0.tgz",
+      "sha256": "cc5c72baf5ae5c8238a6841f0897227be2d02826b9cf98eaf02fdefaeeb03a57"
+    }
+  ],
+  "extracted_regular_files": [
+    {
+      "path": "supply-chain/notices/onnxruntime-windows/ThirdPartyNotices.txt",
+      "bytes": 344457,
+      "sha256": "c53a76501ef60db6f865f20599f220761201ac4057683acefdab37d861b86622"
+    },
+    {
+      "path": "supply-chain/notices/onnxruntime-windows/LICENSE",
+      "bytes": 1094,
+      "sha256": "c250d6278f0b47a6439fb7592b08b58a55eb9f535aa49a1db63211c3f982b674"
+    },
+    {
+      "path": "crates/adapter-ocr/assets/runtime/windows/onnxruntime.dll",
+      "bytes": 17253176,
+      "sha256": "0c42dc4e278f0968fdf9ebf1b1e54a74c657a9942e70803e453c91993451cf4c"
+    },
+    {
+      "path": "supply-chain/notices/onnxruntime-linux/LICENSE",
+      "bytes": 1073,
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+    },
+    {
+      "path": "crates/adapter-ocr/assets/runtime/linux/libonnxruntime.so.1.31.0",
+      "bytes": 29345384,
+      "sha256": "469849977cb60744ea160927e1a3a0643fd4c55c0aff743251c6d293402e334e"
+    },
+    {
+      "path": "supply-chain/notices/onnxruntime-linux/ThirdPartyNotices.txt",
+      "bytes": 338088,
+      "sha256": "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3"
+    },
+    {
+      "path": "supply-chain/notices/onnxruntime-windows/Privacy.md",
+      "bytes": 6635,
+      "sha256": "8c26e1fc8581d9553e475250fe014e3d1e5ea4ae9f1cb084a068ff8601703dc9"
+    },
+    {
+      "path": "supply-chain/notices/onnxruntime-linux/Privacy.md",
+      "bytes": 6571,
+      "sha256": "ea592b16d154ff2de759ba5210350c64593c378c1bbd0a2aa4ddef777edbf358"
+    }
+  ],
+  "extraction_executed_native_code": false,
+  "packaged_clean_os_acceptance_completed": false,
+  "licence": "MIT project; complete per-platform upstream third-party notices preserved without claiming all optional components are linked",
+  "scope": "Byte identity and extraction only. Retains the accepted native exception; no fresh full third-party legal review, linked-optional-component inventory or licence-compatibility certificate is claimed."
+}

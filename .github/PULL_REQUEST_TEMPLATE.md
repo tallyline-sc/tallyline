@@ -55,7 +55,7 @@ If something could not be tested, say so explicitly. "Tests pass" is not a descr
 ### Every pull request
 
 - [ ] Every commit carries a `Signed-off-by:` trailer that matches its author (DCO 1.1, `git commit -s`). A GitHub noreply address is fine if the commit author uses the same address.
-- [ ] I have signed the [CLA](https://github.com/greluc/tallyline/blob/main/CLA.md): my GitHub handle is in [`docs/cla-signatures.md`](https://github.com/greluc/tallyline/blob/main/docs/cla-signatures.md), or this pull request is my `cla: sign — <handle>` signature and quotes the acceptance sentence of CLA §11 verbatim in its description.
+- [ ] I have signed the [CLA](https://github.com/tallyline-sc/tallyline/blob/main/CLA.md): my GitHub handle is in [`docs/cla-signatures.md`](https://github.com/tallyline-sc/tallyline/blob/main/docs/cla-signatures.md), or this pull request is my `cla: sign — <handle>` signature and quotes the acceptance sentence of CLA §11 verbatim in its description.
 - [ ] Every commit message and the pull-request title follow Conventional Commits (`<type>(<scope>): <summary>`).
 - [ ] The documents this change affects are updated in the same commit as the change, not in a follow-up commit or pull request; contradictions I noticed are fixed or reported. A user-visible change also updates `README.md`, the user guide and `CHANGELOG.md`.
 - [ ] Every shipped component or bundled asset this pull request adds or changes has its `NOTICE` entry, and every bundled file (OCR model, font, icon, logo) also has its `REUSE.toml` annotation, its licence text under `LICENSES/` and its SHA-256 in `NOTICE`. Its licence is allowed by the "Stack rules" in `CLAUDE.md`.

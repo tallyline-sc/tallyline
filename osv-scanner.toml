@@ -1,0 +1,14 @@
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0370"
+ignoreUntil = 2026-11-16
+reason = "Triaged 2026-11-02 under S-19: informational unmaintained notice for zvariant merged into zbus 6, constrained by published secret-service 5.2.0 requiring zbus ^5, with weekly parent review and removal on an eligible maintained upgrade or by 2026-11-16 as recorded in docs/plan/10-supply-chain-security.md."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0371"
+ignoreUntil = 2026-11-16
+reason = "Triaged 2026-11-02 under S-19: informational unmaintained notice for zbus_names merged into zbus 6, constrained by published secret-service 5.2.0 requiring zbus ^5, with weekly parent review and removal on an eligible maintained upgrade or by 2026-11-16 as recorded in docs/plan/10-supply-chain-security.md."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2026-0372"
+ignoreUntil = 2026-11-16
+reason = "Triaged 2026-11-02 under S-19: informational unmaintained notice for zvariant_derive merged into zbus 6, constrained by published secret-service 5.2.0 requiring zbus ^5, with weekly parent review and removal on an eligible maintained upgrade or by 2026-11-16 as recorded in docs/plan/10-supply-chain-security.md."

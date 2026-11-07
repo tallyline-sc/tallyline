@@ -3,11 +3,12 @@
 
 # `tallyline-egui`
 
-Tallyline theme tokens and reusable widgets for egui 0.36.2.
+Tallyline theme tokens and reusable widgets for egui 0.37.0.
 
 The crate currently provides dark, light and high-contrast colour palettes;
-theme, density and reduced-motion settings; nine state icons drawn with egui
-primitives; and the `IconButton`, `Chip`, `DeltaBadge`, `Field`, `Panel` and
+theme, density and reduced-motion settings; 156 named Material Symbols Rounded
+codepoints and nine compatible semantic state icons; and the
+`IconButton`, `Chip`, `DeltaBadge`, `Field`, `Panel` and
 `Toast` widgets.
 
 ```rust,ignore
@@ -22,8 +23,12 @@ with those DTCG source files. `src/tokens.rs` contains the generated resolved
 colour tables. Token and icon generation sources are maintained outside this
 repository; only generated Rust and the reconciled JSON snapshot are committed.
 
-The earlier delivered crate and its modified Material Symbols subset were not
-available when this crate was recreated. The icon font is not included. The
-replacement state icons are hand-drawn egui primitives; pixel-grid and
-magnified wgpu review of the original font therefore remain inapplicable to
-this implementation and the full icon inventory is not recreated yet.
+Corrected 2026-11-03: the exact historically approved Material Symbols subset
+is restored from the supplied design archive. The desktop loader hash-checks
+the separate font file before registering its dedicated family. The public
+symbols module retains all 156 named codepoints; existing state consumers
+retain their Icon API. NOTICE §2.13 records source and modification limits.
+Actual atlas-glyph contracts cover 16/20 points at 100, 125 and 150 percent;
+native/magnified legibility review remains open.
+
+Corrected 2026-11-03: see [component adoption](../../docs/design-system/components.md) for the supplied archive identities and partial typography/widget adoption. All 20 named type styles and five approved face weights are installed through the separate-file desktop loader; native visual acceptance remains open.

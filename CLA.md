@@ -5,7 +5,7 @@
 This Contributor Licence Agreement ("Agreement") sets out the terms
 under which You ("the Contributor") license Your contributions to the
 Tallyline project ("the Project"), hosted at
-<https://github.com/greluc/tallyline>. By submitting a
+<https://github.com/tallyline-sc/tallyline>. By submitting a
 Contribution to the Project, You accept and agree to the terms below for
 Your present and future Contributions.
 

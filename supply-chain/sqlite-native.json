@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "status": "approved",
+  "reviewed_on": "2026-11-01",
+  "revisit_by": "2027-04-13",
+  "package": "libsqlite3-sys",
+  "version": "0.39.1",
+  "archive_sha256": "14a5f01b87b92705d07b433c06f96cbc764637d81a0bffb5734ce17cf0f9a2b3",
+  "files": {
+    "build.rs": "769b31370a41aa722e1d5a530012432c985bb142eab34d095481ffd1a3436e1b",
+    "sqlite3/sqlite3.c": "0c657666d819f261cc4007526ad57e1669de9949df7a8ea847aa284a2bf0ee52",
+    "sqlite3/sqlite3.h": "d6c84557261893439b341d2e6c35187ae3ea24fbfd843ad94616f72d89242b8c",
+    "sqlite3/sqlite3ext.h": "48963abfefb41ac329ef9d706acb5eadba952a99a748285c9ded6b5e0942721b"
+  },
+  "targets": [
+    "x86_64-pc-windows-msvc",
+    "x86_64-unknown-linux-gnu"
+  ],
+  "features": [
+    "bundled",
+    "bundled_bindings",
+    "cc",
+    "default",
+    "min_sqlite_version_3_45_3",
+    "pkg-config",
+    "vcpkg"
+  ],
+  "rusqlite": {
+    "version": "0.41.1",
+    "archive_sha256": "da9bba6f3506135e120a6586df05be18b48d18896600646a4bec8f993d91a594",
+    "features": [
+      "bundled",
+      "modern_sqlite"
+    ]
+  },
+  "inactive_assembly_selectors": [
+    "VDBE_PROFILE",
+    "SQLITE_PERFORMANCE_TRACE",
+    "SQLITE_ENABLE_STMT_SCANSTATUS"
+  ],
+  "assembly_lines": [
+    96254,
+    96262,
+    96270,
+    96279
+  ],
+  "accepted_environment": {
+    "LIBSQLITE3_SYS_USE_PKG_CONFIG": "0"
+  },
+  "rejected_environment_patterns": [
+    "LIBSQLITE3_FLAGS",
+    "SQLITE_*",
+    "SQLCIPHER_*",
+    "CFLAGS",
+    "CFLAGS_*",
+    "*_CFLAGS",
+    "CPPFLAGS",
+    "CPPFLAGS_*",
+    "*_CPPFLAGS",
+    "CC",
+    "CC_*",
+    "*_CC",
+    "HOST_CC",
+    "TARGET_CC",
+    "CC_KNOWN_WRAPPER_CUSTOM",
+    "CRATE_CC_NO_DEFAULTS",
+    "RUSTFLAGS",
+    "*_RUSTFLAGS",
+    "CARGO_ENCODED_RUSTFLAGS",
+    "CARGO_BUILD_RUSTFLAGS",
+    "RUSTC",
+    "RUSTC_*"
+  ],
+  "licence": "blessing",
+  "scope": "Default bundled SQLite 3.54.1 only. C hardware timer assembly remains inactive. No optional omission flags or debug/analysis selectors. Exact Rust feature and native source changes fail pending review."
+}

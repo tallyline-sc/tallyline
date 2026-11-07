@@ -178,11 +178,16 @@ Source code
                 also lists Intel MKL and a component under the JSON licence;
                 the 1.30.0 CPU natives contain neither (string scan); the
                 same scan is repeated for the pinned library.
-  Text          legal/onnxruntime/: the MIT licence text from the tag above,
-                and ThirdPartyNotices.txt and Privacy.md of the library,
-                unmodified; committed under supply-chain/notices/onnxruntime/
-                together with their reviewed-list entry (shipped with the
-                crate ort) in the change that makes the library ship
+  Text          legal/onnxruntime-windows/ and legal/onnxruntime-linux/:
+                each official1.31.0 archive's complete LICENSE,
+                ThirdPartyNotices.txt and Privacy.md, unmodified under
+                supply-chain/notices/onnxruntime-{windows,linux}/.
+                The offline catalogue supplies both distribution records;
+                packaging must ship only the matching native library.
+                Copied bytes were checked against their approved archives
+                on2026-11-02; the broad optional-component notices are not
+                a new claim that all listed options are linked. Source and
+                complete release/legal acceptance below remain open.
   Source        linked: the tag above; attached: Eigen from
                 eigen-mirror/eigen at the commit pinned in the tag's
                 cmake/deps.txt (MPL-2.0 section 3.2(a)); for 1.30.0 that was
@@ -203,39 +208,50 @@ Source code
   com.microsoft.onnxruntime:onnxruntime 1.30.0 and its sources jar are
   replaced by the ort crate and a separately pinned library.
 
-2.4 PaddleOCR PP-OCRv6 small models
-  Files         the text-detection and the text-recognition model (ONNX)
-                <file names, decided at integration>
-  Source        Hugging Face PaddlePaddle/PP-OCRv6_small_det_onnx and
-                PaddlePaddle/PP-OCRv6_small_rec_onnx at revision <commit>;
-                PaddlePaddle/PaddleOCR at <release tag or commit> for
-                provenance
-  SHA-256       <per file at the pinned revision, also in the checksum file
-                of S-22>
-                [for reference, the copies in basetool-sc-extractor have
-                det d73e0058b7a8086bbd57f3d10b8bcd4ff95363f67e06e2762b5e814fe9c9410e
-                rec 5435fd747c9e0efe15a96d0b378d5bd157e9492ed8fd80edf08f30d02fa24634]
-  Licence       Apache-2.0 [per the PaddleOCR repository; the licence on the
-                Hugging Face model cards is unverified; O-20]
-  Copyright     Copyright (c) 2016 PaddlePaddle Authors. All Rights Reserved.
-  Text          legal/paddleocr/LICENSE (Apache-2.0); in the repository
-                LICENSES/Apache-2.0.txt, added together with the models
-  Modified      no [if converted, quantised or fine-tuned: "modified <date>:
-                <how>" (Apache-2.0 section 4(b))]
+2.4 PaddleOCR PP-OCRv6 Small models
+  Files         crates/adapter-ocr/assets/small/PP-OCRv6_small_det.onnx
+                crates/adapter-ocr/assets/small/PP-OCRv6_small_rec.onnx
+  Source        Official PaddlePaddle Hugging Face ONNX data files:
+                det revision 28fe5895c24fd108c19eb3e8479f4ab385fbfc62,
+                rec revision b8f84f0b80c529de40b4fbb3544b84fa7233a513.
+                The original upstream file name is inference.onnx in each
+                repository; only the local file names differ.
+  SHA-256       det d73e0058b7a8086bbd57f3d10b8bcd4ff95363f67e06e2762b5e814fe9c9410e
+                rec 5435fd747c9e0efe15a96d0b378d5bd157e9492ed8fd80edf08f30d02fa24634
+  Bytes         det 9,880,512; rec 21,159,378.
+  Licence       Apache-2.0, declared in both pinned official model cards;
+                verified 2026-11-02. O-20 remains open for other weights.
+  Attribution   The upstream PaddleOCR project licence states:
+                Copyright (c) 2016 PaddlePaddle Authors. All Rights Reserved.
+                This preserves that project notice; it does not assert
+                a model-specific creation date absent from the cards.
+  Text          legal/paddleocr/LICENSE, copied unmodified from PaddleOCR
+                commit dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/LICENSE;
+                repository path supply-chain/notices/paddleocr/LICENSE,
+                SHA-256 3840c5c0c61c294264d2dd77b8777be6ddd90121ef4e0e64abcd22edea581d6e.
+  Modified      no model conversion, quantisation or fine-tuning by Tallyline.
+                The bytes match the official fixed LFS identities. A
+                reproducible upstream conversion recipe is not verified.
+  Evidence      crates/adapter-ocr/assets/small/provenance.json records exact
+                source/card/config identities. Native execution, output
+                shape, accuracy and packaging acceptance remain separate.
 
-2.5 PP-OCRv6 recognition dictionary
-  File          <file name>, 18,708 entries
-  Source        either PaddleOCR ppocr/utils/dict/ppocrv6_dict.txt at <tag or
-                commit> (at commit dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf
-                its SHA-256 is
-                b5f2bfe2bdd9448429e3e82b51c789775d9b42f2403d082b00662eb77e401c5d),
-                or the character list in the inference.yml of the
-                recognition model at the revision of 2.4 [decided at
-                integration]
-  Licence       Apache-2.0
-  Modified      if taken from inference.yml: "extracted, one entry per line,
-                <date>" (Apache-2.0 section 4(b))
-
+2.5 PP-OCRv6 Small recognition dictionary
+  File          crates/adapter-ocr/assets/small/ppocrv6_dict.txt;
+                18,708 ordered entries, 74,947 bytes, unchanged.
+  Source        PaddlePaddle/PaddleOCR,
+                ppocr/utils/dict/ppocrv6_dict.txt at
+                dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf.
+  SHA-256       b5f2bfe2bdd9448429e3e82b51c789775d9b42f2403d082b00662eb77e401c5d.
+  Binding       Every entry matches the character list of the Small rec
+                inference.yml at b8f84f0b80c529de40b4fbb3544b84fa7233a513,
+                config SHA-256 ab078671bb49f06228eadccd34f1bb501e157f7a047095ffb943ba81512c77d1.
+                Blank zero and the model's appended space imply 18,710
+                expected classes; native output-shape verification is pending.
+  Licence       Apache-2.0; upstream project copyright and unmodified
+                licence text are preserved in 2.4 and legal/paddleocr/LICENSE.
+  Modified      no; the canonical dictionary is not regenerated from YAML,
+                reordered, translated or deduplicated.
 2.6 Jackson
   Superseded 2026-10-12 (ADR-0005): JSON is handled by Rust crates listed in
   the generated list (2.16); no Jackson jar is shipped any more. The
@@ -243,21 +259,29 @@ Source code
   history of this file.
 
 2.7 SQLite (rusqlite with bundled SQLite)
-  Crates        rusqlite with the SQLite amalgamation bundled through
-                libsqlite3-sys [versions pinned in M0]; a registered
-                exception to the pure-Rust rule (09 section 3b, O-109)
-  Licence       SQLite: public-domain dedication (SPDX blessing) [unverified
-                at sqlite.org; O-82]; rusqlite and libsqlite3-sys [licences
-                read from the crates' Cargo.toml and licence files when
-                pinned in M0]
-  Text          legal/sqlite/: the licence files of the crates and the
-                SQLite dedication notice
-  Source        linked: the SQLite amalgamation inside the vendored
-                libsqlite3-sys sources of the tagged source
+  Crates        rusqlite 0.41.1 and libsqlite3-sys 0.39.1, both MIT;
+                bundled SQLite 3.54.1, registered native exception O-109
+  Licence       SQLite: public-domain dedication (SPDX blessing);
+                exact crate MIT texts and sqlite.org dedication read
+  Attribution   Copyright (c) 2014 The rusqlite developers (both crates).
+                SQLite's authors disclaim copyright; see its blessing.
+  Text          legal/crates/rusqlite-0.41.1/LICENSE,
+                legal/crates/libsqlite3-sys-0.39.1/LICENSE and
+                legal/sqlite/blessing.txt
+  Source        https://crates.io/crates/rusqlite/0.41.1
+                https://crates.io/crates/libsqlite3-sys/0.39.1
+                https://www.sqlite.org/2026/sqlite-amalgamation-3540100.zip
+  Integrity     sqlite3.c SHA-256
+                0c657666d819f261cc4007526ad57e1669de9949df7a8ea847aa284a2bf0ee52
+                blessing.txt SHA-256
+                592db1199aab67aafe4515db9808b420db122083807c5329b2f061951e79acbe
+  Verified 2026-11-01: the packaged C/header/extension header match the
+  official SQLite amalgamation byte for byte. SPDX's blessing text matches
+  the source dedication; sqlite.org confirms the public-domain statement.
+  This completes only the SQLite dedication reading within O-82.
   Amended 2026-10-12 (ADR-0005): replaces org.xerial:sqlite-jdbc 3.53.4.0
   with SQLite 3.53.4 inside its natives, its zentus portions and the mingw-w64
   start-up code note, none of which is shipped any more.
-
 2.8 SLF4J API
   Superseded 2026-10-12 (ADR-0005): logging uses the tracing crates, listed in
   the generated list (2.16). The detailed entry is in the history of this
@@ -314,40 +338,70 @@ Source code
   maintenance-fee EULA (O-11). cargo-packager and the WiX tools themselves
   are build tools and are not shipped.
 
-2.12 Fonts [pending O-112]
-  Families      IBM Plex Sans (Regular, SemiBold, Bold) and JetBrains Mono NL
-                (Regular, Bold), from the Tallyline design system
-  Per family    version, upstream source and commit [recorded when the fonts
-                are adopted; the delivered files are compared with upstream
-                first]
-  Licence       OFL-1.1. The OFL.txt ships next to the font files and comes
-                from the same source and commit as they do, because the
-                Reserved Font Name can differ between sources. The font files
-                are not subset, converted or otherwise modified.
-  SHA-256       read from the archive delivered with the Tallyline egui
-                rendition, not yet compared with upstream:
+2.12 Fonts
+  Families      IBM Plex Sans (Regular, SemiBold, Bold) 3.005 and JetBrains
+                Mono NL (Regular, Bold) 2.304, approved by ADR-0004/O-83 D4
+  Source        IBM/plex commit 71f558992315a12ca1f06a2215d57962a1992162,
+                packages/plex-sans/fonts/complete/ttf/ and its
+                packages/plex-sans/LICENSE.txt
+                JetBrains/JetBrainsMono v2.304, commit
+                cd5227bd1f61dff3bbd6c814ceaf7ffd95e947d9, fonts/ttf/
+                and the OFL.txt at the repository root
+  Copyright     Copyright © 2017 IBM Corp. with Reserved Font Name "Plex"
+                Copyright 2020 The JetBrains Mono Project Authors
+                (https://github.com/JetBrains/JetBrainsMono)
+  Licence       OFL-1.1. The source-specific OFL.txt ships next to each
+                family's font files. The files are separate and unmodified:
+                not subset, converted, renamed or embedded in the binary.
+  Location      assets/fonts/{ibm-plex,jetbrains-mono}/ in the app image;
+                crates/ui/assets/fonts/ in the source tree
+  SHA-256
     IBMPlexSans-Regular.ttf
       975dcda37d80f038dcd143c22e33ca2d97a0cc5a929aace1c749153b0fe1afa5
     IBMPlexSans-SemiBold.ttf
       a20caf8286023a6a7a85e40b1d2a4ae9fc3e3b1f9eda8f4c542dd4986af67bb1
     IBMPlexSans-Bold.ttf
       9e6c74a889a700d707613d24548fe4ffa6bc59559a0689d2cf9e133bdcdafb2f
+    ibm-plex/OFL.txt
+      7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da
     JetBrainsMonoNL-Regular.ttf
       fb3b2575d7b0657359707993288f12a7360344d39387bb26050e276d61f6bd2a
     JetBrainsMonoNL-Bold.ttf
       0198e841824025f8876e5c297f0b9b497ee8d6eb9969710a3328e1303f996ec3
-  Amended 2026-10-12 (ADR-0005): the families and the hashes are recorded;
-  the pending design-system decision D10 is now O-112.
-
+    jetbrains-mono/OFL.txt
+      30f0c136e3c88e422d0791acd97238870f9054a9729bc34cf2ff0d4ed8cac4ad
+  Corrected 2026-11-01: the static font files were fetched from these
+  immutable upstream sources and every TTF matches its previously recorded
+  hash. The earlier adoption and source-comparison placeholders are closed.
 2.13 Icons
-  Source        the Tallyline state icons are drawn from egui primitives in
-                crates/egui/src/icon.rs; no third-party icon font
-                or font file is distributed.
-  Change        amended 2026-11-01: the previously planned modified
-                Material Symbols subset was not present in the repository or
-                available crate source. Its claimed font hash could not be
-                verified, so that binary is not included. The replacement
-                icons are newly implemented as Rust drawing code.
+  Set           Material Symbols Rounded, owner-delivered modified subset;
+                156 glyphs, FILL 1, wght 400, GRAD 0, opsz 48
+  Copyright     Copyright 2026 Google LLC.  All Rights Reserved.
+  Licence       Apache-2.0; exact upstream LICENSE ships beside the font.
+  Location      assets/fonts/material-symbols/ in the app image;
+                crates/ui/assets/fonts/material-symbols/ in the source tree
+  SHA-256       MaterialSymbolsRounded-Tallyline.ttf (30,960 bytes)
+                40c8c3a472c6978cedd5028194fa174b2c63edae4165f7686d88fbf174602234
+                LICENSE
+                58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd
+  Modification  The static subset maps codepoints to filled glyphs and removes
+                GSUB, as described by the supplied unexecuted generator.
+                The full modification notice and 156-name list ship in the
+                adjacent NOTICE. Generator/tool versions and reproducible
+                derivation remain unproved; this restoration changes no font
+                bytes and makes no glyph-geometry equivalence claim.
+  Source        Owner-delivered tallyline-egui.zip, SHA-256
+                787c87a0ac63b0a7a393a8fa8aadcc499026c778de3a2e0d1cef99ca6b66b90f;
+                exact font hash recorded in NOTICE of commit
+                7304ffeb0a949d7238fd5f469489a088e26e0d25 on 2026-10-12 and
+                approved by O-112. Upstream comparison and licence source:
+                google/material-design-icons commit
+                49d4db35df873165d6bd6ba09b063c7dafbac2f4 (version 2.975).
+  Corrected 2026-11-03: the original approved subset is available and its
+  historical hash matches. Its dedicated family replaces the recreated
+  primitive state drawings. The magnified egui icon review remains open.
+  Version 2.975 is not described as latest; the exact historical artefact is
+  restored under the existing O-112 approval.
   Amended 2026-10-12 (ADR-0005): replaces the line-icon set (Lucide under
   ISC, plus MIT for the icons derived from Feather) and the path-data
   extraction of the earlier plan.
@@ -382,22 +436,26 @@ Source code
                 own.
 
 2.17 egui and eframe
-  Version       egui and eframe 0.36.2 with the wgpu backend (ADR-0005 D3)
+  Version       egui and eframe 0.37.0 with the wgpu backend (ADR-0005 D3)
                 [crate licences and notices are collected from their
                 manifests and vendored sources]
   Text          legal/crates/, with the other crates
   Added texts   the published sources omit the licence files for accesskit,
-                ecolor, egui, emath, epaint and profiling. Their MIT and
+                ecolor, egui, emath, epaint and profiling. Added 2026-11-01:
+                eframe, egui-wgpu and egui-winit 0.37.0 omit the same files
+                and use the existing emilk/egui texts below, reverified at the
+                official release tag. Their MIT and
                 Apache-2.0 texts are copied unmodified from upstream:
-    legal/accesskit/ (with accesskit 0.24.1)
-      AccessKit/accesskit main at f3026222559c7f5f46d8f25cb7404de68eb149f0
+    legal/accesskit/ (with accesskit 0.25.1)
+      AccessKit/accesskit main at ce8164ba92995cfa86005b6259115e08c8244253
       LICENSE-APACHE SHA-256
       62c7a1e35f56406896d7aa7ca52d0cc0d272ac022b5d2796e7d6905db8a3636a
       LICENSE-MIT SHA-256
       23f18e03dc49df91622fe2a76176497404e46ced8a715d9d2b67a7446571cca3
-    legal/ecolor/, legal/egui/, legal/emath/ and legal/epaint/
-      emilk/egui tag 0.36.2, commit
-      49682f8baa058bf49e011035cfbd6e825f88a5ef
+    legal/ecolor/, legal/egui/, legal/emath/, legal/epaint/,
+    legal/eframe/, legal/egui-wgpu/ and legal/egui-winit/
+      emilk/egui tag 0.37.0, commit
+      841a328ba2dd8f6996beb7189ebb7fc00e668a2a
       LICENSE-APACHE SHA-256
       8173d5c29b4f956d532781d2b86e4e30f83e6b7878dce18c919451d6ba707c90
       LICENSE-MIT SHA-256
@@ -409,6 +467,14 @@ Source code
       LICENSE-MIT SHA-256
       e64891b51361725890d69bafa508ad013bc92aeef99054caecb6f5ce5f7dfd51
 
+  Corrected 2026-11-01: egui 0.37.0 licence texts were retrieved at the
+  separately verified official release tag above and are byte-identical to
+  the retained texts. The published VCS pointer
+  7c0b40402271e8d40cda69f87cf3c2617c2e4382 is distinct and the official
+  commit API returns no such commit. All 279 packaged Rust files across
+  the nine 0.37.0 crates match the release tag. This comparison does not
+  assert that the published VCS pointer and tag are the same commit.
+
 2.18 keyring
   Version       keyring 4.2.0, the OS credential store access for the UEX
                 secret key and app token [licence and the platform crates it
@@ -416,15 +482,15 @@ Source code
   Text          legal/crates/, with the other crates
 
 2.19 TLS provider of rustls
-  Crates        aws-lc-rs 1.18.2 with aws-lc-sys 0.46.0 (AWS-LC, C, C++ and
+  Crates        aws-lc-rs 1.19.0 with aws-lc-sys 0.47.0 (AWS-LC, C, C++ and
                 assembler, compiled by the build script of aws-lc-sys); a
                 registered exception to the pure-Rust rule (09 section 3b,
                 ADR-0006, O-110). Pulled in by rustls 0.23.46 with its
                 aws-lc-rs feature, through the crate tallyline-adapter-uex
   Licence       aws-lc-rs: ISC AND (Apache-2.0 OR ISC); aws-lc-sys: ISC,
                 Apache-2.0, MIT, BSD-3-Clause and MIT-0 as an alternative of a
-                dual licence, per-file as read in the published 0.46.0 on
-                2026-10-14 (ADR-0006). The jitterentropy library is offered
+                dual licence, per-file as read in the published 0.47.0 on
+                2026-11-01 (ADR-0006). The jitterentropy library is offered
                 under a BSD-style licence or GPL-2.0; the BSD-3-Clause option
                 is the one elected. The Keccak and AES reference code is
                 CC0-1.0.
@@ -432,14 +498,14 @@ Source code
                 BSD-3-Clause and MIT-0 texts, and the notices of
                 jitterentropy, s2n-bignum, mlkem-native, mldsa-native, fiat
                 and the CC0 reference code, copied unmodified from the
-                vendored aws-lc-sys 0.46.0 into
-                legal/crates/aws-lc-sys-0.46.0/ (LICENSE, aws-lc/LICENSE,
+                vendored aws-lc-sys 0.47.0 into
+                legal/crates/aws-lc-sys-0.47.0/ (LICENSE, aws-lc/LICENSE,
                 aws-lc/third_party/fiat/LICENSE)
-  Upstream      aws/aws-lc at tag v5.11.0, commit
-                fa9bc8d6f7cfb2cf849b247fb06bbbfc41ecc9d6: the aws-lc
+  Upstream      aws/aws-lc at tag v5.12.0, commit
+                cd481c207e38f06aeb5766f4a1cdfce10a4c0af8: the aws-lc
                 submodule of aws/aws-lc-rs at commit
-                9df497501436596d4da77109217806b3af7f56cb, which the published
-                aws-lc-sys 0.46.0 names in its .cargo_vcs_info.json
+                5d496f88b40f327e28315deecc1a5a1fd1e81e95, which the published
+                aws-lc-sys 0.47.0 names in its .cargo_vcs_info.json
   Added texts   aws-lc/LICENSE refers to two LICENSE files that the published
                 crate does not contain. They are taken unmodified from the
                 upstream commit above, committed under supply-chain/notices/
@@ -451,6 +517,11 @@ Source code
     legal/s2n-bignum/LICENSE
       third_party/s2n-bignum/s2n-bignum-imported/LICENSE, SHA-256
       41c6380384dc6065456d01405ef0b43e5fe39ba1bccc4ec67801cc66142728e5
+  Corrected 2026-11-01: the approved native update retains the same
+  licence options. Both separately supplied native licence texts above
+  were retrieved at the new exact AWS-LC commit and are byte-identical.
+  BSD-3-Clause remains the jitterentropy election, and s2n-bignum retains
+  Apache-2.0; complete original texts and alternatives are preserved.
   Corrected 2026-10-15: the published aws-lc-sys 0.46.0 carries the notices
   of jitterentropy and s2n-bignum only as the summaries in aws-lc/LICENSE,
   not as files of their own.
@@ -580,8 +651,10 @@ Which variant goes on which surface (light or dark background) is checked by
 the owner against the kit [open point O-27].
 
 The two notices follow verbatim. They stay in English in every locale, each
-as one unbroken line, and are never reworded, translated, wrapped or
-"tidied"; their quirks are part of the prescribed text.
+as one unbroken string, and are never reworded, translated or
+"tidied"; their quirks are part of the prescribed text. Corrected 2026-11-01:
+R-UI-19 permits layout flow over several lines without inserting line breaks
+into either stored string.
 
 Fan Kit Guidelines, section 2b (SHA-256 of the UTF-8 line without its line
 break: 154deedbb183aeec2ba7f05c3d16416e55ceee634a36ec1f9ee4785b26467fa1):
@@ -638,3 +711,250 @@ from the OpenJDK runtime and OpenJFX, which are no longer shipped. If the
 generated list (2.16) or the ONNX Runtime ThirdPartyNotices.txt (2.3) shows a
 shipped component whose licence requires a credit, it is added here in the
 licence's own wording.
+
+
+
+7. Disabled and unsupported native dependency metadata
+-----------------------------------------------------
+
+Approved 2026-11-01 for graph metadata only: wayland-backend 0.3.17 has two
+MIT-licensed C logging shims, but its log feature is disabled. Android-only
+android-activity 0.6.1 (crate MIT OR Apache-2.0; native GameActivity Apache-2.0)
+and Apple-only objc-sys 0.3.5 (MIT) are excluded from the Windows and Linux
+build graphs. These parts are not compiled or shipped. Any activation needs
+new owner approval; the restrictions and source evidence are in 09 section 3b.
+
+8. Additional omitted crate licence files adopted with the desktop shell
+-----------------------------------------------------------------------
+
+clipboard-win 5.4.3 declares BSL-1.0, but omits its licence file from the
+published archive. The unmodified LICENSE from DoumanAsh/clipboard-win commit
+ed27008ae5d1f10cfbb266de039f0fb35fd05a56 (the published .cargo_vcs_info.json)
+ships as legal/clipboard-win/LICENSE; SHA-256
+c9bff75738922193e67fa726fa225535870d2aa1059f91452c411736284ad566.
+
+spirv 0.4.0+sdk-1.4.341.0 declares Apache-2.0, but omits its licence file from
+the published archive. The unmodified LICENSE from gfx-rs/rspirv commit
+8afc3d0ac8e158128cd1410bb2e4b4c26ab11bb4 (the published .cargo_vcs_info.json)
+ships as legal/spirv/LICENSE; SHA-256
+cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30.
+
+Both entries are in the reviewed list of S-34 and were read on 2026-11-01.
+
+9. Copyright information not stated by upstream
+------------------------------------------------
+
+Reviewed 2026-11-01: the exact versions in
+supply-chain/copyright-absence.toml provide their licence terms but no named holder in
+the published source and licence material. The exact-version source evidence
+is recorded in supply-chain/copyright-absence.toml. Their catalogue entries
+explicitly say that upstream does not state a holder, and retain the actual
+source link, SPDX expression and full unmodified legal texts. Authors are
+not presented as copyright holders without a statement from upstream.
+
+10. AccessKit source copyright and Chromium notice
+-------------------------------------------------
+
+The AccessKit 0.25.1 licence files do not name holders. Its published
+src/lib.rs header does: Copyright 2021 The AccessKit Authors and
+Copyright 2018 The Chromium Authors. The exact initial comment block is
+preserved as legal/accesskit/NOTICE (SHA-256
+468e37a93c8dd8e5458b325dcc7ccf348bfd176dcc07e79cdcc023e53041c456).
+The header references LICENSE.chromium, omitted from the published archive;
+the unmodified file from AccessKit/accesskit commit
+ce8164ba92995cfa86005b6259115e08c8244253 is included alongside it
+(SHA-256 845022e0c1db1abb41a6ba4cd3c4b674ec290f3359d9d3c78ae558d4c0ed9308).
+Source: https://github.com/AccessKit/accesskit/tree/ce8164ba92995cfa86005b6259115e08c8244253
+Reviewed 2026-11-01. These notices preserve upstream attribution; generic
+Apache grant/template prose is not treated as a copyright-holder statement.
+
+
+11. Scoped Rust inline assembly
+------------------------------
+
+Owner-approved 2026-11-01, reviewed again by 2027-04-13 or before any
+version/source/feature/target/backend change: the exact 19 package versions
+and 98 Rust indicator files in supply-chain/native-assembly.json are the
+bounded assembly inventory for x86_64 Windows MSVC and Linux GNU. The native
+parts, reasons, elected licences, alternatives and activation limits are in
+docs/plan/09-engineering-principles.md section 3b. This does not approve any
+additional target, optional native activation or custom selector override.
+
+Active literal assembly is limited to libm 0.2.16 x86 maths, Linux raw syscall
+and vDSO paths in rustix 0.38.44/1.1.6, and instruction-free compiler/register
+barriers in zeroize 1.9.1 and zmij 1.0.23. cpufeatures 0.3.1, getrandom
+0.3.4/0.4.3, half 2.7.1, parking_lot 0.12.5, sha2 0.11.1 and zlib-rs 0.6.8
+retain their recorded inactive architecture/feature/backend assembly branches.
+concurrent-queue 2.5.0, objc2 0.5.3/0.6.5, portable-atomic 1.15.0 and
+redox_syscall 0.4.1/0.5.18/0.9.5 are absent from both supported graphs;
+none of their native code is approved for activation.
+
+MIT is elected for the dual MIT/Apache rows and the compatible libm notices;
+zlib-rs uses Zlib. Full shipped licence terms remain in the generated legal
+catalogue. The off-target objc2 archives omit their MIT text: 0.5.3 was read
+at https://raw.githubusercontent.com/madsmtm/objc2/5237cbf081d04ef75a1f6a207b4018e7c1ae7438/LICENSE.txt
+and 0.6.5 at https://raw.githubusercontent.com/madsmtm/objc2/d7d2fa23ceaa5e6096c923b081040e5d81b3b9df/LICENSE.md
+(the latter also records Apple SDK-derived licensing implications). No Apple
+build/distribution is approved. The archive/source hashes bind the inspected
+material; this native-effects review is separate from cargo-vet source audits
+and does not claim a complete unsafe-code or third-party-source audit.
+
+
+12. Documented licence elections in the offline catalogue
+-------------------------------------------------------
+
+The exact crate/version choices in supply-chain/licence-elections.toml record
+the eleven dual-licence MIT elections of section 11 and 09 section 3b. The
+catalogue shows that elected option and separately preserves the unmodified
+manifest declaration. All original licence/notice texts remain bundled;
+choosing one option does not remove the other upstream texts.
+
+Reviewed 2026-11-01: the existing AWS-LC jitterentropy BSD-3-Clause election
+(section 2.19) is already explicit in its reviewed resource metadata; its
+complete original dual-licence text remains present. s2n-bignum retains its
+Apache-2.0 resource entry. No new exclusive ISC/Apache choice is invented for
+the compound aws-lc-rs/aws-lc-sys declarations. The planned ort/ort-sys MIT
+election of section 2.3 remains documented for their future adoption; these
+crates and ONNX Runtime are not in this current shipped graph.
+
+Corrected 2026-11-01: LICENSES/Apache-2.0.txt, LICENSES/BSD-3-Clause.txt
+and LICENSES/MIT.txt contain the unmodified standard SPDX licence texts
+downloaded by REUSE for the existing AccessKit notice declarations. Their
+SHA-256 values are respectively
+074e6e32c86a4c0ef8b3ed25b721ca23aca83df277cd88106ef7177c354615ff,
+5a93d5831e1297ab10fe643e1a631e83be392896da14ee2951285a79012df69d,
+and b05785f9f18e6716bab63424b11454513b9943a222595b70411009202fc592b5.
+The complete original AccessKit and Chromium notices remain unchanged.
+
+Native update verification 2026-11-01: the exact approved rustix 1.1.6
+archive preserves all 15 previously reviewed assembly-indicator hashes.
+The 26 AWS-LC Windows NASM objects were compared over every raw byte;
+after masking only COFF TimeDateStamp bytes 4 to 7 and replacing the exact
+ASCII namespace aws_lc_0_46_0_ with aws_lc_0_47_0_, all remaining bytes match.
+This includes their sections, relocations and symbol data; it is not a
+complete audit of the bundled native cryptography.
+
+Corrected 2026-11-01: legal/sqlite/NOTICE preserves the unmodified
+2001 September 15 public-domain dedication block from the exact approved
+SQLite 3.54.1 amalgamation, alongside the existing blessing.txt text.
+The NOTICE SHA-256 is 49cf7bcb103eb3244150a23bb23d840370a4762914faf1b450072a4b03c14670.
+The authors disclaim copyright; the source notice is annotated NONE/blessing
+for REUSE, without assigning that licence to unrelated project code.
+
+13. Shared image intake and decoder spike origin
+
+The image intake under crates/adapter-files/src/image_intake and the generated
+regression fixtures under crates/adapter-files/tests/image_decode are adapted
+from greluc/tallyline, prototype/decoder-check/src and tests, commit
+2f5477efadb411b9ef385598c204eb4fff5cbf87; modified 2026-11-01: public shared
+raster/intake APIs, bounded metadata and codec allocations, streaming PNG box
+reduction, reusable ICC transforms and independently generated HDR curve tests.
+Copyright 2026 Lucas Greuloch; GPL-3.0-or-later. Existing source notices remain.
+
+The decoder graph uses png0.18.1 (MIT OR Apache-2.0), zune-jpeg0.5.15 and
+zune-core0.5.3 (MIT OR Apache-2.0 OR Zlib), image0.25.10 (MIT OR Apache-2.0),
+moxcms0.9.1 directly and0.8.1 through image (BSD-3-Clause OR Apache-2.0),
+and fdeflate0.3.7 (MIT OR Apache-2.0). Complete upstream texts and notices
+are copied from the checksum-verified packages into the offline legal catalogue.
+The std-only jpeg-encoder0.7.1 test fixture writer is never shipped; its
+(MIT OR Apache-2.0) AND IJG licence is the existing O-130 test-only exception.
+
+14. Portable eight-bit linear interpolation source
+------------------------------------------------
+
+crates/adapter-ocr/src/preprocessing/linear.rs adapts the generic eight-bit
+INTER_LINEAR coefficient and vertical rounding arithmetic from OpenCV5.0.0,
+modules/imgproc/src/resize.cpp, immutable commit
+40738fb16ceddb5fb3fea747585f7ce6abb0605b. Modified2026-11-01: translated the
+bounded pixel-centre sampling and fixed-point arithmetic into safe Rust,
+without OpenCV, Python, native bindings or optional accelerated backends.
+Upstream source SHA-256:
+e4610736015ab8e7395bde854a60337d1281b972566bb4806db04f1868f6e36c.
+
+Source:
+https://github.com/opencv/opencv/blob/40738fb16ceddb5fb3fea747585f7ce6abb0605b/modules/imgproc/src/resize.cpp
+
+Copyright (C) 2000-2008, 2017, Intel Corporation, all rights reserved.
+Copyright (C) 2009, Willow Garage Inc., all rights reserved.
+Copyright (C) 2014-2015, Itseez Inc., all rights reserved.
+Third party copyrights are property of their respective owners.
+
+The unmodified file-specific BSD-3-Clause licence header is preserved in
+supply-chain/notices/opencv-linear/LICENSE and is included in the offline
+catalogue with the project source-port attribution. The Rust adaptation is under
+GPL-3.0-or-later with those retained BSD-3-Clause obligations. This source
+attribution does not select or bundle an OpenCV native library.
+Licence-header SHA-256: 3540f4621f2ea804dbc271ee623b324fde7fcb79eb2edff14c15a8c84d183499.
+
+15. Credential dependency foundation
+----------------------------------
+
+The credential dependency foundation selects keyring-core1.0.1 and
+windows-native-keyring-store1.1.0 for Windows, and secret-service5.2.0 with
+zbus5.19.0 and the Rust DH/HKDF/AES path for Linux. The exact dependency,
+archive, publisher and licence evidence is supply-chain/credential-adoption.json.
+Complete original licence/notice files from every shipped crate are retained
+in the generated offline legal catalogue. This foundation does not yet provide
+a working OS-store adapter or onboarding flow.
+
+The six bounded owner-approved native surfaces elect MIT: Windows Credential
+Manager FFI in windows-native-keyring-store1.1.0; Linux x86_64 cmov0.5.4,
+event-listener5.4.2 and num-bigint0.4.8 assembly; Linux zbus5.19.0 local Unix
+client/ancillary descriptor code; and signal-hook-registry1.4.8 compiled only
+through mandatory upstream Tokio features. Original MIT/Apache alternatives
+and copyright notices remain verbatim in the offline catalogue.
+
+The machine registry pins exact archive/source hashes, full metadata features
+and supported-target selectors. Independent resolved-target evidence keeps
+cmov absent on Windows. TCP, unixexec, bus autolaunch, NSS helper calls,
+application process launching, signal registration and server/p2p operation
+remain outside the credential scope. memoffset0.9.1 and uds_windows1.2.1 are
+locked only for other targets and prohibited from both supported graphs.
+
+PP-OCRv6 Tiny/Medium research catalogue and Tiny dictionary
+  File          crates/adapter-ocr/assets/research/ppocrv6_tiny_dict.txt;
+                6,904 ordered entries, 27,156 bytes, unchanged.
+  Source        PaddlePaddle/PaddleOCR, ppocr/utils/dict/ppocrv6_tiny_dict.txt
+                at dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf.
+  SHA-256       c5cbe34ef40c29c4df07ed012bf96569cb69a2d2a01a07027e9f13cb832bd9cd.
+  Binding       Every entry matches the pinned Tiny recogniser configuration.
+                Small/Medium share the canonical dictionary recorded in 2.5.
+  Attribution   Copyright (c) 2016 PaddlePaddle Authors. All Rights Reserved.
+  Licence       Apache-2.0; unchanged text in legal/paddleocr/LICENSE and
+                supply-chain/notices/paddleocr/LICENSE.
+  Models        Tiny/Medium weights are external research data, not bundled.
+                The revision-bound identities, configuration/card hashes and
+                exact dictionary bindings are recorded in
+                crates/adapter-ocr/assets/research/provenance.json.
+  Modified      no; no dictionary reconstruction or model conversion.
+
+
+Packaging tool direction (corrected 2026-11-02): ADR-0011 supersedes
+ADR-0005 D7 for MSI. The selected tool is independently source-compiled
+WiX 7.0.1, commit 642f1a0f7c857ffa4fc9fa3f9d1433aab895dd29,
+under MS-RL. The source profile patch retains .NET Foundation and
+contributors notices; modified 2026-11-01 by Lucas Greuloch to select
+independent compilation and the MSI-only tool profile. Exact source,
+patch, output identities and build limits: supply-chain/wix/README.md.
+The tool is not an application payload. Final MSI streams still need
+an embedded-component inventory and matching MS-RL source delivery.
+No official binary maintenance-fee EULA has been accepted.
+
+
+Corrected 2026-11-02: the IBM Plex source-specific OFL file had been normalised to LF during adoption. Its original CRLF bytes have been restored from IBM/plex commit 71f558992315a12ca1f06a2215d57962a1992162, packages/plex-sans/LICENSE.txt, matching the existing declared SHA-256 7e6b2818edbd8f6a01ae80641cc8f16a51080d08fb4e532be3a0b6f74adb07da. Licence wording, font bytes, version and terms are unchanged; verbatim third-party text must retain its original encoding.
+
+
+Verified 2026-11-02 for corresponding-source duties: ONNX Runtime 1.31.0 commit 402979ac1bef89dcd55add41eaa7277c407599eb retains Eigen revision 1d8b82b0740839c0de7f1242a3585e3390ff5f33. The exact ORT-pinned source ZIP matches legacy SHA-1 05b19b49e6fbb91246be711d801160528c135e34; its newly computed SHA-256 is 6a60d76351f97132669daeeb721d6bf14b008101883ad2d687a3201c5c461eb0. All 1891 archive files match primary Git tree 3de9ea2629ae2b4833ef3fb3844cd7a2e32f7020, including the original COPYING files; no symlinks, missing or changed blobs. The source-duty record is supply-chain/source-archives.json. This is not a publisher SHA-256 signature or a new native version/activation.
+
+9. Tallyline product artwork
+
+  Source        https://github.com/tallyline-sc/tallyline/tree/main/branding
+  Copyright     2026 Lucas Greuloch
+  Licence       GPL-3.0-or-later; full terms in LICENSE
+  Identity      branding/exports.json records the SHA-256 of each artwork export.
+                branding/NOTICE records the exact source archives and shipped icons.
+  Added 2026-11-03: the owner-selected concept C Line geometry from the supplied
+  design export is used for the native window icon and packaged desktop identity.
+  The fixed-colour PNG and ICO are project artwork, separate from the unchanged
+  Star Citizen Fan Kit unit. The outlined wordmarks contain no font software;
+  the approved font software retains its existing SIL OFL-1.1 notices.

@@ -1,0 +1,20 @@
+{
+  "parent": "2ef5e31d27bcbdb986ab62ad561ba4f77df36887",
+  "qualification": "Captured from the actual red-storage test before any storage production source changed. Reporting already had the explicit affinity command; the unchanged schema-13 storage writer omitted it, and the failing reopening assertion recorded that loss. This is not a pristine-parent application fixture. The recorded production_sources hashes identify the parent Git blobs with LF-normalised source bytes; they are not raw pre-change working-copy captures. The storage writer, mapper and schema remained at the parent implementation. The version-one manual Draft has no released attempt; genuine schema-twelve fixtures separately retain released history through the forward migration.",
+  "emitter": "crates/adapter-storage/tests/manual_reports.rs::r_sub_13_r_nf_11__entered_affinity_survives_durable_draft_reopening",
+  "fixture_sha256": "818682d9bddea5b43317527728442de1d80a59d28dc72dd247ba503e2fd7ed5c",
+  "production_sources": [
+    {
+      "path": "crates/adapter-storage/src/reference_cache.rs",
+      "sha256": "b176918dec5591d97f6980819bcc76a540db5ec0ba67dfd3d4b2ee557afb34dc"
+    },
+    {
+      "path": "crates/adapter-storage/src/migration.rs",
+      "sha256": "51f3f4a4428fffce84a9a85fd4e89d096a18409749645eef1e8153c24d9a4c2c"
+    },
+    {
+      "path": "crates/adapter-storage/src/reports.rs",
+      "sha256": "58f1afd787b8cf1a62ba576fdc40115e3b997bd532cd6a7501e793e6a9a1bac1"
+    }
+  ]
+}

@@ -1,0 +1,584 @@
+{
+  "schemaVersion": 2,
+  "id": "mic-l2-long-forest-station-01",
+  "verified": true,
+  "transcription": "Manually transcribed by Codex from the balance-redacted source-resolution pixels on 2026-11-02; independent human verification is required before golden metrics.",
+  "source": {
+    "uploadedBy": "project owner",
+    "provided": "Four original JPEG files from the LIVE screenshots directory, supplied for public corpus inclusion; originals remain outside the repository.",
+    "redaction": "Each original JPEG was decoded once to RGB with zune-jpeg 0.5.15, filled with black over CURRENT BALANCE at x=2912,y=252,width=384,height=112, and stored as lossless RGB PNG with png 0.18.1. PNG readback matched the masked raster byte for byte; every pixel outside the rectangle matched the decoded original. JPEG block-lossless redaction was unavailable in this intake route.",
+    "captureTimeNote": "Confirmed by the project owner on 2026-11-02: conditions.originalFile retains the unchanged game-generated local filename, in MEZ (UTC+01:00), with no clock change. capturedAt converts its date/time to UTC at second precision; the opaque hexadecimal suffix is not interpreted as milliseconds."
+  },
+  "location": {
+    "displayedText": "MIC-L2 LONG FOREST STATION",
+    "expectedTerminal": null
+  },
+  "expectedTerminalId": null,
+  "theme": "blue, all-caps monospace font (Stanton style)",
+  "gameVersion": null,
+  "measured": {
+    "priceCapHeightPx": null,
+    "displayHeightFraction": null,
+    "textHeightBand": null
+  },
+  "captures": {
+    "buy-1.png": {
+      "side": "BUY",
+      "displayedTab": "BUY",
+      "capturedAt": "2026-11-02T15:51:32Z",
+      "locationDisplayedText": "MIC-L2 LONG FOREST STATION",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_16-51-32-BAB.jpg",
+        "originalSha256": "897461dfa59e40bc00dffe823fb74840d14f9de3679e19272ba0ea8e91badb85",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2912,
+          "y": 252,
+          "width": 384,
+          "height": 112
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 43008,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "261a5f7065503e7c02593aff21a9cbcef0b132e46d299f1c9ca54784a0c87f42",
+        "pngSha256": "c7beaf82996ac1a8d16e30556f1145ee119837d4a44d2e62b8f9575f82e26c1c"
+      },
+      "sectionHeaders": [
+        {
+          "name": "OUT OF STOCK",
+          "expanded": false,
+          "beforeCard": null
+        }
+      ],
+      "note": "An empty section string means the section header is outside this capture; it is not inferred from another capture.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "name": "SCRAP",
+          "status": "MAX INVENTORY",
+          "scu": 2100,
+          "pricePerScu": 2990,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "WASTE",
+          "status": "HIGH INVENTORY",
+          "scu": 1,
+          "pricePerScu": 115,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "DIAMOND",
+          "status": "VERY LOW INVENTORY",
+          "scu": 16,
+          "pricePerScu": 5759,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "ASTATINE",
+          "status": "VERY LOW INVENTORY",
+          "scu": 207,
+          "pricePerScu": 2649,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "expectedCommodityId": null
+        }
+      ]
+    },
+    "buy-2.png": {
+      "side": "BUY",
+      "displayedTab": "BUY",
+      "capturedAt": "2026-11-02T15:51:34Z",
+      "locationDisplayedText": "MIC-L2 LONG FOREST STATION",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_16-51-34-594.jpg",
+        "originalSha256": "aba9f0f4fa5f76da346e3796a5ff812526f108226a3ffb33d26c8d23d1d07e1e",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2912,
+          "y": 252,
+          "width": 384,
+          "height": 112
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 43008,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "f664b64309d82ab7258c2e35a9e248a5ca7f80ea24d5ef58d1eb788b87403dcd",
+        "pngSha256": "e7b740d4444eabe1b1fa2cf0503e7a58e54ada8de815e5725ce4185cb92357a4"
+      },
+      "sectionHeaders": [
+        {
+          "name": "IN STOCK",
+          "expanded": true,
+          "beforeCard": 1
+        }
+      ],
+      "note": "Only the shop-panel section is transcribed; left inventory-panel sections are not shop sections.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "IN STOCK",
+          "name": "MEDICAL SUPPLIES",
+          "status": "VERY LOW INVENTORY",
+          "scu": 56,
+          "pricePerScu": 3541,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 2,
+          "section": "IN STOCK",
+          "name": "SCRAP",
+          "status": "MAX INVENTORY",
+          "scu": 2100,
+          "pricePerScu": 2990,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "IN STOCK",
+          "name": "WASTE",
+          "status": "HIGH INVENTORY",
+          "scu": 1,
+          "pricePerScu": 115,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Red frame and tint on the card."
+        },
+        {
+          "screenOrder": 4,
+          "section": "IN STOCK",
+          "name": "DIAMOND",
+          "status": "VERY LOW INVENTORY",
+          "scu": 16,
+          "pricePerScu": 5759,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "IN STOCK",
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "Only the upper card fragment is visible; the name and all other fields remain untranscribed."
+        }
+      ]
+    },
+    "sell-1.png": {
+      "side": "SELL",
+      "displayedTab": "LOCAL MARKET VALUE",
+      "capturedAt": "2026-11-02T15:51:37Z",
+      "locationDisplayedText": "MIC-L2 LONG FOREST STATION",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_16-51-37-18C.jpg",
+        "originalSha256": "b0cc103b2fe63196ba5ee1829f77178d2f5bcc3610047b686a286e3d53aeb568",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2912,
+          "y": 252,
+          "width": 384,
+          "height": 112
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 43008,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "2a125553624ce024cb379f22802464fa24701b172487af1515e43ae4ac709822",
+        "pngSha256": "6d031643b70a5443bfaeb4d776e365c9020a63e13734b5808530d5558522160f"
+      },
+      "sectionHeaders": [
+        {
+          "name": "SELLABLE CARGO",
+          "expanded": false,
+          "beforeCard": 1
+        },
+        {
+          "name": "IN DEMAND",
+          "expanded": true,
+          "beforeCard": 1
+        }
+      ],
+      "note": "LOCAL MARKET VALUE is the displayed tab, mapped to the corpus SELL side; no transaction or sellable-cargo eligibility is inferred.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "IN DEMAND",
+          "name": "COMPBOARD",
+          "status": "OUT OF STOCK",
+          "scu": 0,
+          "pricePerScu": 27000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 2,
+          "section": "IN DEMAND",
+          "name": "DISTILLED SPIRITS",
+          "status": "OUT OF STOCK",
+          "scu": 0,
+          "pricePerScu": 1900,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "IN DEMAND",
+          "name": "DOLIVINE",
+          "status": "OUT OF STOCK",
+          "scu": 0,
+          "pricePerScu": 150000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "IN DEMAND",
+          "name": "HYDROGEN",
+          "status": "OUT OF STOCK",
+          "scu": 0,
+          "pricePerScu": 1000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "IN DEMAND",
+          "name": "PARTY FAVORS",
+          "status": "MEDIUM INVENTORY",
+          "scu": 100,
+          "pricePerScu": 5100,
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "The container-size region and bottom card border are clipped; no hidden sizes are inferred."
+        }
+      ]
+    },
+    "sell-2.png": {
+      "side": "SELL",
+      "displayedTab": "LOCAL MARKET VALUE",
+      "capturedAt": "2026-11-02T15:51:41Z",
+      "locationDisplayedText": "MIC-L2 LONG FOREST STATION",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_16-51-41-0F5.jpg",
+        "originalSha256": "19a6d70e93c61f39cd390fc9774f42bd78eeebe2189edf445a6990220ddfc5ad",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2912,
+          "y": 252,
+          "width": 384,
+          "height": 112
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 43008,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "bae550e69efc5b6d5768c1f225a1687d757e13bb16ab73459b83179ab184c04a",
+        "pngSha256": "898c1e3ce080febe1debfb34a83c54df393f99f91700b6f264a5b0eeed2a63ce"
+      },
+      "sectionHeaders": [
+        {
+          "name": "NO DEMAND",
+          "expanded": false,
+          "beforeCard": null
+        }
+      ],
+      "note": "An empty section string means the section header is outside this capture; it is not inferred from another capture.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "note": "Anonymous prior-card tail: only the cargo-size label, boxes and bottom border are visible. Name, status, quantity and price are unknown."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "PARTY FAVORS",
+          "status": "MEDIUM INVENTORY",
+          "scu": 100,
+          "pricePerScu": 5100,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "PROCESSED FOOD",
+          "status": "OUT OF STOCK",
+          "scu": 0,
+          "pricePerScu": 1500,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "CONSTRUCTION MATERIALS",
+          "status": "LOW INVENTORY",
+          "scu": 344,
+          "pricePerScu": 12000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "name": "MAROK GEM",
+          "status": "OUT OF STOCK",
+          "scu": 0,
+          "pricePerScu": 60000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        }
+      ]
+    }
+  }
+}

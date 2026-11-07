@@ -1,0 +1,26 @@
+[package]
+name = "tallyline-workflows"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+tallyline-shared-kernel.workspace = true
+tallyline-reference-data.workspace = true
+tallyline-reporting.workspace = true
+tallyline-submission.workspace = true
+
+[dev-dependencies]
+tempfile = { version = "=3.27.0", default-features = false }
+rusqlite.workspace = true
+tallyline-adapter-storage = { path = "../adapter-storage" }
+tallyline-game = { path = "../game" }
+tallyline-adapter-files = { path = "../adapter-files" }
+tallyline-adapter-platform = { path = "../adapter-platform" }
+wiremock.workspace = true
+tokio = { workspace = true, features = ["macros", "rt"] }

@@ -1,0 +1,112 @@
+diff --git a/src/Directory.csproj.props b/src/Directory.csproj.props
+index 6891ef2..d616d28 100644
+--- a/src/Directory.csproj.props
++++ b/src/Directory.csproj.props
+@@ -12,6 +12,9 @@
+   </PropertyGroup>
+ 
+   <PropertyGroup>
+-    <AcceptEula>abc;wix7;xyz;123</AcceptEula>
++    <DefineConstants Condition="'$(TallylineSelfCompiled)'=='true'">$(DefineConstants);TALLYLINE_SELF_COMPILED</DefineConstants>
++    <DefineConstants Condition="'$(TallylineMsiOnly)'=='true'">$(DefineConstants);TALLYLINE_MSI_ONLY</DefineConstants>
++    <AcceptEula Condition="'$(TallylineSelfCompiled)'!='true'">abc;wix7;xyz;123</AcceptEula>
++    <AcceptEula Condition="'$(TallylineSelfCompiled)'=='true'"></AcceptEula>
+   </PropertyGroup>
+ </Project>
+diff --git a/src/internal/SetBuildNumber/global.json.pp b/src/internal/SetBuildNumber/global.json.pp
+index b1acc71..cae7cc6 100644
+--- a/src/internal/SetBuildNumber/global.json.pp
++++ b/src/internal/SetBuildNumber/global.json.pp
+@@ -6,7 +6,7 @@
+     "WixToolset.Sdk": "{packageversion}"
+   },
+   "sdk": {
+-    "version": "9.0.300",
++    "version": "10.0.403",
+     "rollForward": "latestFeature"
+   }
+ }
+diff --git a/src/internal/targets/CheckLicenseAcceptance.targets b/src/internal/targets/CheckLicenseAcceptance.targets
+index 6115582..a1ef4a4 100644
+--- a/src/internal/targets/CheckLicenseAcceptance.targets
++++ b/src/internal/targets/CheckLicenseAcceptance.targets
+@@ -5,7 +5,8 @@
+ 
+   <Target
+     Name="CheckWix7LicenseAcceptance"
+-    BeforeTargets="CoreCompile">
++    BeforeTargets="CoreCompile"
++    Condition="'$(TallylineSelfCompiled)' != 'true'">
+ 
+     <ItemGroup>
+       <_AcceptEula Include="$(AcceptEula)" />
+diff --git a/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.csproj b/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.csproj
+index b5c83fb..615dffa 100644
+--- a/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.csproj
++++ b/src/wix/WixToolset.Core.Native/WixToolset.Core.Native.csproj
+@@ -17,8 +17,8 @@
+   </ItemGroup>
+ 
+   <ItemGroup Condition=" '$(NCrunch)'=='' ">
+-    <ProjectReference Include="..\wixnative\wixnative.vcxproj" ReferenceOutputAssembly="false" PrivateAssets="All" Properties="Platform=ARM64" />
+-    <ProjectReference Include="..\wixnative\wixnative.vcxproj" ReferenceOutputAssembly="false" PrivateAssets="All" Properties="Platform=x86" />
++    <ProjectReference Include="..\wixnative\wixnative.vcxproj" ReferenceOutputAssembly="false" PrivateAssets="All" Properties="Platform=ARM64" Condition="'$(TallylineMsiOnly)'!='true'" />
++    <ProjectReference Include="..\wixnative\wixnative.vcxproj" ReferenceOutputAssembly="false" PrivateAssets="All" Properties="Platform=x86" Condition="'$(TallylineMsiOnly)'!='true'" />
+     <ProjectReference Include="..\wixnative\wixnative.vcxproj" ReferenceOutputAssembly="false" PrivateAssets="All" Properties="Platform=x64" />
+   </ItemGroup>
+ 
+diff --git a/src/wix/WixToolset.Core/CommandLine/CommandLine.cs b/src/wix/WixToolset.Core/CommandLine/CommandLine.cs
+index 655a97c..fac0d16 100644
+--- a/src/wix/WixToolset.Core/CommandLine/CommandLine.cs
++++ b/src/wix/WixToolset.Core/CommandLine/CommandLine.cs
+@@ -273,9 +273,13 @@ namespace WixToolset.Core.CommandLine
+ 
+         private bool RequiresEulaAcceptance(ICommandLineCommand command)
+         {
++#if TALLYLINE_SELF_COMPILED
++            return false;
++#else
+             return !(command is HelpCommand) &&
+                    !(command is VersionCommand) &&
+                    !(command is EulaCommand);
++#endif
+         }
+ 
+         private void ParseSuppressWarning(string parameter, int offset, ICommandLineParser parser)
+diff --git a/src/wix/wix/Program.cs b/src/wix/wix/Program.cs
+index 8e42212..22df96e 100644
+--- a/src/wix/wix/Program.cs
++++ b/src/wix/wix/Program.cs
+@@ -8,7 +8,9 @@ namespace WixToolset.Tools
+     using System.Threading.Tasks;
+     using WixToolset.Converters;
+     using WixToolset.Core;
++#if !TALLYLINE_MSI_ONLY
+     using WixToolset.Core.Burn;
++#endif
+     using WixToolset.Core.ExtensionCache;
+     using WixToolset.Core.WindowsInstaller;
+     using WixToolset.Data;
+@@ -47,7 +49,9 @@ namespace WixToolset.Tools
+             {
+                 var serviceProvider = WixToolsetServiceProviderFactory.CreateServiceProvider()
+                                                                       .AddWindowsInstallerBackend()
++#if !TALLYLINE_MSI_ONLY
+                                                                       .AddBundleBackend()
++#endif
+                                                                       .AddExtensionCacheManager()
+                                                                       .AddConverter();
+ 
+diff --git a/src/wix/wix/wix.csproj b/src/wix/wix/wix.csproj
+index 11099b1..aa48c83 100644
+--- a/src/wix/wix/wix.csproj
++++ b/src/wix/wix/wix.csproj
+@@ -20,7 +20,7 @@
+   <ItemGroup>
+     <ProjectReference Include="..\WixToolset.Converters\WixToolset.Converters.csproj" />
+     <ProjectReference Include="..\WixToolset.Core\WixToolset.Core.csproj" />
+-    <ProjectReference Include="..\WixToolset.Core.Burn\WixToolset.Core.Burn.csproj" />
++    <ProjectReference Include="..\WixToolset.Core.Burn\WixToolset.Core.Burn.csproj" Condition="'$(TallylineMsiOnly)'!='true'" />
+     <ProjectReference Include="..\WixToolset.Core.ExtensionCache\WixToolset.Core.ExtensionCache.csproj" />
+     <ProjectReference Include="..\WixToolset.Core.WindowsInstaller\WixToolset.Core.WindowsInstaller.csproj" />
+   </ItemGroup>

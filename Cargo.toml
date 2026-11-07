@@ -1,18 +1,51 @@
 [workspace]
 resolver = "3"
-members = ["xtask", "crates/adapter-uex", "crates/egui"]
+members = ["crates/recognition", "crates/adapter-vlm", "crates/reporting", "crates/shared-kernel", "crates/reference-data", "xtask", "crates/adapter-uex", "crates/egui", "tools/ocr-eval", "crates/workflows", "crates/adapter-files", "crates/ui", "crates/app", "crates/adapter-platform", "crates/adapter-storage", "crates/game", "crates/submission", "crates/adapter-ocr"]
 
 [workspace.dependencies]
-reqwest = { version = "0.13.5", default-features = false, features = ["rustls-no-provider"] }
+proptest = { version = "=1.12.0", default-features = false, features = ["std"] }
+tallyline-recognition = { path = "crates/recognition" }
+zeroize = { version = "=1.9.1", default-features = false, features = ["alloc"] }
+keyring-core = { version = "=1.0.1", default-features = false }
+windows-native-keyring-store = { version = "=1.1.0", default-features = false }
+secret-service = { version = "=5.2.0", default-features = false, features = ["rt-tokio-crypto-rust"] }
+zbus = { version = "=5.19.0", default-features = false, features = ["tokio"] }
+tallyline-adapter-ocr = { path = "crates/adapter-ocr" }
+tallyline-reporting = { path = "crates/reporting" }
+tallyline-submission = { path = "crates/submission" }
+tallyline-adapter-storage = { path = "crates/adapter-storage" }
+rusqlite = { version = "=0.41.1", default-features = false, features = ["bundled"] }
+tallyline-shared-kernel = { path = "crates/shared-kernel" }
+tallyline-reference-data = { path = "crates/reference-data" }
+rust_decimal = { version = "=1.43.0", default-features = false }
+reqwest = { version = "0.13.5", default-features = false, features = ["rustls-no-provider", "system-proxy"] }
 rustls = { version = "0.23.46", default-features = false, features = ["aws-lc-rs", "std"] }
 rustls-platform-verifier = { version = "0.7.1", default-features = false }
-serde = { version = "1.0.228", default-features = false, features = ["derive", "std"] }
-serde_json = { version = "1.0.154", default-features = false, features = ["std"] }
+serde = { version = "1.0.229", default-features = false, features = ["derive", "std"] }
+serde_json = { version = "1.0.154", default-features = false, features = ["std", "arbitrary_precision"] }
 sha2 = { version = "0.11.1", default-features = false }
-tokio = { version = "1.53.3", default-features = false }
+tokio = { version = "1.54.1", default-features = false }
 toml = { version = "1.1.8", default-features = false, features = ["parse", "serde", "std"] }
-egui = { version = "=0.36.2", default-features = false }
+egui = { version = "=0.37.0", default-features = false }
 wiremock = { version = "0.6.5", default-features = false }
+hyper-util = { version = "=0.1.21", default-features = false }
+tower = { version = "=0.5.3", default-features = false }
+
+image = { version = "=0.25.10", default-features = false }
+png = { version = "=0.18.1", default-features = false }
+fdeflate = { version = "=0.3.7", default-features = false }
+moxcms = { version = "=0.9.1", default-features = false, features = ["lut"] }
+zune-jpeg = { version = "=0.5.15", default-features = false, features = ["std"] }
+zune-core = { version = "=0.5.3", default-features = false, features = ["std"] }
+egui_kittest = { version = "=0.37.0", default-features = false, features = ["wgpu", "snapshot"] }
+
+eframe = { version = "=0.37.0", default-features = false, features = ["wgpu", "wayland", "x11", "links"] }
+
+tracing = { version = "0.1.44", default-features = false, features = ["std"] }
+
+egui-wgpu = { version = "=0.37.0", default-features = false }
+
+ort = { version = "=2.0.0-rc.14", default-features = false, features = ["load-dynamic", "api-31"] }
 
 [workspace.package]
 edition = "2024"

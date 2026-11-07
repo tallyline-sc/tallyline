@@ -1,0 +1,143 @@
+[[election]]
+crate = "concurrent-queue"
+version = "2.5.0"
+declared = "Apache-2.0 OR MIT"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "cpufeatures"
+version = "0.3.1"
+declared = "MIT OR Apache-2.0"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "getrandom"
+version = "0.3.4"
+declared = "MIT OR Apache-2.0"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "getrandom"
+version = "0.4.3"
+declared = "MIT OR Apache-2.0"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "half"
+version = "2.7.1"
+declared = "MIT OR Apache-2.0"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "parking_lot"
+version = "0.12.5"
+declared = "MIT OR Apache-2.0"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "portable-atomic"
+version = "1.15.0"
+declared = "Apache-2.0 OR MIT"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "rustix"
+version = "0.38.44"
+declared = "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "rustix"
+version = "1.1.6"
+declared = "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "sha2"
+version = "0.11.1"
+declared = "MIT OR Apache-2.0"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "zeroize"
+version = "1.9.1"
+declared = "Apache-2.0 OR MIT"
+elected = "MIT"
+source = "NOTICE section 11; docs/plan/09-engineering-principles.md section 3b; owner approval 2026-11-01"
+reason = "The documented native review elects the MIT option. Exact source identity and native activation limits remain separately enforced; every original text is preserved."
+
+[[election]]
+crate = "windows-registry"
+version = "0.6.1"
+declared = "MIT OR Apache-2.0"
+elected = "MIT"
+source = "supply-chain/audits.toml exact AI source review; supply-chain/README.md Decimal and system-proxy selection 2026-11-01"
+reason = "The reviewed package permits MIT; its complete original MIT text and all other original legal material remain included. No new native activation or human audit is claimed."
+
+[[election]]
+crate = "windows-native-keyring-store"
+version = "1.1.0"
+declared = "MIT OR Apache-2.0"
+elected = "MIT"
+source = "NOTICE section15; docs/plan/09-engineering-principles.md section3b; exact bounded credential native owner approval"
+reason = "The exact reviewed credential source permits MIT; every original legal text and notice remains preserved. Source, feature and target limits are independently enforced."
+
+[[election]]
+crate = "cmov"
+version = "0.5.4"
+declared = "Apache-2.0 OR MIT"
+elected = "MIT"
+source = "NOTICE section15; docs/plan/09-engineering-principles.md section3b; exact bounded credential native owner approval"
+reason = "The exact reviewed credential source permits MIT; every original legal text and notice remains preserved. Source, feature and target limits are independently enforced."
+
+[[election]]
+crate = "event-listener"
+version = "5.4.2"
+declared = "Apache-2.0 OR MIT"
+elected = "MIT"
+source = "NOTICE section15; docs/plan/09-engineering-principles.md section3b; exact bounded credential native owner approval"
+reason = "The exact reviewed credential source permits MIT; every original legal text and notice remains preserved. Source, feature and target limits are independently enforced."
+
+[[election]]
+crate = "num-bigint"
+version = "0.4.8"
+declared = "MIT OR Apache-2.0"
+elected = "MIT"
+source = "NOTICE section15; docs/plan/09-engineering-principles.md section3b; exact bounded credential native owner approval"
+reason = "The exact reviewed credential source permits MIT; every original legal text and notice remains preserved. Source, feature and target limits are independently enforced."
+
+[[election]]
+crate = "zbus"
+version = "5.19.0"
+declared = "MIT"
+elected = "MIT"
+source = "NOTICE section15; docs/plan/09-engineering-principles.md section3b; exact bounded credential native owner approval"
+reason = "The exact reviewed credential source permits MIT; every original legal text and notice remains preserved. Source, feature and target limits are independently enforced."
+
+[[election]]
+crate = "signal-hook-registry"
+version = "1.4.8"
+declared = "MIT OR Apache-2.0"
+elected = "MIT"
+source = "NOTICE section15; docs/plan/09-engineering-principles.md section3b; exact bounded credential native owner approval"
+reason = "The exact reviewed credential source permits MIT; every original legal text and notice remains preserved. Source, feature and target limits are independently enforced."

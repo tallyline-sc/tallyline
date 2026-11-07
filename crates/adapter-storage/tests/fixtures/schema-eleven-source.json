@@ -1,0 +1,38 @@
+{
+  "parent": "d5d51489a01da5e5fcde2fc285f2eb62877e3e38",
+  "fixture": "Synthetic literal schema-eleven PartialError documents; no current database is downgraded.",
+  "sources": [
+    {
+      "path": "crates/adapter-storage/src/reference_cache.rs",
+      "git_blob": "d8f5cff196aecf2f5f402e9d48486db396dac603"
+    },
+    {
+      "path": "crates/adapter-storage/src/migration.rs",
+      "git_blob": "8490e4c0c04bc05abba9c2408a938f8103997f31"
+    },
+    {
+      "path": "crates/adapter-storage/src/queue_document.rs",
+      "git_blob": "9534346eaf15e9fae7fb04c3813dd01188ebea82"
+    },
+    {
+      "path": "crates/adapter-storage/src/queue_outcome_document.rs",
+      "git_blob": "833f77bb80be10092b8897f9aa59ec03de013bbc"
+    },
+    {
+      "path": "crates/adapter-storage/src/report_lifecycle.rs",
+      "git_blob": "8f116cae5a2b45c9dcc7c1bc25aa97eb58fb7d9a"
+    },
+    {
+      "path": "crates/adapter-storage/src/reports.rs",
+      "git_blob": "94d47e23abec3dcc2c4bb70f82edbd94faf2a5f7"
+    },
+    {
+      "path": "crates/adapter-storage/tests/fixtures/schema-nine.sql",
+      "git_blob": "7d8c30725629c63fb6f54faea12c7508c6b37c11"
+    },
+    {
+      "path": "crates/adapter-storage/tests/fixtures/schema-ten-extension.sql",
+      "git_blob": "645abd63aee35474f2b16a26b84aaf002f7461b6"
+    }
+  ]
+}

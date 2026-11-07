@@ -4,11 +4,15 @@ Committed records of the supply-chain measures of `docs/plan/10-supply-chain-sec
 
 | File | What it is |
 |---|---|
+| `latest-stable-adoption.json` | Exact eligible-stable adoption identities, release-age/checksum verification, owner-record scope, upstream constraints and qualified provenance evidence |
+| `credential-adoption.json` | Exact credential dependency/source, qualified publisher, imported audit, feature and licence reconciliation, with explicit native and target limits |
+| `build-code.json` | Exact reviewed custom-build/proc-macro targets and contextual generator-consumer restrictions (10 S-12); validated by `cargo xtask build-code` and `check` |
 | `vendor-hashes.txt` | The per-package hash list of the vendored dependency tree (10 S-4, O-120). The tree itself is never committed; CI regenerates it and compares it with this list |
 | `config.toml` | The `cargo-vet` configuration: the audit sources we import from and the exemptions (10 S-6) |
 | `audits.toml` | Trusted publisher records and audits we certify ourselves with `cargo vet certify` |
 | `imports.lock` | The audits imported from the sources of `config.toml`, as fetched when `cargo vet regenerate imports` last ran |
 | `bootstrap-exemptions.txt` | The crates that the bootstrap exemptions of `config.toml` cover; the set only shrinks (10 S-6) |
+| `copyright-absence.toml` | Exact-version source evidence for a shipped crate whose reviewed upstream material names no copyright holder; the generated catalogue distinguishes this from provided attribution |
 | `notices.toml` | The reviewed list of 10 S-34: the shipped components whose licence texts `cargo-deny` cannot see, read by `cargo xtask notices` (R-DOC-3) |
 | `notices/<directory>/` | Licence and notice files omitted from a published crate, copied unmodified from upstream and shipped when the related crate is in the dependency graph: aws-lc bundled texts (NOTICE §2.19, O-134) and the egui/AccessKit/profiling texts (NOTICE §2.17) |
 
@@ -29,7 +33,7 @@ files = [{ repository = "supply-chain/notices/jitterentropy/LICENSE" }]
 - `files` are copied unmodified under their file names. A `toolchain` path is relative to the sysroot of the pinned toolchain (`rustc --print sysroot`), a `repository` path to the workspace root. A repository file is third-party text: it is committed unmodified under `notices/<directory>/`, and its origin and SHA-256 go into `NOTICE`. REUSE does not read files named `LICENSE`, `COPYING` and the like; a file with any other name gets an override in `REUSE.toml` with its own licence and copyright.
 - A reviewed entry for a crate may supply its missing licence text when the published crate contains no licence or notice file. The notices check accepts that reviewed text as the crate's legal material and still fails if a listed source file is missing.
 
-`cargo xtask notices` fails when a file of a shipped entry is missing or an entry names a crate outside `Cargo.lock`.
+`cargo xtask notices` fails when a file of a shipped entry is missing or an entry names a crate outside `Cargo.lock`. It also generates `legal/catalogue.json` for the offline About view (schema version 1): name, version, declared/elected SPDX expression, source URL, a typed provided/not-stated-by-upstream copyright record and complete unmodified notice texts. A not-stated record requires exact-version evidence in `copyright-absence.toml`; an unreviewed extraction gap fails generation. Cargo component metadata comes from the locked shipped graph and vendor manifests; reviewed non-Cargo components carry a `[component.catalogue]` table with non-empty `version`, `licence`, `source` and `copyright` fields. The generator rejects missing reviewed metadata instead of inventing attribution. A missing or unreadable runtime catalogue produces the R-UI-18 message and does not fail app startup. The network-dependent assembly stays CI-only per O-135; fake-filesystem tests run in the aggregate check.
 
 ## `vendor-hashes.txt`
 
@@ -45,7 +49,7 @@ name version archive-sha256 tree-sha256
 
 ## `cargo-vet`
 
-`cargo-vet` 0.10.2 (`docs/dependency-pins.md`) checks that every crate of the dependency graph is audited by us, covered by an audit we import, or exempted. CI runs `cargo vet --locked`, which neither fetches nor rewrites anything and fails on a crate that none of the three covers.
+`cargo-vet` 0.10.3 (`docs/dependency-pins.md`) checks that every crate of the dependency graph is audited by us, covered by an audit we import, or exempted. CI runs `cargo vet --locked`, which neither fetches nor rewrites anything and fails on a crate that none of the three covers.
 
 - **`config.toml`** holds `[imports.<name>]` sections (the sources we trust) and `[[exemptions.<crate>]]` entries. The sources are named here and in the pull request that adds them: `bytecode-alliance`, `embark-studios`, `google` and `mozilla` from the start, and `isrg` and `zcash` since the first runtime dependencies (issue #24), whose audits reduce several crates to small deltas; each by the URL that the `cargo-vet` registry lists. An import widens whom we trust, so a new one is a deliberate, reviewed change.
 - **Trusted publishers** (10 S-6). `audits.toml` holds `[[trusted.<crate>]]` entries: the crate is covered for versions that a named crates.io account, or a GitHub trusted-publishing repository, published between `start` and `end` (one year after the entry was written). A publisher is trusted only when an imported source already trusts it, or when it maintains the crate's own project. The first set (2026-10-14): imported trust (Mozilla, Bytecode Alliance) for `alexcrichton`, `BurntSushi`, `cuviper`, `Darksonn`, `dtolnay`, `epage`, `kennykerr`, `Manishearth`, `robertbastian`, `rust-lang-owner`, `seanmonstar` and `Thomasdezeeuw`; project maintainers `ctz`, `djc`, `cpu` and `complexspaces` (`rustls`), `taiki-e` and `github:taiki-e/pin-project-lite` (`futures`, `pin-project-lite`), `sffc` (ICU4X), `KodrAus` (`log`, `bitflags`), `hds` (`tracing`), `LucioFranco` (`tower`), `briansmith` (`untrusted`, `ring`), `justsmth` (`aws-lc-rs`), `newpavlov` and `github:rust-random/getrandom` (`getrandom`), `github:rust-lang/cc-rs` (`cc`, `find-msvc-tools`) and `github:RustCrypto/utils` (`zeroize`). Added 2026-10-26 with the dependency update of that day, as project maintainers: `cpu` for `webpki-root-certs` (`rustls`), `jdm` for `smallvec` (Servo), `epage` for `toml`, and the trusted-publishing repositories `github:rust-lang/libc` (`libc`) and `github:RustCrypto/hashes` (`sha2`); the last three replaced bootstrap exemptions. Added 2026-11-01 for the egui graph: `DataTriny`, `tkaitchuck`, `bluss`, `cuviper`, `Lokathor`, `rerunio`, `tomcur`, `LaurenzV`, `dfrg`, `nical`, `behdad`, `jswrenn`, `DJMcNab`, `Amanieu`, `waywardmonkeys`, `jneem`, `aclysma`, `4lDO2`, `Voultapher`, `wezm`, `KodrAus`, `SergioBenitez` and the trusted-publishing repository `github:google/zerocopy`. A trust entry that runs out is renewed or replaced by an audit in its own pull request.
@@ -60,7 +64,7 @@ name version archive-sha256 tree-sha256
 
 The steps below apply to every pull request that adds a crate or moves a version, by hand or through Dependabot (10 S-5, S-8, S-9). A new dependency is audited or imported, never added to the bootstrap exemptions.
 
-1. **Justify it** in the pull request (the section "Dependencies and keys" of the template): purpose, SPDX licence and where you read it, crates.io owners and last release, the repository the crate links to, whether it has a `build.rs`, a procedural macro, `unsafe` or native code (10 S-29, 09 §3b), and its `cargo-vet` status. Check the version against the 7-day cooldown of 10 S-7.
+1. **Justify it** in the pull request (the section "Dependencies and keys" of the template): purpose, SPDX licence and where you read it, crates.io owners and last release, the repository the crate links to, whether it has a `build.rs`, a procedural macro, `unsafe` or native code (10 S-29, 09 §3b), and its `cargo-vet` status. Verify the newest non-yanked stable version eligible after seven days at the official upstream under 10 S-7, including required major upgrades. Corrected 2026-11-01: the owner restored the release-age cooldown for further version decisions and weekly Dependabot checks, preserving existing exact approvals. Security updates remain exempt; provenance and review gates remain mandatory.
 2. **Commit the change:** `Cargo.toml` (once in `[workspace.dependencies]`) and `Cargo.lock` as one commit, then `cargo xtask vendor-hashes write` and the changed `supply-chain/vendor-hashes.txt` as the next commit. Read the vendor diff, the new transitive crates, and every new `build.rs` and procedural macro.
 3. **Run `cargo vet`.** It lists the crates and versions that are not covered. For each one, in this order:
    1. **Import.** `cargo vet suggest` shows which unaudited crates an imported source could cover. If one of the four sources already audited the crate or a version it can be reached from by a delta, nothing is needed.
@@ -71,3 +75,254 @@ The steps below apply to every pull request that adds a crate or moves a version
 5. **Name the result in the pull request:** which crates were imported, audited or exempted, and which sources. Commit the store files in the same pull request as the dependency change (10 S-5).
 
 A version bump of a crate that is in `bootstrap-exemptions.txt` may move its exemption to the new version: `cargo vet regenerate exemptions` writes the entry without `notes`, so add the shared text again by hand. The crate stays in the baseline and nothing new enters it; an audit or an import of the new version is better and shrinks the baseline.
+
+
+
+## `build-code.json`
+
+The S-12 registry records exact package name/version/target kind, actual target entrypoint SHA-256, build-time behaviour and honest source-review scope. Registry entries also require the locked crates.io archive SHA-256. Workspace-owned custom-build entries instead use an explicit `workspace` object with exact workspace-relative `manifest_path` and `source_path`, bind real workspace membership and a source-less/checksum-less lock identity, and must omit `archive_sha256`. The checker obtains full locked offline metadata and fails on missing/stale records, changed source/identity, duplicate IDs and malformed graph data. Updating a dependency with build-time code therefore requires a source review and registry update in the same pull request. The list also includes inactive/off-target metadata packages; it does not grant permission to activate native code.
+
+The initial source review read all production build-script entrypoints and the newly adopted macro implementation modules. Existing macro entries retain established cargo-vet coverage with a narrower fresh entrypoint/import/capability inspection; their notes do not claim a fresh full unsafe-source audit. AWS-LC keeps ADR-0006's accepted native-source limitation. Entry hashes supplement Cargo archive checksums and S-4 vendor hashes; the inventory is not a substitute for cargo-vet or a claim that every runtime crate was line-audited.
+
+The `contexts` entry for gl_generator 0.14.0 separately pins its full reverse-consumer set and each consumer's exact version/archive/build-script hash. Current scripts select StructGenerator/StaticGenerator/StaticStructGenerator. GlobalGenerator's safe mutable-global loaders can race and DebugStructGenerator logs arguments; neither is selected. Any contextual cargo-vet notes must retain this caveat and the current-project discretion. A new consumer or code/version change fails pending review; ordinary publisher trust does not establish that script review.
+
+Bootstrap reduction 2026-11-01: `hashbrown` leaves the one-time baseline because the exact 0.17.1 publisher is covered by verified same-crate trust. No crate was added to that baseline. Desktop publication dates were checked against the seven-day boundary: `ordered-float` 5.5.0, `rustix` 1.1.5 and `unicode-width` 0.2.2 replace younger transitive selections; only `webbrowser` 1.2.6 uses the documented security-update exception. CI runs `cargo fetch --locked` after the supply-chain guard before the offline metadata checks; the aggregate check itself adds no network step.
+
+Decision history 2026-11-01: after temporarily removing S-7's release-age boundary, the owner restored seven days for further version decisions and weekly Dependabot checks. Major upgrades remain authorised. Existing exact version approvals, including SQLite, AWS-LC and rustix, remain valid with their hashes and limits; pending proposals are not approved by this transition. The preceding versions describe the completed historical review. The current graph, build tools and actions are being rechecked against official eligible stable releases; every changed native version still requires its exact source/feature review.
+
+The offline catalogue recognises explicit year-bearing copyright notices,
+marked `(c)`/© notices and SPDX copyright statements. Apache grant prose and
+unfilled templates remain in the full legal texts but never become holder
+metadata. The AccessKit source-header attribution and referenced Chromium BSD
+licence are preserved in its reviewed notice directory (NOTICE §10).
+
+
+## Desktop dependency adoption (issue #80)
+
+`desktop-adoption.json` records every new locked identity with its purpose,
+reverse consumers, SPDX expression, declared upstream repository, crates.io
+owners and exact selected release/publisher/checksum. Its applied-record
+section preserves the actual new trust and source-review records and their
+scope notes. This includes current own-project maintenance evidence for the
+egui/wgpu, windowing, image/colour, Objective-C and Windows families, the
+same-crate imported publisher endorsements, and exact upstream trusted
+publishing identities. Publisher trust is not labelled as a fresh source
+audit. The six existing import sources are unchanged.
+
+The narrower AI source reviews name what was actually read and retain their
+limits; examples include the contextual three-consumer `gl_generator`
+constraint, the byte/string preconditions of `plain`, and off-target-only
+coverage where applicable. The separate `build-code.json` review does not
+infer script safety from publisher trust. Native activation remains subject
+to §3b and the fail-closed target/assembly inventory guards.
+
+`hashbrown` is the only bootstrap removal in this adoption. Existing
+nonbootstrap `hermit-abi` and `r-efi` exemptions also disappear because their
+exact releases are covered by verified publisher trust. No bootstrap entry
+was added. The owner approved the exact final thirteen records on 2026-11-01;
+the locked gate passed with 406 fully vetted packages, 28 justified exemptions
+and no partial coverage. There are 294 trusted rows and 32 audit rows, including
+19 explicitly attributed Sol AI source reviews. The exemptions are seven
+shrinking bootstrap entries, the existing AWS-LC native-source limitation, and
+twenty off-target entries, including the three separately registered exact-version
+exclusions.
+
+
+## Exact licence elections
+
+`licence-elections.toml` binds each documented choice to an exact crate,
+version and unmodified upstream SPDX declaration, with its source and reason.
+The generated catalogue retains `declared_licence` separately from the
+`licence` used by its component row. Undecided components retain their original
+declaration; every original legal text is kept in either case. Non-Cargo
+resources have no manifest declaration and retain their reviewed resource
+expression (including jitterentropy BSD-3-Clause and s2n-bignum Apache-2.0).
+
+The bounded parser handles AND, OR, parentheses and WITH as a qualified atomic
+term. Every permitted elected alternative must contain all terms required by
+at least one offered alternative, and cannot introduce unavailable terms.
+Missing metadata, stale versions/declarations, duplicate records, malformed
+expressions or incompatible elections fail generation. SPDX identifier/policy
+validation remains the separate cargo-deny gate; this Boolean checker does not
+claim to implement the SPDX licence catalogue or exception equivalence rules.
+The current eleven MIT elections come only from explicit 09/NOTICE choices;
+other compound AWS-LC alternatives are not silently resolved. Native approval
+scope and the registry graph are unchanged.
+
+## SQLite adoption (issue #81)
+
+The owner approved exact rusqlite 0.41.1 (defaults off, bundled),
+libsqlite3-sys 0.39.1 and SQLite 3.54.1 on 2026-11-01. The complete sys
+build script was read; its exact S-12 entry does not claim a full C audit.
+Packaged sqlite3.c/sqlite3.h/sqlite3ext.h match SQLite's official amalgamation.
+The official SPDX `blessing` text and SQLite public-domain statement were
+read; NOTICE and the separate native component preserve them.
+
+The two approved cargo-vet trust rows cover publisher gwenn/5062 for these
+two same-crate projects until 2027-11-01, including future publications in
+their stated windows. Exact release/merge authority was verified in the
+packaged VCS revisions and upstream release commit/PR 1920. Publisher trust
+is separate from native approval: `sqlite-native.json` pins exact source
+hashes, complete full/target features and both supported targets, with the
+hardware-timer C assembly inactive. Compiler/native overrides are rejected;
+`cargo xtask check` fails before workspace build/test work when this guard fails.
+The existing Rust literal assembly register is unchanged. No optional C
+omission flags, SQLCipher, bindgen or extension features are enabled.
+
+The three other new identities are fallible-iterator 0.3.0 (Mozilla full
+0.2.0 plus Bytecode Alliance deploy delta), fallible-streaming-iterator 0.1.9
+(Mozilla deploy audit) and vcpkg 0.2.15 (Bytecode Alliance deploy audit).
+No new trust/audit/exemption was needed for them. The resulting check reports
+411 fully vetted packages and the same 28 exemptions; no bootstrap entry was
+added. The new crates carry MIT or MIT/Apache-2.0 licence choices.
+
+## Decimal and system-proxy selection — 2026-11-01
+
+Corrected 2026-11-01: the owner explicitly approved the exact four persistent S-5/S-6 records. The local AI review remains subject to CODEOWNERS and PR review and is not a human security audit. Four new exact registry identities are added:
+
+| Package | Version | Published UTC | SPDX licence | Selected scope |
+| --- | --- | --- | --- | --- |
+| rust_decimal | 1.43.0 | 2026-09-02 | MIT | Defaults and every optional feature disabled; only existing arrayvec and num-traits runtime dependencies. Pure decimal arithmetic/string runtime, crate-level unsafe prohibition; build.rs only transforms packaged README into OUT_DIR documentation. |
+| windows-registry | 0.6.1 | 2025-10-06 19:17:38 | MIT OR Apache-2.0, MIT elected | Windows read-only hyper-util proxy consumer; exact AI source audit, no future publisher trust. |
+| system-configuration | 0.7.0 | 2025-12-02 16:19:39 | MIT OR Apache-2.0 | Off-target exemption with known callback-context lifetime gap; no activation on either supported target. |
+| system-configuration-sys | 0.6.0 | 2024-01-31 13:42:46 | MIT OR Apache-2.0 | Off-target exemption; complete build.rs emits only an Apple framework link directive. |
+
+The restored seven-day cooldown is satisfied by all four. Hyper-util 0.1.21 constrains windows-registry to ^0.6 and system-configuration to ^0.7; their newer upstream 0.100.0 and 0.8.0 releases cannot satisfy those ranges. These are documented parent constraints, not claims that the selected transitives are latest. No other package identity or version is intentionally changed.
+
+Exact publisher authority for rust_decimal is paupino/5326, both the selected publisher and sole current owner. Packaged VCS `8592462ca2d928ea46e6358e530a5c7d4b38f7d6` matches the release commit authored and committed by paupino. The one same-crate trust row ends 2027-11-01 and includes that account's future publications within its stated window; changed features/build sources still need S-5/S-12 review. This is not a full arithmetic audit. [Registry release](https://crates.io/api/v1/crates/rust_decimal/1.43.0), [release source](https://github.com/paupino/rust-decimal/commit/8592462ca2d928ea46e6358e530a5c7d4b38f7d6).
+
+The qualified windows-registry audit records complete reading of eleven runtime files, manifests, VCS and elected MIT text, plus the relevant HSTRING storage/empty-buffer contracts. It records races in registry size/type reads, possible allocation/iteration panics and trust in OS ABI/raw-caller contracts; it grants no unrestricted future trust. Hyper-util reads only CURRENT_USER Internet Settings, with environment overrides preferred. System proxy support covers environment/static registry values; PAC, autodiscovery and protocol-specific ProxyServer syntax are not implemented by that upstream path. Full R-API-3 acceptance remains pending. No OS settings are changed. [Exact consumer](https://github.com/hyperium/hyper-util/tree/v0.1.21/src/client/proxy), [registry source](https://github.com/microsoft/windows-rs/tree/32c3144490c016fe496a0aed769bce60987a2e9d/crates/libs/registry).
+
+The two Apple exemptions are outside the bootstrap set. Their concrete lifetime/FFI limitations remain recorded, both names are banned through rooted package-ID traversal on both supported targets, and the aggregate native-scope check stops before workspace build/test work. No new native C/assembler or own unsafe code is introduced. Exact custom-build source/archive hashes are in build-code.json. serde_json's existing arbitrary_precision feature preserves decimal number spelling before any money conversion; f64 is not an intermediate price representation.
+
+Verification: the real check CLI with an injected renamed Apple dependency stopped at native-scope before later Cargo work. The isolated child-process HTTPS_PROXY contract reached a local CONNECT fixture without changing the parent environment or OS registry; its ignored child helper is invoked by that normal Cargo-run test. This covers environment routing, not PAC, registry mutation or every system trust-store scenario. Vet reports 413 fully audited and 30 exempted after adoption (28 existing plus the two qualified Apple exemptions); the bootstrap set is unchanged. The exact rust_decimal publisher metadata row in imports.lock comes from the verified registry publication record; no imported audit source was added or refreshed broadly.
+
+## Eligible stable dependency adoption (2026-11-01)
+
+The owner approved the exact twenty per-crate publisher rules, two qualified AI delta audits and `send_wrapper` 0.6.0 off-target exemption locally on 2026-11-01. The publisher rules expire exclusively on 2027-11-01 and cover future releases of the same named crate by the same account; the existing hashbrown account rule has its publication-day start widened rather than duplicated. The delta audits retain their actual AI reading scope and criteria: smallvec 1.16.3 to 1.16.4 is safe-to-deploy; kittest 0.4.0 to 0.5.0 is safe-to-run. Owner acceptance of these records is not a claim of human source auditing. The six imported audit sources and shrinking bootstrap baseline are unchanged.
+
+The exact `send_wrapper` exemption grants no publisher trust and no unrestricted source audit. Its optional Pin/drop concern remains documented. It has no optional features in the full graph and is absent from both supported target graphs. The native-scope guard rejects every reachable version, including renamed transitive dependencies from every workspace root. The dedicated suppression row expires on 2027-04-13 or earlier before any target, feature, version or activation change.
+
+The separately approved AWS-LC versions retain their existing exemption reason and native boundaries; rustix 1.1.6 retains the exact approved assembly selectors and hashes. The S-12 update records byte-identical entrypoints separately from the reviewed AWS builder delta and the zerovec pointer-layout caveat. No new native activation or first-party unsafe code is authorised.
+
+The parent-range duplicate reconciliation retains only an exact `windows-sys@=0.59.0` skip alongside the existing skips, with its reason and 2027-04-13 revisit in section 3a. The latest parent graph still needs rustix 0.38.44 with windows-sys >=0.52, <=0.59 and other consumers on 0.61. The obsolete calloop 0.13.0, calloop-wayland-source 0.3.0 and smithay-client-toolkit 0.19.2 skips and register rows were removed. There is no skip-tree or future-version wildcard.
+
+## Shared image intake adoption (2026-11-01, issue #103)
+
+[The exact adoption record](image-intake-adoption.json) covers moxcms 0.9.1 and the test-only jpeg-encoder 0.7.1. Both meet the restored seven-day cooldown. The ICC adapter uses the latest eligible direct release; image 0.25.10 retains its disjoint ^0.8 requirement, so the owner-approved exact moxcms@=0.8.1 duplicate skip and section 3a revisit end on 2027-04-13. This is a duplicate-version exception, not a source override or security-advisory exemption.
+
+The owner explicitly approved the two proposed records on2026-11-01 after automatic approval review rejected their first attempted write. jpeg-encoder publisher82913/vstroebel is the current sole owner and the actual merger of current same-project PR39/40. Its named-crate safe-to-run trust window runs from2026-07-27 until2027-11-01 and includes later releases by that publisher of this crate. This is publisher trust, not a full human or AI security audit. The selected dependency is exactly0.7.1, test-only, with std enabled and defaults/simd disabled; the exact test licence is already allowed by O-130. There are no new imported audit sources, exemptions, native components, assembly, models or runtimes.
+
+moxcms0.9.1 is covered by the existing same-crate publisher266802 rule. imports.lock adds only the two independently verified publication records; no imported audit file was refreshed. The generated vendor hash list includes both new archive identities. Complete upstream decoder notices remain in the offline catalogue; NOTICE records the GPL decoder-spike source origin separately. `cargo vet --locked` reports419 fully audited and31 exempted packages after this adoption; the exemption and bootstrap sets are unchanged.
+
+Workspace identity support (2026-11-01, issue #104) does not adopt a script or exempt it from review. Paths are normal relative paths beneath the declared workspace and reviewed package; metadata names, versions, membership and paths must agree with the review. Actual hashing rejects missing or nonregular files, links/reparse points at every ancestor, and canonical escapes. A workspace script review covers its exact entrypoint bytes; any helper/build dependency source remains a separate review obligation. Keep minimal asset-verification scripts self-contained and bind all expected hashes in reviewed code. Registry scripts, including future ort-sys adoption, retain registry/archive identity, and contextual generator reviews retain their independent consumer checks. The aggregate pre-build guard order is unchanged.
+Small OCR data (2026-11-02, issue #104) reuse the approved `sha2`0.11.1 source and feature set for normal and build-time hashing. No registry package/version/checksum or vendor tree changes; the lockfile adds only the adapter's existing-package dependency edge. The self-contained `adapter-ocr/build.rs` record uses the genuine workspace identity and hashes three fixed local data files, emitting public Cargo file/hash/size metadata. It starts no subprocess, compiler, converter or native runtime and opens no network connection. `NOTICE`2.4/2.5, the immutable source evidence and unmodified upstream licence accompany the assets; the dictionary's multilingual glyphs have one exact-path verbatim language exception. This is data-integrity evidence, not OCR accuracy, native runtime or package acceptance.
+
+## Credential dependency foundation (2026-11-02, issue #82)
+
+[The adoption ledger](credential-adoption.json) records 45 new registry identities,
+archive checksums, purposes/reverse consumers, official release age, declared
+licences and preserved legal files, actual publishers/project authorities and
+build-time targets. All 44 unchanged packet identities match the reviewed source
+packet (991 compared files, zero differences). ctutils0.4.6 became eligible at
+the current seven-day cutoff and replaces proposed0.4.5 after its safe-Rust
+borrow-mask delta review. ctutils0.4.7 and zcheapstr1.2.0 remain too young;
+zcheapstr1.1.0 is locked. num-bigint0.4.8 and zbus/zbus_macros5.19.0 remain
+constrained by current num/secret-service parent ranges; their exact native
+approvals are preserved. No source replacement or bootstrap exemption is added.
+
+The 40 one-year publisher rules follow the existing S-6 standing policy, with
+per-entry real publisher/own-project or imported authority, not blanket exact
+owner approval of a forty record packet. They expire exclusively on 2027-11-02
+and cover later releases of the same named crate by the same publisher during
+that window. Five team-owned cases use the publisher's exact same-project
+packaged release commit, rather than team membership alone. The six bounded
+native approvals are separate and do not make publisher trust a source,
+cryptographic or human audit.
+
+The extra fortieth rule covers already locked tempfile3.27.0. cargo-vet's
+all-platform graph now treats it as production through excluded uds_windows,
+so safe-to-run coverage alone is insufficient. Its shipped-target use remains
+test-only. Fresh official publisher/sole-owner evidence establishes
+Stebalien/280 of github.com/Stebalien/tempfile as its own-project maintainer;
+this is safe-to-deploy publisher trust, not an exemption or local source audit.
+
+The four existing named import authorities add five exact audit records:
+Google byteorder1.5.0, Bytecode Alliance parking2.2.1, Mozilla hex0.4.3 and
+num-rational0.4.1, and ISRG's num-rational0.4.1-to0.4.2 delta. Their immutable
+source commits and file hashes are in the ledger. byteorder's original Google
+record expressly asserts the built-in safe-to-deploy criterion alongside
+custom does-not-implement-crypto/ub-risk-2 criteria. The cache retains only that
+same built-in assertion; this is a strictly weaker projection, with the full
+original and provenance preserved in the ledger. No custom criterion is
+reinterpreted, and no imported audit is relabelled as a local audit. All six
+configured URLs and all prior cached records remain, including Zcash despite
+its unavailable upstream URL. No new audit source is introduced.
+
+memoffset0.9.1 and uds_windows1.2.1 receive separately justified other-target
+exemptions with section 3a rows ending 2027-04-13. Both stay absent from both
+supported graphs and forbidden at every version through renamed edges. These
+are off-target dispositions, not source-soundness certificates or activation
+permission. Native-scope pins exact versions/features of the credential entry
+points; the source inventory binds the six native surfaces with archive and
+source hashes, original metadata selectors and independent resolved selectors.
+In particular, conservative Windows metadata reaching cmov does not grant its
+activation: the resolved Windows selector is null. Runtime backends, storage
+fallback, provider behaviour and masked onboarding remain pending.
+
+The eight new S-12 entries bind seven procedural macros and the excluded
+memoffset script. The review records generated runtime capabilities honestly:
+tracing instrumentation may format arguments/errors, enumflags2_derive emits
+an unsafe RawBitFlags implementation, and zbus macros can generate blocking/
+server APIs whose use is not authorised by this client-only scope. The direct
+proc-macro-crate helper reads manifests and invokes Cargo locate-project;
+this discovers the workspace without building/resolving dependencies or using
+a shell. That build-time effect is not authority for app process launching.
+S-12 source/capability review and publisher trust remain separate obligations.
+
+The exact merged metadata also adds three windows-sys helper flags through zbus's excluded Windows branch: Win32_NetworkManagement, Win32_NetworkManagement_IpHelper and Win32_Security_Authorization. Complete target trees keep them inactive; the resolved native guard explicitly rejects their activation through renamed edges before workspace build/test work. This grants no Windows transport/NSS helper scope. endi1.1.1's published MIT grant names no copyright holder; the separately reviewed absence record preserves that fact without inventing attribution, and the complete original licence remains in the catalogue.
+
+The same complete-source/legal review also confirms that event-listener5.4.2, event-listener-strategy0.5.4 and ordered-stream0.2.0 supply no named holder. Their MIT grants byte-match the reviewed endi grant; Apache template text is not attribution. Exact version/VCS-bound absence rows preserve this fact, with every original text retained. futures-lite and parking preserve their actual third-party copyright notices instead.
+
+The exact normal dependency graph adds three Windows identities and 41 Linux identities without removing any. Eight Linux additions were already locked for other roles: errno, fastrand, futures-io, getrandom0.4.3, proc-macro2, quote, syn and winnow. Their versions/archive identities remain unchanged. The legal review also records genuine version/VCS-bound holder absences for fastrand2.5.0, proc-macro2 1.0.107, quote1.0.47, syn3.0.9 and winnow1.0.4, instead of inferring holder names from Cargo authors.
+
+The zvariant_utils 4.2.0 published MIT grant also supplies no named holder; its complete package marker search and exact VCS revision support a separate absence row. The full original grant remains bundled.
+
+The Windows inventory uses the actual src/cred.rs and src/store.rs paths and binds all five published Rust sources. Each byte-matches the unchanged approved archive; these additional wrapper/store hashes complete source coverage and grant no new native behaviour, API calls, target or feature scope. The packet's original utils.rs/tests.rs native bindings remain unchanged.
+
+## Approved runtime binding adoption (2026-11-02, issue #104)
+
+[The exact adoption record](ocr-runtime-adoption.json) covers all eight new registry identities. `adapter-ocr` alone inherits `ort =2.0.0-rc.14`, defaults off, with only `load-dynamic` and `api-31`; its matching `ort-sys` pin is exact. The rooted pre-build scope gate binds both resolved feature closures and their private consumer edges. The official Microsoft1.31.0 runtime bytes are not loaded or executed by this dependency checkpoint.
+
+The crate manifests and complete selected build entrypoints/helpers were read before compilation. `ort-sys` returns after three check-cfg directives when `disable-linking` is enabled: no native linking, download or copy path executes. The new numerical packages arise from weak optional `std` propagation in Cargo's lock/metadata; the actual supported-target normal/build trees omit `ndarray` and its numerical chain, with no `ort` ndarray/tracing feature. Their identities are nevertheless reviewed and vetted. `matrixmultiply`'s inactive script only probes compiler support through existing `autocfg`; it is separately hash-bound in S-12. No procedural macro or additional literal assembly is introduced; the inventory remains98 source files.
+
+Seven named-crate publisher records follow the standing S-6 own-project-maintainer policy, using live actual publishers and matching canonical release/merge authority. Each was written2026-11-02 and expires2027-11-02; its start includes the selected publication. This is publisher trust, not a full human/AI source-soundness audit or a fresh owner decision. Existing `libloading` publisher726 trust covers its0.9.0 release. Only eight publication identities are added to `imports.lock`; imported audits and the31 exemptions remain unchanged. `cargo vet --locked --frozen` reports427 fully covered packages and31 exempted; its "fully audited" counter includes publisher trust.
+
+`libloading`0.9.0 is the latest eligible stable and required by the accepted binding's^0.9 constraint. Existing ash/wgpu parents retain disjoint^0.8 ranges; an exact0.8.9 duplicate skip carries its reason and2027-04-13 revisit in09§3a. This does not override sources or exempt an advisory. Packaged licence generation retains all unchanged original licence texts. Runtime hash/build-load verification, mapped module/CRT proof, telemetry positive control, model output shape, inference/pool lifecycle and clean-OS acceptance remain open.
+
+The actual native boundary adds no registry identity, exemption or trust grant. `adapter-ocr/build.rs` now hashes five fixed local files, including both accepted1.31.0 native libraries, before compilation; its exact complete entrypoint hash is updated in the existing workspace record. Extraction checked each official archive before copying only its fixed regular library and full unchanged licence/notices; no symlink, provider/CRT file, installer, download or native build is added. Both libraries use LFS. The broad upstream third-party notice text is equal across platforms apart from original line endings and includes optional components; preserving it does not assert every option is linked or resolve existing corresponding-source/release obligations. Primary project licence metadata is MIT, with complete upstream terms supplied separately.
+
+Runtime verification is owned by the deep adapter, with explicitly injected app-owned host checks and a non-clone attempt token; no mutable global is introduced. Windows module references/resources have narrow registered contracts. Model snapshots retain exactly the bytes that were hashed and are passed directly to ORT from memory. The diagnostic sessions explicitly request bounded conservative options and expose only numeric evidence; no production pool/resource, Linux telemetry, corpus or clean-OS acceptance claim follows from compilation or a developer-host probe.
+
+Credential adapter use, 2026-11-02: `adapter-platform` directly uses the already-locked zeroize 1.9.1 with defaults off and alloc only for temporary credential bundle guards and erasure of bad-data byte payloads. No registry identity, source, checksum, selected version, native source or resolved feature is added. Its new shared-kernel edge supplies the existing precise timestamp type. Windows store use stays within the approved fixed-entry Local binary read/write/delete scope; source inventories and publisher/audit records remain unchanged. The new isolated-provider tests and selected wrapper compilation do not certify real OS-store behaviour or Linux transport acceptance.
+
+
+The source-only archive pins in source-archives.json support corresponding-source duties for already approved shipped components. Each record distinguishes a newly computed archive digest from publisher metadata and preserves the exact upstream revision/tree/licence evidence. These records authorise no new dependency version, feature, target or native build. Source preparation occurs before protected token insertion; no source archive is fetched or compiled afterwards.
+
+package-legal-profiles.json pins the exact current Windows/Linux legal catalogues to canonical project source inputs. Only project input line endings are canonicalised for these input identities; third-party notice text and its original encoding remain byte-bound by the target catalogue. Profiles are compiled into the prebuilt helper, so a supplied stage cannot approve its own different legal graph. Current217/271 component inventories are preparation evidence, with complete corresponding-source and protected package acceptance still open.
+
+## Numeric property profile (2026-11-03)
+
+The owner approved the exact testing profile and existing getrandom 0.4.3 std to std,sys_rng feature extension in chat; `property-testing.json` records the actual grant and proposal digest. The only workspace introduction is recognition's development dependency on proptest 1.12.0 with defaults off and std enabled. Seven exact archives, source trees, feature sets and both x64 targets are bound until 2027-04-13 or a scope change. No publisher trust, imported audit source or bootstrap exemption is added.
+
+The six safe-to-run records and dependency-free rand_core safe-to-deploy record preserve GPT-6.1 Sol's qualified source review. Cargo-vet requires the latter through shared getrandom; this criterion does not establish shipment. The source review covered active unsafe/intrinsic paths and their contracts without claiming a cryptographic audit, formal proof or complete inactive-source correctness review. The six ordinary MIT grants are elected; unarray elects its explicit Apache-2.0 alternative because its MIT text contains unfilled placeholders. Every original licence file remains unchanged in genuine Cargo vendor output. `core_detect`'s MIT/Apache-2.0 field is explained as dual licensing by its upstream README. No attribution is inferred from Cargo authors or a null publishing account.
+
+ChaCha/core_detect remain compiled test dependencies even though the properties use literal-seeded XorShift. No new C, C++, literal assembly, own unsafe or FFI is introduced. Existing getrandom backend selection and assembly/build-script hashes remain unchanged. Full and target test graphs are conservative evidence; independently collected normal/build trees exclude the seven testing packages. Matching-host Linux compilation/runtime and final release/SBOM acceptance remain CI/release work.
+
+The three public numeric properties each require 256 cases, no persistence, a literal sixteen-byte XorShift seed and explicit effective runner fields. A separate process contract compares neutral and hostile PROPTEST settings, checks effective bounds and observes actual case execution. Config's default construction can read the environment; all effective fields are overridden. Shrinking is bounded to 1,024 iterations and 1,000 ms, so time-limited counterexample minimisation is not claimed deterministic.
+
+The genuine vendor reconciliation records all eight archive/registry/vendor identities in property-testing-vendor-reconciliation.json. Cargo removes only the explicitly recorded .gitignore files from archive contents; registry extraction adds only .cargo-ok. Every retained vendor file matches its approved archive byte-for-byte. The enforced registry hashes remain unchanged; supplemental vendor identities do not authorise source rewriting or a silent source replacement.
+
+## Owned-process Windows packet (2026-11-07)
+
+owned-process-windows.json records the first twenty owner-approved Win32 APIs' feature boundary: windows-sys 0.61.2/windows-link 0.2.1, one exact x86_64-pc-windows-msvc platform declaration adding Security/JobObjects/Pipes/IO and the actual complete resolved Windows feature union. Its exact permitted declaration baseline covers every declaration requesting any of those four features, including pre-existing registry owners and older SDK requirements. The native pre-build check validates full owner/dependency identity, workspace membership, source/target/version/defaults/rename/kind/optional/declaration and resolved features, so an additional Pipes-only or IO-only edge cannot borrow the approved union; existing forbidden zbus/NSS/helper fixtures remain. No IpHelper/TCP feature, native runtime payload, package version, audit exemption or additional source is adopted. The source contract and unsafe-site register describe lifetimes, bounds and remaining acceptance separately.

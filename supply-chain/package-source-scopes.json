@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "components": [
+    {
+      "name": "Star Citizen Fan Kit artwork and notices",
+      "version": "Fankit_2025_11_19",
+      "licence": "LicenseRef-Fankit-Agreement",
+      "source": "https://github.com/tallyline-sc/tallyline/blob/main/NOTICE",
+      "patterns": [
+        "project/docs/images/fankit/made-by-the-community.png",
+        "project/docs/images/fankit/MadeByTheCommunity_White.png"
+      ]
+    },
+    {
+      "name": "IBM Plex Sans",
+      "version": "3.005",
+      "licence": "OFL-1.1",
+      "source": "https://github.com/IBM/plex/tree/71f558992315a12ca1f06a2215d57962a1992162/packages/plex-sans",
+      "patterns": [
+        "project/crates/ui/assets/fonts/ibm-plex/*"
+      ]
+    },
+    {
+      "name": "JetBrains Mono NL",
+      "version": "2.304",
+      "licence": "OFL-1.1",
+      "source": "https://github.com/JetBrains/JetBrainsMono/tree/cd5227bd1f61dff3bbd6c814ceaf7ffd95e947d9",
+      "patterns": [
+        "project/crates/ui/assets/fonts/jetbrains-mono/*"
+      ]
+    },
+    {
+      "name": "The jitterentropy library inside aws-lc-sys",
+      "version": "AWS-LC 5.12.0 snapshot",
+      "licence": "BSD-3-Clause",
+      "source": "https://github.com/aws/aws-lc/tree/cd481c207e38f06aeb5766f4a1cdfce10a4c0af8",
+      "patterns": [
+        "vendor/aws-lc-sys-0.47.0/aws-lc/third_party/jitterentropy/*",
+        "project/supply-chain/notices/jitterentropy/*"
+      ]
+    },
+    {
+      "name": "ONNX Runtime official Linux x64 distribution notices",
+      "version": "1.31.0",
+      "licence": "MIT project; upstream third-party terms in the complete notices",
+      "source": "https://github.com/microsoft/onnxruntime/releases/tag/v1.31.0",
+      "patterns": [
+        "project/crates/adapter-ocr/assets/runtime/linux/libonnxruntime.so.1.31.0",
+        "native-sources/onnxruntime-1.31.0/*",
+        "native-sources/eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/*",
+        "project/supply-chain/notices/onnxruntime-linux/*"
+      ]
+    },
+    {
+      "name": "ONNX Runtime official Windows x64 distribution notices",
+      "version": "1.31.0",
+      "licence": "MIT project; upstream third-party terms in the complete notices",
+      "source": "https://github.com/microsoft/onnxruntime/releases/tag/v1.31.0",
+      "patterns": [
+        "project/crates/adapter-ocr/assets/runtime/windows/onnxruntime.dll",
+        "native-sources/onnxruntime-1.31.0/*",
+        "native-sources/eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33/*",
+        "project/supply-chain/notices/onnxruntime-windows/*"
+      ]
+    },
+    {
+      "name": "OpenCV generic eight-bit linear interpolation arithmetic (safe Rust adaptation)",
+      "version": "5.0.0 source; portable Rust profile ppocr-bgr48-linear8u-v1",
+      "licence": "BSD-3-Clause",
+      "source": "https://github.com/opencv/opencv/blob/40738fb16ceddb5fb3fea747585f7ce6abb0605b/modules/imgproc/src/resize.cpp",
+      "patterns": [
+        "native-sources/opencv-5.0.0/*",
+        "project/supply-chain/notices/opencv-linear/*"
+      ]
+    },
+    {
+      "name": "PaddleOCR PP-OCRv6 Small model data and canonical dictionary",
+      "version": "Small det 28fe5895c24fd108c19eb3e8479f4ab385fbfc62; rec b8f84f0b80c529de40b4fbb3544b84fa7233a513",
+      "licence": "Apache-2.0",
+      "source": "https://huggingface.co/PaddlePaddle/PP-OCRv6_small_rec_onnx/tree/b8f84f0b80c529de40b4fbb3544b84fa7233a513",
+      "patterns": [
+        "project/crates/adapter-ocr/assets/small/PP-OCRv6_small_det.onnx",
+        "project/crates/adapter-ocr/assets/small/PP-OCRv6_small_rec.onnx",
+        "project/crates/adapter-ocr/assets/small/ppocrv6_dict.txt",
+        "project/supply-chain/notices/paddleocr/*"
+      ]
+    },
+    {
+      "name": "The Rust standard library and the components bundled with it",
+      "version": "1.99.0",
+      "licence": "MIT OR Apache-2.0 WITH LLVM-exception",
+      "source": "https://github.com/rust-lang/rust/tree/1.99.0/library",
+      "patterns": [
+        "toolchain/rust-std-1.99.0/*"
+      ]
+    },
+    {
+      "name": "The s2n-bignum library inside aws-lc-sys",
+      "version": "AWS-LC 5.12.0 snapshot",
+      "licence": "Apache-2.0",
+      "source": "https://github.com/aws/aws-lc/tree/cd481c207e38f06aeb5766f4a1cdfce10a4c0af8",
+      "patterns": [
+        "vendor/aws-lc-sys-0.47.0/aws-lc/third_party/s2n-bignum/*",
+        "project/supply-chain/notices/s2n-bignum/*"
+      ]
+    },
+    {
+      "name": "SQLite",
+      "version": "3.54.1",
+      "licence": "blessing",
+      "source": "https://www.sqlite.org/2026/sqlite-amalgamation-3540100.zip",
+      "patterns": [
+        "vendor/libsqlite3-sys-0.39.1/sqlite3/*",
+        "project/supply-chain/notices/sqlite/*"
+      ]
+    },
+    {
+      "name": "Tallyline product artwork",
+      "version": "Line export 2026-11-03",
+      "licence": "GPL-3.0-or-later",
+      "source": "https://github.com/tallyline-sc/tallyline/tree/main/branding",
+      "patterns": [
+        "project/branding/*",
+        "project/LICENSE"
+      ]
+    },
+    {
+      "name": "Material Symbols Rounded Tallyline modified subset",
+      "version": "Owner-approved 156-icon subset; metadata 2.975",
+      "licence": "Apache-2.0",
+      "source": "https://github.com/tallyline-sc/tallyline/blob/7304ffeb0a949d7238fd5f469489a088e26e0d25/NOTICE",
+      "patterns": [
+        "project/crates/ui/assets/fonts/material-symbols/*"
+      ]
+    }
+  ]
+}

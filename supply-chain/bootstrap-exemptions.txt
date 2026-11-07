@@ -3,7 +3,6 @@ block-buffer
 cfg-if
 crypto-common
 digest
-hashbrown
 hybrid-array
 indexmap
 typenum

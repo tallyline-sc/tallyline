@@ -1,15 +1,15 @@
 // SPDX-FileCopyrightText: 2026 Lucas Greuloch
 // SPDX-License-Identifier: GPL-3.0-or-later
 
-//! The Dependabot rules of 10 S-7 and S-8: a cooldown on every ecosystem and no auto-merge.
+//! The Dependabot rules of 10 S-7 and S-8: weekly updates, release-age delay and no auto-merge.
 
 use crate::guard::SourceFile;
 
 /// The path of the Dependabot configuration.
 pub const CONFIG_PATH: &str = ".github/dependabot.yml";
 
-/// The shortest cooldown, in days, that any ecosystem of the configuration may declare.
-pub const MIN_COOLDOWN_DAYS: u32 = 7;
+/// The explicit release-age delay for every ecosystem and semantic version level.
+pub const COOLDOWN_DAYS: u32 = 7;
 
 const REQUIRED_ECOSYSTEMS: [&str; 2] = ["cargo", "github-actions"];
 const ECOSYSTEM_KEY: &str = "package-ecosystem:";
@@ -24,8 +24,8 @@ const AUTO_MERGE_MARKERS: [&str; 4] = ["gh pr merge", "automerge", "auto-merge",
 /// Names the violations of the Dependabot rules in the repository `files`.
 ///
 /// `.github/dependabot.yml` must exist and declare the ecosystems `cargo` and `github-actions`.
-/// Every ecosystem needs a `cooldown` with a `default-days` of at least [`MIN_COOLDOWN_DAYS`], no
-/// shorter `semver-*-days` and no `exclude` list. No workflow or other non-Markdown file under
+/// Every ecosystem needs a weekly schedule and a `cooldown` with `default-days` equal to [`COOLDOWN_DAYS`], no
+/// different `semver-*-days`, no `exclude` list and no version filters. No workflow or other non-Markdown file under
 /// `.github/` may merge a pull request or enable auto-merge, so Dependabot never merges itself.
 #[must_use]
 pub fn violations(files: &[SourceFile]) -> Vec<String> {
@@ -47,6 +47,12 @@ fn config_violations(text: &str) -> Vec<String> {
         .collect();
     for entry in &entries {
         found.extend(entry_violations(entry));
+        if !has_weekly_schedule(entry) {
+            found.push(format!(
+                "{CONFIG_PATH} entry `{}`: update checks must use a weekly schedule (10 S-7)",
+                entry.ecosystem
+            ));
+        }
     }
     found
 }
@@ -81,13 +87,21 @@ fn entry_violations(entry: &Entry<'_>) -> Vec<String> {
         .skip_while(|line| !line.trim_start().starts_with("cooldown:"));
     let Some(header) = lines.next() else {
         return vec![format!(
-            "{subject}: no `cooldown`; a version update must wait at least {MIN_COOLDOWN_DAYS} days (10 S-7)"
+            "{subject}: no `cooldown`; version updates need an explicit seven-day delay (10 S-7)"
         )];
     };
     let cooldown: Vec<&str> = lines
         .take_while(|line| is_deeper_than(line, header))
         .collect();
     let mut found = Vec::new();
+    for line in &entry.lines {
+        let trimmed = line.trim_start();
+        if trimmed.starts_with("ignore:") || trimmed.starts_with("update-types:") {
+            found.push(format!(
+                "{subject}: version filters can hide the latest stable or major update (10 S-7)"
+            ));
+        }
+    }
     let mut default_days = None;
     for line in &cooldown {
         let trimmed = line.trim();
@@ -98,10 +112,10 @@ fn entry_violations(entry: &Entry<'_>) -> Vec<String> {
             if !value
                 .trim()
                 .parse::<u32>()
-                .is_ok_and(|days| days >= MIN_COOLDOWN_DAYS)
+                .is_ok_and(|days| days == COOLDOWN_DAYS)
             {
                 found.push(format!(
-                    "{subject}: `{key}` {} is not a number of at least {MIN_COOLDOWN_DAYS} days",
+                    "{subject}: `{key}` {} is not seven days",
                     value.trim()
                 ));
             }
@@ -123,6 +137,21 @@ fn entry_violations(entry: &Entry<'_>) -> Vec<String> {
 
 fn is_deeper_than(line: &str, parent: &str) -> bool {
     line.trim().is_empty() || indentation(line) > indentation(parent)
+}
+
+fn has_weekly_schedule(entry: &Entry<'_>) -> bool {
+    let mut lines = entry
+        .lines
+        .iter()
+        .copied()
+        .skip_while(|line| !line.trim_start().starts_with("schedule:"));
+    let Some(header) = lines.next() else {
+        return false;
+    };
+    lines
+        .take_while(|line| is_deeper_than(line, header))
+        .find_map(|line| line.trim().strip_prefix("interval:"))
+        .is_some_and(|value| value.trim().trim_matches(['"', '\'']) == "weekly")
 }
 
 fn indentation(line: &str) -> usize {
@@ -172,16 +201,32 @@ mod tests {
     }
 
     #[test]
-    fn r_sec_5__a_cooldown_of_seven_days_on_both_ecosystems_has_no_violation() {
+    fn r_sec_5__stable_updates_wait_seven_days_between_weekly_checks() {
         assert_eq!(check(GOOD), Vec::<String>::new());
     }
 
     #[test]
-    fn r_sec_5__a_longer_cooldown_is_allowed() {
-        assert_eq!(
-            check(&GOOD.replace("default-days: 7", "default-days: 14")),
-            Vec::<String>::new()
-        );
+    fn r_sec_5__update_checks_must_be_weekly() {
+        for interval in ["daily", "monthly"] {
+            let config = GOOD.replacen("interval: weekly", &format!("interval: {interval}"), 1);
+            let found = check(&config);
+            assert_eq!(found.len(), 1, "{interval}: {found:?}");
+            assert!(found[0].contains("weekly"), "{found:?}");
+        }
+        let config = GOOD.replacen("    schedule:\n      interval: weekly\n", "", 1);
+        let found = check(&config);
+        assert_eq!(found.len(), 1, "{found:?}");
+        assert!(found[0].contains("weekly"), "{found:?}");
+    }
+
+    #[test]
+    fn r_sec_5__a_release_age_delay_other_than_seven_days_is_rejected() {
+        for days in ["0", "1", "6", "8", "14"] {
+            let found =
+                check(&GOOD.replacen("default-days: 7", &format!("default-days: {days}"), 1));
+            assert_eq!(found.len(), 1, "{days}: {found:?}");
+            assert!(found[0].contains("not seven days"), "{found:?}");
+        }
     }
 
     #[test]
@@ -201,12 +246,14 @@ mod tests {
     }
 
     #[test]
-    fn r_sec_5__a_cooldown_shorter_than_seven_days_is_a_violation() {
-        for days in ["0", "3", "6"] {
-            let config = GOOD.replacen("default-days: 7", &format!("default-days: {days}"), 1);
-            let found = check(&config);
-            assert_eq!(found.len(), 1, "{days}: {found:?}");
-            assert!(found[0].contains("at least 7 days"), "{found:?}");
+    fn r_sec_5__explicit_seven_day_semver_delays_are_allowed() {
+        for kind in ["major", "minor", "patch"] {
+            let config = GOOD.replacen(
+                "default-days: 7",
+                &format!("default-days: 7\n      semver-{kind}-days: 7"),
+                1,
+            );
+            assert_eq!(check(&config), Vec::<String>::new());
         }
     }
 
@@ -217,7 +264,7 @@ mod tests {
     }
 
     #[test]
-    fn r_sec_5__a_short_semver_cooldown_undoes_the_default_for_that_kind_of_update() {
+    fn r_sec_5__a_semver_delay_cannot_override_the_seven_day_rule() {
         let config = GOOD.replacen(
             "default-days: 7\n",
             "default-days: 7\n      semver-patch-days: 1\n",
@@ -230,7 +277,7 @@ mod tests {
 
     #[test]
     fn r_sec_5__a_cooldown_without_default_days_is_a_violation() {
-        let config = GOOD.replacen("default-days: 7", "semver-major-days: 30", 1);
+        let config = GOOD.replacen("default-days: 7", "semver-major-days: 7", 1);
         let found = check(&config);
         assert_eq!(found.len(), 1, "{found:?}");
         assert!(found[0].contains("no `default-days`"), "{found:?}");
@@ -262,7 +309,7 @@ mod tests {
 
     #[test]
     fn r_sec_5__a_cooldown_belongs_to_its_own_entry() {
-        let config = "updates:\n  - package-ecosystem: cargo\n    directory: /\n  - package-ecosystem: github-actions\n    cooldown:\n      default-days: 7\n";
+        let config = "updates:\n  - package-ecosystem: cargo\n    directory: /\n    schedule:\n      interval: weekly\n  - package-ecosystem: github-actions\n    schedule:\n      interval: weekly\n    cooldown:\n      default-days: 7\n";
         let found = check(config);
         assert_eq!(found.len(), 1, "{found:?}");
         assert!(found[0].contains("`cargo`"), "{found:?}");
@@ -270,8 +317,7 @@ mod tests {
 
     #[test]
     fn r_sec_5__both_required_ecosystems_must_be_present() {
-        let config =
-            "updates:\n  - package-ecosystem: cargo\n    cooldown:\n      default-days: 7\n";
+        let config = "updates:\n  - package-ecosystem: cargo\n    schedule:\n      interval: weekly\n    cooldown:\n      default-days: 7\n";
         let found = check(config);
         assert_eq!(found.len(), 1, "{found:?}");
         assert!(found[0].contains("`github-actions`"), "{found:?}");
@@ -283,6 +329,17 @@ mod tests {
     fn r_sec_5__quoted_ecosystem_names_are_read() {
         let config = GOOD.replace("package-ecosystem: cargo", "package-ecosystem: \"cargo\"");
         assert_eq!(check(&config), Vec::<String>::new());
+    }
+
+    #[test]
+    fn r_sec_5__version_filters_cannot_hide_major_updates() {
+        for filter in [
+            "ignore:\n      - dependency-name: tokio\n        update-types: [version-update:semver-major]",
+            "allow:\n      - dependency-type: all\n        update-types: [version-update:semver-patch]",
+        ] {
+            let config = GOOD.replacen("directory: /", &format!("directory: /\n    {filter}"), 1);
+            assert!(!check(&config).is_empty(), "{filter}");
+        }
     }
 
     #[test]

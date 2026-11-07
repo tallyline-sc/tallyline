@@ -1,0 +1,40 @@
+[package]
+name = "tallyline-ui"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+eframe.workspace = true
+egui.workspace = true
+sha2.workspace = true
+serde_json.workspace = true
+serde.workspace = true
+tallyline-workflows = { path = "../workflows" }
+tallyline-egui = { path = "../egui" }
+tallyline-reference-data = { path = "../reference-data" }
+tallyline-shared-kernel = { path = "../shared-kernel" }
+
+[dev-dependencies]
+egui-wgpu.workspace = true
+png.workspace = true
+image.workspace = true
+egui_kittest.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies.tallyline-game]
+path = "../game"
+
+[[test]]
+name = "native_activation"
+harness = false
+
+[dependencies.tallyline-reporting]
+workspace = true
+
+[dependencies.tallyline-submission]
+workspace = true

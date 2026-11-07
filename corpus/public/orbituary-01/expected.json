@@ -1,0 +1,2005 @@
+{
+  "schemaVersion": 2,
+  "id": "orbituary-01",
+  "verified": true,
+  "transcription": "Manually transcribed by Codex from balance-redacted source-resolution pixels on 2026-11-02, independently of recognition output and other agents; human verification is required before golden metrics.",
+  "source": {
+    "uploadedBy": "project owner",
+    "provided": "Fifteen original JPEG files from the LIVE screenshots directory, supplied for public corpus inclusion; originals remain outside the repository.",
+    "redaction": "Each original JPEG was decoded once to RGB with zune-jpeg 0.5.15, filled with black over CURRENT BALANCE at x=2896,y=272,width=352,height=128, and stored as lossless RGB PNG with png 0.18.1. PNG readback matched the masked raster byte for byte; every pixel outside the rectangle matched the decoded original. JPEG block-lossless redaction was unavailable in this intake route. The conservative allowed reencoded-unknown fidelity class makes no resolution or capture-method coverage claim.",
+    "captureTimeNote": "Confirmed by the project owner on 2026-11-02: conditions.originalFile retains the unchanged game-generated local filename, in MEZ (UTC+01:00), with no clock change. capturedAt converts its date/time to UTC at second precision; the opaque hexadecimal suffix is not interpreted as milliseconds."
+  },
+  "location": {
+    "displayedText": "ORBITUARY",
+    "expectedTerminal": null
+  },
+  "expectedTerminalId": null,
+  "theme": "orange",
+  "gameVersion": null,
+  "measured": {
+    "priceCapHeightPx": null,
+    "displayHeightFraction": null,
+    "textHeightBand": null
+  },
+  "captures": {
+    "buy-1.png": {
+      "side": "BUY",
+      "displayedTab": "Buy",
+      "capturedAt": "2026-11-02T16:14:25Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-25-180.jpg",
+        "originalSha256": "09a39786b7564f89ceb08ac906b5abb1ec52badcc535aa2d5732702e1926a8ef",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "d5ed0bad3e6af7548428addaa31b3450cea9bbbf6593ce2d75ef6aefb5f5ce29",
+        "pngSha256": "9ae715af10458f31b8b31b2bbcba5e76358e4b87e542355f7f28f4ad117ecd95"
+      },
+      "sectionHeaders": [
+        {
+          "name": "IN STOCK",
+          "expanded": true,
+          "beforeCard": 1
+        }
+      ],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "IN STOCK",
+          "name": "Carbon",
+          "status": "Max Inventory",
+          "scu": 24000,
+          "pricePerScu": 235,
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 2,
+          "section": "IN STOCK",
+          "name": "Copper",
+          "status": "High Inventory",
+          "scu": 723,
+          "pricePerScu": 2893,
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "IN STOCK",
+          "name": "Potassium",
+          "status": "Max Inventory",
+          "scu": 24000,
+          "pricePerScu": 396,
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "IN STOCK",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Ship Ammunition - Size 1",
+          "scu": 12000,
+          "pricePerScu": 6868,
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "Status is cut by the viewport; the container region and lower card border are hidden."
+        }
+      ]
+    },
+    "buy-2.png": {
+      "side": "BUY",
+      "displayedTab": "Buy",
+      "capturedAt": "2026-11-02T16:14:28Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-28-B63.jpg",
+        "originalSha256": "9cfe71cec627d22a06a16a7cbc8586f592d1a4038d1813ed83426d490d147f7f",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "327e7cbdab8ce7947740cbf83db1ba08bfa1d2079798edc50348ff1050c2ac7a",
+        "pngSha256": "5945f526a338717bddacc80557c614bd98a713915d08b26a9baec7056a68c007"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Anonymous prior-card tail; identity and hidden fields remain unknown."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Ship Ammunition - Size 1",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 6868,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Ship Ammunition - Size 2",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 7126,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Ship Ammunition - Size 3",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 7384,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Ship Ammunition -",
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "Only the first name line is complete; the size suffix and other fields are clipped or hidden."
+        }
+      ]
+    },
+    "buy-3.png": {
+      "side": "BUY",
+      "displayedTab": "Buy",
+      "capturedAt": "2026-11-02T16:14:31Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-31-970.jpg",
+        "originalSha256": "ef802a0cf2958fc8604a0b2f77e415993e9b484089cd18ededeb9e77339147ab",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "ae14c5f827080a928a90e5b446d524fc53611d8cd8f94d94e18b5dfa8501aa92",
+        "pngSha256": "3b036a4fae8173349c536faba58f833fb2c5b5f046ea0e184d56e05da441cfd2"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Anonymous prior-card tail; identity and hidden fields remain unknown."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Ship Ammunition - Size 4",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 7641,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Ship Ammunition - Size 5",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 7985,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Ship Ammunition - Size 6",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 8328,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "partial": true,
+          "partialEdge": "bottom",
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "Only a narrow upper card-border fragment is visible at the viewport edge; no field is transcribed."
+        }
+      ]
+    },
+    "buy-4.png": {
+      "side": "BUY",
+      "displayedTab": "Buy",
+      "capturedAt": "2026-11-02T16:14:34Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-34-440.jpg",
+        "originalSha256": "5a1edb64ea24acfaaad9e10d0cb092f25d23fe96178bded6c957f0ffd8e74876",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "0b9268257c632a890b857c009f10882c8c617d4148f6dafdfa03d8afaf5bab38",
+        "pngSha256": "e66d7dee58e9ac900bf411139e1774ae921368cf3c66f310c502ca4e4e02aa8c"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Anonymous prior-card tail; identity and hidden fields remain unknown."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Ship Ammunition - Size 7",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 8671,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Ship Decoy Countermeasures",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 4293,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Ship Noise Countermeasures",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 8585,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Hydrogen Fuel",
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "The name is complete; the quantity line is clipped and all lower fields are hidden."
+        }
+      ]
+    },
+    "buy-5.png": {
+      "side": "BUY",
+      "displayedTab": "Buy",
+      "capturedAt": "2026-11-02T16:14:37Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-37-FBA.jpg",
+        "originalSha256": "3ce27b723f6a059ffb6d8207b2386204f50e459cf18e4e46aa01f92be1be1ae7",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "6542b7d5c6407c1648339b89aa08123bae7236905149e44fb0f2293d8c75fc93",
+        "pngSha256": "a085443b91bfd9a9f774c0a8fa80eb15af6e3a5c7d95d683206960dcd8d15d89"
+      },
+      "sectionHeaders": [
+        {
+          "name": "OUT OF STOCK",
+          "expanded": false,
+          "beforeCard": null
+        }
+      ],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Anonymous prior-card tail; identity and hidden fields remain unknown."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Hydrogen Fuel",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 782,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Quantum Fuel",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 1760,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Recycled Material Composite",
+          "status": "Max Inventory",
+          "scu": 12000,
+          "pricePerScu": 7587,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        }
+      ]
+    },
+    "sell-1.png": {
+      "side": "SELL",
+      "displayedTab": "Local Market Value",
+      "capturedAt": "2026-11-02T16:14:40Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-40-A74.jpg",
+        "originalSha256": "11d58d6c35acb5a3a3e552333ff767590dc4629d120e4ad4ababe07afd3059a7",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "795878cd34b7d1b9114b8207629636612881e5c89527d05b106a5799035526fd",
+        "pngSha256": "57375ca3c4e65fb2cc5ea672204eedbf89f55c5e5a59e46ca9f123e7c2f89aaf"
+      },
+      "sectionHeaders": [
+        {
+          "name": "SELLABLE CARGO",
+          "expanded": false,
+          "beforeCard": 1
+        },
+        {
+          "name": "IN DEMAND",
+          "expanded": true,
+          "beforeCard": 1
+        }
+      ],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "IN DEMAND",
+          "name": "Waste",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 450,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 2,
+          "section": "IN DEMAND",
+          "name": "[!] Altruciatoxin",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 6200,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "IN DEMAND",
+          "name": "Aluminium",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 3600,
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "IN DEMAND",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Argon",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 420,
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "The container region and lower card border are hidden."
+        }
+      ]
+    },
+    "sell-2.png": {
+      "side": "SELL",
+      "displayedTab": "Local Market Value",
+      "capturedAt": "2026-11-02T16:14:42Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-42-522.jpg",
+        "originalSha256": "ba20ecacfcd5d7f173e998012e7dbffdb6f2f14823fde86490e851dd0efe94a4",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "aba784fd9bb9d8df0a8e8d0fe5fb98168e4aa1eaa79010258917f0a64c25d795",
+        "pngSha256": "c580823a24fe2fd7dd24a98e53b704d023974952c7246d385ea2f7b6cfcbdb80"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Anonymous prior-card tail; identity and hidden fields remain unknown."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Argon",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 420,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Beryl",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 19000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Bioplastic",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 8600,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Borase",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 27000,
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "Only the tops of the container boxes are visible; their digits and the lower card border are hidden."
+        }
+      ]
+    },
+    "sell-3.png": {
+      "side": "SELL",
+      "displayedTab": "Local Market Value",
+      "capturedAt": "2026-11-02T16:14:45Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-45-D6A.jpg",
+        "originalSha256": "5136fb18a2bff6660972d7a726b92124f0443e938dfde863b407c8998e05d932",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "43a91b2099d1cf216d8eeb5f6783b950577d090e4e8271bc0ee3b62ac31ddf54",
+        "pngSha256": "502b561a155e3767f3051454190b021f1b4dd4bd8e802a4e6c54349cd675e5a9"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "Only a narrow prior-card lower-border fragment is visible; no identity or field is inferred."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Borase",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 27000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Construction Materials",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 12000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Corundum",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 4400,
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Hephaestanite",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 4600,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "All container digits are visible, but the lower card border is clipped; the card remains partial."
+        }
+      ]
+    },
+    "sell-4.png": {
+      "side": "SELL",
+      "displayedTab": "Local Market Value",
+      "capturedAt": "2026-11-02T16:14:48Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-48-996.jpg",
+        "originalSha256": "af455fd90af7ecf36d4c6d579f6762aa765b08bfa0f4abb8289ce5e8702cc513",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "a56f79d5f78767aa099cdc47bd3f65e27c1ac1af4f6c47fc3cb28a60333a7db6",
+        "pngSha256": "8742d715e073a68fc835de5bcce54febdc0ab69158eb76da5dead63772677b2e"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Anonymous prior-card tail; identity and hidden fields remain unknown."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Hephaestanite",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 4600,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Human Food Bars",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 470,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Fluorine",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 1200,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Agricium",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 9200,
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "The container label is clipped; container digits and lower border are hidden."
+        }
+      ]
+    },
+    "sell-5.png": {
+      "side": "SELL",
+      "displayedTab": "Local Market Value",
+      "capturedAt": "2026-11-02T16:14:50Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-50-3A2.jpg",
+        "originalSha256": "ae94fca849fb57e8c82a8457a68dad71d02f120da2e727422f6708992bdc1851",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "5d50a0870934d7d6e5f527d164af70cf189004615b8541bcc11a42ff8040dcb1",
+        "pngSha256": "901a2fbfe6e37063974ff114690f1ddeb9f0e68e95716cd1c2577e78a65b6973"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "Only clipped box edges and the lower border of an anonymous prior card are visible; no digits are inferred."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Agricium",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 9200,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Hydrogen",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 1100,
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Laranite",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 8500,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Medical Supplies",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 5200,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Container digits are visible, but the boxes and lower card border are clipped; the card remains partial."
+        }
+      ]
+    },
+    "sell-6.png": {
+      "side": "SELL",
+      "displayedTab": "Local Market Value",
+      "capturedAt": "2026-11-02T16:14:53Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-53-DA8.jpg",
+        "originalSha256": "65bf86a5c4b58cf8786c690731a3feb60df5a4254d9d9bbfaeb1d033cd12e0c6",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "d18208cfbbbc7d065f2bf8e079ca898a786dae57f562586dc5cbe915d0d93bad",
+        "pngSha256": "8b1b49eabb7f092ccc242890c2f5ef5244a2a4d02ac228684d567438a0521c59"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Anonymous prior-card tail; identity and hidden fields remain unknown."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Medical Supplies",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 5200,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "[!] Neon",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 17000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Nitrogen",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 3000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Omnapoxy",
+          "status": "Medium Inventory",
+          "scu": 657,
+          "pricePerScu": 4800,
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "The container region and lower card border are hidden."
+        }
+      ]
+    },
+    "sell-7.png": {
+      "side": "SELL",
+      "displayedTab": "Local Market Value",
+      "capturedAt": "2026-11-02T16:14:58Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-14-58-FF7.jpg",
+        "originalSha256": "deb9a5c012349b999c8a609a0ea7e64488ccf1fc9aa01bcec6bfa6e6d177f836",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "befb4ef8b06030b86abebc68f60f8bc461983ae3d4debde34e38e53376728e00",
+        "pngSha256": "3ac174edea9870b57691a51934b8446f6a186bc0a06f62f6b46076dcc0d409cc"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Anonymous prior-card tail; identity and hidden fields remain unknown."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Omnapoxy",
+          "status": "Medium Inventory",
+          "scu": 657,
+          "pricePerScu": 4800,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Pressurized Ice",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 5200,
+          "containerSizes": [
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Processed Food",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 1400,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Quartz",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 4200,
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "Only container-box tops are visible; digits and lower card border are hidden."
+        }
+      ]
+    },
+    "sell-8.png": {
+      "side": "SELL",
+      "displayedTab": "Local Market Value",
+      "capturedAt": "2026-11-02T16:15:03Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-15-03-433.jpg",
+        "originalSha256": "43878f96f8e5c907b02750644404696e22cde6e282910c1134f390d4ff74d809",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "0b45d966f747615d52e7760211ce77314bf288a5f4dc788e5e078b6215b2956e",
+        "pngSha256": "60c611030e030cb49981f783d2e976120d8f92cc5c7dafdaed1d3fc5d57fb0a7"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "name": "Quartz",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 4200,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Scrap",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 3500,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Steel",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 2000,
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Stims",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 5000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        }
+      ]
+    },
+    "sell-9.png": {
+      "side": "SELL",
+      "displayedTab": "Local Market Value",
+      "capturedAt": "2026-11-02T16:15:06Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-15-06-143.jpg",
+        "originalSha256": "3b42b5669208243149e4f800e50b1b016d6ce0e9a1884d41c393bbb08bf52435",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "2184dceb382e8d6b19f6b5d59a608ee7ed9079375db9d9110238161a9c14d58a",
+        "pngSha256": "ab3f4705500ebbbaa3d67b89a826371896f9d50a028a1baea827266fe2f1a7a7"
+      },
+      "sectionHeaders": [],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Anonymous prior-card tail; identity and hidden fields remain unknown."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Tin",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 3800,
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Titanium",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 8300,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Year of the Rat Envelope",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 2000000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 5,
+          "section": "",
+          "partial": true,
+          "partialEdge": "bottom",
+          "name": "Luminalia Gift",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 5000000,
+          "containerSizes": null,
+          "expectedCommodityId": null,
+          "note": "Only container-box tops are visible; digits and lower card border are hidden."
+        }
+      ]
+    },
+    "sell-10.png": {
+      "side": "SELL",
+      "displayedTab": "Local Market Value",
+      "capturedAt": "2026-11-02T16:15:08Z",
+      "locationDisplayedText": "ORBITUARY",
+      "conditions": {
+        "originalFile": "ScreenShot-2026-11-02_17-15-08-976.jpg",
+        "originalSha256": "1a91d66a5bf8694d84e29b05b58e9dde4478b252e591ad521066ee9cfadf5b90",
+        "fileResolution": "3840x2160",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": "LIVE",
+        "gameVersion": null,
+        "container": "png8",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "ladder": null
+      },
+      "redaction": {
+        "rectangle": {
+          "x": 2896,
+          "y": 272,
+          "width": 352,
+          "height": 128
+        },
+        "fillRgb": [
+          0,
+          0,
+          0
+        ],
+        "maskedPixels": 45056,
+        "outsidePixelsUnchanged": true,
+        "outsideRgbSha256": "7038745b774f6b02fc19a1a82b9262e4a4df391c24d1cf976faee39deeb44aee",
+        "pngSha256": "358e7832a255bcea22131b3f764c4311a2bf0b084beded16b16591bb0a74e2f5"
+      },
+      "sectionHeaders": [
+        {
+          "name": "NO DEMAND",
+          "expanded": false,
+          "beforeCard": null
+        }
+      ],
+      "note": "An empty section means its header is outside this capture; no section or hidden card field is borrowed from another capture. The displayed Local Market Value tab maps to the existing SELL corpus side, not a sellable-cargo eligibility claim.",
+      "cards": [
+        {
+          "screenOrder": 1,
+          "section": "",
+          "partial": true,
+          "partialEdge": "top",
+          "status": "Out of Stock",
+          "containerSizes": [
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null,
+          "note": "Anonymous prior-card tail: status and container digits are visible; the name, quantity and clipped price remain untranscribed."
+        },
+        {
+          "screenOrder": 2,
+          "section": "",
+          "name": "Titanium",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 8300,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 3,
+          "section": "",
+          "name": "Year of the Rat Envelope",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 2000000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        },
+        {
+          "screenOrder": 4,
+          "section": "",
+          "name": "Luminalia Gift",
+          "status": "Out of Stock",
+          "scu": 0,
+          "pricePerScu": 5000000,
+          "containerSizes": [
+            1,
+            2,
+            4,
+            8,
+            16,
+            24,
+            32
+          ],
+          "expectedCommodityId": null
+        }
+      ]
+    }
+  }
+}

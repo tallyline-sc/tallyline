@@ -1,0 +1,21 @@
+Tallyline product artwork
+Copyright 2026 Lucas Greuloch
+SPDX-License-Identifier: GPL-3.0-or-later
+
+Source: https://github.com/tallyline-sc/tallyline/tree/main/branding
+The original Line geometry is concept C in the supplied design system's
+components/AppIconConcepts/preview.html, selected by ADR-0004 section 1 and O-83.
+Exports preserve its 32-unit plate and bars. Native icons use fixed dark colours.
+The outlined lettering uses the approved IBM Plex Sans; exports contain no font
+software. Font software retains its separate SIL OFL-1.1 notices.
+
+Source archive SHA-256:
+Tallyline-Design-System.zip
+ac6f69b6ecaf22535978eec678de598f82c1db46ac1729fba82e4de3baf50207
+tallyline-egui.zip
+787c87a0ac63b0a7a393a8fa8aadcc499026c778de3a2e0d1cef99ca6b66b90f
+
+Native PNG SHA-256: d0ed9a91e6e5fd79633352b1f319e8f2c96c0ff1159c371a9354857ab5d8108f
+Native ICO SHA-256: 13c3bf7fd049940f4ae4ec656ca548491ad22aa5760ef2562a2d072cad4b2879
+The complete exported artwork identities are recorded in branding/exports.json.
+The complete licence terms are in the project's LICENSE file.

@@ -1,0 +1,4533 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-01",
+  "base_commit": "ef40bf6ec3cc93060c7b4db80ba5c256375ae12d",
+  "scope": "Reviewed eligible stable dependency adoption and unavoidable upstream transitive constraints. Metadata and archive identities, publisher trust and explicitly limited source reviews are distinct evidence. This is not a fresh full source audit of every package.",
+  "upstream_checked_at": "2026-11-01T19:03:36.980654+01:00",
+  "seven_day_cutoff": "2026-10-25T19:03:36.980654+01:00",
+  "lock_sha256": "a1f9dd5559ac8007ceef970738695296ac78bffd43ea00e4b096d232955e60ba",
+  "registry_identities_checked": 448,
+  "yanked_or_unjustified_young": 0,
+  "age_exceptions": [
+    {
+      "name": "aws-lc-rs",
+      "version": "1.19.0",
+      "published_at": "2026-10-28T15:48:44.285686Z",
+      "reason": "Exact native version/hash/features/targets approved before restoration of S-7."
+    },
+    {
+      "name": "aws-lc-sys",
+      "version": "0.47.0",
+      "published_at": "2026-10-28T15:43:12.261263Z",
+      "reason": "Exact native version/hash/features/targets approved before restoration of S-7."
+    },
+    {
+      "name": "rusqlite",
+      "version": "0.41.1",
+      "published_at": "2026-10-28T17:58:27.732969Z",
+      "reason": "Inherited exact SQLite parent/native source approval, preserved by the S-7 transition; no new version decision."
+    },
+    {
+      "name": "rustix",
+      "version": "1.1.6",
+      "published_at": "2026-10-27T00:49:03.146056Z",
+      "reason": "Exact native version/hash/features/targets approved before restoration of S-7."
+    },
+    {
+      "name": "webbrowser",
+      "version": "1.2.6",
+      "published_at": "2026-10-31T06:44:19.065844Z",
+      "reason": "Existing documented security-update exception."
+    }
+  ],
+  "owner_approval": {
+    "approved_on": "2026-11-01",
+    "security_proposal_sha256": "f37440c4823e45bb71ee4c7831249cb813aaab63cb6e03f515bce416e86dd3ea",
+    "scope": "Exactly 20 named-crate publisher rules, two qualified AI delta audits and send_wrapper 0.6.0 off-target exemption plus all-root/version/renamed activation guard. Local adoption only. Existing AWS-LC exemption move and exact native versions were separately approved.",
+    "publisher_rules_exclusive_end": "2027-11-01",
+    "send_wrapper_revisit_by": "2027-04-13"
+  },
+  "egui_provenance": {
+    "published_vcs_commit": "7c0b40402271e8d40cda69f87cf3c2617c2e4382",
+    "repository": "https://github.com/emilk/egui",
+    "published_vcs_api_status": 422,
+    "published_vcs_api_result": "No commit found for SHA",
+    "official_release_tag": "0.37.0",
+    "official_tag_object": "418687fa18fdac8a9b1b6c8f4a2eb1afd2df4c47",
+    "peeled_release_commit": "841a328ba2dd8f6996beb7189ebb7fc00e668a2a",
+    "packaged_rust_files_compared": 279,
+    "packaged_rust_files_identical": 279,
+    "packaged_files_compared": 302,
+    "comparison_scope": "All nine published 0.37.0 family packages; excludes Cargo-generated normalised Cargo.toml, Cargo.lock, .cargo_vcs_info.json and the local .cargo-ok marker. Cargo.toml.orig maps to upstream Cargo.toml. egui README is the exact repository-root README. Only remaining difference is an epaint manifest documentation comment naming egui_system_fonts instead of egui_system_font_provider. No code, dependency or feature difference found in this comparison.",
+    "limit": "The published VCS commit is distinct and unavailable through the checked official API; the release tag is not asserted to be that commit. Official registry archive hashes and publisher/vet coverage remain independent."
+  },
+  "changed_registry_identities": [
+    {
+      "name": "accesskit",
+      "version": "0.25.1",
+      "archive_sha256": "ad442f58ee04714aaa0ba0a2768c1ea1935b29507bb22ddece8cbbc76db02932",
+      "published_at": "2026-09-25T19:40:54.207184Z",
+      "publisher": {
+        "id": 27789,
+        "login": "DataTriny"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/AccessKit/accesskit",
+      "source": "https://crates.io/api/v1/crates/accesskit/0.25.1",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "accesskit_consumer",
+          "version": "0.39.1",
+          "requirements": [
+            "^0.25.1"
+          ]
+        },
+        {
+          "name": "egui",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.25.0"
+          ]
+        },
+        {
+          "name": "kittest",
+          "version": "0.5.0",
+          "requirements": [
+            "^0.25.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 27789,
+          "login": "DataTriny",
+          "kind": "user"
+        },
+        {
+          "id": 143177,
+          "login": "mwcampbell",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "accesskit_consumer",
+      "version": "0.39.1",
+      "archive_sha256": "8a45e2bb300bea6d5f33a82c3e051c3ddc6f41c209750f68a0acbe991a284344",
+      "published_at": "2026-09-25T19:40:56.422234Z",
+      "publisher": {
+        "id": 27789,
+        "login": "DataTriny"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/AccessKit/accesskit",
+      "source": "https://crates.io/api/v1/crates/accesskit_consumer/0.39.1",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "kittest",
+          "version": "0.5.0",
+          "requirements": [
+            "^0.39.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 27789,
+          "login": "DataTriny",
+          "kind": "user"
+        },
+        {
+          "id": 143177,
+          "login": "mwcampbell",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; prior desktop-adoption roster exists for this name.",
+      "owners_added_since_desktop_snapshot": [],
+      "owners_removed_since_desktop_snapshot": []
+    },
+    {
+      "name": "aws-lc-rs",
+      "version": "1.19.0",
+      "archive_sha256": "048006790404103c488e6c5616b3e7e702a71292aadda08e8f7698a9e0d2eb53",
+      "published_at": "2026-10-28T15:48:44.285686Z",
+      "publisher": {
+        "id": 156764,
+        "login": "justsmth"
+      },
+      "licence": "ISC AND (Apache-2.0 OR ISC)",
+      "repository": "https://github.com/aws/aws-lc-rs",
+      "source": "https://crates.io/api/v1/crates/aws-lc-rs/1.19.0",
+      "age_exception": "Exact native version/hash/features/targets approved before restoration of S-7.",
+      "reverse_consumers": [
+        {
+          "name": "rustls",
+          "version": "0.23.46",
+          "requirements": [
+            "^1.18"
+          ]
+        },
+        {
+          "name": "rustls-webpki",
+          "version": "0.103.16",
+          "requirements": [
+            "^1.18"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 156764,
+          "login": "justsmth",
+          "kind": "user"
+        },
+        {
+          "id": 184010,
+          "login": "skmcgrail",
+          "kind": "user"
+        },
+        {
+          "id": 220328,
+          "login": "crypto-alg",
+          "kind": "user"
+        },
+        {
+          "id": 7883,
+          "login": "github:aws:aws-lc-rs-team",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "aws-lc-sys",
+      "version": "0.47.0",
+      "archive_sha256": "8bfbe32ac36b3c428696ce315464181bc4029d689fd58e3f2a4e58c252242f52",
+      "published_at": "2026-10-28T15:43:12.261263Z",
+      "publisher": {
+        "id": 156764,
+        "login": "justsmth"
+      },
+      "licence": "ISC AND (Apache-2.0 OR ISC) AND Apache-2.0 AND MIT AND BSD-3-Clause AND (Apache-2.0 OR ISC OR MIT) AND (Apache-2.0 OR ISC OR MIT-0)",
+      "repository": "https://github.com/aws/aws-lc-rs",
+      "source": "https://crates.io/api/v1/crates/aws-lc-sys/0.47.0",
+      "age_exception": "Exact native version/hash/features/targets approved before restoration of S-7.",
+      "reverse_consumers": [
+        {
+          "name": "aws-lc-rs",
+          "version": "1.19.0",
+          "requirements": [
+            "^0.47.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 156764,
+          "login": "justsmth",
+          "kind": "user"
+        },
+        {
+          "id": 184010,
+          "login": "skmcgrail",
+          "kind": "user"
+        },
+        {
+          "id": 220328,
+          "login": "crypto-alg",
+          "kind": "user"
+        },
+        {
+          "id": 7883,
+          "login": "github:aws:aws-lc-rs-team",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "cc",
+      "version": "1.10.0",
+      "archive_sha256": "86e055fa6e3e40ad6187ba25b6855eeb635d5271f8e0f0e1e9a5826b8d75bea0",
+      "published_at": "2026-10-23T08:35:43.203664Z",
+      "publisher": null,
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/rust-lang/cc-rs",
+      "source": "https://crates.io/api/v1/crates/cc/1.10.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "android-activity",
+          "version": "0.6.1",
+          "requirements": [
+            "^1.0.42"
+          ]
+        },
+        {
+          "name": "aws-lc-sys",
+          "version": "0.47.0",
+          "requirements": [
+            "^1.2.41"
+          ]
+        },
+        {
+          "name": "cmake",
+          "version": "0.1.58",
+          "requirements": [
+            "^1.2.46"
+          ]
+        },
+        {
+          "name": "libsqlite3-sys",
+          "version": "0.39.1",
+          "requirements": [
+            "^1.2.27"
+          ]
+        },
+        {
+          "name": "ring",
+          "version": "0.17.14",
+          "requirements": [
+            "^1.2.8"
+          ]
+        },
+        {
+          "name": "wayland-backend",
+          "version": "0.3.17",
+          "requirements": [
+            "^1.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 55123,
+          "login": "rust-lang-owner",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed.",
+      "trusted_publishing_identity": {
+        "provider": "github",
+        "repository": "rust-lang/cc-rs",
+        "run_id": "39925715290",
+        "sha": "8d06fcb73f6938c35c9bc59edbdcb9fb56f04d71"
+      }
+    },
+    {
+      "name": "ecolor",
+      "version": "0.37.0",
+      "archive_sha256": "31bcbef0d4263a63eb32c4834e5d711613035ce1333468e107d928923e21e6e2",
+      "published_at": "2026-10-15T14:48:52.938614Z",
+      "publisher": {
+        "id": 197939,
+        "login": "rerunio"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/emilk/egui",
+      "source": "https://crates.io/api/v1/crates/ecolor/0.37.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "epaint",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 5619,
+          "login": "emilk",
+          "kind": "user"
+        },
+        {
+          "id": 197939,
+          "login": "rerunio",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "eframe",
+      "version": "0.37.0",
+      "archive_sha256": "9c5642501a65ca657d05f00c643a5c14ff2346cb3818032bfe23d58e1f8e5f84",
+      "published_at": "2026-10-15T15:28:53.621684Z",
+      "publisher": {
+        "id": 197939,
+        "login": "rerunio"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/emilk/egui/tree/main/crates/eframe",
+      "source": "https://crates.io/api/v1/crates/eframe/0.37.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "egui_kittest",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "tallyline-app",
+          "version": "0.1.0",
+          "requirements": [
+            "=0.37.0"
+          ]
+        },
+        {
+          "name": "tallyline-ui",
+          "version": "0.1.0",
+          "requirements": [
+            "=0.37.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 5619,
+          "login": "emilk",
+          "kind": "user"
+        },
+        {
+          "id": 197939,
+          "login": "rerunio",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; prior desktop-adoption roster exists for this name.",
+      "owners_added_since_desktop_snapshot": [],
+      "owners_removed_since_desktop_snapshot": []
+    },
+    {
+      "name": "egui",
+      "version": "0.37.0",
+      "archive_sha256": "bec9144f49b7a28b5f395d3147e325b4fe3e77ba686eac11d1bdf0a7da3f375f",
+      "published_at": "2026-10-15T14:49:16.159284Z",
+      "publisher": {
+        "id": 197939,
+        "login": "rerunio"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/emilk/egui",
+      "source": "https://crates.io/api/v1/crates/egui/0.37.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "eframe",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "egui-wgpu",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "egui-winit",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "egui_glow",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "egui_kittest",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "tallyline-app",
+          "version": "0.1.0",
+          "requirements": [
+            "=0.37.0"
+          ]
+        },
+        {
+          "name": "tallyline-egui",
+          "version": "0.1.0",
+          "requirements": [
+            "=0.37.0"
+          ]
+        },
+        {
+          "name": "tallyline-ui",
+          "version": "0.1.0",
+          "requirements": [
+            "=0.37.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 5619,
+          "login": "emilk",
+          "kind": "user"
+        },
+        {
+          "id": 197939,
+          "login": "rerunio",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "egui-wgpu",
+      "version": "0.37.0",
+      "archive_sha256": "0309cbe1febed48af5b974e4bcc424b35e9664863a4d402697147b57a488c864",
+      "published_at": "2026-10-15T14:49:55.127617Z",
+      "publisher": {
+        "id": 197939,
+        "login": "rerunio"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/emilk/egui/tree/main/crates/egui-wgpu",
+      "source": "https://crates.io/api/v1/crates/egui-wgpu/0.37.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "eframe",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "egui_kittest",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "tallyline-ui",
+          "version": "0.1.0",
+          "requirements": [
+            "=0.37.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 5619,
+          "login": "emilk",
+          "kind": "user"
+        },
+        {
+          "id": 197939,
+          "login": "rerunio",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; prior desktop-adoption roster exists for this name.",
+      "owners_added_since_desktop_snapshot": [],
+      "owners_removed_since_desktop_snapshot": []
+    },
+    {
+      "name": "egui-winit",
+      "version": "0.37.0",
+      "archive_sha256": "e4e449f4c4a2a60c7ccb4ba7fa4078417bfe1f9ddc03b5e05ce75748e33a70de",
+      "published_at": "2026-10-15T14:49:31.077523Z",
+      "publisher": {
+        "id": 197939,
+        "login": "rerunio"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/emilk/egui/tree/main/crates/egui-winit",
+      "source": "https://crates.io/api/v1/crates/egui-winit/0.37.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "eframe",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 5619,
+          "login": "emilk",
+          "kind": "user"
+        },
+        {
+          "id": 197939,
+          "login": "rerunio",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; prior desktop-adoption roster exists for this name.",
+      "owners_added_since_desktop_snapshot": [],
+      "owners_removed_since_desktop_snapshot": []
+    },
+    {
+      "name": "egui_glow",
+      "version": "0.37.0",
+      "archive_sha256": "9275ca5cc35a6b7c94e0e8cedf22542f66cb0cf45ed8ab2657c78ff49fec7268",
+      "published_at": "2026-10-15T14:49:41.064307Z",
+      "publisher": {
+        "id": 197939,
+        "login": "rerunio"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/emilk/egui/tree/main/crates/egui_glow",
+      "source": "https://crates.io/api/v1/crates/egui_glow/0.37.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "eframe",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 5619,
+          "login": "emilk",
+          "kind": "user"
+        },
+        {
+          "id": 197939,
+          "login": "rerunio",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; prior desktop-adoption roster exists for this name.",
+      "owners_added_since_desktop_snapshot": [],
+      "owners_removed_since_desktop_snapshot": []
+    },
+    {
+      "name": "egui_kittest",
+      "version": "0.37.0",
+      "archive_sha256": "0979c2e37860fcf13a2bea77508607f067a9a6a84ba9bd47b5e298582fb59b86",
+      "published_at": "2026-10-15T15:36:03.13416Z",
+      "publisher": {
+        "id": 197939,
+        "login": "rerunio"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/emilk/egui",
+      "source": "https://crates.io/api/v1/crates/egui_kittest/0.37.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "tallyline-ui",
+          "version": "0.1.0",
+          "requirements": [
+            "=0.37.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 5619,
+          "login": "emilk",
+          "kind": "user"
+        },
+        {
+          "id": 197939,
+          "login": "rerunio",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; prior desktop-adoption roster exists for this name.",
+      "owners_added_since_desktop_snapshot": [],
+      "owners_removed_since_desktop_snapshot": []
+    },
+    {
+      "name": "emath",
+      "version": "0.37.0",
+      "archive_sha256": "e73ce90f54750be8672c02be0743fe47530e6f251e066f0ee2869b59eb297af5",
+      "published_at": "2026-10-15T14:48:48.114881Z",
+      "publisher": {
+        "id": 197939,
+        "login": "rerunio"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/emilk/egui/tree/main/crates/emath",
+      "source": "https://crates.io/api/v1/crates/emath/0.37.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "ecolor",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "egui",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "epaint",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 5619,
+          "login": "emilk",
+          "kind": "user"
+        },
+        {
+          "id": 197939,
+          "login": "rerunio",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "epaint",
+      "version": "0.37.0",
+      "archive_sha256": "97bac86ae3dde93fc3951e790951caea739ff39a6c89d909cdaf1d9278dbb1bd",
+      "published_at": "2026-10-15T14:49:06.2681Z",
+      "publisher": {
+        "id": 197939,
+        "login": "rerunio"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/emilk/egui/tree/main/crates/epaint",
+      "source": "https://crates.io/api/v1/crates/epaint/0.37.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "egui",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        },
+        {
+          "name": "egui-wgpu",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.37.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 5619,
+          "login": "emilk",
+          "kind": "user"
+        },
+        {
+          "id": 197939,
+          "login": "rerunio",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "fixedbitset",
+      "version": "0.5.7",
+      "archive_sha256": "1d674e81391d1e1ab681a28d99df07927c6d4aa5b027d7da16ba32d1d21ecd99",
+      "published_at": "2024-04-14T23:53:05.91882Z",
+      "publisher": {
+        "id": 120881,
+        "login": "james7132"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/petgraph/fixedbitset",
+      "source": "https://crates.io/api/v1/crates/fixedbitset/0.5.7",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "petgraph",
+          "version": "0.8.3",
+          "requirements": [
+            "^0.5.7"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 356,
+          "login": "bluss",
+          "kind": "user"
+        },
+        {
+          "id": 33804,
+          "login": "jrraymond",
+          "kind": "user"
+        },
+        {
+          "id": 120881,
+          "login": "james7132",
+          "kind": "user"
+        },
+        {
+          "id": 1450,
+          "login": "github:petgraph:release-team",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "foldhash",
+      "version": "0.1.5",
+      "archive_sha256": "d9c4f5dac5e15c24eb999c26181a6ca40b39fe946cbe4c263c7209467bc83af2",
+      "published_at": "2025-03-15T20:10:19.156505Z",
+      "publisher": {
+        "id": 24326,
+        "login": "orlp"
+      },
+      "licence": "Zlib",
+      "repository": "https://github.com/orlp/foldhash",
+      "source": "https://crates.io/api/v1/crates/foldhash/0.1.5",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "hashbrown",
+          "version": "0.15.5",
+          "requirements": [
+            "^0.1.2"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 24326,
+          "login": "orlp",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "glifo",
+      "version": "0.3.0",
+      "archive_sha256": "282a26c1e23de04bdab3e34a21b6f877a479b96737792516b9b8b8f69b6661be",
+      "published_at": "2026-08-07T11:00:12.385798Z",
+      "publisher": {
+        "id": 288469,
+        "login": "LaurenzV"
+      },
+      "licence": "Apache-2.0 OR MIT",
+      "repository": "https://github.com/linebender/vello",
+      "source": "https://crates.io/api/v1/crates/glifo/0.3.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "vello_cpu",
+          "version": "0.2.0",
+          "requirements": [
+            "^0.3.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1968,
+          "login": "raphlinus",
+          "kind": "user"
+        },
+        {
+          "id": 109051,
+          "login": "DJMcNab",
+          "kind": "user"
+        },
+        {
+          "id": 158585,
+          "login": "xStrom",
+          "kind": "user"
+        },
+        {
+          "id": 288469,
+          "login": "LaurenzV",
+          "kind": "user"
+        },
+        {
+          "id": 361049,
+          "login": "grebmeg",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.15.5",
+      "archive_sha256": "9229cfe53dfd69f0609a49f65461bd93001ea1ef889cd5529dd176593f5338a1",
+      "published_at": "2025-08-07T23:58:32.116553Z",
+      "publisher": {
+        "id": 55123,
+        "login": "rust-lang-owner"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/rust-lang/hashbrown",
+      "source": "https://crates.io/api/v1/crates/hashbrown/0.15.5",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "petgraph",
+          "version": "0.8.3",
+          "requirements": [
+            "^0.15.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 55123,
+          "login": "rust-lang-owner",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; prior desktop-adoption roster exists for this name.",
+      "owners_added_since_desktop_snapshot": [],
+      "owners_removed_since_desktop_snapshot": []
+    },
+    {
+      "name": "icu_collections",
+      "version": "2.4.0",
+      "archive_sha256": "fe090a42a0d3140fed8c63263ed1fecc02422cb2f4bfe55cd8de2de1b8e105dd",
+      "published_at": "2026-10-22T08:56:10.314911Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/icu_collections/2.4.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "icu_normalizer",
+          "version": "2.4.0",
+          "requirements": [
+            "~2.4.0"
+          ]
+        },
+        {
+          "name": "icu_properties",
+          "version": "2.4.0",
+          "requirements": [
+            "~2.4.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1139,
+          "login": "Manishearth",
+          "kind": "user"
+        },
+        {
+          "id": 128408,
+          "login": "sffc",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "icu_locale_core",
+      "version": "2.4.0",
+      "archive_sha256": "25d29b57c17c6528d0dc4c2141cfa2d08200465acb537a3909c8b9b8a4a984c0",
+      "published_at": "2026-10-22T08:51:54.513231Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/icu_locale_core/2.4.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "icu_properties",
+          "version": "2.4.0",
+          "requirements": [
+            "^2.4.0"
+          ]
+        },
+        {
+          "name": "icu_provider",
+          "version": "2.4.0",
+          "requirements": [
+            "^2.4.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 128408,
+          "login": "sffc",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "icu_normalizer",
+      "version": "2.4.0",
+      "archive_sha256": "404a3b8c486f205c87fe7f23ab6894d84a4ad76d6e4671ae1981ba7def87c599",
+      "published_at": "2026-10-22T08:56:44.926074Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/icu_normalizer/2.4.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "idna_adapter",
+          "version": "1.2.2",
+          "requirements": [
+            "^2.2"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1139,
+          "login": "Manishearth",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "icu_normalizer_data",
+      "version": "2.4.0",
+      "archive_sha256": "20f0088bfb7441f7a37fa0c9e20cb1e9cba1cac6b9ce8cd2a6dc44294f8e8cbc",
+      "published_at": "2026-10-22T08:56:37.139212Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/icu_normalizer_data/2.4.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "icu_normalizer",
+          "version": "2.4.0",
+          "requirements": [
+            "~2.4.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 128408,
+          "login": "sffc",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "icu_properties",
+      "version": "2.4.0",
+      "archive_sha256": "2ea83d991c56158f7cf898bf86436c1dfe7c07ee82fe88951f2695c9f37a379f",
+      "published_at": "2026-10-22T08:56:21.837545Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/icu_properties/2.4.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "icu_normalizer",
+          "version": "2.4.0",
+          "requirements": [
+            "~2.4.0"
+          ]
+        },
+        {
+          "name": "idna_adapter",
+          "version": "1.2.2",
+          "requirements": [
+            "^2.2"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1139,
+          "login": "Manishearth",
+          "kind": "user"
+        },
+        {
+          "id": 128408,
+          "login": "sffc",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "icu_properties_data",
+      "version": "2.4.0",
+      "archive_sha256": "b98f29af82d02b163fe50161388350e743bb3107cc8e8c2f7314cb505faddfcf",
+      "published_at": "2026-10-22T08:56:15.143869Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/icu_properties_data/2.4.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "icu_properties",
+          "version": "2.4.0",
+          "requirements": [
+            "~2.4.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 128408,
+          "login": "sffc",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "icu_provider",
+      "version": "2.4.0",
+      "archive_sha256": "413099315636c588ee8f011190b329b971a09a8fae9d157e01dcae8379468514",
+      "published_at": "2026-10-22T08:52:08.277979Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/icu_provider/2.4.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "icu_normalizer",
+          "version": "2.4.0",
+          "requirements": [
+            "^2.4.0"
+          ]
+        },
+        {
+          "name": "icu_properties",
+          "version": "2.4.0",
+          "requirements": [
+            "^2.4.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 9648,
+          "login": "zbraniecki",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "kittest",
+      "version": "0.5.0",
+      "archive_sha256": "0bb81a721ba76aa095b7f45deb180504f786904e56ca4b8e141f66eb89a78b75",
+      "published_at": "2026-10-05T11:43:34.731497Z",
+      "publisher": {
+        "id": 197939,
+        "login": "rerunio"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/rerun-io/kittest",
+      "source": "https://crates.io/api/v1/crates/kittest/0.5.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "egui_kittest",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.5.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 197939,
+          "login": "rerunio",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; prior desktop-adoption roster exists for this name.",
+      "owners_added_since_desktop_snapshot": [],
+      "owners_removed_since_desktop_snapshot": []
+    },
+    {
+      "name": "nom",
+      "version": "8.0.0",
+      "archive_sha256": "df9761775871bdef83bee530e60050f7e54b1105350d6884eb0fb4f46c2f9405",
+      "published_at": "2025-01-26T16:03:28.068915Z",
+      "publisher": {
+        "id": 959,
+        "login": "Geal"
+      },
+      "licence": "MIT",
+      "repository": "https://github.com/rust-bakery/nom",
+      "source": "https://crates.io/api/v1/crates/nom/8.0.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "tree_magic_mini",
+          "version": "3.2.2",
+          "requirements": [
+            "^8.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 959,
+          "login": "Geal",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "os_pipe",
+      "version": "1.2.3",
+      "archive_sha256": "7d8fae84b431384b68627d0f9b3b1245fcf9f46f6c0e3dc902e9dce64edd1967",
+      "published_at": "2025-10-11T19:15:04.313994Z",
+      "publisher": {
+        "id": 3589,
+        "login": "oconnor663"
+      },
+      "licence": "MIT",
+      "repository": "https://github.com/oconnor663/os_pipe.rs",
+      "source": "https://crates.io/api/v1/crates/os_pipe/1.2.3",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "wl-clipboard-rs",
+          "version": "0.9.4",
+          "requirements": [
+            "^1.1"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 3589,
+          "login": "oconnor663",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "petgraph",
+      "version": "0.8.3",
+      "archive_sha256": "8701b58ea97060d5e5b155d383a69952a60943f0e6dfe30b04c287beb0b27455",
+      "published_at": "2025-09-30T13:16:04.011947Z",
+      "publisher": {
+        "id": 126199,
+        "login": "ABorgna"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/petgraph/petgraph",
+      "source": "https://crates.io/api/v1/crates/petgraph/0.8.3",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "tree_magic_mini",
+          "version": "3.2.2",
+          "requirements": [
+            "^0.8.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 356,
+          "login": "bluss",
+          "kind": "user"
+        },
+        {
+          "id": 126199,
+          "login": "ABorgna",
+          "kind": "user"
+        },
+        {
+          "id": 1450,
+          "login": "github:petgraph:release-team",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "rustix",
+      "version": "1.1.6",
+      "archive_sha256": "e5e76742e5294153d4dde1207dbec5bdd81eef6fabdc0d2118babadabfd858aa",
+      "published_at": "2026-10-27T00:49:03.146056Z",
+      "publisher": {
+        "id": 6825,
+        "login": "sunfishcode"
+      },
+      "licence": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "repository": "https://github.com/bytecodealliance/rustix",
+      "source": "https://crates.io/api/v1/crates/rustix/1.1.6",
+      "age_exception": "Exact native version/hash/features/targets approved before restoration of S-7.",
+      "reverse_consumers": [
+        {
+          "name": "gethostname",
+          "version": "1.1.0",
+          "requirements": [
+            "^1.0.3"
+          ]
+        },
+        {
+          "name": "polling",
+          "version": "3.11.0",
+          "requirements": [
+            "^1.0.5"
+          ]
+        },
+        {
+          "name": "tallyline-adapter-platform",
+          "version": "0.1.0",
+          "requirements": [
+            "=1.1.6"
+          ]
+        },
+        {
+          "name": "tempfile",
+          "version": "3.27.0",
+          "requirements": [
+            "^1.1.4"
+          ]
+        },
+        {
+          "name": "wayland-backend",
+          "version": "0.3.17",
+          "requirements": [
+            "^1.0.2"
+          ]
+        },
+        {
+          "name": "wayland-client",
+          "version": "0.31.15",
+          "requirements": [
+            "^1.0.2"
+          ]
+        },
+        {
+          "name": "wayland-cursor",
+          "version": "0.31.14",
+          "requirements": [
+            "^1.0.2"
+          ]
+        },
+        {
+          "name": "wl-clipboard-rs",
+          "version": "0.9.4",
+          "requirements": [
+            "^1.0.2"
+          ]
+        },
+        {
+          "name": "x11rb",
+          "version": "0.13.2",
+          "requirements": [
+            "^1.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 6825,
+          "login": "sunfishcode",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; prior desktop-adoption roster exists for this name.",
+      "owners_added_since_desktop_snapshot": [],
+      "owners_removed_since_desktop_snapshot": []
+    },
+    {
+      "name": "send_wrapper",
+      "version": "0.6.0",
+      "archive_sha256": "cd0b0ec5f1c1ca621c432a25813d8d60c88abe6d3e08a3eb9cf37d97a0fe3d73",
+      "published_at": "2022-06-05T17:10:03.323883Z",
+      "publisher": {
+        "id": 9343,
+        "login": "thk1"
+      },
+      "licence": "MIT/Apache-2.0",
+      "repository": "https://github.com/thk1/send_wrapper",
+      "source": "https://crates.io/api/v1/crates/send_wrapper/0.6.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "eframe",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.6"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 9343,
+          "login": "thk1",
+          "kind": "user"
+        },
+        {
+          "id": 362,
+          "login": "github:rust-bus:maintainers",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "smallvec",
+      "version": "1.16.4",
+      "archive_sha256": "d0d5d4b1981b8bbbb7aed204cae5726d683d5d6ac7e74ec54122ea28f315e7c8",
+      "published_at": "2026-10-23T17:08:24.995029Z",
+      "publisher": {
+        "id": 373789,
+        "login": "alejandro-vaz"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/servo/rust-smallvec",
+      "source": "https://crates.io/api/v1/crates/smallvec/1.16.4",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "egui",
+          "version": "0.37.0",
+          "requirements": [
+            "^1.16"
+          ]
+        },
+        {
+          "name": "epaint",
+          "version": "0.37.0",
+          "requirements": [
+            "^1.16"
+          ]
+        },
+        {
+          "name": "glifo",
+          "version": "0.3.0",
+          "requirements": [
+            "^1.15.1"
+          ]
+        },
+        {
+          "name": "harfrust",
+          "version": "0.12.0",
+          "requirements": [
+            "^1.14"
+          ]
+        },
+        {
+          "name": "hyper",
+          "version": "1.12.0",
+          "requirements": [
+            "^1.12"
+          ]
+        },
+        {
+          "name": "icu_normalizer",
+          "version": "2.4.0",
+          "requirements": [
+            "^1.10.0"
+          ]
+        },
+        {
+          "name": "idna",
+          "version": "1.1.0",
+          "requirements": [
+            "^1.13.1"
+          ]
+        },
+        {
+          "name": "kurbo",
+          "version": "0.13.1",
+          "requirements": [
+            "^1.15.1"
+          ]
+        },
+        {
+          "name": "parking_lot_core",
+          "version": "0.9.12",
+          "requirements": [
+            "^1.6.1"
+          ]
+        },
+        {
+          "name": "peniko",
+          "version": "0.6.1",
+          "requirements": [
+            "^1.15.1"
+          ]
+        },
+        {
+          "name": "rusqlite",
+          "version": "0.41.1",
+          "requirements": [
+            "^1.6.1"
+          ]
+        },
+        {
+          "name": "vello_common",
+          "version": "0.2.0",
+          "requirements": [
+            "^1.15.1"
+          ]
+        },
+        {
+          "name": "wayland-backend",
+          "version": "0.3.17",
+          "requirements": [
+            "^1.9"
+          ]
+        },
+        {
+          "name": "wgpu",
+          "version": "30.0.1",
+          "requirements": [
+            "^1.14"
+          ]
+        },
+        {
+          "name": "wgpu-core",
+          "version": "30.0.1",
+          "requirements": [
+            "^1.14"
+          ]
+        },
+        {
+          "name": "wgpu-hal",
+          "version": "30.0.1",
+          "requirements": [
+            "^1.14"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 7,
+          "login": "SimonSapin",
+          "kind": "user"
+        },
+        {
+          "id": 2155,
+          "login": "Ms2ger",
+          "kind": "user"
+        },
+        {
+          "id": 373789,
+          "login": "alejandro-vaz",
+          "kind": "user"
+        },
+        {
+          "id": 5,
+          "login": "github:servo:cargo-publish",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "tinystr",
+      "version": "0.8.5",
+      "archive_sha256": "abc840c238154d58f9e86b2792261edfde565a17696e1cda1a449de27979801a",
+      "published_at": "2026-10-22T08:51:49.200908Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/tinystr/0.8.5",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "icu_locale_core",
+          "version": "2.4.0",
+          "requirements": [
+            "^0.8.5"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1139,
+          "login": "Manishearth",
+          "kind": "user"
+        },
+        {
+          "id": 1968,
+          "login": "raphlinus",
+          "kind": "user"
+        },
+        {
+          "id": 9648,
+          "login": "zbraniecki",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "tokio",
+      "version": "1.54.1",
+      "archive_sha256": "b52fd3255258d26fac7264ab5a76b53c13367136dc011d3d6ad4f8ed070396a3",
+      "published_at": "2026-10-21T21:05:43.950213Z",
+      "publisher": {
+        "id": 6741,
+        "login": "Darksonn"
+      },
+      "licence": "MIT",
+      "repository": "https://github.com/tokio-rs/tokio",
+      "source": "https://crates.io/api/v1/crates/tokio/1.54.1",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "deadpool",
+          "version": "0.12.3",
+          "requirements": [
+            "^1.5",
+            "^1.5.0"
+          ]
+        },
+        {
+          "name": "h2",
+          "version": "0.4.20",
+          "requirements": [
+            "^1"
+          ]
+        },
+        {
+          "name": "hyper",
+          "version": "1.12.0",
+          "requirements": [
+            "^1"
+          ]
+        },
+        {
+          "name": "hyper-rustls",
+          "version": "0.27.10",
+          "requirements": [
+            "^1.0"
+          ]
+        },
+        {
+          "name": "hyper-util",
+          "version": "0.1.21",
+          "requirements": [
+            "^1",
+            "^1.13"
+          ]
+        },
+        {
+          "name": "reqwest",
+          "version": "0.13.5",
+          "requirements": [
+            "^1.0"
+          ]
+        },
+        {
+          "name": "tallyline-adapter-platform",
+          "version": "0.1.0",
+          "requirements": [
+            "^1.54.1"
+          ]
+        },
+        {
+          "name": "tallyline-adapter-uex",
+          "version": "0.0.0",
+          "requirements": [
+            "^1.54.1"
+          ]
+        },
+        {
+          "name": "tallyline-app",
+          "version": "0.1.0",
+          "requirements": [
+            "^1.54.1"
+          ]
+        },
+        {
+          "name": "tallyline-workflows",
+          "version": "0.1.0",
+          "requirements": [
+            "^1.54.1"
+          ]
+        },
+        {
+          "name": "tokio-rustls",
+          "version": "0.26.6",
+          "requirements": [
+            "^1.0"
+          ]
+        },
+        {
+          "name": "tokio-util",
+          "version": "0.7.20",
+          "requirements": [
+            "^1.0.0",
+            "^1.51.0"
+          ]
+        },
+        {
+          "name": "tower",
+          "version": "0.5.3",
+          "requirements": [
+            "^1.6.2"
+          ]
+        },
+        {
+          "name": "wasm-bindgen-futures",
+          "version": "0.4.79",
+          "requirements": [
+            "^1"
+          ]
+        },
+        {
+          "name": "wiremock",
+          "version": "0.6.5",
+          "requirements": [
+            "^1.47.1"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 10,
+          "login": "carllerche",
+          "kind": "user"
+        },
+        {
+          "id": 6741,
+          "login": "Darksonn",
+          "kind": "user"
+        },
+        {
+          "id": 1461,
+          "login": "github:tokio-rs:core",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "tree_magic_mini",
+      "version": "3.2.2",
+      "archive_sha256": "b8765b90061cba6c22b5831f675da109ae5561588290f9fa2317adab2714d5a6",
+      "published_at": "2025-11-14T19:22:26.199587Z",
+      "publisher": {
+        "id": 2017,
+        "login": "mbrubeck"
+      },
+      "licence": "MIT",
+      "repository": "https://github.com/mbrubeck/tree_magic/",
+      "source": "https://crates.io/api/v1/crates/tree_magic_mini/3.2.2",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "wl-clipboard-rs",
+          "version": "0.9.4",
+          "requirements": [
+            "^3"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 2017,
+          "login": "mbrubeck",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "unicode-properties",
+      "version": "0.1.4",
+      "archive_sha256": "7df058c713841ad818f1dc5d3fd88063241cc61f49f5fbea4b951e8cf5a8d71d",
+      "published_at": "2025-10-30T16:34:55.538672Z",
+      "publisher": {
+        "id": 1139,
+        "login": "Manishearth"
+      },
+      "licence": "MIT/Apache-2.0",
+      "repository": "https://github.com/unicode-rs/unicode-properties",
+      "source": "https://crates.io/api/v1/crates/unicode-properties/0.1.4",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "epaint",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.1.4"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1139,
+          "login": "Manishearth",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "vello_common",
+      "version": "0.2.0",
+      "archive_sha256": "bbb2141a2bca6e6d598e471fd4d1d7eed8e020aad6a28187edda07f091a325dd",
+      "published_at": "2026-08-07T11:00:10.051964Z",
+      "publisher": {
+        "id": 288469,
+        "login": "LaurenzV"
+      },
+      "licence": "Apache-2.0 OR MIT",
+      "repository": "https://github.com/linebender/vello",
+      "source": "https://crates.io/api/v1/crates/vello_common/0.2.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "glifo",
+          "version": "0.3.0",
+          "requirements": [
+            "^0.2.0"
+          ]
+        },
+        {
+          "name": "vello_cpu",
+          "version": "0.2.0",
+          "requirements": [
+            "^0.2.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1968,
+          "login": "raphlinus",
+          "kind": "user"
+        },
+        {
+          "id": 109051,
+          "login": "DJMcNab",
+          "kind": "user"
+        },
+        {
+          "id": 158585,
+          "login": "xStrom",
+          "kind": "user"
+        },
+        {
+          "id": 288469,
+          "login": "LaurenzV",
+          "kind": "user"
+        },
+        {
+          "id": 361049,
+          "login": "grebmeg",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "vello_cpu",
+      "version": "0.2.0",
+      "archive_sha256": "ace506ca414548966fcf3c283be94eb1cad8254de488791ee698bf438b0890a9",
+      "published_at": "2026-08-07T11:00:16.11489Z",
+      "publisher": {
+        "id": 288469,
+        "login": "LaurenzV"
+      },
+      "licence": "Apache-2.0 OR MIT",
+      "repository": "https://github.com/linebender/vello",
+      "source": "https://crates.io/api/v1/crates/vello_cpu/0.2.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "epaint",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.2.0"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1968,
+          "login": "raphlinus",
+          "kind": "user"
+        },
+        {
+          "id": 109051,
+          "login": "DJMcNab",
+          "kind": "user"
+        },
+        {
+          "id": 158585,
+          "login": "xStrom",
+          "kind": "user"
+        },
+        {
+          "id": 288469,
+          "login": "LaurenzV",
+          "kind": "user"
+        },
+        {
+          "id": 361049,
+          "login": "grebmeg",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "webpki-root-certs",
+      "version": "1.0.11",
+      "archive_sha256": "e49d0e65abc00c142e8f9428da991da9f1a250c39be97459901eb12b9b49f62a",
+      "published_at": "2026-10-23T08:25:18.441682Z",
+      "publisher": {
+        "id": 2751,
+        "login": "ctz"
+      },
+      "licence": "CDLA-Permissive-2.0",
+      "repository": "https://github.com/rustls/webpki-roots",
+      "source": "https://crates.io/api/v1/crates/webpki-root-certs/1.0.11",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "rustls-platform-verifier",
+          "version": "0.7.1",
+          "requirements": [
+            "^1"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 2751,
+          "login": "ctz",
+          "kind": "user"
+        },
+        {
+          "id": 4556,
+          "login": "djc",
+          "kind": "user"
+        },
+        {
+          "id": 209038,
+          "login": "cpu",
+          "kind": "user"
+        },
+        {
+          "id": 7807,
+          "login": "github:rustls:publishers",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.59.0",
+      "archive_sha256": "1e38bc4d79ed67fd075bcc251a1c39b32a1776bbe92e5bef1f0bf1f8c531853b",
+      "published_at": "2024-07-30T15:26:17.224105Z",
+      "publisher": {
+        "id": 64539,
+        "login": "kennykerr"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/microsoft/windows-rs",
+      "source": "https://crates.io/api/v1/crates/windows-sys/0.59.0",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "colored",
+          "version": "2.2.0",
+          "requirements": [
+            ">=0.48, <=0.59"
+          ]
+        },
+        {
+          "name": "rustix",
+          "version": "0.38.44",
+          "requirements": [
+            ">=0.52, <=0.59"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 64539,
+          "login": "kennykerr",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "wl-clipboard-rs",
+      "version": "0.9.4",
+      "archive_sha256": "4d7888ccd4896447b2d14d3a9350a85df2aeb6f181e2e7a31349d104ac46cac1",
+      "published_at": "2026-09-28T05:48:05.918323Z",
+      "publisher": {
+        "id": 5538,
+        "login": "YaLTeR"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "repository": "https://github.com/YaLTeR/wl-clipboard-rs",
+      "source": "https://crates.io/api/v1/crates/wl-clipboard-rs/0.9.4",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "arboard",
+          "version": "3.7.0",
+          "requirements": [
+            "^0.9.3"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 4445,
+          "login": "bugaevc",
+          "kind": "user"
+        },
+        {
+          "id": 5538,
+          "login": "YaLTeR",
+          "kind": "user"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "yoke",
+      "version": "0.8.4",
+      "archive_sha256": "417ef3fcf6c300b7dbd25c85531a746931c02ad536f3cf4786ed1e88223340b3",
+      "published_at": "2026-10-22T08:51:34.589056Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/yoke/0.8.4",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "icu_collections",
+          "version": "2.4.0",
+          "requirements": [
+            "^0.8.4"
+          ]
+        },
+        {
+          "name": "icu_provider",
+          "version": "2.4.0",
+          "requirements": [
+            "^0.8.4"
+          ]
+        },
+        {
+          "name": "zerotrie",
+          "version": "0.2.5",
+          "requirements": [
+            "^0.8.3"
+          ]
+        },
+        {
+          "name": "zerovec",
+          "version": "0.11.9",
+          "requirements": [
+            "^0.8.4"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1139,
+          "login": "Manishearth",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "zerovec",
+      "version": "0.11.9",
+      "archive_sha256": "f58a2799cfe9a1670c7ea8edbd52ef8edb93cb37a7f83bf31ba9e35d9dae6a40",
+      "published_at": "2026-10-22T08:51:43.98249Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/zerovec/0.11.9",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "icu_collections",
+          "version": "2.4.0",
+          "requirements": [
+            "^0.11.9"
+          ]
+        },
+        {
+          "name": "icu_locale_core",
+          "version": "2.4.0",
+          "requirements": [
+            "^0.11.9"
+          ]
+        },
+        {
+          "name": "icu_normalizer",
+          "version": "2.4.0",
+          "requirements": [
+            "^0.11.9"
+          ]
+        },
+        {
+          "name": "icu_properties",
+          "version": "2.4.0",
+          "requirements": [
+            "^0.11.9"
+          ]
+        },
+        {
+          "name": "icu_provider",
+          "version": "2.4.0",
+          "requirements": [
+            "^0.11.9"
+          ]
+        },
+        {
+          "name": "potential_utf",
+          "version": "0.1.6",
+          "requirements": [
+            "^0.11.7"
+          ]
+        },
+        {
+          "name": "tinystr",
+          "version": "0.8.5",
+          "requirements": [
+            "^0.11.9"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1139,
+          "login": "Manishearth",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    },
+    {
+      "name": "zerovec-derive",
+      "version": "0.11.7",
+      "archive_sha256": "c3743ddbf47738d929cd1ae2e199d40d0162979dfe31aef8ae646d2bf00bf97a",
+      "published_at": "2026-10-22T08:51:38.515193Z",
+      "publisher": {
+        "id": 166196,
+        "login": "robertbastian"
+      },
+      "licence": "Unicode-3.0",
+      "repository": "https://github.com/unicode-org/icu4x",
+      "source": "https://crates.io/api/v1/crates/zerovec-derive/0.11.7",
+      "age_exception": null,
+      "reverse_consumers": [
+        {
+          "name": "zerovec",
+          "version": "0.11.9",
+          "requirements": [
+            "^0.11.7"
+          ]
+        }
+      ],
+      "current_owners": [
+        {
+          "id": 1139,
+          "login": "Manishearth",
+          "kind": "user"
+        },
+        {
+          "id": 3807,
+          "login": "github:unicode-org:icu4x-release",
+          "kind": "team"
+        }
+      ],
+      "owner_comparison_limit": "Current official owner roster checked; no prior owner-roster baseline for this name is claimed."
+    }
+  ],
+  "constrained_transitive_identities": [
+    {
+      "name": "allocator-api2",
+      "version": "0.2.21",
+      "newest_eligible": "0.4.0",
+      "reverse_consumers": [
+        {
+          "name": "hashbrown",
+          "version": "0.16.1",
+          "requirements": [
+            "^0.2.9"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "base64",
+      "version": "0.22.1",
+      "newest_eligible": "0.23.1",
+      "reverse_consumers": [
+        {
+          "name": "wiremock",
+          "version": "0.6.5",
+          "requirements": [
+            "^0.22"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "bit-set",
+      "version": "0.10.0",
+      "newest_eligible": "0.11.1",
+      "reverse_consumers": [
+        {
+          "name": "naga",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.10"
+          ]
+        },
+        {
+          "name": "wgpu-core",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.10"
+          ]
+        },
+        {
+          "name": "wgpu-hal",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.10"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "bit-vec",
+      "version": "0.9.1",
+      "newest_eligible": "0.10.1",
+      "reverse_consumers": [
+        {
+          "name": "bit-set",
+          "version": "0.10.0",
+          "requirements": [
+            "^0.9.1"
+          ]
+        },
+        {
+          "name": "wgpu-core",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.9.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "bitflags",
+      "version": "1.3.2",
+      "newest_eligible": "2.13.2",
+      "reverse_consumers": [
+        {
+          "name": "core-graphics",
+          "version": "0.23.2",
+          "requirements": [
+            "^1.0"
+          ]
+        },
+        {
+          "name": "core-graphics-types",
+          "version": "0.1.3",
+          "requirements": [
+            "^1.0"
+          ]
+        },
+        {
+          "name": "redox_syscall",
+          "version": "0.4.1",
+          "requirements": [
+            "^1.1.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "block2",
+      "version": "0.5.1",
+      "newest_eligible": "0.6.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-app-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-cloud-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-contacts",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-core-data",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-core-image",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-core-location",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-foundation",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-link-presentation",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-metal",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-quartz-core",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-uniform-type-identifiers",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "objc2-user-notifications",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.5.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "calloop",
+      "version": "0.13.0",
+      "newest_eligible": "0.14.5",
+      "reverse_consumers": [
+        {
+          "name": "calloop-wayland-source",
+          "version": "0.3.0",
+          "requirements": [
+            "^0.13.0"
+          ]
+        },
+        {
+          "name": "smithay-client-toolkit",
+          "version": "0.19.2",
+          "requirements": [
+            "^0.13.0"
+          ]
+        },
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.13.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "calloop-wayland-source",
+      "version": "0.3.0",
+      "newest_eligible": "0.4.1",
+      "reverse_consumers": [
+        {
+          "name": "smithay-client-toolkit",
+          "version": "0.19.2",
+          "requirements": [
+            "^0.3.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "colored",
+      "version": "2.2.0",
+      "newest_eligible": "3.1.1",
+      "reverse_consumers": [
+        {
+          "name": "dify",
+          "version": "0.8.0",
+          "requirements": [
+            "^2.0.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "core-foundation",
+      "version": "0.9.4",
+      "newest_eligible": "0.10.1",
+      "reverse_consumers": [
+        {
+          "name": "core-graphics",
+          "version": "0.23.2",
+          "requirements": [
+            "^0.9"
+          ]
+        },
+        {
+          "name": "core-graphics-types",
+          "version": "0.1.3",
+          "requirements": [
+            "^0.9.4"
+          ]
+        },
+        {
+          "name": "system-configuration",
+          "version": "0.7.0",
+          "requirements": [
+            "^0.9"
+          ]
+        },
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.9.3"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "core-graphics",
+      "version": "0.23.2",
+      "newest_eligible": "0.25.0",
+      "reverse_consumers": [
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.23.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "core-graphics-types",
+      "version": "0.1.3",
+      "newest_eligible": "0.2.0",
+      "reverse_consumers": [
+        {
+          "name": "core-graphics",
+          "version": "0.23.2",
+          "requirements": [
+            "^0.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "deadpool",
+      "version": "0.12.3",
+      "newest_eligible": "0.13.1",
+      "reverse_consumers": [
+        {
+          "name": "wiremock",
+          "version": "0.6.5",
+          "requirements": [
+            "^0.12.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "deadpool-runtime",
+      "version": "0.1.4",
+      "newest_eligible": "0.3.1",
+      "reverse_consumers": [
+        {
+          "name": "deadpool",
+          "version": "0.12.3",
+          "requirements": [
+            "^0.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "downcast-rs",
+      "version": "1.2.1",
+      "newest_eligible": "2.0.2",
+      "reverse_consumers": [
+        {
+          "name": "wayland-backend",
+          "version": "0.3.17",
+          "requirements": [
+            "^1.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "fax",
+      "version": "0.2.7",
+      "newest_eligible": "0.3.0",
+      "reverse_consumers": [
+        {
+          "name": "tiff",
+          "version": "0.11.3",
+          "requirements": [
+            "^0.2.6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "fearless_simd",
+      "version": "0.4.1",
+      "newest_eligible": "1.1.0",
+      "reverse_consumers": [
+        {
+          "name": "vello_common",
+          "version": "0.2.0",
+          "requirements": [
+            "^0.4.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "foldhash",
+      "version": "0.1.5",
+      "newest_eligible": "0.2.0",
+      "reverse_consumers": [
+        {
+          "name": "hashbrown",
+          "version": "0.15.5",
+          "requirements": [
+            "^0.1.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "getrandom",
+      "version": "0.2.17",
+      "newest_eligible": "0.4.3",
+      "reverse_consumers": [
+        {
+          "name": "ring",
+          "version": "0.17.14",
+          "requirements": [
+            "^0.2.10"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "getrandom",
+      "version": "0.3.4",
+      "newest_eligible": "0.4.3",
+      "reverse_consumers": [
+        {
+          "name": "ahash",
+          "version": "0.8.12",
+          "requirements": [
+            "^0.3.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "glifo",
+      "version": "0.3.0",
+      "newest_eligible": "0.4.0",
+      "reverse_consumers": [
+        {
+          "name": "vello_cpu",
+          "version": "0.2.0",
+          "requirements": [
+            "^0.3.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "glow",
+      "version": "0.17.0",
+      "newest_eligible": "0.18.0",
+      "reverse_consumers": [
+        {
+          "name": "egui_glow",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.17.0"
+          ]
+        },
+        {
+          "name": "wgpu-hal",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.17"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "harfrust",
+      "version": "0.12.0",
+      "newest_eligible": "0.15.0",
+      "reverse_consumers": [
+        {
+          "name": "epaint",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.12.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.15.5",
+      "newest_eligible": "0.17.1",
+      "reverse_consumers": [
+        {
+          "name": "petgraph",
+          "version": "0.8.3",
+          "requirements": [
+            "^0.15.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "hashbrown",
+      "version": "0.16.1",
+      "newest_eligible": "0.17.1",
+      "reverse_consumers": [
+        {
+          "name": "gpu-allocator",
+          "version": "0.28.0",
+          "requirements": [
+            "^0.16.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "jni-sys",
+      "version": "0.3.1",
+      "newest_eligible": "0.4.1",
+      "reverse_consumers": [
+        {
+          "name": "ndk",
+          "version": "0.9.0",
+          "requirements": [
+            "^0.3"
+          ]
+        },
+        {
+          "name": "ndk-sys",
+          "version": "0.6.0+11769913",
+          "requirements": [
+            "^0.3.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "libloading",
+      "version": "0.8.9",
+      "newest_eligible": "0.9.0",
+      "reverse_consumers": [
+        {
+          "name": "ash",
+          "version": "0.38.0+1.3.281",
+          "requirements": [
+            "^0.8"
+          ]
+        },
+        {
+          "name": "dlib",
+          "version": "0.5.3",
+          "requirements": [
+            ">=0.7, <0.9"
+          ]
+        },
+        {
+          "name": "glutin",
+          "version": "0.32.3",
+          "requirements": [
+            "^0.8.0"
+          ]
+        },
+        {
+          "name": "khronos-egl",
+          "version": "6.0.0",
+          "requirements": [
+            "^0.8"
+          ]
+        },
+        {
+          "name": "wgpu-hal",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.8"
+          ]
+        },
+        {
+          "name": "x11rb",
+          "version": "0.13.2",
+          "requirements": [
+            "^0.8.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "libredox",
+      "version": "0.1.25",
+      "newest_eligible": "0.2.0",
+      "reverse_consumers": [
+        {
+          "name": "orbclient",
+          "version": "0.3.55",
+          "requirements": [
+            "^0.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "linux-raw-sys",
+      "version": "0.4.15",
+      "newest_eligible": "0.12.1",
+      "reverse_consumers": [
+        {
+          "name": "rustix",
+          "version": "0.38.44",
+          "requirements": [
+            "^0.4.14"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "lock_api",
+      "version": "0.4.14",
+      "newest_eligible": "0.5.0",
+      "reverse_consumers": [
+        {
+          "name": "parking_lot",
+          "version": "0.12.5",
+          "requirements": [
+            "^0.4.14"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "miniz_oxide",
+      "version": "0.8.9",
+      "newest_eligible": "0.9.1",
+      "reverse_consumers": [
+        {
+          "name": "png",
+          "version": "0.18.1",
+          "requirements": [
+            "^0.8"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "moxcms",
+      "version": "0.8.1",
+      "newest_eligible": "0.9.1",
+      "reverse_consumers": [
+        {
+          "name": "image",
+          "version": "0.25.10",
+          "requirements": [
+            "^0.8.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2",
+      "version": "0.5.3",
+      "newest_eligible": "0.6.5",
+      "reverse_consumers": [
+        {
+          "name": "block2",
+          "version": "0.5.1",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-app-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-cloud-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-contacts",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-core-data",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-core-image",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-core-location",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-foundation",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-link-presentation",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-metal",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-quartz-core",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-symbols",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-uniform-type-identifiers",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "objc2-user-notifications",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.5.2"
+          ]
+        },
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.5.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-app-kit",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-link-presentation",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-cloud-kit",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-contacts",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-core-location",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-core-data",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-app-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-core-image",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-app-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-core-location",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-cloud-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-user-notifications",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-foundation",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-app-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-cloud-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-contacts",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-core-data",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-core-image",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-core-location",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-link-presentation",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-metal",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-quartz-core",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-symbols",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-uniform-type-identifiers",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-user-notifications",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-link-presentation",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-metal",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-core-image",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-quartz-core",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-quartz-core",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-app-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        },
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-symbols",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-ui-kit",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-uniform-type-identifiers",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "objc2-user-notifications",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.2",
+      "reverse_consumers": [
+        {
+          "name": "objc2-ui-kit",
+          "version": "0.2.2",
+          "requirements": [
+            "^0.2.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "orbclient",
+      "version": "0.3.55",
+      "newest_eligible": "0.4.6",
+      "reverse_consumers": [
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.3.47"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "parking_lot",
+      "version": "0.12.5",
+      "newest_eligible": "0.13.0",
+      "reverse_consumers": [
+        {
+          "name": "arboard",
+          "version": "3.7.0",
+          "requirements": [
+            "^0.12"
+          ]
+        },
+        {
+          "name": "eframe",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.12.5"
+          ]
+        },
+        {
+          "name": "epaint",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.12.5"
+          ]
+        },
+        {
+          "name": "wgpu",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.12.3"
+          ]
+        },
+        {
+          "name": "wgpu-core",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.12.3"
+          ]
+        },
+        {
+          "name": "wgpu-hal",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.12.3"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "parking_lot_core",
+      "version": "0.9.12",
+      "newest_eligible": "0.10.0",
+      "reverse_consumers": [
+        {
+          "name": "parking_lot",
+          "version": "0.12.5",
+          "requirements": [
+            "^0.9.12"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "quick-xml",
+      "version": "0.41.0",
+      "newest_eligible": "0.42.0",
+      "reverse_consumers": [
+        {
+          "name": "wayland-scanner",
+          "version": "0.31.11",
+          "requirements": [
+            "^0.41"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "r-efi",
+      "version": "5.3.0",
+      "newest_eligible": "7.1.0",
+      "reverse_consumers": [
+        {
+          "name": "getrandom",
+          "version": "0.3.4",
+          "requirements": [
+            "^5.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "r-efi",
+      "version": "6.0.0",
+      "newest_eligible": "7.1.0",
+      "reverse_consumers": [
+        {
+          "name": "getrandom",
+          "version": "0.4.3",
+          "requirements": [
+            "^6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "read-fonts",
+      "version": "0.41.0",
+      "newest_eligible": "0.46.0",
+      "reverse_consumers": [
+        {
+          "name": "harfrust",
+          "version": "0.12.0",
+          "requirements": [
+            "^0.41.0"
+          ]
+        },
+        {
+          "name": "skrifa",
+          "version": "0.44.0",
+          "requirements": [
+            "^0.41.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "redox_syscall",
+      "version": "0.4.1",
+      "newest_eligible": "0.9.5",
+      "reverse_consumers": [
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.4.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "redox_syscall",
+      "version": "0.5.18",
+      "newest_eligible": "0.9.5",
+      "reverse_consumers": [
+        {
+          "name": "parking_lot_core",
+          "version": "0.9.12",
+          "requirements": [
+            "^0.5"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "rustc-hash",
+      "version": "1.1.0",
+      "newest_eligible": "2.1.3",
+      "reverse_consumers": [
+        {
+          "name": "naga",
+          "version": "30.0.1",
+          "requirements": [
+            "^1.1"
+          ]
+        },
+        {
+          "name": "naga-types",
+          "version": "30.0.1",
+          "requirements": [
+            "^1.1"
+          ]
+        },
+        {
+          "name": "wgpu-core",
+          "version": "30.0.1",
+          "requirements": [
+            "^1.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "rustix",
+      "version": "0.38.44",
+      "newest_eligible": "1.1.5",
+      "reverse_consumers": [
+        {
+          "name": "calloop",
+          "version": "0.13.0",
+          "requirements": [
+            "^0.38"
+          ]
+        },
+        {
+          "name": "calloop-wayland-source",
+          "version": "0.3.0",
+          "requirements": [
+            "^0.38.4"
+          ]
+        },
+        {
+          "name": "smithay-client-toolkit",
+          "version": "0.19.2",
+          "requirements": [
+            "^0.38.15"
+          ]
+        },
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.38.4"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "skrifa",
+      "version": "0.44.0",
+      "newest_eligible": "0.49.0",
+      "reverse_consumers": [
+        {
+          "name": "epaint",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.44.0"
+          ]
+        },
+        {
+          "name": "glifo",
+          "version": "0.3.0",
+          "requirements": [
+            "^0.44.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "smithay-client-toolkit",
+      "version": "0.19.2",
+      "newest_eligible": "0.21.1",
+      "reverse_consumers": [
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.19.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "smol_str",
+      "version": "0.2.2",
+      "newest_eligible": "0.3.7",
+      "reverse_consumers": [
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.2.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "syn",
+      "version": "2.0.119",
+      "newest_eligible": "3.0.9",
+      "reverse_consumers": [
+        {
+          "name": "jni-macros",
+          "version": "0.22.4",
+          "requirements": [
+            "^2.0"
+          ]
+        },
+        {
+          "name": "jni-sys-macros",
+          "version": "0.4.1",
+          "requirements": [
+            "^2"
+          ]
+        },
+        {
+          "name": "num_enum_derive",
+          "version": "0.7.6",
+          "requirements": [
+            "^2"
+          ]
+        },
+        {
+          "name": "pin-project-internal",
+          "version": "1.1.13",
+          "requirements": [
+            "^2.0.1"
+          ]
+        },
+        {
+          "name": "thiserror-impl",
+          "version": "1.0.69",
+          "requirements": [
+            "^2.0.87"
+          ]
+        },
+        {
+          "name": "windows-implement",
+          "version": "0.60.2",
+          "requirements": [
+            "^2.0"
+          ]
+        },
+        {
+          "name": "windows-interface",
+          "version": "0.59.3",
+          "requirements": [
+            "^2.0"
+          ]
+        },
+        {
+          "name": "zerocopy-derive",
+          "version": "0.8.63",
+          "requirements": [
+            "^2.0.46"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "system-configuration",
+      "version": "0.7.0",
+      "newest_eligible": "0.8.0",
+      "reverse_consumers": [
+        {
+          "name": "hyper-util",
+          "version": "0.1.21",
+          "requirements": [
+            "^0.7"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "thiserror",
+      "version": "1.0.69",
+      "newest_eligible": "2.0.21",
+      "reverse_consumers": [
+        {
+          "name": "calloop",
+          "version": "0.13.0",
+          "requirements": [
+            "^1.0.7"
+          ]
+        },
+        {
+          "name": "ndk",
+          "version": "0.9.0",
+          "requirements": [
+            "^1.0.23"
+          ]
+        },
+        {
+          "name": "smithay-client-toolkit",
+          "version": "0.19.2",
+          "requirements": [
+            "^1.0.30"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "thiserror-impl",
+      "version": "1.0.69",
+      "newest_eligible": "2.0.21",
+      "reverse_consumers": [
+        {
+          "name": "thiserror",
+          "version": "1.0.69",
+          "requirements": [
+            "=1.0.69"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "tower-http",
+      "version": "0.6.11",
+      "newest_eligible": "0.7.1",
+      "reverse_consumers": [
+        {
+          "name": "reqwest",
+          "version": "0.13.5",
+          "requirements": [
+            "^0.6.8"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "vello_common",
+      "version": "0.2.0",
+      "newest_eligible": "0.3.0",
+      "reverse_consumers": [
+        {
+          "name": "glifo",
+          "version": "0.3.0",
+          "requirements": [
+            "^0.2.0"
+          ]
+        },
+        {
+          "name": "vello_cpu",
+          "version": "0.2.0",
+          "requirements": [
+            "^0.2.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "vello_cpu",
+      "version": "0.2.0",
+      "newest_eligible": "0.3.0",
+      "reverse_consumers": [
+        {
+          "name": "epaint",
+          "version": "0.37.0",
+          "requirements": [
+            "^0.2.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "wasi",
+      "version": "0.11.1+wasi-snapshot-preview1",
+      "newest_eligible": "0.14.7+wasi-0.2.4",
+      "reverse_consumers": [
+        {
+          "name": "getrandom",
+          "version": "0.2.17",
+          "requirements": [
+            "^0.11"
+          ]
+        },
+        {
+          "name": "mio",
+          "version": "1.2.4",
+          "requirements": [
+            "^0.11.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "wasip2",
+      "version": "1.0.4+wasi-0.2.12",
+      "newest_eligible": "2.0.1+wasi-0.2.12",
+      "reverse_consumers": [
+        {
+          "name": "getrandom",
+          "version": "0.3.4",
+          "requirements": [
+            "^1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "weezl",
+      "version": "0.1.12",
+      "newest_eligible": "0.2.1",
+      "reverse_consumers": [
+        {
+          "name": "tiff",
+          "version": "0.11.3",
+          "requirements": [
+            "^0.1.10"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-collections",
+      "version": "0.3.2",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "windows",
+          "version": "0.62.2",
+          "requirements": [
+            "^0.3.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-core",
+      "version": "0.62.2",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "wgpu-hal",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.62"
+          ]
+        },
+        {
+          "name": "windows",
+          "version": "0.62.2",
+          "requirements": [
+            "^0.62.2"
+          ]
+        },
+        {
+          "name": "windows-collections",
+          "version": "0.3.2",
+          "requirements": [
+            "^0.62.2"
+          ]
+        },
+        {
+          "name": "windows-future",
+          "version": "0.3.2",
+          "requirements": [
+            "^0.62.2"
+          ]
+        },
+        {
+          "name": "windows-numerics",
+          "version": "0.3.1",
+          "requirements": [
+            "^0.62.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-future",
+      "version": "0.3.2",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "windows",
+          "version": "0.62.2",
+          "requirements": [
+            "^0.3.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-implement",
+      "version": "0.60.2",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "windows-core",
+          "version": "0.62.2",
+          "requirements": [
+            "^0.60.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-interface",
+      "version": "0.59.3",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "windows-core",
+          "version": "0.62.2",
+          "requirements": [
+            "^0.59.3"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-link",
+      "version": "0.2.1",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "gethostname",
+          "version": "1.1.0",
+          "requirements": [
+            "^0.2.1"
+          ]
+        },
+        {
+          "name": "jni",
+          "version": "0.22.4",
+          "requirements": [
+            "^0.2"
+          ]
+        },
+        {
+          "name": "libloading",
+          "version": "0.8.9",
+          "requirements": [
+            "^0.2"
+          ]
+        },
+        {
+          "name": "parking_lot_core",
+          "version": "0.9.12",
+          "requirements": [
+            "^0.2.0"
+          ]
+        },
+        {
+          "name": "windows-core",
+          "version": "0.62.2",
+          "requirements": [
+            "^0.2.1"
+          ]
+        },
+        {
+          "name": "windows-future",
+          "version": "0.3.2",
+          "requirements": [
+            "^0.2.1"
+          ]
+        },
+        {
+          "name": "windows-numerics",
+          "version": "0.3.1",
+          "requirements": [
+            "^0.2.1"
+          ]
+        },
+        {
+          "name": "windows-registry",
+          "version": "0.6.1",
+          "requirements": [
+            "^0.2.1"
+          ]
+        },
+        {
+          "name": "windows-result",
+          "version": "0.4.1",
+          "requirements": [
+            "^0.2.1"
+          ]
+        },
+        {
+          "name": "windows-strings",
+          "version": "0.5.1",
+          "requirements": [
+            "^0.2.1"
+          ]
+        },
+        {
+          "name": "windows-sys",
+          "version": "0.61.2",
+          "requirements": [
+            "^0.2.1"
+          ]
+        },
+        {
+          "name": "windows-threading",
+          "version": "0.2.1",
+          "requirements": [
+            "^0.2.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-numerics",
+      "version": "0.3.1",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "windows",
+          "version": "0.62.2",
+          "requirements": [
+            "^0.3.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-registry",
+      "version": "0.6.1",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "hyper-util",
+          "version": "0.1.21",
+          "requirements": [
+            ">=0.3, <0.7"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-result",
+      "version": "0.4.1",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "wgpu-hal",
+          "version": "30.0.1",
+          "requirements": [
+            "^0.4"
+          ]
+        },
+        {
+          "name": "windows-core",
+          "version": "0.62.2",
+          "requirements": [
+            "^0.4.1"
+          ]
+        },
+        {
+          "name": "windows-registry",
+          "version": "0.6.1",
+          "requirements": [
+            "^0.4.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-strings",
+      "version": "0.5.1",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "windows-core",
+          "version": "0.62.2",
+          "requirements": [
+            "^0.5.1"
+          ]
+        },
+        {
+          "name": "windows-registry",
+          "version": "0.6.1",
+          "requirements": [
+            "^0.5.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.52.0",
+      "newest_eligible": "0.61.2",
+      "reverse_consumers": [
+        {
+          "name": "glutin",
+          "version": "0.32.3",
+          "requirements": [
+            "^0.52"
+          ]
+        },
+        {
+          "name": "glutin_egl_sys",
+          "version": "0.7.1",
+          "requirements": [
+            "^0.52"
+          ]
+        },
+        {
+          "name": "ring",
+          "version": "0.17.14",
+          "requirements": [
+            "^0.52"
+          ]
+        },
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.52.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-sys",
+      "version": "0.59.0",
+      "newest_eligible": "0.61.2",
+      "reverse_consumers": [
+        {
+          "name": "colored",
+          "version": "2.2.0",
+          "requirements": [
+            ">=0.48, <=0.59"
+          ]
+        },
+        {
+          "name": "rustix",
+          "version": "0.38.44",
+          "requirements": [
+            ">=0.52, <=0.59"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-targets",
+      "version": "0.52.6",
+      "newest_eligible": "0.53.5",
+      "reverse_consumers": [
+        {
+          "name": "windows-sys",
+          "version": "0.52.0",
+          "requirements": [
+            "^0.52.0"
+          ]
+        },
+        {
+          "name": "windows-sys",
+          "version": "0.59.0",
+          "requirements": [
+            "^0.52.6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows-threading",
+      "version": "0.2.1",
+      "newest_eligible": "0.100.0",
+      "reverse_consumers": [
+        {
+          "name": "windows-future",
+          "version": "0.3.2",
+          "requirements": [
+            "^0.2.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows_aarch64_gnullvm",
+      "version": "0.52.6",
+      "newest_eligible": "0.53.1",
+      "reverse_consumers": [
+        {
+          "name": "windows-targets",
+          "version": "0.52.6",
+          "requirements": [
+            "^0.52.6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows_aarch64_msvc",
+      "version": "0.52.6",
+      "newest_eligible": "0.53.1",
+      "reverse_consumers": [
+        {
+          "name": "windows-targets",
+          "version": "0.52.6",
+          "requirements": [
+            "^0.52.6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows_i686_gnu",
+      "version": "0.52.6",
+      "newest_eligible": "0.53.1",
+      "reverse_consumers": [
+        {
+          "name": "windows-targets",
+          "version": "0.52.6",
+          "requirements": [
+            "^0.52.6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows_i686_gnullvm",
+      "version": "0.52.6",
+      "newest_eligible": "0.53.1",
+      "reverse_consumers": [
+        {
+          "name": "windows-targets",
+          "version": "0.52.6",
+          "requirements": [
+            "^0.52.6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows_i686_msvc",
+      "version": "0.52.6",
+      "newest_eligible": "0.53.1",
+      "reverse_consumers": [
+        {
+          "name": "windows-targets",
+          "version": "0.52.6",
+          "requirements": [
+            "^0.52.6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows_x86_64_gnu",
+      "version": "0.52.6",
+      "newest_eligible": "0.53.1",
+      "reverse_consumers": [
+        {
+          "name": "windows-targets",
+          "version": "0.52.6",
+          "requirements": [
+            "^0.52.6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows_x86_64_gnullvm",
+      "version": "0.52.6",
+      "newest_eligible": "0.53.1",
+      "reverse_consumers": [
+        {
+          "name": "windows-targets",
+          "version": "0.52.6",
+          "requirements": [
+            "^0.52.6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "windows_x86_64_msvc",
+      "version": "0.52.6",
+      "newest_eligible": "0.53.1",
+      "reverse_consumers": [
+        {
+          "name": "windows-targets",
+          "version": "0.52.6",
+          "requirements": [
+            "^0.52.6"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "wit-bindgen",
+      "version": "0.57.1",
+      "newest_eligible": "0.63.0",
+      "reverse_consumers": [
+        {
+          "name": "wasip2",
+          "version": "1.0.4+wasi-0.2.12",
+          "requirements": [
+            "^0.57.1"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "x11rb",
+      "version": "0.13.2",
+      "newest_eligible": "0.14.0",
+      "reverse_consumers": [
+        {
+          "name": "arboard",
+          "version": "3.7.0",
+          "requirements": [
+            "^0.13"
+          ]
+        },
+        {
+          "name": "winit",
+          "version": "0.30.13",
+          "requirements": [
+            "^0.13.0"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "x11rb-protocol",
+      "version": "0.13.2",
+      "newest_eligible": "0.14.0",
+      "reverse_consumers": [
+        {
+          "name": "x11rb",
+          "version": "0.13.2",
+          "requirements": [
+            "^0.13.2"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    },
+    {
+      "name": "xml-rs",
+      "version": "0.8.29",
+      "newest_eligible": "1.0.0",
+      "reverse_consumers": [
+        {
+          "name": "gl_generator",
+          "version": "0.14.0",
+          "requirements": [
+            "^0.8"
+          ]
+        }
+      ],
+      "reason": "Retained upstream requirement range. Adopted workspace roots use their latest eligible direct releases; changing this transitive line requires an upstream parent migration, not a source override."
+    }
+  ],
+  "additional_upstream_check": {
+    "new_official_names": [
+      "fallible-iterator",
+      "fallible-streaming-iterator",
+      "libsqlite3-sys",
+      "rusqlite",
+      "rust_decimal",
+      "system-configuration",
+      "system-configuration-sys",
+      "vcpkg",
+      "windows-registry"
+    ],
+    "registry_identities": 448,
+    "checked_utc": "2026-11-01T19:42:27.7664523+01:00"
+  },
+  "duplicate_policy": {
+    "revisit_by": "2027-04-13",
+    "scope": "Exact windows-sys@=0.59.0 skip with reason/register under existing latest-stable authorisation; no advisory suppression, source or publisher trust added",
+    "removed_stale_skips": [
+      "calloop@=0.13.0",
+      "calloop-wayland-source@=0.3.0",
+      "smithay-client-toolkit@=0.19.2"
+    ]
+  },
+  "owner_rosters_checked_at": "2026-11-01T19:08:19.157101+00:00"
+}

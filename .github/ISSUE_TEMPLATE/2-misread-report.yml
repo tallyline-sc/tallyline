@@ -13,7 +13,7 @@ body:
 
         **This issue is public.** Anyone can read it and open its attachments without logging in. Attach only redacted images: no CURRENT BALANCE, no player names, no chat. Never include your UEX secret key or an app token.
 
-        **Do not attach the reference-snapshot file of the "Report a misread" export.** It holds recorded UEX data, which is not published until UEX allows it (open point 7 in [06-uex-api.md](https://github.com/greluc/tallyline/blob/main/docs/plan/06-uex-api.md)). It enters only the private corpus; if it is needed, the maintainer asks you for it privately.
+        **Do not attach the reference-snapshot file of the "Report a misread" export.** It holds recorded UEX data, which is not published until UEX allows it (open point 7 in [06-uex-api.md](https://github.com/tallyline-sc/tallyline/blob/main/docs/plan/06-uex-api.md)). It enters only the private corpus; if it is needed, the maintainer asks you for it privately.
 
         Values that are wrong on UEX itself belong to [UEX Corp](https://uexcorp.space), not here.
 

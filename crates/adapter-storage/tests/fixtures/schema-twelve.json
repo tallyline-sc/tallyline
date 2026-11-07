@@ -1,0 +1,39 @@
+{
+  "job": [
+    1,
+    1,
+    4,
+    "partially_accepted",
+    "{\"resolution_actions\":[{\"row_decision\":{\"row\":1,\"decision\":\"not_received\",\"at\":\"1501000\"}}],\"header\":{\"report\":1,\"report_version\":6,\"account\":\"fixture-account\",\"mode\":\"production\",\"terminal\":11,\"side\":\"buy\",\"environment\":\"live\",\"game_version\":\"4.10.2\",\"observed_at\":\"900000\"},\"rows\":[{\"id\":1,\"commodity\":42,\"price\":\"123.45\",\"stock\":\"0\",\"status\":3}],\"newer_approvals\":[],\"phase\":\"partially_accepted\",\"attempts\":[{\"started_at\":\"1000000\",\"rows\":1,\"payload_hash\":[7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7],\"date_added\":\"900000\",\"ended_at\":\"1001000\",\"outcome\":\"partial\",\"receipt_checked\":false,\"account_evidence\":null,\"account_checks\":[],\"client_update\":null}],\"result\":{\"partial_evidence\":[{\"value\":\"database_error\",\"row_failure\":\"database\"},null,\"unmapped\",[]]},\"review_reason\":null,\"service_pause_acknowledged\":false,\"client_update\":null}",
+    "{\"attachment\":null,\"environment\":\"live\",\"game_version\":\"4.10.2\",\"lifecycle\":{\"age\":null,\"finding\":null,\"newer_observations\":[],\"release\":{\"account\":\"fixture-account\",\"environment\":\"live\",\"job\":1,\"mode\":\"production\",\"release_version\":5},\"state\":\"queued\"},\"observed_at\":\"900000\",\"rows\":[{\"commodity\":42,\"id\":1,\"price\":\"123.45\",\"price_decision\":{\"confirmation\":null,\"deviation\":null,\"revoked\":false,\"unreviewed\":false},\"status\":3,\"status_confirmation\":null,\"status_confirmation_revoked\":false,\"status_deviation\":null,\"status_unreviewed\":false,\"stock\":\"0\",\"stock_decision\":{\"confirmation\":null,\"deviation\":null,\"revoked\":false,\"unreviewed\":false}}],\"side\":\"buy\",\"terminal\":11}",
+    6
+  ],
+  "report": [
+    1,
+    7,
+    "{\"lifecycle\":{\"state\":\"partially_accepted\",\"release\":{\"account\":\"fixture-account\",\"mode\":\"production\",\"environment\":\"live\",\"release_version\":5,\"job\":1},\"age\":null,\"finding\":null,\"newer_observations\":[]},\"terminal\":11,\"side\":\"buy\",\"environment\":\"live\",\"observed_at\":\"900000\",\"game_version\":\"4.10.2\",\"rows\":[{\"id\":1,\"commodity\":42,\"price\":\"123.45\",\"stock\":\"0\",\"status\":3,\"price_decision\":{\"confirmation\":null,\"deviation\":null,\"unreviewed\":false,\"revoked\":false},\"stock_decision\":{\"confirmation\":null,\"deviation\":null,\"unreviewed\":false,\"revoked\":false},\"status_confirmation\":null,\"status_deviation\":null,\"status_unreviewed\":false,\"status_confirmation_revoked\":false}],\"attachment\":null}",
+    "partially_accepted"
+  ],
+  "schema": [
+    "CREATE TABLE accepted_priors(sequence INTEGER PRIMARY KEY AUTOINCREMENT,submission_id INTEGER NOT NULL REFERENCES submission_jobs(id),commodity INTEGER NOT NULL,environment TEXT NOT NULL,projection TEXT NOT NULL,payload TEXT NOT NULL,UNIQUE(submission_id,commodity))",
+    "CREATE TABLE domain_outbox(event_source TEXT NOT NULL,aggregate_id INTEGER NOT NULL,revision INTEGER NOT NULL,event_kind TEXT NOT NULL,delivered INTEGER NOT NULL DEFAULT 0 CHECK(delivered IN(0,1)),PRIMARY KEY(event_source,aggregate_id,revision))",
+    "CREATE TABLE ref_cache(endpoint TEXT PRIMARY KEY, fetched_at TEXT NOT NULL, payload TEXT NOT NULL)",
+    "CREATE TABLE ref_commodities(id INTEGER PRIMARY KEY, name TEXT NOT NULL, code TEXT NOT NULL, available_live INTEGER NOT NULL)",
+    "CREATE TABLE ref_terminals(id INTEGER PRIMARY KEY,name TEXT NOT NULL,nickname TEXT NOT NULL,display_name TEXT NOT NULL,location TEXT NOT NULL,available_live INTEGER NOT NULL,max_container_size INTEGER CHECK(max_container_size IS NULL OR max_container_size>0))",
+    "CREATE TABLE report_recents(report_id INTEGER PRIMARY KEY REFERENCES reports(id),changed_order INTEGER NOT NULL)",
+    "CREATE TABLE reports(id INTEGER PRIMARY KEY AUTOINCREMENT,version INTEGER NOT NULL CHECK(version>=0),payload TEXT NOT NULL, phase TEXT NOT NULL DEFAULT 'draft')",
+    "CREATE TABLE screenshot_requirements(account_digest BLOB PRIMARY KEY CHECK(length(account_digest)=32),observed_at TEXT NOT NULL)",
+    "CREATE TABLE submission_jobs(id INTEGER PRIMARY KEY AUTOINCREMENT,report_id INTEGER NOT NULL REFERENCES reports(id),revision INTEGER NOT NULL CHECK(revision>0),phase TEXT NOT NULL,payload TEXT NOT NULL,release_report TEXT NOT NULL,release_report_version INTEGER NOT NULL CHECK(release_report_version>0))",
+    "CREATE TABLE submission_receipt_enrichment(job_id INTEGER PRIMARY KEY REFERENCES submission_jobs(id),job_revision INTEGER NOT NULL CHECK(job_revision>0),payload TEXT)",
+    "CREATE TABLE submission_service_fences(cause TEXT NOT NULL CHECK(cause IN('api_changed','daily_quota','account_pause')),source_job INTEGER NOT NULL REFERENCES submission_jobs(id),source_revision INTEGER NOT NULL CHECK(source_revision>0),PRIMARY KEY(cause,source_job))",
+    "CREATE INDEX accepted_priors_projection ON accepted_priors(environment,projection)",
+    "CREATE INDEX ref_commodities_code ON ref_commodities(code)",
+    "CREATE INDEX ref_commodities_name ON ref_commodities(name)",
+    "CREATE INDEX ref_terminals_display_name ON ref_terminals(display_name)",
+    "CREATE INDEX ref_terminals_location ON ref_terminals(location)",
+    "CREATE INDEX ref_terminals_name ON ref_terminals(name)",
+    "CREATE INDEX ref_terminals_nickname ON ref_terminals(nickname)",
+    "CREATE UNIQUE INDEX submission_one_sending ON submission_jobs((1)) WHERE phase='sending'"
+  ],
+  "schema_version": 12
+}

@@ -1,0 +1,50 @@
+[package]
+name = "tallyline-app"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "tallyline"
+path = "src/main.rs"
+
+[dependencies]
+tallyline-adapter-ocr.workspace = true
+tallyline-reference-data.workspace = true
+tallyline-adapter-uex = { path = "../adapter-uex" }
+tallyline-adapter-storage.workspace = true
+tokio = { workspace = true, features = ["rt", "rt-multi-thread"] }
+tallyline-shared-kernel.workspace = true
+eframe.workspace = true
+egui.workspace = true
+tracing.workspace = true
+tallyline-workflows = { path = "../workflows" }
+tallyline-adapter-files = { path = "../adapter-files" }
+tallyline-adapter-platform = { path = "../adapter-platform" }
+tallyline-ui = { path = "../ui" }
+
+
+[lints]
+workspace = true
+
+[dependencies.tallyline-game]
+path = "../game"
+
+[dev-dependencies]
+rusqlite.workspace = true
+serde_json.workspace = true
+
+[dependencies.tallyline-reporting]
+workspace = true
+
+[dependencies.tallyline-submission]
+workspace = true
+
+[dependencies.log]
+version = "=0.4.34"
+default-features = false
+
+[dev-dependencies.png]
+workspace = true

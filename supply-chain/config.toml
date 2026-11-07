@@ -22,8 +22,13 @@ url = "https://raw.githubusercontent.com/mozilla/supply-chain/main/audits.toml"
 [imports.zcash]
 url = "https://raw.githubusercontent.com/zcash/rust-ecosystem/main/supply-chain/audits.toml"
 
+[[exemptions.android-properties]]
+version = "0.2.2"
+criteria = "safe-to-deploy"
+notes = "S-6 justified off-target exemption, not a source-soundness audit: absent from both shipped-target graphs x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu, and native-scope rejects any reachable version including renamed edges. Complete source inspection found unsafe Android bionic-deprecated empty-CString 92-byte output buffer/reconstruction defects and Rust-ABI callback declarations; do not activate Android or conceal these defects. Final filtered metadata and native-scope passed 2026-11-01. Separate suppression register revisit 2027-04-13 or before any activation."
+
 [[exemptions.aws-lc-sys]]
-version = "0.46.0"
+version = "0.47.0"
 criteria = "safe-to-deploy"
 notes = "AWS-LC C, C++ and assembler sources of about two million lines that cannot be audited by reading; registered native-code exception of ADR-0006"
 
@@ -47,6 +52,11 @@ version = "0.10.1"
 criteria = "safe-to-deploy"
 notes = "not compiled for the shipped targets x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu; locked only as a dependency of another platform"
 
+[[exemptions.core-graphics]]
+version = "0.23.2"
+criteria = "safe-to-deploy"
+notes = "S-6 justified off-target exemption only: Apple bindings absent from both shipped-target graphs x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu; native-scope rejects any reachable version including renamed edges. Final filtered metadata and native-scope passed 2026-11-01. No source audit or new native-code approval is claimed. Separate suppression register revisit 2027-04-13 or before activation."
+
 [[exemptions.crypto-common]]
 version = "0.2.2"
 criteria = "safe-to-deploy"
@@ -57,15 +67,10 @@ version = "0.11.3"
 criteria = "safe-to-deploy"
 notes = "initial adoption, not yet audited"
 
-[[exemptions.hashbrown]]
-version = "0.17.1"
+[[exemptions.dispatch]]
+version = "0.2.0"
 criteria = "safe-to-deploy"
-notes = "initial adoption, not yet audited"
-
-[[exemptions.hermit-abi]]
-version = "0.5.3"
-criteria = "safe-to-run"
-notes = "not compiled for the shipped targets x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu; locked only as a dependency of another platform"
+notes = "S-6 justified off-target exemption only: Apple dispatch bindings absent from both shipped-target graphs x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu; native-scope rejects any reachable version including renamed edges. Final filtered metadata and native-scope passed 2026-11-01. No source audit or new native-code approval is claimed. Separate suppression register revisit 2027-04-13 or before activation."
 
 [[exemptions.hybrid-array]]
 version = "0.4.15"
@@ -102,10 +107,10 @@ version = "0.3.106"
 criteria = "safe-to-deploy"
 notes = "not compiled for the shipped targets x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu; locked only as a dependency of another platform"
 
-[[exemptions.r-efi]]
-version = "6.0.0"
+[[exemptions.memoffset]]
+version = "0.9.1"
 criteria = "safe-to-deploy"
-notes = "not compiled for the shipped targets x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu; locked only as a dependency of another platform"
+notes = "S-6 justified off-target exemption, not a source-soundness audit or bootstrap exemption: exact archive SHA-256 488016bfae457b036d996092f6cb448677611ce4449e970ceaf42695203f218a is locked only behind the Linux zbus dependency graph for other targets and is absent from both shipped target graphs: x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu. The Windows credential dependency is independently target-specific and never activates zbus. The native-scope guard rejects every reachable version, including renamed edges. Revisit by 2027-04-13 or before any activation/version/source/feature/target change. No build script or native code was executed in this research."
 
 [[exemptions.schannel]]
 version = "0.1.30"
@@ -122,15 +127,35 @@ version = "2.17.0"
 criteria = "safe-to-deploy"
 notes = "not compiled for the shipped targets x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu; locked only as a dependency of another platform"
 
+[[exemptions.send_wrapper]]
+version = "0.6.0"
+criteria = "safe-to-deploy"
+notes = "S-6 exact off-target exemption only, not a source-soundness audit: package is absent from both supported target graphs x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu. Complete src/lib.rs and src/futures.rs inspection identified an unresolved optional Future/Stream Pin projection and wrong-thread Drop/leak contract concern; no unrestricted audit or publisher trust is granted. Current full graph enables no optional features. Native-scope rejects every reachable send_wrapper version from every workspace root, including renamed transitive edges, with or without the futures feature. Revisit 2027-04-13 or before any target, feature, version or activation change; activation needs a focussed source review and explicit owner approval."
+
 [[exemptions.simd_cesu8]]
 version = "1.2.0"
 criteria = "safe-to-deploy"
 notes = "not compiled for the shipped targets x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu; locked only as a dependency of another platform"
 
+[[exemptions.system-configuration]]
+version = "0.7.0"
+criteria = "safe-to-deploy"
+notes = "S-6 justified off-target exemption, not a full soundness audit: absent from both supported workspace-root graphs x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu. Native-scope must reject any reachable version, including renamed edges, before builds. Complete selected dynamic_store.rs and lib.rs read: callback_context accepts arbitrary T without a static lifetime while build returns non-generic SCDynamicStore, erasing T into a C callback pointer; do not activate this callback API or claim unrestricted soundness. Hyper-util0.1.21's macOS proxy consumer uses callback=None, but no Apple target is approved. Other source modules are not certified by this exemption. Revisit2027-04-13 or before any activation."
+
+[[exemptions.system-configuration-sys]]
+version = "0.6.0"
+criteria = "safe-to-deploy"
+notes = "S-6 justified off-target exemption, not a fresh full FFI audit: absent from both supported workspace-root graphs x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu. Native-scope must reject any reachable version, including renamed edges, before builds. Complete build.rs and src/lib.rs read; build script only emits framework=SystemConfiguration when TARGET contains -apple, with no source compilation, download or process execution. Raw Apple SystemConfiguration/CoreFoundation declarations are not approved for activation. Revisit2027-04-13 or before any activation."
+
 [[exemptions.typenum]]
 version = "1.20.1"
 criteria = "safe-to-deploy"
 notes = "initial adoption, not yet audited"
+
+[[exemptions.uds_windows]]
+version = "1.2.1"
+criteria = "safe-to-deploy"
+notes = "S-6 justified off-target exemption, not a source-soundness audit or bootstrap exemption: exact archive SHA-256 f2f6fb2847f6742cd76af783a2a2c49e9375d0a111c7bef6f71cd9e738c72d6e is locked only behind the Linux zbus dependency graph for other targets and is absent from both shipped target graphs: x86_64-pc-windows-msvc and x86_64-unknown-linux-gnu. The Windows credential dependency is independently target-specific and never activates zbus. The native-scope guard rejects every reachable version, including renamed edges. Revisit by 2027-04-13 or before any activation/version/source/feature/target change. No build script or native code was executed in this research."
 
 [[exemptions.wasm-bindgen]]
 version = "0.2.129"

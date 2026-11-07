@@ -12,7 +12,10 @@ const OK_STATUS: &str = "ok";
 /// Returns the `data` of an `ok` envelope, or the [`ReadError`] the answer stands for.
 pub(crate) fn data(http_status: u16, body: &[u8]) -> Result<Value, ReadError> {
     let Ok(answer) = serde_json::from_slice::<Value>(body) else {
-        return Err(ReadError::NotJson { http_status });
+        return Err(ReadError::NotJson {
+            http_status,
+            cf_ray: None,
+        });
     };
     let Value::Object(mut envelope) = answer else {
         return Err(ReadError::Malformed {
@@ -32,7 +35,7 @@ pub(crate) fn data(http_status: u16, body: &[u8]) -> Result<Value, ReadError> {
         let data = envelope
             .remove("data")
             .filter(|value| !value.is_null())
-            .map(rejected_data);
+            .map(|value| rejected_data(value, &status));
         return Err(ReadError::Rejected {
             http_status,
             code: status,
@@ -45,7 +48,18 @@ pub(crate) fn data(http_status: u16, body: &[u8]) -> Result<Value, ReadError> {
     })
 }
 
-fn rejected_data(value: Value) -> RejectedData {
+fn rejected_data(value: Value, code: &str) -> RejectedData {
+    if code == "exceeded_daily_quota"
+        && let Some(reset) = value
+            .get("reset")
+            .and_then(Value::as_u64)
+            .filter(|reset| *reset > 0)
+    {
+        return RejectedData::QuotaReset {
+            reset,
+            observed_at: None,
+        };
+    }
     if let Some(row) = value.get("row").and_then(Value::as_u64)
         && let Ok(row) = usize::try_from(row)
     {

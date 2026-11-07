@@ -1,0 +1,19 @@
+# Reproducing the Ollama v0.40.13 static evidence
+
+> **Doc type:** Historical record — static partial-archive evidence and reproduction method. Last reviewed: 2026-11-05.
+
+The companion [JSON manifest](ollama-v0.40.13-windows-amd64-static-evidence-v01.json) uses schema `tallyline.ollama-static-evidence`, version 1. Its SHA-256 is **d110257d028634ae9865f8ab8e62201f1992d85877dd5f69f1a33bb458c98eaa**. It records a 2026-11-05 partial-archive observation: 30 inspected members, including 26 PE files/four notices, a 25-file source-expanded import candidate and all 58 embedded Go modules.
+
+The publication copy normalises CRLF line endings to repository LF without changing any JSON value or key/array order. The sealed pre-publication manifest had SHA-256 **de5cb9b1ccfc911fb3b665cffd9ae68aa60cafbffd9d5b5de19bc9fb7122d823**; the publication hash above identifies the repository bytes. All member, notice and supporting-evidence hashes remain unchanged.
+
+The upstream identity comes from the official [v0.40.13 release](https://api.github.com/repos/ollama/ollama/releases/tags/v0.40.13), [asset 687142233](https://api.github.com/repos/ollama/ollama/releases/assets/687142233) and [source tag](https://api.github.com/repos/ollama/ollama/git/ref/tags/v0.40.13). Native b11963 resolves to [39febd2adb947b70da35e95f9351b3bf58ad170a](https://api.github.com/repos/ggml-org/llama.cpp/git/ref/tags/b11963); the pinned [Ollama native version](https://github.com/ollama/ollama/blob/04088e7c9d41cba5d33bafbf788d87a465c79d5b/LLAMA_CPP_VERSION) and [compatibility/build integration](https://github.com/ollama/ollama/blob/04088e7c9d41cba5d33bafbf788d87a465c79d5b/llama/server/CMakeLists.txt) identify the additional source overlay.
+
+1. Verify the upstream asset ID, name, archive size, published digest and source/native references against the manifest. Retain any changed metadata separately; this is a fixed historical observation.
+2. Obtain only the named members through a reviewed data-only method. The recorded attempt used a pinned directory/EOCD anchor, a new strong ETag and unchanged If-Range validation, followed by exact local-record ranges. It read 29,396,850 application body bytes and produced 83,611,431 decompressed bytes. Validate local headers, declared sizes, CRCs and bounded decompression; keep native contents inert.
+3. Compare every member's byte count and SHA-256 with `members`. Those hashes identify observed member bytes. No upstream per-member digest was available, and partial ranges did not verify the published whole-archive SHA-256.
+4. Parse PE headers, sections, ordinary imports and delay imports as data. Start the declared-import graph from the CLI, helper, source-supported ggml.dll and all 14 CPU scoring variants. The manifest records candidate membership and unresolved external module names; static reachability does not settle dynamic loading or actual CRT providers.
+5. Parse the CLI's embedded Go build information without invoking it, compare all module paths/versions/sums and the embedded revision claim, then decode the four notices as strict UTF-8 and compare their hashes. Preserve complete notice bytes.
+
+The target OS/architecture and Go settings describe embedded build claims, not the research host. The manifest contains no host paths, profile/environment inventory or raw tool output. Its explicit unresolved flags cover binary/source/toolchain derivation, CGo/SQLite, complete notices, external providers, dynamic loading and product redistribution admission.
+
+The observed **go-sqlite3 v1.14.52 with CGO enabled** and **gods/v2 v2.0.0-alpha** remain literal upstream qualifications. The application's rusqlite approval does not cover this Ollama payload. Embedded build information, matching import lists and notice hashes do not authenticate native code or establish clean-install, CPU-only, accuracy or hardware acceptance. No acquired programme/library/model was executed in this review.

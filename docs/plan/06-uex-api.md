@@ -1,6 +1,6 @@
 # UEX API 2.0 – working notes
 
-> **Doc type:** Living spec — binding. Last reviewed: 2026-11-01.
+> **Doc type:** Living spec — binding. Last reviewed: 2026-11-06.
 
 > **Sources.** Corrected 2026-10-09: the earlier notes were written without access to the official documentation and rested on search snippets, third-party copies and open-source clients ([3P]). On 2026-10-09 the official documentation and the live API were checked. Tags:
 >
@@ -16,6 +16,10 @@
 > Nothing here was verified with a write call: no `data_submit`, `data_edit` or `data_remove` has been sent (`CLAUDE.md`, "External writes"). The review of the plan against these facts is [08](08-review.md) §N.
 
 ## Basics
+
+### Public contract observation — 2026-11-02
+
+An actual credential-free run of the in-progress `contract-snapshot` spike read `game_versions`, `commodities_status`, `data_parameters`, `commodities` and `terminals?type=commodity` from the primary `.uk` host. All five returned HTTP 200. Their metadata-only projections contain respectively 7, 25, 34, 45 and 62 field paths (173 total); both status-code sets contain 1 through 7. The retained 11,788-byte metadata baseline has SHA-256 `4fa17a62405c63c97548b2a3963d2ffdba1e9adbc1c5c9f8ad03bbb4bd455eb1`. No raw responses or scalar data values were saved. These samples do not establish authenticated behaviour or every nullable shape. [The drift guide](../public-api-contract-drift.md) records source identity, comparison limits, local contracts and pending main-only hosted activation for #100. Technical error identifiers used in synthetic tests are not live observations.
 
 | Topic | Value | Source |
 |---|---|---|
@@ -177,6 +181,8 @@ All public (no token, no key) unless marked. Field lists [DOC], values and types
 | `GET /data_monitor` (Bearer) | Per terminal: TTL status of its prices, `ids_reports` (int array of pending, unconsolidated LIVE reports), `has_ptu_reports`, `last_update`. Not used by the plan | – |
 | `GET /release_notes` | UEX dev notes (`id`, `date_updated`, `content` as HTML); the read-only source for noticing API changes | – |
 
+Verified again 2026-11-01 [LIVE]: the public [`/terminals?type=commodity`](https://api.uexcorp.uk/2.0/terminals?type=commodity) response supplies `name`, `nickname`, `displayname`, `type`, `is_player_owned`, `is_available_live`, and the nullable location fields `star_system_name`, `planet_name`, `orbit_name`, `moon_name`, `space_station_name`, `outpost_name`, `city_name`. These location names are retained in hierarchy order for manual search and disambiguation, with repeated decoded values shown once. `poi_name` was absent; the adapter does not invent it. The response still supplies `max_container_size`; deprecated `mcs` remains ignored. This dated field verification does not replace the historical counts above. Unsupported terminal types and player-owned rows are excluded at the adapter boundary; LIVE availability is applied by the reference context, allowing PTU vocabulary to retain rows unavailable in LIVE.
+Corrected 2026-11-01 (R-API-5): the initial read adapter no longer derives traded sides through `f64`. JSON numbers retain their spelling with `serde_json/arbitrary_precision`, then parse through the exact non-negative `PricePerScu` value. Numeric strings follow the same path. The public price-row result retains the positive price only for a single traded side; zero is not a prior, and contradictory dual-sided rows remain explicitly `Both` without a chosen price. Non-finite strings, negatives, unsupported range/precision and rounding-dependent mantissas reject the response. The raw numeric JSON contract includes `9007199254740993.125` and `9.7e-7`, proving that binary-float rounding does not precede the value type. Full SCU/prior/cache projection remains in progress.
 ## Observed by third parties (2026-10-09)
 
 Production behaviour seen in the predecessor's own log of one session on 2026-10-08 (83 `data_submit` calls, read without decompiling), in production responses that users pasted into its public issue tracker ([Shebuka/SC-Datarunner-UEX#38](https://github.com/Shebuka/SC-Datarunner-UEX/issues/38), 2026-08-18/19) and in open-source clients ([08](08-review.md) §O). Tag **[3P-OBS]**. These are observations of other clients' traffic; our own `is_production=0` write check still has to confirm them before an adapter relies on them.
@@ -275,3 +281,70 @@ Status as of 2026-11-01, after UEX's answers of 2026-10-25 and 2026-10-31 [UEX].
 34. **Answered 2026-10-31** [UEX] (asked 2026-10-26): still 1000 reports in 30 minutes, counting only the user's own reports of that type, checked once at the start of each request against the reports already stored (point 16, R-SUB-2).
 35. **Answered 2026-10-31** [UEX] (asked 2026-10-26): no clock difference is tolerated; a `date_added` later than the server's clock at arrival answers `invalid_date`; UEX suggests sending the current time instead, or leaving `date_added` out (R-VAL-6, O-144).
 36. **Answered 2026-10-31** [UEX] (asked 2026-10-26): one request per capture is fine and better for moderators; different commodities never trigger `duplicated_report` (O-137 confirmed). `data_info` lists every datarunner's reports, as [DOC] says; the title "own reports" is misleading; the `username` filter and the `is_owner` flag tell the caller's own reports apart.
+
+### Exact commodity averages and terminal container limits (2026-11-01)
+
+Rechecked public `GET /commodities` on 2026-11-01: 205 vocabulary rows, both `price_buy` and `price_sell` present as JSON integers in this response; zero means missing. The adapter accepts the established numeric-string alternative and exact decimal/scientific JSON numbers without binary-float conversion, maps each side separately to `PricePerScu`, and rejects malformed averages. Contract fixtures include `9007199254740993.125` and `9.7e-7`; these demonstrate lossless parsing rather than claim those values occurred in the live sample. No LIVE average is retained in a PTU snapshot. The previously verified `max_container_size` field maps positive whole values to a typed optional limit; zero or absence means unknown, and deprecated `mcs` is ignored.
+
+### Typed parameter boundary (2026-11-01)
+
+Public `GET /data_parameters` was rechecked on 2026-11-01: all three global flags and commodity acceptance were integer 1, price variation 25 percent, TTL 15 days and SCU variation 5000 percent; the commodity staff notification was a 145-character string. These are response observations, not compiled acceptance values. The adapter requires numeric whole 0/1 flags (including numeric strings), positive whole TTL and supported whole-percent ranges, maps only the commodity constraints needed here, and discards unused report sections. Staff notifications are decoded exactly once, retained as bounded plain text and never interpreted as markup. Contract fixtures cover closed PTU, malformed flags, zero TTL, fractional/overflowing constraints and invalid notification types. The SQLite cache retains the independent switches and exact successful fetch time, with daily refresh and 15-minute send-gate freshness.
+
+### Complete typed terminal prior mapping (2026-11-01)
+
+Rechecked public `GET /commodities_prices?id_terminal=89` on 2026-11-01: 84 rows, all sell-only with one positive traded price; requested identity, commodity identity, prices, SCU and statuses were JSON integers, container sizes and game version strings, and modification time integer Unix seconds. A two-row whitelisted field projection was retained outside the repository; no complete price table or reporter data was saved. The client accepts the established numeric-string alternatives and exact fractional numeric values, preserves the source version without semantic-version assumptions, maps status zero to unknown and reads sell stock exclusively from `scu_sell_stock`. Contract fixtures deliberately distinguish that stock from forecast `scu_sell` and exercise fractional SCU and prices beyond binary-float integer precision.
+
+The typed batch boundary allows at most ten unique positive IDs, returns an explicit successful empty assortment for requested terminals without rows and rejects unrequested terminals, duplicated commodities and invalid single-side rows before publishing any batch result. Both-positive and neither-positive price rows are malformed. Cache expiry is independently 30 minutes per terminal; source modification age and client fetch age remain separate. LIVE priors never enter a PTU snapshot. `ContainerSize` now belongs to the shared kernel; the adapter retains its existing public re-export.
+
+## Reference transport host and diagnostic boundary (2026-11-01)
+
+The production `ReaderSettings::new` accepts HTTPS authority URLs with a trailing slash and rejects user information, queries and fragments. Transport revalidates the configured HTTPS origin before each GET or POST, before attaching credential headers. Its redirect policy remains `none`, and the app fixes public reference requests to `https://api.uexcorp.uk/2.0/` without either credential. Local HTTP contract servers use a separate constructor compiled only under `cfg(test)`; production construction rejects HTTP even on loopback and exposes no certificate-verification bypass.
+
+Credentialled technical expert origins require `with_expert_host_confirmation`, whose caller must first show `EXPERT_HOST_WARNING` and obtain explicit user confirmation. This confirmation is bound to immutable settings for that origin. Public alternative-host reads remain credential-free. The spike CLI requires `--confirm-expert-host` before `--host space` for credentialled GET commands and flushes the disclosure warning before reading credentials or sending a request. Its dry-run write command retains the primary-host restriction. This does not introduce a desktop host preference or a new config schema.
+
+`ReadError::NotJson` carries only HTTP status and optional validated `cf-ray`, never the response body or arbitrary headers. Cloudflare describes a Ray hash and three-letter datacentre suffix in its [Ray documentation](https://developers.cloudflare.com/fundamentals/reference/cloudflare-ray-id/) and [HTTP header reference](https://developers.cloudflare.com/fundamentals/reference/http-headers/#cf-ray). The adapter accepts at most 64 ASCII bytes of hexadecimal identifier with an optional three-letter suffix; this is a defensive bound, not a claimed protocol-wide fixed hash width. Malformed, oversized or reflected request-credential values are omitted. Absence of a usable Ray does not hide the HTTP status or observation time.
+
+The app-owned reference worker adds its injected `Clock` observation to this bounded metadata. The UI displays it literally as the last non-JSON response with UTC Unix milliseconds, independently of successful cache fetch times. The last incident is memory-only and remains visible after recovery, without changing view, keyboard focus, selected channel or records. Current cache state and age remain separate.
+
+Full R-API-3 system-proxy acceptance remains pending: the enabled upstream feature supports static Windows registry settings and environment proxies, but not PAC/autodiscovery or protocol-specific Windows registry lists. No additional native or unsafe activation is introduced by this slice.
+
+### Manual validation parameter recheck (2026-11-02)
+
+A credential-free read of the primary public [`GET /data_parameters`](https://api.uexcorp.uk/2.0/data_parameters) returned `status: ok`, commodity `price_variation: 25`, `scu_variation: 5000` and `ttl: 15`. This confirms the existing field shape and current values; the percentage/day semantics remain those documented above and confirmed by UEX. It supplies no corpus calibration: the SCU value remains diagnostics only under O-140, and neither an unverified transcription nor a geometry label calibrates a client SCU threshold.
+
+### Manual attachment encoding checkpoint (2026-11-02)
+
+The official read-only [data_submit documentation](https://uexcorp.space/api/documentation/id/post_data_submit/) was checked again for screenshot input: PNG/JPG in Base64, documented 10.00 MB and evaluation-period requirement. This does not supersede the owner's stricter Base64 bound or the UEX team's stored-size guidance above. The manual attachment encoder emits only a user-confirmed selected region as PNG within 1920×1080 and at most 10,000,000 Base64 bytes, without a data-URL prefix. This headless slice has made no UEX write, including no dry run; account requirement learning and sending remain pending.
+
+### Account screenshot evidence implementation (2026-11-02)
+
+The adapter maps only an actual rejected response with the exact documented `screenshot_required` code into typed Submission evidence. The localmock contract supplies dummy credentials and performs no UEX write. `GET /user` still has no screenshot flag; neither a successful response nor an unrelated rejection invents a requirement. `ScreenshotPolicyApplication` records the newest answer date against the validated account used by that attempt, persists before publication, and clears only that account after the explicit try-without action. The desktop consumes this policy through the attachment workflow; the complete submission lifecycle and its feedback delivery remain separate pending work.
+
+### Manual refusal contract implementation (2026-11-03)
+
+Corrected 2026-11-03: O-142 was decided on 2026-11-01; the historical open-point-30 wording above is superseded by its recorded choice. The manual gateway uses the documented before-storage list and retains row/error metadata without positional receipt mapping. Unlisted production refusals keep the data_info safety check; full, malformed or unavailable lookup windows cannot prove absence. A later read-only check never adds another POST attempt. Local-mock timeout and HTTP-504 contracts each receive exactly one POST and remain OutcomeUnknown; these are fault contracts, not live UEX observations. No new service field or error-code observation is claimed. Daily-quota reset parsing/scheduling and detailed row resolution retain their owning gates.
+
+Client recovery handling 2026-11-03 (R-SUB-6, R-SUB-9, R-SUB-11): unlisted bounded ASCII alphanumeric/underscore/hyphen identifiers retain exact case. Account refusal provenance remains independent of receipt certainty; unsafe echoed codes are absent while HTTP401/403 still retain typed account action. These are synthetic local contract cases, not new live UEX field/code observations. See [recovery scope](../submission-queue.md#recovery-scope-and-compatibility-evidence).
+
+## Client use of existing data-info evidence — 2026-11-04
+
+Corrected 2026-11-04: an explicit unknown-origin check reuses the documented bounded account/terminal/type-filtered `data_info` GET, limit 100 and the existing terminal/commodity/ID/returned-date association against the exact attempted wire date. This is client policy over the already verified fields, not a new live-service observation or independent verification of returned prices/statuses. There is no new ordering, paging, time filter or tolerance assumption. Only positive non-conflicting matches supply unknown-resolution evidence; absence in any window never proves an unknown POST unprocessed. The existing refusal safety path retains its separate documented complete-short-window negative-presence policy. No real-service mutation was performed for this slice.
+
+## Partial row resolution checkpoint — 2026-11-04
+
+The #89 client reuses the existing ID-filtered and account/terminal/type-filtered data_info GETs. Every positive Partial ID is individually verified against the original terminal, commodity and exact attempted wire date; the bounded window can add omitted positive identities. A single strict decoder serves these reads and existing success/refusal paths. Duplicate/conflicting identities, malformed/oversized windows and mismatching metadata fail closed. Empty or full 100-record windows never infer non-receipt for partial/unknown settlement. The refusal safety path retains its separately documented complete-short-window rule. Typed row-failure provenance/classification adds no observed wire field, code, paging, ordering or date tolerance assumption. Local HTTP contracts are synthetic; no live write or new service observation is claimed. See [the queue checkpoint](../submission-queue.md#partial-row-resolution-checkpoint--2026-11-04).
+
+## Daily quota translation checkpoint — 2026-11-04
+
+The accepted [UEX] answers in Basics and open point 25 remain the primary evidence for HTTP 429 `exceeded_daily_quota` and `data.reset` as Unix seconds. The public [documentation](https://uexcorp.space/api/documentation/) was read again: it still shows the older divided-per-minute figure and generic `requests_limit_reached`, without a reset shape. No authenticated exhaustion response was obtained, no quota was deliberately consumed and no write was made; a credential-free GET cannot establish that authenticated error payload.
+
+Adapter contracts decode reset only for `exceeded_daily_quota` and accept only a positive whole unsigned JSON integer, retaining the Date parsed from that exact response before body processing. Other refusal codes retain their positive `data.row` or `data.report` boundary even when `data.reset` is also present. Missing/invalid reset, absent/ambiguous Date and an originally non-future reset remain quota refusals without usable scheduling authority. No midnight, 24-hour bound, numeric-string acceptance or Retry-After is invented. The original reset/server observation survives delayed saving and later tracker changes. Existing authenticated `data_info` receipt/safety and token-access reads retain independent quota evidence; public references remain tokenless. Pending local evidence applies before each further authenticated request, including later IDs in the same operation; a proven distinct token remains eligible. Ownership transfer retains continuous admission until durable saving. Fresh monotonic server time controls expiry, and the full ordinary send gate remains mandatory. Synthetic local HTTP contracts establish mapping behaviour, not new live-service verification.
+
+
+### Optional affinity source recheck (2026-11-06)
+
+The live public [official data-submit documentation](https://uexcorp.space/api/documentation/id/post_data_submit/) was read again: `faction_affinity` is an optional report-level integer bounded by -100 and 100; the service permits commodity and item reports. Tallyline's narrower R-SUB-13 commodity-only policy remains binding. An attempted credential-free `GET https://api.uexcorp.space/2.0/parameters` was inaccessible through the research tool, so no fresh parameter-response verification is claimed. No POST or other UEX write was made. The gateway's local HTTP contract verifies omission, explicit zero and both bounds; none of these tests establishes live-service acceptance.
+
+## Verified lifecycle adapter source checkpoint — 2026-11-07
+
+The read-only adapter uses one username/type/limit100 batch across admitted terminals, with the shared authenticated app-token quota and bounded CPU processor. Exact paired ID/date and released terminal/commodity proof precede the documented seven-status and binary editability parse. Missing/full windows remain positive-only evidence. Local HTTP contracts derive from this documentation and do not establish recorded or live UEX behaviour; withdrawal and approved real-wire acceptance remain open. See [the lifecycle checkpoint](../submission-queue.md#verified-lifecycle-read-checkpoint--2026-11-07).

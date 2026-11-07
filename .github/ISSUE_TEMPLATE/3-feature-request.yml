@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for the idea. The project is planned in [docs/plan](https://github.com/greluc/tallyline/tree/main/docs/plan): please check the requirements in 01-requirements.md and the roadmap in 04-roadmap.md first, because many ideas are already planned or deliberately left out. Open owner decisions are listed in [docs/adr/0000-open-points.md](https://github.com/greluc/tallyline/blob/main/docs/adr/0000-open-points.md).
+        Thank you for the idea. The project is planned in [docs/plan](https://github.com/tallyline-sc/tallyline/tree/main/docs/plan): please check the requirements in 01-requirements.md and the roadmap in 04-roadmap.md first, because many ideas are already planned or deliberately left out. Open owner decisions are listed in [docs/adr/0000-open-points.md](https://github.com/tallyline-sc/tallyline/blob/main/docs/adr/0000-open-points.md).
 
         If your proposal changes an existing requirement (R-…) or an accepted decision (ADR), name it below. Such changes need the approval of the project owner, @greluc.
 

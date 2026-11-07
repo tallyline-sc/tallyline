@@ -141,10 +141,12 @@ fn parse_component(number: usize, entry: &toml::Value) -> Result<Component, Stri
     let Some(entry) = entry.as_table() else {
         return Err(fail("is not a table"));
     };
-    if let Some(key) = entry
-        .keys()
-        .find(|key| !matches!(key.as_str(), "directory" | "name" | "shipped" | "files"))
-    {
+    if let Some(key) = entry.keys().find(|key| {
+        !matches!(
+            key.as_str(),
+            "directory" | "name" | "shipped" | "files" | "catalogue"
+        )
+    }) {
         return Err(fail(&format!("has the unknown key `{key}`")));
     }
     let text = |key: &str| -> Result<String, String> {
@@ -1215,3 +1217,7 @@ files = [{ repository = "supply-chain/notices/onnxruntime/ThirdPartyNotices.txt"
         assert!(!target.join("crates/serde-1.0.0").exists());
     }
 }
+
+mod catalogue;
+
+pub use catalogue::write_catalogue;

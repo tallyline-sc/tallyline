@@ -1,6 +1,18 @@
 
 # cargo-vet audits file
 
+[[audits.android_system_properties]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.1.6"
+notes = "AI full source review by GPT-6.1 Sol: read complete src/lib.rs, time_zone example and both manifests of0.1.6. Reviewed Android RTLD_NOLOAD libc handle/symbol resolution, optional function-pointer casts, checked lookup, extern C callback stack payload/lifetime and non-unwinding UTF-8 conversion, legacy92-byte Vec capacity/initialised-length checks, Send+Sync read-only use and dlclose ownership. Checked callback declarations and PROP_VALUE_MAX92 against canonical Bionic sys/system_properties.h. Handles/functions remain owned until Drop; missing symbols/null lookups/invalid UTF-8 return None. Non-Android constructor has no functions/handle and is inert. No setters/build/native compilation/process/network/file writes or telemetry; property values returned to caller only. Assumes genuine platform libc API/buffer/thread-safety contracts and no privileged process-wide property reload concurrent with reads. This does not authorise Android target/native enablement; dependencies remain separate audit obligations. Archive ae221649c9976a6f6c56ae1facf410f3ddb33cc661c4b7b61020a912d4237fbc matches Cargo.lock. AI-reviewed; owner reviews record in pull request."
+
+[[audits.as-raw-xcb-connection]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "1.0.1"
+notes = "AI source review by GPT-6.1 Sol: read complete src/lib.rs and both Cargo manifests for 1.0.1; no dependencies/build script/procedural macros or I/O. Checked unsafe trait validity/lifetime contract, reference and alloc forwarding implementations, and ValidConnection unsafe NonNull constructor/raw-pointer accessor; no FFI calls or pointer dereferences are performed. Confirmed archive SHA-256 175571dd1d178ced59193a6fc02dde1b972eb0bc56c892cde9beeceac5bf0f6b matches Cargo.lock."
+
 [[audits.base64]]
 who = "Claude Opus 5.5 (AI agent, for Lucas Greuloch)"
 criteria = "safe-to-run"
@@ -12,6 +24,24 @@ who = "Claude Opus 5.5 (AI agent, for Lucas Greuloch)"
 criteria = "safe-to-deploy"
 version = "0.23.1"
 notes = "Read all of src/ (the SIMD engine and the general-purpose decoder in full, the rest against 0.22.1): unsafe is confined to the SIMD engines, whose unaligned loads and stores are bounded by loop guards and whose CPU features are runtime-detected or required by an unsafe constructor; no build script, dependencies or ambient capabilities. Read by an AI agent; the owner reviews the record in the pull request."
+
+[[audits.chacha20]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-run"
+version = "0.10.2"
+notes = "Exact AI source review. Adopted after exact owner approval on 2026-11-03; provenance and bounds in property-testing.json. Read complete active rng-only Windows/Linux x64 library code: lib.rs, backends.rs, variants.rs, rng.rs and soft/avx2/sse2 backends, both manifests and MIT grant. CPU init tokens precede SIMD dispatch; reviewed fixed 64-byte state loads, 256-byte output stores, all-bit-pattern vector transmutes, fixed rounds and counters. No literal assembly/C FFI, build script, proc-macro, file/process/network operations or telemetry. The package remains compiled even when the property runner chooses XorShift. Cipher/legacy/xchacha/zeroize, AVX512 custom cfg, forced backend and non-x64 paths are outside this source criterion. Runtime normal dispatch uses already locked cpufeatures0.3.1, whose x64 expansion was separately read and hash-verified. No cryptographic, formal soundness or executed SIMD test claim. Archive 65c35e4b699c7e15ccbe7ee35c005e4fc0a278d22238a2857e6ce2dadeda1b06 matches lock, crates.io, extracted files and upstream source identities. AI review only; future source/version/feature/backend/target activation requires fresh review; no publisher trust or native approval is conferred."
+
+[[audits.concurrent-queue]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "2.5.0"
+notes = "AI source review: read all five production files, all four test files, bench, README, both manifests and MIT text; archive 4ca0197aee26d1ae37445ee532fefce43251d24cc7c166799f4d46817f1d3973 matches lock. Reviewed single-slot lock/initialisation, bounded CAS/stamp ownership, unbounded block publication and READ/DESTROY reclamation, exclusive Drop and Send contracts. x86 full_fence inline assembly only modifies a live aligned local word with a locked instruction and compiler memory clobber; native-code adoption independently requires an approved register row, which this audit does not grant. No ambient file/network/process/environment operations. Known upstream issue82: bounded force_push can erase a concurrent close mark via tail.store, allowing pushes after close and shutdown failure. No exploitable memory-safety consequence found in the complete source assessment, but do not use close plus force_push as a security boundary; this is not a claim of unrestricted queue correctness. In unfiltered resolution, consumers polling 3.11.0 (private bounded IOCP queue: push/try_iter/capacity) and winit 0.30.13 (Web unbounded notifier: push/pop/close) were inspected and do not exercise force_push. Independent workspace-root traversal confirms concurrent-queue itself is absent from both current supported target graphs; no active Windows use is claimed. Reassess new consumers or reliance on closure semantics. Criterion discretion is limited to reasonable current use; dependency audits separate. AI review, not completed human review."
+
+[[audits.core_detect]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-run"
+version = "1.0.0"
+notes = "Exact AI source review. Adopted after exact owner approval on 2026-11-03; provenance and bounds in property-testing.json. Read all five library source files, manifests, README dual-licence explanation and MIT grant. On supported non-SGX x64, __cpuid/__cpuid_count and OSXSAVE-gated _xgetbv collect processor features into atomic bit caches; size-preserving integer/byte transmutes accept every bit pattern. No literal assembly/C FFI/build script/proc-macro or I/O. Empty default feature only; assume_has_cpuid, unstable_has_cpuid and fabricated cfgs remain excluded. Proptest's sole reference occurs in hardware_rng, whose feature/std cfg excludes it in this profile; the crate still compiles and call absence is not dependency removal. Version was published in2021, so no recent-maintenance claim. Archive 7f8f80099a98041a3d1622845c271458a2d73e688351bf3cb999266764b81d48 matches lock, crates.io, extracted files and upstream source identities. No new tests or CPUID execution performed. AI source review, not human/native acceptance, and no future feature/target activation permission."
 
 [[audits.deadpool]]
 who = "Claude Opus 5.5 (AI agent, for Lucas Greuloch)"
@@ -25,11 +55,29 @@ criteria = "safe-to-run"
 version = "0.1.4"
 notes = "Read all of src/: a runtime-abstraction shim with forbid(unsafe_code) that wraps the timeout and spawn_blocking of tokio and async-std; no build script and no I/O. Read by an AI agent; the owner reviews the record in the pull request."
 
+[[audits.downcast-rs]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "1.2.1"
+notes = "AI full source review by GPT-6.1 Sol: read complete src/lib.rs including documentation/examples, every impl_downcast macro arm and internal tests, both integration tests and both Cargo manifests of 1.2.1. Checked Downcast/DowncastSync blanket implementations, Any conversions for Box/Rc/Arc, type checks before owned downcasts, reference/mutable-reference lifetimes, Send+Sync bounds and generic/associated/concrete macro expansion paths. Uses only safe Rust and standard/core/alloc Any APIs, with deny(unsafe_code); no dependencies, build script, procedural macro, FFI, I/O, network, process or environment access. No malicious behaviour or unchecked type conversion observed. Archive SHA-256 was recomputed and matched Cargo.lock. AI-reviewed; owner reviews this record in the pull request."
+
 [[audits.fs_extra]]
 who = "Claude Opus 5.5 (AI agent, for Lucas Greuloch)"
 criteria = "safe-to-deploy"
 version = "1.3.0"
 notes = "Read all of src/ (lib.rs, dir.rs, file.rs, error.rs) and Cargo.toml and skimmed the tests: no unsafe code, no build script, no dependencies and no network, process or environment access; a thin wrapper over std::fs for copying, moving, removing and listing files, as advertised. Read by an AI agent; the owner reviews the record in the pull request."
+
+[[audits.gethostname]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "1.1.0"
+notes = "AI full source review by GPT-6.1 Sol: read sole src/lib.rs including tests and both manifests of 1.1.0. Unix copies rustix uname nodename bytes; Windows links kernel32 GetComputerNameExW, queries required size with null/zero, allocates zero-initialised UTF-16 storage, passes matching capacity, checks failure and returned length, and trims NUL before OsString conversion. Verified null/size/terminator/failure contract against Microsoft Learn GetComputerNameExW documentation. OS/name changes can cause a documented panic, not unchecked buffer growth; OS API integrity is assumed. No build script/procedural macro/native compilation, runtime network/process launch, telemetry or file writes. Unit test launches hostname/uname only when dependency tests run. Returned local hostname is not persisted/transmitted by this crate; callers control handling. Dependencies are separate audit obligations. Archive SHA-256 1bd49230192a3797a9a4d6abe9b3eed6f7fa4c8a8a4947977c6f80025f92cbd8 matches Cargo.lock. AI-reviewed; owner reviews this record in the pull request."
+
+[[audits.gl_generator]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.14.0"
+notes = "AI GL-review agent read every executable Rust file, all five generators, all four embedded type templates, both manifests and README. Archive 1a95dfc23a2b4a9a2f5ab41d194f8bfda3cabec42af4e39f08c339eb2a0c124d matches lock and all17 packaged files match reviewed cache. Reviewed XML parsing/filtering/type conversion, raw function-pointer loading, missing-function panic and Send generation. Output only to caller io::Write; no build script, proc macro or ambient network/process/environment/filesystem access. Embedded inputs covered by separate khronos_api review. GlobalGenerator safe unsynchronised static-mut loaders/queries can race; DebugStructGenerator logs arguments/GetError. Both modes are explicitly excluded from this current-project reasonable-use assessment. Actual build-code guard passes and pins only glutin_egl_sys 0.7.1, glutin_glx_sys 0.6.1 and glutin_wgl_sys 0.6.1 as consumers with exact archive/build.rs hashes and reviewed StructGenerator/StaticGenerator/StaticStructGenerator selection; full scripts read. Generated unsafe FFI requires correct live symbols, context, ABI, pointers/buffers and driver contracts. Reassess any new consumer/generator selection; this is not unrestricted soundness of all output modes. AI review, not completed human review."
 
 [[audits.idna_adapter]]
 who = "Claude Opus 5.5 (AI agent, for Lucas Greuloch)"
@@ -43,17 +91,101 @@ criteria = "safe-to-deploy"
 version = "2.12.2"
 notes = "No unsafe code, build script or ambient capabilities (no_std); lib, parser, mask and serde read in full, ipnet.rs and ipext.rs through every non-test panic site; the prefix parser is a bounded copy of the std parser and every deserialisation path validates the prefix length. Read by an AI agent; the owner reviews the record in the pull request."
 
+[[audits.khronos_api]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "3.1.0"
+notes = "AI source review by GPT-6.1 Sol: read complete build.rs and src/lib.rs, both Cargo manifests and README of 3.1.0. No dependencies, unsafe, procedural macros, native compilation, network or process calls. Build script reads Cargo OUT_DIR/current package directory, enumerates immediate WebGL extension directories and writes an escaped include_bytes slice to OUT_DIR/webgl_exts.rs; library exports immutable registry bytes. Did not manually line-review all XML/IDL; verified every one of 66 packaged data files by Git blob ID against canonical OpenGL-Registry, EGL-Registry, WebGL and ANGLE submodules pinned at gl-rs f150967b1c44ae888e6676f93f639ebc82771bdc (complete trees, no mismatches). All 72 archive files match reviewed cached sources and archive SHA-256 e2db585e1d738fc771bf08a151420d3ed193d9d895a36df7f6f8a9456b911ddc matches Cargo.lock. Consumers remain responsible for parsing/generating/using graphics interfaces. AI-reviewed; owner reviews this record in the pull request."
+
+[[audits.kittest]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.4.0"
+notes = "AI source review: read all five production Rust files (lib, state, node, filter, query), README and both manifests. Archive SHA-256 90ceaa75eb0036a32b6b9833962eb18137449e9817e2e586006471925b727fd5 matches Cargo.lock. Safe AccessKit tree wrapper: ownership/lifetimes, recursive querying, role/label/value/predicate filters, BTreeSet label suppression, Arc predicates and query macros reviewed. No unsafe, build script, native compilation, process, network, environment or filesystem access. Missing/duplicate queries deliberately panic and pathological caller trees/predicates can exhaust resources; debug/panic output can include UI labels/values, so use redacted test data. Cargo.toml.orig's egui Git patch is absent from normalised published dependency manifest. AccessKit dependencies remain separate obligations. AI review, not a claim of completed human review."
+
+[[audits.kittest]]
+who = "GPT-6.1 Sol (AI delta source review)"
+criteria = "safe-to-run"
+delta = "0.4.0 -> 0.5.0"
+notes = "AI review of the complete packaged-tree delta and new src/lib.rs: AccessKitNode re-export moves from accesskit_consumer::Node to NodeRef; dependency requirements move accesskit 0.24 to 0.25 and accesskit_consumer 0.35 to 0.39. Other source changes are lint attributes and documentation inclusion; manifests also update MSRV 1.92 to 1.95, lint policy, packaged lockfile and VCS revision. No build script, procedural macro or new ambient I/O in changed code. Dependencies require separate coverage. Archive SHA-256 0bb81a721ba76aa095b7f45deb180504f786904e56ca4b8e141f66eb89a78b75 checked against exact registry metadata and candidate lockfile. Relies on existing 0.4.0 coverage; safe-to-run only. AI delta review, not completed human review; owner reviews and approves this record."
+
 [[audits.once_cell]]
 who = "Claude Opus 5.5 (AI agent, for Lucas Greuloch)"
 criteria = "safe-to-deploy"
 version = "1.21.4"
 notes = "Read all of src/: the unsafe code is confined to the cell implementations (a std-derived Once queue, CAS-based race cells, unchecked reads after Acquire checks) and is sound with correct Send and Sync bounds; no build script or ambient capabilities. Read by an AI agent; the owner reviews the record in the pull request."
 
+[[audits.plain]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.2.3"
+notes = "AI full source review by GPT-6.1 Sol: read all five src files (lib/plain/methods/error/tests) and both manifests of0.2.3. no_std, no dependencies/build/procedural macro/ambient I/O. Reviewed unsafe Plain all-bit-pattern validity contract, scalar/slice implementations, alignment checks, size checks using division to avoid multiplication overflow, immutable/mutable casts with input-borrow lifetimes and bounded copy_from_bytes. as_bytes/as_mut_bytes are unsafe and padding/uninitialised-byte reads remain caller obligations; do not implement Plain for invalid-value/Drop/reference/pointer types. Zero-sized automatic slice conversion divides by zero and panics; not a no-panic or blanket correctness proof. Under documented unsafe trait/byte-exposure contracts no serious exploitable issue observed in reasonable use. Assessed using built-in safe-to-deploy reasonable-use discretion with these explicit limits; no policy change. Archive SHA-256 recomputed matches Cargo.lock. AI-reviewed; owner reviews record in pull request."
+
+[[audits.proptest]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-run"
+version = "1.12.0"
+notes = "Exact AI source-review record. Adopted 2026-11-03 after the exact owner grant and scope guard adoption; provenance and limits are in property-testing.json. Reviewed normalised/original manifests, library/module roots, runner/configuration/RNG, persistence, macro expansion, array initialisation, integer/sample/string generation, standard-type capability paths and all unsafe/FFI/assembly/import/side-effect candidates; ordinary safe combinator/distribution arithmetic was inspected selectively, not every upstream algorithm or test. Restricted to recognition numeric property tests on supported Windows/Linux x64 with std/regex-syntax only. Fork, timeout, hardware-rng, handle-panics, attr-macro, no_std and other optional features remain disabled. File persistence stays compiled but must remain uncalled with failure_persistence=None. The original source review found that proptest! re-contextualises Config, allowing PROPTEST_* values to override RNG, seed, case count and shrink bounds; that review executed no test or new dependency compilation. Corrected 2026-11-03: the adopted harness uses TestRunner::new_with_rng with a literal-seeded XorShift and explicit effective fields. Process-isolated neutral/hostile environment contracts passed with 256 cases, identical generated values and the bounded shrink settings. This subsequent harness validation does not expand the original source-review coverage or establish time-independent counterexample minimisation. No network/telemetry destination or automatic build-time executable is introduced. Dependencies remain separate audit obligations. Archive b8530004ccb15eae51c7e40009fbe317f341f804db54dc033eec1c50be28cfa0 matches lock, crates.io and every extracted file; upstream blob identities verified. See the hash-bound private findings and source inventory. This is an AI source assessment, not human approval, unrestricted feature coverage, mathematical proof or runtime/native acceptance."
+
+[[audits.quick-error]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "2.0.1"
+notes = "AI full source review by GPT-6.1 Sol: read complete src/lib.rs including all quick_error macro arms/docs/unit tests, context example and both manifests of2.0.1. Reviewed token sorting, public/private wrapper/enum generation, unit/tuple/struct patterns, Display/Error::source forwarding, From/context conversions and ResultExt map_err ownership/lifetimes. Safe Rust only, no dependencies/build/procedural macro/unsafe/FFI, no automatic I/O/network/process/environment access in library. Formatting writes only to caller Formatter and may expose contained error/context data if caller formats it; conversion/display expressions are caller-supplied code, not a sandbox. Example explicitly reads argv-selected file and prints errors, and is not run when used as dependency. No malicious behaviour or serious exploitable issue observed under ordinary error-construction/formatting use. Archive a993555f31e5a609f617c12db6250dedcac1b0a85076912c436e6fc9b2c8e6a3 matches Cargo.lock. AI-reviewed; owner reviews record in pull request."
+
+[[audits.rand]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-run"
+version = "0.10.3"
+notes = "Exact AI source review for alloc/std/sys_rng numeric-property use on Windows/Linux x64, Adopted after exact owner approval on 2026-11-03; provenance and bounds in property-testing.json. Read roots, RngExt/Fill, active RNG implementations, all unsafe/FFI/assembly/import/side-effect candidates, integer/uniform/sample paths and character/ASCII/String invariants; other ordinary safe distribution/sequence arithmetic was inspected selectively, not a complete mathematical audit. Unsafe active code exposes live integer slice bytes, transmutes fully initialised byte arrays into x64 vector values and preserves Unicode/ASCII String validity. __m128i/__m256i distribution conversions compile even with simd_support off. ThreadRng UnsafeCell and arithmetic SIMD features are disabled, as are std_rng/chacha/serde/unbiased/log. SysRng forwards to getrandom0.4.3's already selected OS backend; its sys_rng feature and the separately reviewed rand_core criterion were adopted under the exact 2026-11-03 owner grant and existing feature register, without changing entropy backends. No own build/proc-macro/network/process/file operations or telemetry. The original source review ran no new code or tests. Corrected 2026-11-03: the literal-seeded XorShift harness and process-isolated hostile-environment contracts passed after the exact grant; this later validation does not expand the original AI source-review scope. Archive 65c9fb96cbc91e3478eaae79a69fcd3f1ae4ad052e471fe6732fff548984b4af matches lock, crates.io, extracted files and upstream source identities. AI review only; no cryptographic/statistical guarantee, shipped dependency adoption or future publisher trust."
+
+[[audits.rand_core]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.10.1"
+notes = "Exact AI source review. Adopted after exact owner approval on 2026-11-03; provenance and bounds in property-testing.json. Read every library code line in all six src files, both manifests, MIT text and COPYRIGHT notice: no_std RNG traits, blanket forwarding, deterministic PCG32 seed expansion, sealed u32/u64 Word conversions, fixed-array BlockRng state/index/chunk logic, byte helpers and UnwrapErr error adapter. No unsafe, dependencies, optional features, build/proc-macro code, ambient I/O, global mutable state or native source. Checked slice/chunk bounds and documented panic cases; UnwrapErr intentionally panics on a supplied fallible RNG error. No cryptographic or distribution guarantee is inferred from trait names. Criterion safe-to-deploy is deliberately supported by the complete dependency-free library source review because retained cargo-vet output requires it through the shared getrandom node; it is not evidence that this crate is shipped and does not authorise a new product dependency. Archive 63b8176103e19a2643978565ca18b50549f6101881c443590420e4dc998a3c69 matches lock, crates.io and extracted files; all comparable upstream sources/licences/original manifest match the exact v0.10.1 commit and publishing identity. AI review only, no new compilation/test execution and no future-version/publisher trust."
+
+[[audits.rand_xorshift]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-run"
+version = "0.5.0"
+notes = "Exact AI source review. Adopted after exact owner approval on 2026-11-03; provenance and bounds in property-testing.json. Read complete library code, manifests, MIT and COPYRIGHT texts. forbid(unsafe_code), no_std four-word wrapping u32 XorShift state, little-endian seed conversion, all-zero seed substitution and calls to rand_core word/fill helpers were reviewed. No I/O, build script, proc-macro or native source. Serde remains disabled. Appropriate only as a deterministic testing RNG here; no cryptographic use or guarantee is proposed. rand_core remains a separate source-audit obligation. Archive 60aa6af80be32871323012e02e6e65f8a7cc7890931ae421d217ad8fe0df2ccf matches lock, crates.io, extracted files and exact upstream source identities. No new code/tests executed; AI assessment, not human/native acceptance or future publisher trust."
+
+[[audits.range-alloc]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.1.5"
+notes = "AI full source review by GPT-6.1 Sol: read complete sole src/lib.rs including every test/doc example and both manifests of0.1.5. Safe Rust only, no dependencies/build/procedural macro, raw-pointer access, native calls or ambient I/O. Reviewed best-fit selection, aligned-start/prefix/suffix splitting, adjacent-range merging, grow/reset, allocated-range iteration and available-space aggregation. Reasonable use requires ordered valid initial ranges, representable nonnegative arithmetic, positive sizes/alignment, monotonic growth and freeing only previously allocated intervals; invalid/custom arithmetic, shrinking or double/overlapping frees can panic or violate logical allocator invariants. Not a blanket arithmetic/logic correctness proof. Under these allocation contracts no serious exploitable issue observed; unsafe consumers must enforce their own bounds. Archive ca45419789ae5a7899559e9512e58ca889e41f04f1f2445e9f4b290ceccd1d08 matches Cargo.lock. AI-reviewed; owner reviews record in pull request."
+
+[[audits.renderdoc-sys]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "1.1.0"
+notes = "AI full source review by GPT-6.1 Sol: read complete src/lib.rs, src/bindings.rs including layout tests and Debug implementations, README and both manifests of 1.1.0. Entire executable source consists of constants, C aliases, repr(C) API table/unions, optional unsafe extern C function-pointer types and formatting. No dependencies/build script/procedural macro/native compilation, automatic linking/loading, initialisers, FFI invocations, network/process/environment access or file writes. Checked integer discriminants, pointer/option types, API table ordering and union fields; union Debug does not read an inactive member, and layout tests use addr_of on MaybeUninit without value reads. All RenderDoc operations require caller unsafe code and correct supported live API table, ABI, pointers/buffers and library lifetime; this review does not audit RenderDoc binaries or claim arbitrary API versions safe. Archive checksum recomputed and matches Cargo.lock. AI-reviewed; owner reviews this record in the pull request."
+
+[[audits.scoped-tls]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "1.0.1"
+notes = "AI full source review by GPT-6.1 Sol: read complete sole src/lib.rs including macro/docs/tests and both manifests of1.0.1. No dependencies/build/procedural macro/ambient I/O; only thread-local pointer storage. Normal documented scoped_thread_local macro creates a unique key with fixed T and per-thread Cell; set borrows T across callback and Reset guard restores prior pointer during nesting/unwind; with non-null checks and generic callback borrow prevent normal reference escape. Per-thread storage supports Sync without sharing T across threads. Public doc-hidden inner/_marker permit manually aliasing key types or corrupting cell pointers; such hidden-item construction/manipulation is outside this assessment and forbidden by project foreign-item conventions. No attacker control of compile-time T through the documented macro API. Current normal documented usage assessed under safe-to-deploy reasonable-use discretion; not an unrestricted formal soundness claim. Archive e1cf6437eb19a8f4a6cc0f7dca544973b0b78843adbfeb3683d1a94a0024a294 matches Cargo.lock. AI-reviewed; owner reviews record in pull request."
+
 [[audits.smallvec]]
 who = "Claude Opus 5.5 (AI agent, for Lucas Greuloch)"
 criteria = "safe-to-deploy"
 delta = "1.15.2 -> 1.16.2"
 notes = "Rewrites push into separate inline and heap paths and retain as a std-style in-place compaction with a panic guard; both unsafe paths checked for bounds, double drop and panic safety. Adds a PhantomData marker that makes may_dangle drop checking sound. Read by an AI agent; the owner reviews the record in the pull request."
+
+[[audits.smallvec]]
+who = "GPT-6.1 Sol (AI delta source review)"
+criteria = "safe-to-deploy"
+delta = "1.16.3 -> 1.16.4"
+notes = "AI review of the complete packaged-tree delta: Rust source files are byte-identical. Changes are package version in both manifests, packaged VCS revision, and the crate's own packaged Cargo.lock (syn 3.0.7 to 3.0.9 and unicode-ident 1.0.26 to 1.0.27). No new build script, procedural macro or runtime capability. Archive SHA-256 d0d5d4b1981b8bbbb7aed204cae5726d683d5d6ac7e74ec54122ea28f315e7c8 checked against exact registry metadata and candidate lockfile. This delta relies on prior coverage of 1.16.3; it is not a fresh full-crate soundness audit. The owner approved this exact record locally on 2026-11-01; the source-review scope remains the stated AI delta review."
+
+[[audits.smithay-clipboard]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.7.3"
+notes = "AI source review: read all five production Rust files, complete example, README, both manifests and MIT text. Archive 71704c03f739f7745053bde45fa203a46c58d25bc5c4efba1d9a60e9dba81226 matches lock and all17 archive files match cache. Reviewed worker ownership/Exit join, seat focus and serial selection, MIME filtering, clipboard/primary selection, nonblocking FD reads/writes, UTF8 conversion and CRLF normalisation. Unsafe constructor explicitly requires caller-owned valid wl_display for the entire Clipboard lifetime; worker is joined before that lifetime ends. calloop unsafe get_mut only reads/writes the retained pipe, never replaces/drops its registered I/O source. fcntl uses a live owned FD and checks errors. No build/native compilation/process/network/telemetry or unrelated file access; clipboard transfer over supplied Wayland connection and OS pipes is its intended capability. Local compositor and clipboard peers can cause unbounded memory use or latency with huge/nonterminating transfers; this does not certify a sandbox for hostile clipboard streams. Some backend/protocol/registration failures can panic or prevent replies; ordinary focused GUI use and dependency contracts assumed. Example prints clipboard/keyboard data and is not shipped application behaviour. No blanket publisher trust or full dependency audit is implied. AI review, not completed human review."
 
 [[audits.stable_deref_trait]]
 who = "Claude Opus 5.5 (AI agent, for Lucas Greuloch)"
@@ -73,6 +205,48 @@ criteria = "safe-to-deploy"
 delta = "0.13.2 -> 0.14.0"
 notes = "Ports to syn 3 by filling the new attrs fields and tidies two match arms; pure token manipulation with no unsafe code, build script or I/O. Read by an AI agent; the owner reviews the record in the pull request."
 
+[[audits.type-map]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.5.1"
+notes = "AI full source review by GPT-6.1 Sol: read complete src/lib.rs (including tests), Cargo.toml and Cargo.toml.orig of 0.5.1, the entire executable source. Checked both ordinary and concurrent maps, KvPair type/value invariant, TypeId lookup, boxed Any downcasts, entry insertion/removal/reference lifetimes and Send+Sync bounds. Uses only safe Rust and rustc-hash; no build script, procedural macro, unsafe, FFI, I/O, environment, network or process access. Hash collision performance is inherited from FxHashMap; keys are internal TypeIds. Dependency rustc-hash is a separate audit obligation. Archive SHA-256 cb30dbbd9036155e74adad6812e9898d03ec374946234fbcebd5dfc7b9187b90 matches Cargo.lock. AI-reviewed; owner reviews this record in the pull request."
+
+[[audits.unarray]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-run"
+version = "0.1.4"
+notes = "Exact AI source review. Adopted after exact owner approval on 2026-11-03; provenance and bounds in property-testing.json. Read all four library modules and unsafe contracts, manifests and selected Apache-2.0 text. MaybeUninit array conversion requires every T initialised; safe builders/result mapping/iterator collection drop only written slots on normal error and convert only fully written arrays. Panic paths may leak partial initialisation but do not read/drop uninitialised T or duplicate owning drops. Public unsafe mark_initialized retains its caller contract; proptest uses the safe build_array_result wrapper. No dependencies/features/I/O/native code/Cargo build script; src/build.rs is a library module. Published manifest offers MIT OR Apache-2.0; elect Apache-2.0 and preserve original files because LICENSE-MIT has literal [year]/[fullname] placeholders and source headers supply no concrete copyright holder. Do not infer authorship from publisher identity. Archive eaea85b334db583fe3274d12b4cd1880032beab409c0d774be044d4480ab9a94 matches lock, crates.io, extracted files and upstream source identities. No new code/tests executed, formal proof or future version/publisher/native permission."
+
+[[audits.wayland-cursor]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.31.14"
+notes = "AI full source review by GPT-6.1 Sol: read complete sole src/lib.rs and both manifests of0.31.14. Reviewed local XCURSOR_THEME/SIZE/theme/fallback reads, image/animation selection, append-only shm storage, Wayland buffer creation, weak backend/FD ownership and ignored object callbacks. No own unsafe/build/native compilation/process launch or Internet access; caller existing Wayland connection and local cursor assets only. Linux memfd uses CLOEXEC; POSIX shm fallback uses CREATE|EXCL and0600 then immediate unlink. Limits: malformed/empty/zero-delay images, extreme dimensions/pool sizes and truncation can panic or make invalid compositor requests; assessment requires ordinary trusted desktop themes, reasonable sizes and valid compositor contracts. POSIX fallback retries a fixed time-derived name and may spin if precreated; shipped Linux normally uses memfd. Reasonable desktop deployment assessment, not an untrusted-image service/parser or no-panic proof. Dependencies remain separate obligations. Archive4a52d18780be9b1314328a3de5f930b73d2200112e3849ca6cb11822793fb34d matches Cargo.lock. AI-reviewed; owner reviews record in pull request."
+
+[[audits.wayland-protocols-misc]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.3.12"
+notes = "AI full executable-source/provenance review by GPT-6.1 Sol: read complete src/lib.rs, src/protocol_macro.rs and both manifests of0.3.12. Only feature-gated module wiring and fixed package-relative protocol paths to wayland_scanner generate_interfaces/client/server_code macros; imports match declared cross-protocol dependencies. No own build script, native compilation, runtime initialisers or ambient network/process/environment/file access. Scanner/backend/client/server dependencies remain separate audit obligations; no automatic protocol connection/request is performed. Did not manually line-review every XML; verified all4 packaged XML files byte-for-byte by Git blob hash against complete canonical upstream tree Smithay/wayland-rs a3d7927d87799b2955bf491b51c7c2a3a82da661 (no mismatches). Every one of13 archive files matches cached reviewed package, no links/traversal; archive SHA-256 matches Cargo.lock. Generated bindings depend on trusted scanner and callers must obey Wayland object/permission/lifetime contracts. This certifies exact immutable package, not a future publisher grant. AI-reviewed; owner reviews record in pull request."
+
+[[audits.wayland-protocols-plasma]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.3.12"
+notes = "AI full executable-source/provenance review by GPT-6.1 Sol: read complete src/lib.rs, src/protocol_macro.rs and both manifests of0.3.12. Only feature-gated module wiring and fixed package-relative protocol paths to wayland_scanner generate_interfaces/client/server_code macros; imports match declared cross-protocol dependencies. No own build script, native compilation, runtime initialisers or ambient network/process/environment/file access. Scanner/backend/client/server dependencies remain separate audit obligations; no automatic protocol connection/request is performed. Did not manually line-review every XML; verified all30 packaged XML files byte-for-byte by Git blob hash against complete canonical upstream tree KDE/plasma-wayland-protocols 3d8327f5c8727702c5b14730c32d70b30e2ae106, exact submodule pin of wayland-rs a3d7927d (no mismatches). Every one of58 archive files matches cached reviewed package, no links/traversal; archive SHA-256 matches Cargo.lock. Generated bindings depend on trusted scanner and callers must obey Wayland object/permission/lifetime contracts. This certifies exact immutable package, not a future publisher grant. AI-reviewed; owner reviews record in pull request."
+
+[[audits.wayland-protocols-wlr]]
+who = "GPT-6.1 Sol (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.3.12"
+notes = "AI full executable-source/provenance review by GPT-6.1 Sol: read complete src/lib.rs, src/protocol_macro.rs and both manifests of0.3.12. Only feature-gated module wiring and fixed package-relative protocol paths to wayland_scanner generate_interfaces/client/server_code macros; imports match declared cross-protocol dependencies. No own build script, native compilation, runtime initialisers or ambient network/process/environment/file access. Scanner/backend/client/server dependencies remain separate audit obligations; no automatic protocol connection/request is performed. Did not manually line-review every XML; verified all10 packaged XML files byte-for-byte by Git blob hash against complete canonical upstream tree canonical gitlab.freedesktop.org/wlroots/wlr-protocols a741f0ac5d655338a5100fc34bc8cec87d237346, exact submodule pin of wayland-rs a3d7927d (no mismatches). Every one of26 archive files matches cached reviewed package, no links/traversal; archive SHA-256 matches Cargo.lock. Generated bindings depend on trusted scanner and callers must obey Wayland object/permission/lifetime contracts. This certifies exact immutable package, not a future publisher grant. AI-reviewed; owner reviews record in pull request."
+
+[[audits.windows-registry]]
+who = "Codex (AI source review)"
+criteria = "safe-to-deploy"
+version = "0.6.1"
+notes = "AI source review: read all 11 production Rust files, both manifests, packaged VCS metadata and complete elected MIT licence; archive SHA-256 02752bf7fbdcce7f2a27a742f798510f3e5ad88dbe84871e5168e2120c3d5720 and all recorded runtime hashes verified. Checked HKEY/HANDLE ownership and Drop, borrowed predefined keys and OpenOptions/transaction lifetimes, terminated UTF-16 argument storage, checked Win32 result and length conversions, typed integer sizes, bounds-checked registry reads/iteration and aligned HeapAlloc-backed Data with initialised bytes. Also read windows-strings0.5.1 HStringBuilder/HStringHeader and the HSTRING empty-buffer contract relevant to this crate; their remaining implementation and other dependencies remain separate audit obligations. Registry strings use bounded slices rather than an unbounded terminator scan. Size/type queries can race with local registry changes and yield stale type/trailing zero data or errors; allocation failure and unexpected iterator errors may panic. No atomic snapshot or panic-free API is claimed. No build script, proc macro, native compilation, download, runtime network, process/thread launch or telemetry; exposes deliberate registry mutation APIs but performs none at import. Current selected consumer hyper-util0.1.21 opens CURRENT_USER Internet Settings read-only and reads ProxyEnable/ProxyServer/ProxyOverride; it calls no mutation/transaction/iterator APIs. Windows only, default/std features; Linux excludes the crate. Trusts OS ABI/result contracts and unsafe raw-API caller contracts. No blanket future publisher trust or claim of completed human review. Reassess changed source/features/consumer capabilities."
+
 [[audits.wiremock]]
 who = "Claude Opus 5.5 (AI agent, for Lucas Greuloch)"
 criteria = "safe-to-run"
@@ -85,6 +259,27 @@ user-id = 27789 # Arnold Loubriat (DataTriny)
 start = "2025-10-02"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
+
+[[trusted.accesskit_consumer]]
+criteria = "safe-to-deploy"
+user-id = 143177
+start = "2026-03-04"
+end = "2027-11-01"
+notes = "S-6 narrow own-project release/maintenance authority: current own-crate owners mwcampbell143177 andDataTriny27789; mwcampbell sponsorprofile explicitly states leaddeveloper and is linked by official accesskit.dev; actual same-project feature development Mar2026. Continuing shared project stewardship, not sole active maintenance or sponsorship alone. Exact locked version(s)0.35.0 actual publishermwcampbell/143177 verified live2026-11-01. Dated facts and stated continuity inference; no cross-project endorsement or native enablement."
+
+[[trusted.accesskit_consumer]]
+criteria = "safe-to-run"
+user-id = 27789 # Arnold Loubriat (DataTriny)
+start = "2026-09-25"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact accesskit_consumer 0.39.1 publisher DataTriny/27789 verified at https://crates.io/api/v1/crates/accesskit_consumer/0.39.1. AccessKit official release accesskit_consumer-v0.39.2 is released by DataTriny; https://github.com/AccessKit/accesskit/releases This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
+[[trusted.aes]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:RustCrypto/block-ciphers"
+start = "2026-08-28"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher RustCrypto/block-ciphers matched to the published crate repository and exact package metadata. Exact version 0.9.3 archive SHA-256 35f0f96ce78e38c3dc6d8948aa8163d06385be74000f3c7a95bf1eef35d3ea32. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
 
 [[trusted.ahash]]
 criteria = "safe-to-deploy"
@@ -99,12 +294,54 @@ user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2019-03-28"
 end = "2027-10-14"
 
+[[trusted.android-activity]]
+criteria = "safe-to-deploy"
+user-id = 68864 # Robert Bragg (rib)
+start = "2026-03-24"
+end = "2027-11-01"
+notes = "S-6 direct own-project release/maintenance authority: rust-mobile/android-activity exact packaged0.6.1releaseb4ddf059 authored/committed byrib2026-03-24, adjacent currentrelease11a5a544 byrib. Exact crates.io android-activity 0.6.1 publisherrib/68864 verifiedlive2026-11-01; packaged VCS matched same upstream. This does not authorise Android target/native enablement."
+
+[[trusted.anyhow]]
+criteria = "safe-to-deploy"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2026-07-18"
+end = "2027-11-01"
+notes = "S-6: crates.io API confirms anyhow 1.0.104 was published 2026-07-18 by dtolnay (3618). Existing imported Bytecode Alliance audits.toml explicitly trusts this same crate/publisher for safe-to-deploy through 2027-04-17; checked live 2026-11-01. Local trust expiry follows the S-6 one-year rule."
+
+[[trusted.arboard]]
+criteria = "safe-to-deploy"
+user-id = 104931 # 1PasswordCratePublisher
+start = "2026-10-15"
+end = "2027-11-01"
+notes = "S-6 narrow own-project maintenance/release authority: Current own-crate owner1PasswordCratePublisher104931; official1Password/arboard README identifies combined1Password staff maintenance; exact publishing account company@1Password. Narrow project-owned release account, not corporate cross-crate trust. Exact version(s) 3.7.0 publisher 1PasswordCratePublisher/104931 verified live2026-11-01. Dated facts/continuity inference only; no cross-project endorsement or native enablement."
+
 [[trusted.arrayvec]]
 criteria = "safe-to-deploy"
 user-id = 356 # bluss (bluss)
 start = "2019-07-10"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
+
+[[trusted.async-broadcast]]
+criteria = "safe-to-deploy"
+user-id = 6423 # Zeeshan Ali Khan (zeenix)
+start = "2024-12-23"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact publisher zeenix/6423 authored the same-project packaged release commit https://github.com/smol-rs/async-broadcast/commit/f7a99132b7e12cb03945013df78b93a35ceafbc1. Exact version 0.7.2 archive SHA-256 435a87a52755b8f27fcf321ac4f04b2802e337c8c4872923137471ec39c37532. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.async-recursion]]
+criteria = "safe-to-deploy"
+user-id = 55174 # Robert Usher (dcchut)
+start = "2026-10-03"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher dcchut/55174 is a current owner of this named crate at https://crates.io/api/v1/crates/async-recursion/owners. Exact version 1.2.0 archive SHA-256 4f8abc12baad266b1c8cec146854c195b5864b4221d4b2ca7296a7ae82d9e451. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.async-trait]]
+criteria = "safe-to-deploy"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2026-08-08"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher dtolnay/3618 is a current owner of this named crate at https://crates.io/api/v1/crates/async-trait/owners. Exact version 0.1.92 archive SHA-256 82f6aeea286b8eb4dd3431a1be1b59d290ace00f5bfd8e2a159bc2a05e2c1667. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
 
 [[trusted.autocfg]]
 criteria = "safe-to-deploy"
@@ -125,6 +362,20 @@ user-id = 3204 # Ashley Mannix (KodrAus)
 start = "2019-05-02"
 end = "2027-10-14"
 
+[[trusted.block-padding]]
+criteria = "safe-to-deploy"
+user-id = 5059 # Artyom Pavlov (newpavlov)
+start = "2025-11-26"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher newpavlov/5059 is a current owner of this named crate at https://crates.io/api/v1/crates/block-padding/owners. Exact version 0.4.2 archive SHA-256 710f1dd022ef4e93f8a438b4ba958de7f64308434fa6a87104481645cc30068b. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.block2]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact block2 version(s) 0.5.1, 0.6.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
 [[trusted.bytemuck]]
 criteria = "safe-to-deploy"
 user-id = 7211 # Lokathor (Lokathor)
@@ -139,11 +390,46 @@ start = "2020-08-21"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
 
+[[trusted.byteorder-lite]]
+criteria = "safe-to-deploy"
+user-id = 5862 # fintelia
+start = "2024-04-07"
+end = "2027-11-01"
+notes = "S-6 narrow own-project maintenance/release authority: Current own-crate ownerfintelia5862 plus image-rs publishing team; exact0.1.0 VCS equals currentHEAD7d44da06 authored/committed fintelia; rebrand27092516/forbidunsafe bfe9a22d same author. Exact version(s) 0.1.0 publisher fintelia/5862 verified live2026-11-01. Dated facts/continuity inference only; no cross-project endorsement or native enablement."
+
 [[trusted.bytes]]
 criteria = "safe-to-deploy"
 user-id = 6741 # Alice Ryhl (Darksonn)
 start = "2021-01-11"
 end = "2027-10-14"
+
+[[trusted.calloop]]
+criteria = "safe-to-deploy"
+user-id = 4118 # Ian Douglas Scott (ids1024)
+start = "2026-10-01"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/calloop exact 0.14.5 release commit c0d9940e by ids1024; notgull also owns same-project v0.14.4/v0.14.3 releases. crates.io exact version(s) 0.14.5 confirm ids1024/4118; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.calloop]]
+criteria = "safe-to-deploy"
+user-id = 69526 # John Nunley (notgull)
+start = "2024-03-01"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/calloop exact 0.14.5 release commit c0d9940e by ids1024; notgull also owns same-project v0.14.4/v0.14.3 releases. crates.io exact version(s) 0.13.0 confirm notgull/69526; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.calloop-wayland-source]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2024-03-01"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/calloop-wayland-source exact release commits 9828ce38/47ce61c2 authored or committed by kchibisov; own manifest names Kirill. crates.io exact version(s) 0.4.1, 0.3.0 confirm kchibisov/42583; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.cbc]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:RustCrypto/block-modes"
+start = "2026-05-20"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher RustCrypto/block-modes matched to the published crate repository and exact package metadata. Exact version 0.2.1 archive SHA-256 ce2dc9ee5f88d11e0beb842c88b33c8a5cf0d1329c4b19494af42b07dbfe8896. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
 
 [[trusted.cc]]
 criteria = "safe-to-deploy"
@@ -151,11 +437,32 @@ trusted-publisher = "github:rust-lang/cc-rs"
 start = "2025-09-01"
 end = "2027-10-14"
 
+[[trusted.cipher]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:RustCrypto/traits"
+start = "2026-05-19"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher RustCrypto/traits matched to the published crate repository and exact package metadata. Exact version 0.5.2 archive SHA-256 e8cf2a2c93cd704877c0858356ed03480ff301ee950b43f1cbe4573b088bfa6c. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.clipboard-win]]
+criteria = "safe-to-deploy"
+user-id = 1551 # Douman (DoumanAsh)
+start = "2026-10-23"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: DoumanAsh/clipboard-win exact 5.4.3 release ed27008a authored/committed by DoumanAsh on 2026-10-23, with adjacent same-project release work. Exact crates.io clipboard-win 5.4.3 publisher DoumanAsh/1551 verified live 2026-11-01; packaged VCS revision matched upstream. Evidence is direct release/merge authority."
+
 [[trusted.cmake]]
 criteria = "safe-to-deploy"
 user-id = 55123 # rust-lang-owner
 start = "2022-10-29"
 end = "2027-10-14"
+
+[[trusted.cmov]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:RustCrypto/utils"
+start = "2026-05-28"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher RustCrypto/utils matched to the published crate repository and exact package metadata. Exact version 0.5.4 archive SHA-256 0c9ea0ac24bc397ab3c98583a3c9ba74fa56b09a4449bbe172b9b1ddb016027a. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
 
 [[trusted.color]]
 criteria = "safe-to-deploy"
@@ -164,11 +471,102 @@ start = "2025-04-30"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
 
+[[trusted.colored]]
+criteria = "safe-to-deploy"
+user-id = 167830 # Hunter Wittenborn (hwittenborn)
+start = "2024-12-15"
+end = "2027-11-01"
+notes = "S-6 narrow own-project maintenance/release authority: Current own-crate ownerhwittenborn167830; latest3.1.1 Jan2026 still authenticated publisherhwittenborn via project publish workflow; earlier own release/CI workb391ff0e/e20bd921. Continuing release authority, not sole code authorship. Exact version(s) 2.2.0 publisher hwittenborn/167830 verified live2026-11-01. Dated facts/continuity inference only; no cross-project endorsement or native enablement."
+
+[[trusted.const-oid]]
+criteria = "safe-to-deploy"
+user-id = 267 # Tony Arcieri (tarcieri)
+start = "2026-01-07"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher tarcieri/267 is a current owner of this named crate at https://crates.io/api/v1/crates/const-oid/owners. Exact version 0.10.2 archive SHA-256 a6ef517f0926dd24a1582492c791b6a4818a4d94e789a334894aa15b0d12f55c. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.cpubits]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:RustCrypto/utils"
+start = "2026-04-28"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher RustCrypto/utils matched to the published crate repository and exact package metadata. Exact version 0.1.1 archive SHA-256 15b85f9c39137c3a891689859392b1bd49812121d0d61c9caf00d46ed5ce06ae. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.crc32fast]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:srijs/rust-crc32fast"
+start = "2026-10-20"
+end = "2027-11-01"
+notes = "S-6 own-project trusted publishing: live crates.io confirms crc32fast 1.5.3 authenticated GitHub publisher srijs/rust-crc32fast at d2363eab95ebc85fcf726d1c8fa845148e474591; exact publishing repository matches declared upstream https://github.com/srijs/rust-crc32fast. Verified 2026-11-01; no individual publisher inferred."
+
+[[trusted.crossbeam-deque]]
+criteria = "safe-to-deploy"
+user-id = 33035 # Taiki Endo (taiki-e)
+start = "2026-09-05"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance/release authority: crossbeam-rs/crossbeam actual PR1353/1350/1292 merger taiki-e on2026-10-31; merges d08c2b21/cc440fb2/c477320b. Exact packaged VCS2920c984 belongs to same monorepo. Live exact crates.io crossbeam-deque 0.8.8 publisher taiki-e/33035 verified2026-11-01. Narrow same-project scope, not cross-project account endorsement or organisation membership. No target/native enablement."
+
+[[trusted.crossbeam-epoch]]
+criteria = "safe-to-deploy"
+user-id = 33035 # Taiki Endo (taiki-e)
+start = "2026-09-05"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance/release authority: crossbeam-rs/crossbeam actual PR1353/1350/1292 merger taiki-e on2026-10-31; merges d08c2b21/cc440fb2/c477320b. Exact packaged VCS2920c984 belongs to same monorepo. Live exact crates.io crossbeam-epoch 0.9.21 publisher taiki-e/33035 verified2026-11-01. Narrow same-project scope, not cross-project account endorsement or organisation membership. No target/native enablement."
+
+[[trusted.crossbeam-utils]]
+criteria = "safe-to-deploy"
+user-id = 33035 # Taiki Endo (taiki-e)
+start = "2026-09-05"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance/release authority: crossbeam-rs/crossbeam actual PR1353/1350/1292 merger taiki-e on2026-10-31; merges d08c2b21/cc440fb2/c477320b. Exact packaged VCS2920c984 belongs to same monorepo. Live exact crates.io crossbeam-utils 0.8.23 publisher taiki-e/33035 verified2026-11-01. Narrow same-project scope, not cross-project account endorsement or organisation membership. No target/native enablement."
+
+[[trusted.ctutils]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:RustCrypto/utils"
+start = "2026-10-23"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher RustCrypto/utils matched to the published crate repository and exact package metadata. Exact version 0.4.6 archive SHA-256 fe3e9d21d39e6f39ff46e03d5b621424f88ee23d8a1672c6bfc9ccc7f2da4f6a. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.cursor-icon]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2025-05-25"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: rust-windowing/cursor-icon v1.2.0 and previous releases by kchibisov; own manifest names Kirill. crates.io exact version(s) 1.2.0 confirm kchibisov/42583; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.dify]]
+criteria = "safe-to-deploy"
+user-id = 47938 # Jihchi Lee (jihchi)
+start = "2026-01-04"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: jihchi/dify exact packaged 0.8.0 version commit 86145b56 authored/committed by jihchi; current January 2026 version/fix commits 0e5f1fa5/1c82f210 by jihchi. Exact crates.io dify 0.8.0 publisher jihchi/47938 verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
+
+[[trusted.dispatch2]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2026-02-26"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact dispatch2 version(s) 0.3.1 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
 [[trusted.displaydoc]]
 criteria = "safe-to-deploy"
 user-id = 1139 # Manish Goregaokar (Manishearth)
 start = "2024-06-20"
 end = "2027-10-14"
+
+[[trusted.dlib]]
+criteria = "safe-to-deploy"
+user-id = 4118 # Ian Douglas Scott (ids1024)
+start = "2026-02-26"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/dlib exact 0.5.3 release commit ab1a79fd by ids1024 and adjacent project maintenance. crates.io exact version(s) 0.5.3 confirm ids1024/4118; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.dpi]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2025-05-02"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms dpi 0.1.2 publisher kchibisov/42583. dpi belongs to rust-windowing/winit; current project CODEOWNERS assigns XKB, Wayland and X11 ownership to kchibisov. Verified 2026-11-01."
 
 [[trusted.ecolor]]
 criteria = "safe-to-deploy"
@@ -177,12 +575,47 @@ start = "2024-12-16"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
 
+[[trusted.eframe]]
+criteria = "safe-to-deploy"
+user-id = 197939 # Rerun (rerunio)
+start = "2026-09-08"
+end = "2027-11-01"
+notes = "S-6 direct project release governance: https://github.com/emilk/egui/blob/main/RELEASES.md Governance explicitly grants rerun-io (where project maintainer emilk is CTO) publishing authority for all project crates; lock-step workspace releases and scripts/publish_crates.sh explicitly include eframe. Extends existing accepted same-project rerunio trust, not sponsorship alone. Live crates.io exact eframe 0.36.2 publisher rerunio/197939 verified 2026-11-01."
+
 [[trusted.egui]]
 criteria = "safe-to-deploy"
 user-id = 197939 # Rerun (rerunio)
 start = "2024-12-16"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
+
+[[trusted.egui-wgpu]]
+criteria = "safe-to-deploy"
+user-id = 197939 # Rerun (rerunio)
+start = "2026-09-08"
+end = "2027-11-01"
+notes = "S-6 direct project release governance: https://github.com/emilk/egui/blob/main/RELEASES.md Governance explicitly grants rerun-io (where project maintainer emilk is CTO) publishing authority for all project crates; lock-step workspace releases and scripts/publish_crates.sh explicitly include egui-wgpu. Extends existing accepted same-project rerunio trust, not sponsorship alone. Live crates.io exact egui-wgpu 0.36.2 publisher rerunio/197939 verified 2026-11-01."
+
+[[trusted.egui-winit]]
+criteria = "safe-to-deploy"
+user-id = 197939 # Rerun (rerunio)
+start = "2026-09-08"
+end = "2027-11-01"
+notes = "S-6 direct project release governance: https://github.com/emilk/egui/blob/main/RELEASES.md Governance explicitly grants rerun-io (where project maintainer emilk is CTO) publishing authority for all project crates; lock-step workspace releases and scripts/publish_crates.sh explicitly include egui-winit. Extends existing accepted same-project rerunio trust, not sponsorship alone. Live crates.io exact egui-winit 0.36.2 publisher rerunio/197939 verified 2026-11-01."
+
+[[trusted.egui_glow]]
+criteria = "safe-to-deploy"
+user-id = 197939 # Rerun (rerunio)
+start = "2026-09-08"
+end = "2027-11-01"
+notes = "S-6 direct project release governance: https://github.com/emilk/egui/blob/main/RELEASES.md Governance explicitly grants rerun-io (where project maintainer emilk is CTO) publishing authority for all project crates; lock-step workspace releases and scripts/publish_crates.sh explicitly include egui_glow. Extends existing accepted same-project rerunio trust, not sponsorship alone. Live crates.io exact egui_glow 0.36.2 publisher rerunio/197939 verified 2026-11-01."
+
+[[trusted.egui_kittest]]
+criteria = "safe-to-deploy"
+user-id = 197939 # Rerun (rerunio)
+start = "2026-09-08"
+end = "2027-11-01"
+notes = "S-6 direct project release governance: https://github.com/emilk/egui/blob/main/RELEASES.md Governance explicitly grants rerun-io (where project maintainer emilk is CTO) publishing authority for all project crates; lock-step workspace releases and scripts/publish_crates.sh explicitly include egui_kittest. Extends existing accepted same-project rerunio trust, not sponsorship alone. Live crates.io exact egui_kittest 0.36.2 publisher rerunio/197939 verified 2026-11-01."
 
 [[trusted.either]]
 criteria = "safe-to-deploy"
@@ -198,6 +631,27 @@ start = "2024-12-16"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
 
+[[trusted.endi]]
+criteria = "safe-to-deploy"
+user-id = 6423 # Zeeshan Ali Khan (zeenix)
+start = "2025-11-26"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher zeenix/6423 is a current owner of this named crate at https://crates.io/api/v1/crates/endi/owners. Exact version 1.1.1 archive SHA-256 66b7e2430c6dff6a955451e2cfc438f09cea1965a9d6f87f7e3b90decc014099. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.enumflags2]]
+criteria = "safe-to-deploy"
+user-id = 38769 # Maja Kądziołka (meithecatte)
+start = "2025-06-09"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher meithecatte/38769 is a current owner of this named crate at https://crates.io/api/v1/crates/enumflags2/owners. Exact version 0.7.12 archive SHA-256 1027f7680c853e056ebcec683615fb6fbbc07dbaa13b4d5d9442b146ded4ecef. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.enumflags2_derive]]
+criteria = "safe-to-deploy"
+user-id = 38769 # Maja Kądziołka (meithecatte)
+start = "2025-06-09"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher meithecatte/38769 is a current owner of this named crate at https://crates.io/api/v1/crates/enumflags2_derive/owners. Exact version 0.7.12 archive SHA-256 67c78a4d8fdf9953a5c9d458f9efe940fd97a0cab0941c075a813ac594733827. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
 [[trusted.epaint]]
 criteria = "safe-to-deploy"
 user-id = 197939 # Rerun (rerunio)
@@ -210,6 +664,41 @@ criteria = "safe-to-deploy"
 user-id = 539 # Josh Stone (cuviper)
 start = "2023-02-05"
 end = "2027-10-14"
+
+[[trusted.error-code]]
+criteria = "safe-to-deploy"
+user-id = 1551 # Douman (DoumanAsh)
+start = "2026-08-15"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: DoumanAsh/error-code exact 3.4.0 release e4615e51 authored/committed by DoumanAsh on 2026-08-15, with adjacent implementation maintenance. Exact crates.io error-code 3.4.0 publisher DoumanAsh/1551 verified live 2026-11-01; packaged VCS revision matched upstream. Evidence is direct release/merge authority."
+
+[[trusted.event-listener]]
+criteria = "safe-to-deploy"
+user-id = 6423 # Zeeshan Ali Khan (zeenix)
+start = "2026-07-27"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact publisher zeenix/6423 authored the same-project packaged release commit https://github.com/smol-rs/event-listener/commit/77004ac77dcef7884bf71a99c276a50f83a7fa4e. Exact version 5.4.2 archive SHA-256 5a23add41df1562121a9393cb065eab5146a1242410f23a644851e90cfd669d2. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.event-listener-strategy]]
+criteria = "safe-to-deploy"
+user-id = 33035 # Taiki Endo (taiki-e)
+start = "2025-03-27"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact publisher taiki-e/33035 authored the same-project packaged release commit https://github.com/smol-rs/event-listener-strategy/commit/f533c437e8a6561e9b625c3ee036a8ea7d19375c. Exact version 0.5.4 archive SHA-256 8be9f3dfaaffdae2972880079a491a1a8bb7cbed0b8dd7a347f668b4150a3b93. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.fastrand]]
+criteria = "safe-to-deploy"
+user-id = 33035 # Taiki Endo (taiki-e)
+start = "2026-07-19"
+end = "2027-11-01"
+notes = "S-6 direct own-project release authority: smol-rs/fastrand exact packaged release commit 7a1cc2c69ebde6cb3442809213db3fe19a2cb0ba authored/committed by taiki-e on 2026-07-19; actual PR131 merger taiki-e on same date. Live exact fastrand 2.5.0 publisher taiki-e/33035 verified 2026-11-01. No trust transfer from Crossbeam or other smol projects."
+
+[[trusted.fax]]
+criteria = "safe-to-deploy"
+user-id = 43402 # Sebastian (s3bk)
+start = "2026-04-27"
+end = "2027-11-01"
+notes = "S-6 narrow own-project maintenance/release authority: pdf-rs/fax exact0.2.7releaseac2a4b22 bys3bk Apr2026 and subsequent0.3.0release8f26f4f6 bys3bk July2026. Exact version(s) 0.2.7 publisher s3bk/43402 verified live2026-11-01. Dated facts/continuity inference only; no cross-project endorsement or native enablement."
 
 [[trusted.fearless_simd]]
 criteria = "safe-to-deploy"
@@ -224,12 +713,33 @@ trusted-publisher = "github:rust-lang/cc-rs"
 start = "2025-09-05"
 end = "2027-10-14"
 
+[[trusted.fixedbitset]]
+criteria = "safe-to-deploy"
+user-id = 120881 # James Liu (james7132)
+start = "2024-04-14"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact fixedbitset 0.5.7 publisher james7132/120881 verified at https://crates.io/api/v1/crates/fixedbitset/0.5.7. Official fixedbitset v0.5.7 release author james7132; https://github.com/petgraph/fixedbitset/releases/tag/v0.5.7 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
+[[trusted.flate2]]
+criteria = "safe-to-deploy"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2026-08-28"
+end = "2027-11-01"
+notes = "S-6 narrow own-project maintenance/release authority: rust-lang/flate2-rs actual currentPR580/579/578 mergerByron Oct2026, commits54f49cd9/d7d70cf9/92b4f57c. Own-project authority, not expired imported-account trust. Exact version(s) 1.1.10 publisher Byron/980 verified live2026-11-01. Dated facts/continuity inference only; no cross-project endorsement or native enablement."
+
 [[trusted.font-types]]
 criteria = "safe-to-deploy"
 user-id = 81909 # Chad Brokaw (dfrg)
 start = "2023-08-28"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
+
+[[trusted.foreign-types-macros]]
+criteria = "safe-to-deploy"
+user-id = 5 # Steven Fackler (sfackler)
+start = "2026-07-22"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: sfackler/foreign-types exact packaged commit2d507764 authored/committed by sfackler, current July2026 release coordination and merged PR26. Live crates.io exact foreign-types-macros 0.2.4 publisher sfackler/5 verified 2026-11-01; packaged manifest/VCS repository matched this project. Direct same-project release/merge authority, not organisation membership or cross-project account endorsement."
 
 [[trusted.futures]]
 criteria = "safe-to-deploy"
@@ -255,6 +765,13 @@ user-id = 33035 # Taiki Endo (taiki-e)
 start = "2020-10-05"
 end = "2027-10-14"
 
+[[trusted.futures-lite]]
+criteria = "safe-to-deploy"
+user-id = 69526 # John Nunley (notgull)
+start = "2025-08-04"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact publisher notgull/69526 authored the same-project packaged release commit https://github.com/smol-rs/futures-lite/commit/226ce18976d8714d6bd9700b61dcc81d7200bc9a. Exact version 2.6.1 archive SHA-256 f78e10609fe0e0b3f4157ffab1876319b5b0db102a2c60dc4626306dc46b44ad. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
 [[trusted.futures-macro]]
 criteria = "safe-to-deploy"
 user-id = 33035 # Taiki Endo (taiki-e)
@@ -279,6 +796,13 @@ user-id = 33035 # Taiki Endo (taiki-e)
 start = "2020-10-05"
 end = "2027-10-14"
 
+[[trusted.getopts]]
+criteria = "safe-to-deploy"
+user-id = 55123 # rust-lang-owner
+start = "2025-08-29"
+end = "2027-11-01"
+notes = "S-6 narrow own-project maintenance/release authority: Own-crate current owner API sole rust-lang-owner55123; canonical packaged rust-lang/getopts VCS40846923. Bot profile explicitly managed by Rust infrastructure. Direct own-crate release authority, independent of importedhashbrown. Exact version(s) 0.2.24 publisher rust-lang-owner/55123 verified live2026-11-01. Dated facts/continuity inference only; no cross-project endorsement or native enablement."
+
 [[trusted.getrandom]]
 criteria = "safe-to-deploy"
 user-id = 5059 # Artyom Pavlov (newpavlov)
@@ -298,6 +822,48 @@ start = "2026-05-30"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
 
+[[trusted.glow]]
+criteria = "safe-to-deploy"
+user-id = 9941 # Josh Groves (grovesNL)
+start = "2026-03-07"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: grovesNL/glow exact 0.17.0 release 0983efbc authored/committed by grovesNL; current September 2026 other-contributor changes committed by grovesNL. Exact crates.io glow 0.17.0 publisher grovesNL/9941 verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
+
+[[trusted.glutin]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2025-04-30"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: rust-windowing/glutin v0.32.3/v0.32.2/v0.32.1 releases by kchibisov; own manifest names Kirill. crates.io exact version(s) 0.32.3 confirm kchibisov/42583; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.glutin-winit]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2024-06-08"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: rust-windowing/glutin exact 0.32.0 release commit 0811b6c7 by kchibisov; own manifest names Kirill. crates.io exact version(s) 0.5.0 confirm kchibisov/42583; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.glutin_egl_sys]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2025-01-12"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: rust-windowing/glutin exact 0.32.2 release commit d9b4fd70 by kchibisov; own manifest names Kirill. crates.io exact version(s) 0.7.1 confirm kchibisov/42583; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.glutin_glx_sys]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2025-01-12"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: rust-windowing/glutin exact 0.32.2 release commit d9b4fd70 by kchibisov; own manifest names Kirill. crates.io exact version(s) 0.6.1 confirm kchibisov/42583; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.glutin_wgl_sys]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2025-01-12"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: rust-windowing/glutin exact 0.32.2 release commit d9b4fd70 by kchibisov; own manifest names Kirill. crates.io exact version(s) 0.6.1 confirm kchibisov/42583; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
 [[trusted.guillotiere]]
 criteria = "safe-to-deploy"
 user-id = 1281 # Nicolas Silva (nical)
@@ -311,12 +877,47 @@ user-id = 359 # Sean McArthur (seanmonstar)
 start = "2019-03-13"
 end = "2027-10-14"
 
+[[trusted.half]]
+criteria = "safe-to-deploy"
+user-id = 3416 # Kathryn Long (VoidStarKat)
+start = "2025-10-14"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: VoidStarKat/half-rs exact 2.7.1 version commit 8cc891f3 authored/committed by VoidStarKat; current February 2026 dependency/docs PR merges by VoidStarKat. Exact crates.io half 2.7.1 publisher VoidStarKat/3416 verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
+
 [[trusted.harfrust]]
 criteria = "safe-to-deploy"
 user-id = 299582 # Behdad Esfahbod (behdad)
 start = "2025-06-10"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
+
+[[trusted.hashbrown]]
+criteria = "safe-to-deploy"
+user-id = 55123 # rust-lang-owner
+start = "2025-08-07"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact hashbrown 0.15.5 publisher rust-lang-owner/55123 verified at https://crates.io/api/v1/crates/hashbrown/0.15.5. Existing approved audit sources Bytecode Alliance, Mozilla and ISRG each trust this same crate/account beginning 2025-04-30; https://raw.githubusercontent.com/bytecodealliance/wasmtime/main/supply-chain/audits.toml This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
+[[trusted.hermit-abi]]
+criteria = "safe-to-deploy"
+user-id = 91569 # Martin Kröning (mkroening)
+start = "2026-08-31"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: hermit-os/hermit-rs exact 0.5.3 release c0b97d12, release PR1081 actual merger mkroening 2026-08-31; current October 2026 project merges by mkroening. Exact crates.io hermit-abi 0.5.3 publisher mkroening/91569 verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
+
+[[trusted.hkdf]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:RustCrypto/KDFs"
+start = "2026-03-30"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher RustCrypto/KDFs matched to the published crate repository and exact package metadata. Exact version 0.13.0 archive SHA-256 4aaa26c720c68b866f2c96ef5c1264b3e6f473fe5d4ce61cd44bbe913e553018. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.hmac]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:RustCrypto/MACs"
+start = "2026-03-29"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher RustCrypto/MACs matched to the published crate repository and exact package metadata. Exact version 0.13.0 archive SHA-256 6303bc9732ae41b04cb554b844a762b4115a61bfaa81e3e83050991eeb56863f. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
 
 [[trusted.http]]
 criteria = "safe-to-deploy"
@@ -366,11 +967,25 @@ user-id = 128408 # Shane F. Carr (sffc)
 start = "2022-08-05"
 end = "2027-10-14"
 
+[[trusted.icu_collections]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact icu_collections 2.4.0 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/icu_collections/2.4.0. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
 [[trusted.icu_locale_core]]
 criteria = "safe-to-deploy"
 user-id = 128408 # Shane F. Carr (sffc)
 start = "2024-11-23"
 end = "2027-10-14"
+
+[[trusted.icu_locale_core]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact icu_locale_core 2.4.0 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/icu_locale_core/2.4.0. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
 
 [[trusted.icu_normalizer]]
 criteria = "safe-to-deploy"
@@ -378,11 +993,25 @@ user-id = 128408 # Shane F. Carr (sffc)
 start = "2022-08-05"
 end = "2027-10-14"
 
+[[trusted.icu_normalizer]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact icu_normalizer 2.4.0 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/icu_normalizer/2.4.0. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
 [[trusted.icu_normalizer_data]]
 criteria = "safe-to-deploy"
 user-id = 128408 # Shane F. Carr (sffc)
 start = "2023-09-23"
 end = "2027-10-14"
+
+[[trusted.icu_normalizer_data]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact icu_normalizer_data 2.4.0 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/icu_normalizer_data/2.4.0. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
 
 [[trusted.icu_properties]]
 criteria = "safe-to-deploy"
@@ -390,17 +1019,52 @@ user-id = 128408 # Shane F. Carr (sffc)
 start = "2021-11-02"
 end = "2027-10-14"
 
+[[trusted.icu_properties]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact icu_properties 2.4.0 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/icu_properties/2.4.0. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
 [[trusted.icu_properties_data]]
 criteria = "safe-to-deploy"
 user-id = 128408 # Shane F. Carr (sffc)
 start = "2023-09-23"
 end = "2027-10-14"
 
+[[trusted.icu_properties_data]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact icu_properties_data 2.4.0 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/icu_properties_data/2.4.0. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
 [[trusted.icu_provider]]
 criteria = "safe-to-deploy"
 user-id = 128408 # Shane F. Carr (sffc)
 start = "2021-07-29"
 end = "2027-10-14"
+
+[[trusted.icu_provider]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact icu_provider 2.4.0 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/icu_provider/2.4.0. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
+[[trusted.image]]
+criteria = "safe-to-deploy"
+user-id = 11453 # Aurelia Molzer (197g)
+start = "2026-03-10"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms image 0.25.10 publisher 197g/11453. Current https://github.com/image-rs/image/blob/main/README.md explicitly lists 197g as maintainer. Verified 2026-11-01."
+
+[[trusted.inout]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:RustCrypto/utils"
+start = "2026-10-19"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher RustCrypto/utils matched to the published crate repository and exact package metadata. Exact version 0.2.5 archive SHA-256 3b5cf4372d022092674a83b8febf5865f7a573cc0c5baec5e49c879b6a20978f. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
 
 [[trusted.itertools]]
 criteria = "safe-to-deploy"
@@ -415,11 +1079,39 @@ user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-05-02"
 end = "2027-10-14"
 
+[[trusted.jni-sys]]
+criteria = "safe-to-deploy"
+user-id = 68864 # Robert Bragg (rib)
+start = "2026-03-22"
+end = "2027-11-01"
+notes = "S-6 direct own-project release/maintenance authority: jni-rs/jni-sys exact packaged0.3.1release1985e8bd authored/committed byrib; currentMarch2026invocationtests/CIcommits809b4c49/67f990f5 byrib. Exact crates.io jni-sys 0.3.1 publisherrib/68864 verifiedlive2026-11-01; packaged VCS matched same upstream. This does not authorise Android target/native enablement."
+
 [[trusted.jobserver]]
 criteria = "safe-to-deploy"
 user-id = 55123 # rust-lang-owner
 start = "2024-07-23"
 end = "2027-10-14"
+
+[[trusted.jpeg-encoder]]
+criteria = "safe-to-run"
+user-id = 82913 # Volker Ströbel (vstroebel)
+start = "2026-07-27"
+end = "2027-11-01"
+notes = "S-6 own-project publisher authority verified2026-11-01: exact jpeg-encoder0.7.1 publisher and current sole owner vstroebel/82913; packaged VCS baf40191ae25a32e56a884fa6e001c4fe938d451 matches vstroebel/jpeg-encoder. Current PR40 merger vstroebel at8fe7e7beb9a2be686c8662f96d27170074d08ffc and PR39 merger vstroebel at3849e2baa1f3715a5f50d13e42e2d8d58cf13d7a. Same named-crate future releases within these dates only. This is publisher trust, not a complete source audit. Test-only std feature; defaults and simd disabled, no build script or dependencies; O-130 permits this exact test licence. No native, assembly, exemption or imported source scope is added."
+
+[[trusted.keyring-core]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:open-source-cooperative/keyring-core"
+start = "2026-10-13"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher open-source-cooperative/keyring-core matched to the published crate repository and exact package metadata. Exact version 1.0.1 archive SHA-256 29fbf4b551298c67925f38cf341a1ada797a75f1837bdf8ae1fc8e2ebc6efb59. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.khronos-egl]]
+criteria = "safe-to-deploy"
+user-id = 52759 # Timothée Haudebourg (timothee-haudebourg)
+start = "2023-10-05"
+end = "2027-11-01"
+notes = "S-6 narrow own-project maintenance/release authority: Unchanged non-archived personal upstream timothee-haudebourg/khronos-egl; exact latest6.0.0release/currentHEAD5605af04 by soleowner2023-10-05. Continuing authority inferred from stable owner/latest release, not recent activity. Exact version(s) 6.0.0 publisher timothee-haudebourg/52759 verified live2026-11-01. Dated facts/continuity inference only; no cross-project endorsement or native enablement."
 
 [[trusted.kurbo]]
 criteria = "safe-to-deploy"
@@ -440,6 +1132,34 @@ trusted-publisher = "github:rust-lang/libc"
 start = "2026-10-02"
 end = "2027-10-26"
 
+[[trusted.libloading]]
+criteria = "safe-to-deploy"
+user-id = 726 # Simonas Kazlauskas (nagisa)
+start = "2025-09-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: nagisa/rust_libloading exact VCS f4ec9e70 authored by nagisa; subsequent same-project 0.9.0 release rites commit dab97c56 authored/committed by nagisa on 2025-11-05. Exact crates.io libloading 0.8.9 actual publisher verified live 2026-11-01; VCS revision read from packaged .cargo_vcs_info.json and matched upstream. Evidence is release/merge authority, not generic contribution or cross-project account endorsement."
+
+[[trusted.libm]]
+criteria = "safe-to-deploy"
+user-id = 55123 # rust-lang-owner
+start = "2026-01-24"
+end = "2027-11-01"
+notes = "S-6 narrow own-project maintenance/release authority: Own-crate current owner API sole rust-lang-owner55123; canonical packaged rust-lang/compiler-builtins VCSdfd2203a. Bot profile explicitly managed by Rust infrastructure. Direct own-crate release authority, independent of importedhashbrown. Exact version(s) 0.2.16 publisher rust-lang-owner/55123 verified live2026-11-01. Dated facts/continuity inference only; no cross-project endorsement or native enablement."
+
+[[trusted.libredox]]
+criteria = "safe-to-deploy"
+user-id = 42742 # 4lDO2 (4lDO2)
+start = "2026-09-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project role: exact 0.1.25 publisher 4lDO2/42742, published 2026-09-21, remains live own-crate owner alongside jackpot51. Packaged upstream is canonical gitlab.redox-os.org/redox-os/libredox.git, VCS 9a9fc664b027a93a2fa5b27167858956c7566d2d. Canonical Git fetch verifies this actual master merge of another contributor's get-set-rlimit MR35 on 2026-09-16, authored/committed by Jacob Lorentzon with the same 4lDO2 identity named as sole Cargo author. Current upstream HEAD 1ec76f79ba8587ea8af7bed68a83eb1b41eaa817 retains that explicit author. This is direct project author/current owner/merge authority, not generic Redox membership. GitLab HTTP API was unavailable; canonical Git objects were inspected."
+
+[[trusted.libsqlite3-sys]]
+criteria = "safe-to-deploy"
+user-id = 5062 # gwenn (gwenn)
+start = "2026-10-25"
+end = "2027-11-01"
+notes = "S-6 same-crate maintainer authority verified 2026-11-01: exact libsqlite3-sys0.39.1 publisher gwenn/5062, archive14a5f01b87b92705d07b433c06f96cbc764637d81a0bffb5734ce17cf0f9a2b3; packaged VCSfb7c711f4e988db149f43cac68f7865b25d0b10e matches upstream PR1920 Bump bundled SQLite version to3.54.1, authored and merged by gwenn2026-10-25, with primary pull API merged_by evidence. Current crates.io owner gwenn, alongside thomcc. This trusts this account's publications of this crate from2026-10-25 until2027-11-01, including future versions in that window; it is not a full bundled SQLite C/Rust audit. Separate exact native source/build/feature guard and registered exception O109 remain required; publisher trust alone grants no changed source version, assembler selector, SQLCipher, bindgen, extension or target activation. Exact packaged C/header/ext bytes match official SQLite3.54.1 amalgamation; complete build.rs read separately under S12."
+
 [[trusted.linebender_resource_handle]]
 criteria = "safe-to-deploy"
 user-id = 109051 # Daniel McNab (DJMcNab)
@@ -447,11 +1167,25 @@ start = "2025-09-09"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
 
+[[trusted.linux-raw-sys]]
+criteria = "safe-to-deploy"
+user-id = 6825 # Dan Gohman (sunfishcode)
+start = "2025-01-08"
+end = "2027-11-01"
+notes = "S-6: live crates.io confirms linux-raw-sys 0.4.15 and 0.12.1 publisher sunfishcode/6825. Existing Mozilla trusted.linux-raw-sys endorses this same crate/account safe-to-deploy through 2027-09-08. Verified snapshot 2026-11-01."
+
 [[trusted.litemap]]
 criteria = "safe-to-deploy"
 user-id = 128408 # Shane F. Carr (sffc)
 start = "2021-08-27"
 end = "2027-10-14"
+
+[[trusted.litrs]]
+criteria = "safe-to-deploy"
+user-id = 915 # Lukas Kalbertodt (LukasKalbertodt)
+start = "2026-10-12"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: LukasKalbertodt/litrs exact version bump 510d5d77 and adjacent current fixes authored/committed by LukasKalbertodt. Exact crates.io litrs 1.0.1 actual publisher verified live 2026-11-01; VCS revision read from packaged .cargo_vcs_info.json and matched upstream. Evidence is release/merge authority, not generic contribution or cross-project account endorsement."
 
 [[trusted.lock_api]]
 criteria = "safe-to-deploy"
@@ -466,11 +1200,32 @@ user-id = 3204 # Ashley Mannix (KodrAus)
 start = "2019-07-10"
 end = "2027-10-14"
 
+[[trusted.matrixmultiply]]
+criteria = "safe-to-deploy"
+user-id = 356 # bluss (bluss)
+start = "2026-07-14"
+end = "2027-11-02"
+notes = "S-6 standing own-project maintainer-publisher policy, recorded 2026-11-02 by GPT-6.1 Sol (AI agent). Canonical bluss/matrixmultiply release commit 07f968c20e0df41e3fd694e9c47ef5368ec9eee1 is authored and committed by bluss with message 0.3.11; the packaged VCS revision and actual crates.io publisher match. The start includes the selected publication; expiry is one year after this record is written. Trust applies only to this named crate and publisher, not other projects. This is publisher trust, not a full source-soundness audit, completed human review or fresh owner decision. Exact binding/features/native limits and CODEOWNERS/PR review remain separate."
+
 [[trusted.memchr]]
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2019-07-07"
 end = "2027-10-14"
+
+[[trusted.memmap2]]
+criteria = "safe-to-deploy"
+user-id = 35980 # Maarten de Vries (de-vri-es)
+start = "2026-10-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: RazrFalcon/memmap2-rs exact 0.9.12 release merge 4692b056, release PR180 merged by de-vri-es 2026-10-21; version commit 9e5c0eec authored/committed by de-vri-es. Exact crates.io memmap2 0.9.12 publisher de-vri-es/35980 verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
+
+[[trusted.miniz_oxide]]
+criteria = "safe-to-deploy"
+user-id = 4968 # oyvindln
+start = "2025-06-09"
+end = "2027-11-01"
+notes = "S-6 narrow own-project maintenance/release authority: Frommi/miniz_oxide current own-crate ownersoyvindln4968 andFrommi10555; actualPR221 mergeroyvindln2026-10-29 commitc6d34e98. Exact version(s) 0.8.9, 0.9.1 publisher oyvindln/4968 verified live2026-11-01. Dated facts/continuity inference only; no cross-project endorsement or native enablement."
 
 [[trusted.mio]]
 criteria = "safe-to-deploy"
@@ -478,17 +1233,280 @@ user-id = 6025 # Thomas de Zeeuw (Thomasdezeeuw)
 start = "2019-12-17"
 end = "2027-10-14"
 
+[[trusted.moxcms]]
+criteria = "safe-to-deploy"
+user-id = 266802 # Radzivon Bartoshyk (awxkee)
+start = "2026-03-07"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: awxkee/moxcms own-project current October2026 PR201 merge097dccf3a9ab40811f23baa5da71cbfb985f8de8 byawxkee. Live crates.io exact moxcms 0.8.1 publisher awxkee/266802 verified 2026-11-01; packaged manifest/VCS repository matched this project. Direct same-project release/merge authority, not organisation membership or cross-project account endorsement."
+
+[[trusted.naga]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms naga 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
+[[trusted.naga-types]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms naga-types 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
+[[trusted.ndarray]]
+criteria = "safe-to-deploy"
+user-id = 303992 #  (akern40)
+start = "2026-01-10"
+end = "2027-11-02"
+notes = "S-6 standing own-project maintainer-publisher policy, recorded 2026-11-02 by GPT-6.1 Sol (AI agent). Canonical rust-ndarray/ndarray release commit 2cf23d6abf5f7a8a5e638fa1c69779dc4d7219a0 is authored and committed by akern40 with message chore: Release; the packaged VCS revision and actual crates.io publisher match. The start includes the selected publication; expiry is one year after this record is written. Trust applies only to this named crate and publisher, not other projects. This is publisher trust, not a full source-soundness audit, completed human review or fresh owner decision. Exact binding/features/native limits and CODEOWNERS/PR review remain separate."
+
+[[trusted.ndk]]
+criteria = "safe-to-deploy"
+user-id = 110371 # Marijn Suijten (MarijnS95)
+start = "2024-04-26"
+end = "2027-11-01"
+notes = "S-6 direct own-project release/maintenance authority: rust-mobile/ndk exact packaged release49bbbba1 for ndk0.9.0/ndk-sys0.6.0, releasePR472 byMarijnS95; currentOctober2026maintenance761020ca/5ae5c56f byMarijnS95. Exact crates.io ndk 0.9.0 publisherMarijnS95/110371 verifiedlive2026-11-01; packaged VCS matched same upstream. This does not authorise Android target/native enablement."
+
+[[trusted.ndk-sys]]
+criteria = "safe-to-deploy"
+user-id = 110371 # Marijn Suijten (MarijnS95)
+start = "2024-04-26"
+end = "2027-11-01"
+notes = "S-6 direct own-project release/maintenance authority: rust-mobile/ndk exact packaged release49bbbba1 for ndk0.9.0/ndk-sys0.6.0, releasePR472 byMarijnS95; currentOctober2026maintenance761020ca/5ae5c56f byMarijnS95. Exact crates.io ndk-sys 0.6.0+11769913 publisherMarijnS95/110371 verifiedlive2026-11-01; packaged VCS matched same upstream. This does not authorise Android target/native enablement."
+
+[[trusted.nom]]
+criteria = "safe-to-deploy"
+user-id = 959 # Geoffroy Couprie (Geal)
+start = "2025-01-26"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact nom 8.0.0 publisher Geal/959 verified at https://crates.io/api/v1/crates/nom/8.0.0. Same-project CODEOWNERS assigns all paths to Geal; https://github.com/rust-bakery/nom/blob/main/.github/CODEOWNERS This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
+[[trusted.num]]
+criteria = "safe-to-deploy"
+user-id = 539 # Josh Stone (cuviper)
+start = "2024-05-08"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher cuviper/539 is a current owner of this named crate at https://crates.io/api/v1/crates/num/owners. Exact version 0.4.3 archive SHA-256 35bd024e8b2ff75562e5f34e7f4905839deb4b22955ef5e73d2fea1b9813cb23. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.num-bigint]]
+criteria = "safe-to-deploy"
+user-id = 539 # Josh Stone (cuviper)
+start = "2026-07-05"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher cuviper/539 is a current owner of this named crate at https://crates.io/api/v1/crates/num-bigint/owners. Exact version 0.4.8 archive SHA-256 c89e69e7e0f03bea5ef08013795c25018e101932225a656383bd384495ecc367. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.num-complex]]
+criteria = "safe-to-deploy"
+user-id = 539 # Josh Stone (cuviper)
+start = "2024-05-07"
+end = "2027-11-02"
+notes = """
+S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher cuviper/539 is a current owner of this named crate at https://crates.io/api/v1/crates/num-complex/owners. Exact version 0.4.6 archive SHA-256 73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates.
+Independent published ORT review evidence: S-6 standing own-project maintainer-publisher policy, recorded 2026-11-02 by GPT-6.1 Sol (AI agent). Canonical rust-num/num-complex release PR128 is merged by cuviper into packaged revision 91fdc06356c0c868cb88b5a180859023c57e6e50 (Release 0.4.6); GitHub merged_by and actual crates.io publisher match. This is release authority, not generic contribution. The start includes the selected publication; expiry is one year after this record is written. Trust applies only to this named crate and publisher, not other projects. This is publisher trust, not a full source-soundness audit, completed human review or fresh owner decision. Exact binding/features/native limits and CODEOWNERS/PR review remain separate."""
+
+[[trusted.num-integer]]
+criteria = "safe-to-deploy"
+user-id = 539 # Josh Stone (cuviper)
+start = "2026-08-12"
+end = "2027-11-02"
+notes = """
+S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher cuviper/539 is a current owner of this named crate at https://crates.io/api/v1/crates/num-integer/owners. Exact version 0.1.47 archive SHA-256 7ce2d95d4b3734dc35aa2f45e1aa22cd416814592a4f9d9205e11affd5b8e10b. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates.
+Independent published ORT review evidence: S-6 standing own-project maintainer-publisher policy, recorded 2026-11-02 by GPT-6.1 Sol (AI agent). Canonical rust-num/num-integer packaged revision 765fd9b3eb9397471d41b9f613e530f6d9d6383f is authored and committed by cuviper and fixes the release date; actual crates.io publisher is the same account. The start includes the selected publication; expiry is one year after this record is written. Trust applies only to this named crate and publisher, not other projects. This is publisher trust, not a full source-soundness audit, completed human review or fresh owner decision. Exact binding/features/native limits and CODEOWNERS/PR review remain separate."""
+
+[[trusted.num-iter]]
+criteria = "safe-to-deploy"
+user-id = 539 # Josh Stone (cuviper)
+start = "2026-07-07"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher cuviper/539 is a current owner of this named crate at https://crates.io/api/v1/crates/num-iter/owners. Exact version 0.1.46 archive SHA-256 c92800bd69a1eac91786bcfe9da64a897eb72911b8dc3095decbd07429e8048b. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
 [[trusted.num_cpus]]
 criteria = "safe-to-deploy"
 user-id = 359 # Sean McArthur (seanmonstar)
 start = "2019-06-10"
 end = "2027-10-14"
 
+[[trusted.num_enum]]
+criteria = "safe-to-deploy"
+user-id = 14455 # Daniel Wagner-Hall (illicitonion)
+start = "2026-03-15"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: illicitonion/num_enum exact release commit f11d81c6, release PR183 authored and merged by illicitonion; current 2026-04-19 project fixes. Exact crates.io num_enum 0.7.6 actual publisher verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
+
+[[trusted.num_enum_derive]]
+criteria = "safe-to-deploy"
+user-id = 14455 # Daniel Wagner-Hall (illicitonion)
+start = "2026-03-15"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: illicitonion/num_enum exact release commit f11d81c6, release PR183 authored and merged by illicitonion; current 2026-04-19 project fixes. Exact crates.io num_enum_derive 0.7.6 actual publisher verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
+
+[[trusted.objc-sys]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc-sys version(s) 0.3.5 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2026-10-05"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2 version(s) 0.5.3, 0.6.5 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-app-kit]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-app-kit version(s) 0.2.2, 0.3.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-cloud-kit]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-cloud-kit version(s) 0.2.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-contacts]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-contacts version(s) 0.2.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-core-data]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-core-data version(s) 0.2.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-core-image]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-core-image version(s) 0.2.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-core-location]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-core-location version(s) 0.2.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-foundation]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-foundation version(s) 0.2.2, 0.3.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-link-presentation]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-link-presentation version(s) 0.2.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-metal]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-metal version(s) 0.2.2, 0.3.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-quartz-core]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-quartz-core version(s) 0.2.2, 0.3.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-symbols]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-symbols version(s) 0.2.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-ui-kit]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-ui-kit version(s) 0.2.2, 0.3.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-uniform-type-identifiers]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-uniform-type-identifiers version(s) 0.2.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.objc2-user-notifications]]
+criteria = "safe-to-deploy"
+user-id = 36629 # Mads Marquart (madsmtm)
+start = "2024-05-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: madsmtm/objc2 current owner madsmtm, non-archived; current October 2026 owner-authored maintenance including 8a5abacd90d5403fc0463459a35826f892b9142e; actual project PR role OWNER. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact objc2-user-notifications version(s) 0.2.2 publisher madsmtm/36629 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.open]]
+criteria = "safe-to-deploy"
+user-id = 980 # Sebastian Thiel (Byron)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: Byron/open-rs exact 5.4.5 release a60a9d50 authored/committed by Byron; current 2026-10-30 release-review/merge work by Byron. Exact crates.io open 5.4.5 publisher Byron/980 verified live 2026-11-01; packaged VCS revision matched upstream. Evidence is direct release/merge authority."
+
 [[trusted.openssl-probe]]
 criteria = "safe-to-deploy"
 user-id = 4556 # Dirkjan Ochtman (djc)
 start = "2025-12-29"
 end = "2027-10-14"
+
+[[trusted.orbclient]]
+criteria = "safe-to-deploy"
+user-id = 2668 # Jeremy Soller (jackpot51)
+start = "2026-05-24"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance/release authority: Official redox-os/orbclient mirror of canonical GitLab project: exact release5e16bc81 byjackpot51; current September2026 actual merge5306851a byjackpot51. Live exact crates.io orbclient 0.3.55 publisher jackpot51/2668 verified2026-11-01. Narrow same-project scope, not cross-project account endorsement or organisation membership. No target/native enablement."
+
+[[trusted.ordered-float]]
+criteria = "safe-to-deploy"
+user-id = 2017 # Matt Brubeck (mbrubeck)
+start = "2026-08-21"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: reem/rust-ordered-float exact 5.5.1 release d0ff7fb1 authored/committed by mbrubeck; current 2026-10-25 other-contributor merge aa4c4f2d committed by mbrubeck. Exact live 5.5.0 publisher mbrubeck/2017 and publication 2026-08-21 verified after S-7 cooldown pin; extend existing trust start to cover this exact publication. Packaged source and upstream verified; direct release/merge authority, not cross-crate inference."
+
+[[trusted.ordered-stream]]
+criteria = "safe-to-deploy"
+user-id = 129275 # danieldg
+start = "2023-02-11"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher danieldg/129275 is a current owner of this named crate at https://crates.io/api/v1/crates/ordered-stream/owners. Exact version 0.2.0 archive SHA-256 9aa2b01e1d916879f73a53d01d1d6cee68adbb31d6d9177a8cfce093cced1d50. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.ort]]
+criteria = "safe-to-deploy"
+user-id = 152041 # Carson M. (decahedron1)
+start = "2026-10-12"
+end = "2027-11-02"
+notes = "S-6 standing own-project maintainer-publisher policy, recorded 2026-11-02 by GPT-6.1 Sol (AI agent). Canonical pykeio/ort release commit 1ee1f842e8a381153ede7a506f01734e545854e0 is authored and committed by decahedron1 with message 2.0.0-rc.14; the packaged VCS revision matches. Current sole crates.io owner and actual publisher are the same account. The start includes the selected publication; expiry is one year after this record is written. Trust applies only to this named crate and publisher, not other projects. This is publisher trust, not a full source-soundness audit, completed human review or fresh owner decision. Exact binding/features/native limits and CODEOWNERS/PR review remain separate."
+
+[[trusted.ort-sys]]
+criteria = "safe-to-deploy"
+user-id = 152041 # Carson M. (decahedron1)
+start = "2026-10-12"
+end = "2027-11-02"
+notes = "S-6 standing own-project maintainer-publisher policy, recorded 2026-11-02 by GPT-6.1 Sol (AI agent). Canonical pykeio/ort release commit 1ee1f842e8a381153ede7a506f01734e545854e0 is authored and committed by decahedron1 with message 2.0.0-rc.14; the packaged VCS revision matches. Actual publisher is decahedron1, the binding project maintainer and ort sole owner. The start includes the selected publication; expiry is one year after this record is written. Trust applies only to this named crate and publisher, not other projects. This is publisher trust, not a full source-soundness audit, completed human review or fresh owner decision. Exact binding/features/native limits and CODEOWNERS/PR review remain separate."
+
+[[trusted.os_pipe]]
+criteria = "safe-to-deploy"
+user-id = 3589 # Jack O'Connor (oconnor663)
+start = "2025-10-11"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact os_pipe 1.2.3 publisher oconnor663/3589 verified at https://crates.io/api/v1/crates/os_pipe/1.2.3. Exact release commit 228ee175117faf1bf0cce99942ce579244215da4 authored and committed by oconnor663; current other-author changes also committed by this maintainer; https://github.com/oconnor663/os_pipe.rs/commits/master This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
 
 [[trusted.parking_lot]]
 criteria = "safe-to-deploy"
@@ -511,11 +1529,53 @@ start = "2025-01-20"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
 
+[[trusted.petgraph]]
+criteria = "safe-to-deploy"
+user-id = 126199 # Agustín Borgna (ABorgna)
+start = "2025-09-30"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact petgraph 0.8.3 publisher ABorgna/126199 verified at https://crates.io/api/v1/crates/petgraph/0.8.3. Official CONTRIBUTING.md explicitly names ABorgna as a current petgraph maintainer; https://github.com/petgraph/petgraph/blob/master/CONTRIBUTING.md This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
+[[trusted.pin-project]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:taiki-e/pin-project"
+start = "2026-05-13"
+end = "2027-11-01"
+notes = "S-6 own-project trusted publishing: live crates.io confirms pin-project 1.1.13 authenticated GitHub publisher taiki-e/pin-project at 61a5c74806c90ea24239ff2ce98043d2ede8f3a8; exact publishing repository matches declared upstream https://github.com/taiki-e/pin-project. Verified 2026-11-01; no individual publisher inferred."
+
+[[trusted.pin-project-internal]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:taiki-e/pin-project"
+start = "2026-05-13"
+end = "2027-11-01"
+notes = "S-6 own-project trusted publishing: live crates.io confirms pin-project-internal 1.1.13 authenticated GitHub publisher taiki-e/pin-project at 61a5c74806c90ea24239ff2ce98043d2ede8f3a8; exact publishing repository matches declared upstream https://github.com/taiki-e/pin-project. Verified 2026-11-01; no individual publisher inferred."
+
 [[trusted.pin-project-lite]]
 criteria = "safe-to-deploy"
 trusted-publisher = "github:taiki-e/pin-project-lite"
 start = "2026-02-27"
 end = "2027-10-14"
+
+[[trusted.png]]
+criteria = "safe-to-deploy"
+user-id = 11453 # Aurelia Molzer (197g)
+start = "2026-02-14"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: image-rs/image-png current September2026 merges487e1111b51368005e330ac60e19b5bb17c55d57/e917d6a04f198c0b49df0ee5d0a65732bb6a337c by197g. Live crates.io exact png 0.18.1 publisher 197g/11453 verified 2026-11-01; packaged manifest/VCS repository matched this project. Direct same-project release/merge authority, not organisation membership or cross-project account endorsement."
+
+[[trusted.polling]]
+criteria = "safe-to-deploy"
+user-id = 33035 # Taiki Endo (taiki-e)
+start = "2025-09-14"
+end = "2027-11-01"
+notes = "S-6 narrow own-project maintenance/release authority: smol-rs/polling latest official3.11.0releasef404d08d authored/committed taiki-e2025-09-13; same current project and retained own-crate owner. Continuing release-role inference, not a2026coding claim. Exact version(s) 3.11.0 publisher taiki-e/33035 verified live2026-11-01. Dated facts/continuity inference only; no cross-project endorsement or native enablement."
+
+[[trusted.pollster]]
+criteria = "safe-to-deploy"
+user-id = 21853 # Joshua Barretto (zesterer)
+start = "2026-07-10"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: zesterer/pollster exact version commit 6a1a1482 authored/committed by zesterer; current 2026-07-10 merged PRs by zesterer. Exact crates.io pollster 1.0.1 actual publisher verified live 2026-11-01; VCS revision read from packaged .cargo_vcs_info.json and matched upstream. Evidence is release/merge authority, not generic contribution or cross-project account endorsement."
 
 [[trusted.polycool]]
 criteria = "safe-to-deploy"
@@ -524,11 +1584,32 @@ start = "2025-10-09"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
 
+[[trusted.portable-atomic]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:taiki-e/portable-atomic"
+start = "2026-08-09"
+end = "2027-11-01"
+notes = "S-6 own-project trusted publishing: live crates.io confirms portable-atomic 1.15.0 authenticated GitHub publisher taiki-e/portable-atomic at cb58081f88cd02681dbb32482acec7ae198850d5; exact publishing repository matches declared upstream https://github.com/taiki-e/portable-atomic. Verified 2026-11-01; no individual publisher inferred."
+
+[[trusted.portable-atomic-util]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:taiki-e/portable-atomic-util"
+start = "2026-09-04"
+end = "2027-11-01"
+notes = "S-6 own-project trusted publishing: live crates.io confirms portable-atomic-util 0.2.8 authenticated GitHub publisher taiki-e/portable-atomic-util at f0b9e652063a2cc6548e95ba1f9d58bfffea5297; exact publishing repository matches declared upstream https://github.com/taiki-e/portable-atomic-util. Verified 2026-11-01; no individual publisher inferred."
+
 [[trusted.potential_utf]]
 criteria = "safe-to-deploy"
 user-id = 128408 # Shane F. Carr (sffc)
 start = "2026-08-13"
 end = "2027-10-14"
+
+[[trusted.proc-macro-crate]]
+criteria = "safe-to-deploy"
+user-id = 6134 # Bastian Köcher (bkchr)
+start = "2026-03-04"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: bkchr/proc-macro-crate exact 3.5.0 release merge 8f3d8b04, release PR66 merged by bkchr 2026-03-04; subsequent project maintenance merge by bkchr. Exact crates.io proc-macro-crate 3.5.0 publisher bkchr/6134 verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
 
 [[trusted.proc-macro2]]
 criteria = "safe-to-deploy"
@@ -543,12 +1624,68 @@ start = "2020-11-25"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
 
+[[trusted.pxfm]]
+criteria = "safe-to-deploy"
+user-id = 266802 # Radzivon Bartoshyk (awxkee)
+start = "2026-07-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: awxkee/pxfm own-project current July2026 PR92 mergeacf7acd00cfc845307eda7b7b2de19e42303de82 and latest five commits byawxkee. Live crates.io exact pxfm 0.1.30 publisher awxkee/266802 verified 2026-11-01; packaged manifest/VCS repository matched this project. Direct same-project release/merge authority, not organisation membership or cross-project account endorsement."
+
+[[trusted.quick-xml]]
+criteria = "safe-to-deploy"
+user-id = 2927 # Mingun
+start = "2026-06-29"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: tafia/quick-xml exact release commit 4deda08a authored/committed by Mingun; current 2026-10-31 merged PR a73f5647 by Mingun. Exact crates.io quick-xml 0.41.0 actual publisher verified live 2026-11-01; VCS revision read from packaged .cargo_vcs_info.json and matched upstream. Evidence is release/merge authority, not generic contribution or cross-project account endorsement."
+
+[[trusted.r-efi]]
+criteria = "safe-to-deploy"
+user-id = 12177 # David Rheinsberg (dvdhrm)
+start = "2025-06-17"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: r-efi/r-efi exact 5.3.0 release 97b55bed authored/committed by dvdhrm; current September 2026 other-contributor protocol changes committed by dvdhrm. Exact crates.io r-efi 5.3.0 publisher dvdhrm/12177 verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
+
+[[trusted.range-alloc]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-02-27"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance established separately from wgpu: gfx-rs/range-alloc exact packaged release commit34a5b93f04850e25315f87841d2555f2c0e0ed80 authored/committed by cwfitzgerald2026-02-27; current March2026 repository-procedure merge6f51102e and other-contributor no_std commit8ded7dba committed bycwfitzgerald. Live exact0.1.5 publishercwfitzgerald/53780 verified2026-11-01. No transfer based solely on wgpu leadership; this is not a source-audit certification or guarantee for invalid arithmetic/free/grow inputs."
+
+[[trusted.rawpointer]]
+criteria = "safe-to-deploy"
+user-id = 356 # bluss (bluss)
+start = "2019-09-12"
+end = "2027-11-02"
+notes = "S-6 standing own-project maintainer-publisher policy, recorded 2026-11-02 by GPT-6.1 Sol (AI agent). Canonical bluss/rawpointer release commit e4f5800e86acc8cb610430a3f361977480e2b0a6 is authored and committed by bluss with message 0.2.1; the packaged VCS revision and actual crates.io publisher match. The start includes the selected publication; expiry is one year after this record is written. Trust applies only to this named crate and publisher, not other projects. This is publisher trust, not a full source-soundness audit, completed human review or fresh owner decision. Exact binding/features/native limits and CODEOWNERS/PR review remain separate."
+
+[[trusted.rayon]]
+criteria = "safe-to-deploy"
+user-id = 539 # Josh Stone (cuviper)
+start = "2026-04-14"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance/release authority: rayon-rs/rayon actual PR1329/1330/1327 merger cuviper on2026-10-26/27, commits599425d4/f94e30dc/d627c1de; exact packaged VCSc9ced185 belongs to this project. Live exact crates.io rayon 1.12.0 publisher cuviper/539 verified2026-11-01. Narrow same-project scope, not cross-project account endorsement or organisation membership. No target/native enablement."
+
+[[trusted.redox_syscall]]
+criteria = "safe-to-deploy"
+user-id = 2668 # Jeremy Soller (jackpot51)
+start = "2023-09-08"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance/release authority: Official redox-os/syscall mirror of canonical GitLab project: exact releasef94a5a7d byjackpot51; current same-project0.7.5 releasee3c2b74d byjackpot51 May2026. Live exact crates.io redox_syscall 0.4.1 publisher jackpot51/2668 verified2026-11-01. Narrow same-project scope, not cross-project account endorsement or organisation membership. No target/native enablement."
+
 [[trusted.redox_syscall]]
 criteria = "safe-to-deploy"
 user-id = 42742 # 4lDO2 (4lDO2)
 start = "2020-07-10"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
+
+[[trusted.redox_syscall]]
+criteria = "safe-to-deploy"
+user-id = 42742 # 4lDO2 (4lDO2)
+start = "2026-10-17"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance/release authority: Official redox-os/kernel mirror of canonical GitLab project: exact packaged716a8f83 other-contributor change committed4lDO2; current September2026 kernel maintenance3efe4e03/2c50fa7f by4lDO2. Live exact crates.io redox_syscall 0.9.5 publisher 4lDO2/42742 verified2026-11-01. Narrow same-project scope, not cross-project account endorsement or organisation membership. No target/native enablement."
 
 [[trusted.regex]]
 criteria = "safe-to-deploy"
@@ -579,6 +1716,34 @@ criteria = "safe-to-deploy"
 user-id = 2342 # Brian Smith (briansmith)
 start = "2019-07-03"
 end = "2027-10-14"
+
+[[trusted.rusqlite]]
+criteria = "safe-to-deploy"
+user-id = 5062 # gwenn (gwenn)
+start = "2026-10-28"
+end = "2027-11-01"
+notes = "S-6 same-crate maintainer authority verified 2026-11-01: exact rusqlite0.41.1 publisher gwenn/5062, archive da9bba6f3506135e120a6586df05be18b48d18896600646a4bec8f993d91a594; packaged VCS18ee76dbb976d5ef7e37ad5a8fffae678ca21a78 is the project's Prepare next release commit authored and committed by gwenn2026-10-28. Current crates.io owner gwenn, alongside thomcc. This trusts this account's publications of this crate from2026-10-28 until2027-11-01, including future versions in that window; it is not an exact-version source audit. Native approval and the separate source/feature/hash guard remain exact to reviewed sys0.39.1/SQLite3.54.1 and wrapper0.41.1; new source versions/features cannot inherit native approval. No claim of a full wrapper or bundled C line audit."
+
+[[trusted.rust_decimal]]
+criteria = "safe-to-deploy"
+user-id = 5326 # Paul Mason (paupino)
+start = "2026-09-02"
+end = "2027-11-01"
+notes = "S-6 same-crate maintainer authority verified 2026-11-01: exact rust_decimal 1.43.0 publisher and sole current crates.io owner paupino/5326; packaged VCS 8592462ca2d928ea46e6358e530a5c7d4b38f7d6 matches the upstream version 1.43.0 release commit authored and committed by paupino. Archive 7653272e75dcac41dc199fbea6f5797633994fafd339943c06c9af16bf29cd3a. Trust covers this account's publications of this same crate from 2026-09-02 until 2027-11-01, including future versions in that window; it is not a full arithmetic/source audit. Chosen configuration has all defaults/features disabled: only existing arrayvec and num-traits normal dependencies, no serde/JSON/database/random/wasm/proc-macro feature. Runtime crate forbids unsafe code and selected module gates expose pure decimal arithmetic/string operations; no runtime I/O, thread or FFI path selected. Complete build.rs read separately under S-12: package README to OUT_DIR documentation transformation only, no network/process/native code. Feature/purity and build-source changes require S-5/S-12 review; new native activation is never granted by this trust record."
+
+[[trusted.rustc-hash]]
+criteria = "safe-to-deploy"
+user-id = 130181 # nora (Noratrieb)
+start = "2026-07-02"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: rust-lang/rustc-hash exact version merge c13e7ccc by Noratrieb; current 2026-10-15 project merge f16da569 by Noratrieb. Exact crates.io rustc-hash 2.1.3 actual publisher verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
+
+[[trusted.rustix]]
+criteria = "safe-to-deploy"
+user-id = 6825 # Dan Gohman (sunfishcode)
+start = "2025-01-21"
+end = "2027-11-01"
+notes = "S-6: live crates.io confirms rustix 0.38.44 and 1.1.6 publisher sunfishcode/6825. Existing Bytecode Alliance trusted.rustix endorses this same crate/account safe-to-deploy through 2027-10-11. Verified 2026-11-01."
 
 [[trusted.rustls]]
 criteria = "safe-to-deploy"
@@ -635,6 +1800,13 @@ start = "2020-02-16"
 end = "2027-11-01"
 notes = "Trusted publisher for one year; initial adoption of the egui application dependency graph in issue #33."
 
+[[trusted.secret-service]]
+criteria = "safe-to-deploy"
+user-id = 103233 # Daniel Brotsky (brotskydotcom)
+start = "2026-08-29"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher brotskydotcom/103233 is a current owner of this named crate at https://crates.io/api/v1/crates/secret-service/owners. Exact version 5.2.0 archive SHA-256 5107b24b91445dd2aa449a258a1807b63240942157292354dc5bfdbeb8bc6db8. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
 [[trusted.self_cell]]
 criteria = "safe-to-deploy"
 user-id = 18325 # Lukas Bergdoll (Voultapher)
@@ -666,6 +1838,13 @@ user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-02-28"
 end = "2027-10-14"
 
+[[trusted.serde_repr]]
+criteria = "safe-to-deploy"
+user-id = 3618 # David Tolnay (dtolnay)
+start = "2026-07-18"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher dtolnay/3618 is a current owner of this named crate at https://crates.io/api/v1/crates/serde_repr/owners. Exact version 0.1.21 archive SHA-256 8d3b1629de253c70a0508c3899572da79ca359fdab27c7920ff00406df418906. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
 [[trusted.serde_spanned]]
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
@@ -678,11 +1857,32 @@ trusted-publisher = "github:RustCrypto/hashes"
 start = "2026-03-25"
 end = "2027-10-26"
 
+[[trusted.signal-hook-registry]]
+criteria = "safe-to-deploy"
+user-id = 5906 # Michal 'vorner' Vaner (vorner)
+start = "2025-12-25"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher vorner/5906 is a current owner of this named crate at https://crates.io/api/v1/crates/signal-hook-registry/owners. Exact version 1.4.8 archive SHA-256 c4db69cba1110affc0e9f7bcd48bbf87b3f4fc7c61fc9155afd4c469eb3d6c1b. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.simd-adler32]]
+criteria = "safe-to-deploy"
+user-id = 100904 # Marvin Countryman (mcountryman)
+start = "2026-07-14"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: mcountryman/simd-adler32 exact version commit d93164f9 authored/committed by mcountryman; 2026-05-25 merge cffbfadb by mcountryman. Exact crates.io simd-adler32 0.3.10 actual publisher verified live 2026-11-01; packaged VCS revision matched upstream. Direct release/merge authority, not generic contribution."
+
 [[trusted.slab]]
 criteria = "safe-to-deploy"
 user-id = 6741 # Alice Ryhl (Darksonn)
 start = "2021-10-13"
 end = "2027-10-14"
+
+[[trusted.slotmap]]
+criteria = "safe-to-deploy"
+user-id = 24326 # Orson Peters (orlp)
+start = "2025-12-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: orlp/slotmap exact version commit 2d56154b authored/committed by orlp; current 2026-05-09 fixes and merged PRs by orlp. Exact crates.io slotmap 1.1.1 actual publisher verified live 2026-11-01; VCS revision read from packaged .cargo_vcs_info.json and matched upstream. Evidence is release/merge authority, not generic contribution or cross-project account endorsement."
 
 [[trusted.smallvec]]
 criteria = "safe-to-deploy"
@@ -690,17 +1890,52 @@ user-id = 2396 # Josh Bowman-Matthews (jdm)
 start = "2019-06-10"
 end = "2027-10-26"
 
+[[trusted.smithay-client-toolkit]]
+criteria = "safe-to-deploy"
+user-id = 111182 # Ashley Wulber (wash2)
+start = "2024-07-15"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/client-toolkit exact release commits 8a0b3361/c583de8d committed by wash2; current 2026-10-16 merge d557485b by wash2. crates.io exact version(s) 0.19.2, 0.20.0 confirm wash2/111182; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.smol_str]]
+criteria = "safe-to-deploy"
+user-id = 16374 # Lukas Wirth (Veykril)
+start = "2024-05-14"
+end = "2027-11-01"
+notes = "S-6 direct own-project role: exact 0.2.2 crates.io publisher Veykril/16374 and release VCS aea39b4974f55e9380556272b1335e2f6fd13cc7 verified. Archived split-repository README identifies rust-lang/rust-analyzer/lib/smol_str as current upstream. Official rust-lang/team teams/rust-analyzer.toml explicitly lists Veykril as lead; direct March 2026 module maintenance commits 8ff72bbf and ceeac4a2 corroborate the role. Not inferred from another crate or historical crate ownership; current crates.io ownership has changed."
+
 [[trusted.socket2]]
 criteria = "safe-to-deploy"
 user-id = 6025 # Thomas de Zeeuw (Thomasdezeeuw)
 start = "2020-09-09"
 end = "2027-10-14"
 
+[[trusted.spirv]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:gfx-rs/rspirv"
+start = "2026-03-13"
+end = "2027-11-01"
+notes = "S-6 own-project trusted publishing: live crates.io confirms spirv 0.4.0+sdk-1.4.341.0 authenticated GitHub publisher gfx-rs/rspirv at 8afc3d0ac8e158128cd1410bb2e4b4c26ab11bb4; exact publishing repository matches declared upstream https://github.com/gfx-rs/rspirv. Verified 2026-11-01; no individual publisher inferred."
+
 [[trusted.syn]]
 criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-03-01"
 end = "2027-10-14"
+
+[[trusted.tempfile]]
+criteria = "safe-to-deploy"
+user-id = 280 # Steven Allen (Stebalien)
+start = "2026-03-11"
+end = "2027-11-02"
+notes = "S-6 qualified own-project publisher trust checked 2026-11-02: Stebalien/280 is the current sole crates.io owner and the publisher of tempfile3.27.0, whose repository is github.com/Stebalien/tempfile. The locked archive is32497e9a4c7b38532efcdebeef879707aa9f794296a4f0244f6f69e9bc8574bd. The off-target uds_windows edge makes cargo-vet require safe-to-deploy rather than only safe-to-run; the existing shipped use remains test-only. This is one-year publisher trust, including future releases by this exact publisher of this named crate, not a source-soundness or human audit. No off-target native activation is permitted. Evidence: supply-chain/credential-adoption.json."
+
+[[trusted.termcolor]]
+criteria = "safe-to-deploy"
+user-id = 189 # Andrew Gallant (BurntSushi)
+start = "2024-01-10"
+end = "2027-11-01"
+notes = "S-6 direct own-project release authority: exact 1.4.1 publisher BurntSushi/189 and packaged release 71f0921f1eeceda85487098588a1602979d52493 match BurntSushi/termcolor, whose personal owner is unchanged and repository non-archived. Later owner maintenance f4606e69557e5bfa5dfbdd9aca51e44cc7e36752 is dated September 2024. Continuing maintainer authority is inferred from unchanged own-project ownership and release authority, not a claim of 2026 coding activity."
 
 [[trusted.thiserror]]
 criteria = "safe-to-deploy"
@@ -714,11 +1949,25 @@ user-id = 3618 # David Tolnay (dtolnay)
 start = "2019-10-09"
 end = "2027-10-14"
 
+[[trusted.tiff]]
+criteria = "safe-to-deploy"
+user-id = 11453 # Aurelia Molzer (197g)
+start = "2026-02-10"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: image-rs/image-tiff current September2026 merge3302936b08e2260d4c66f40f51170efbb1fded4c by197g, plus August2026 release/merge maintenance. Live crates.io exact tiff 0.11.3 publisher 197g/11453 verified 2026-11-01; packaged manifest/VCS repository matched this project. Direct same-project release/merge authority, not organisation membership or cross-project account endorsement."
+
 [[trusted.tinystr]]
 criteria = "safe-to-deploy"
 user-id = 128408 # Shane F. Carr (sffc)
 start = "2022-08-04"
 end = "2027-10-14"
+
+[[trusted.tinystr]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact tinystr 0.8.5 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/tinystr/0.8.5. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
 
 [[trusted.tokio]]
 criteria = "safe-to-deploy"
@@ -755,6 +2004,13 @@ criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2022-10-21"
 end = "2027-10-14"
+
+[[trusted.toml_edit]]
+criteria = "safe-to-deploy"
+user-id = 6743 # Ed Page (epage)
+start = "2026-10-09"
+end = "2027-11-01"
+notes = "S-6: live crates.io confirms toml_edit 0.25.17+spec-1.1.0 publisher epage/6743. Existing Bytecode Alliance trusted.toml_edit endorses this same crate/account safe-to-deploy through 2027-07-20. Verified 2026-11-01."
 
 [[trusted.toml_parser]]
 criteria = "safe-to-deploy"
@@ -798,6 +2054,20 @@ user-id = 172786 # Hayden Stainsby (hds)
 start = "2024-11-27"
 end = "2027-10-14"
 
+[[trusted.tracing-attributes]]
+criteria = "safe-to-deploy"
+user-id = 172786 # Hayden Stainsby (hds)
+start = "2025-11-26"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact publisher hds/172786 authored the same-project packaged release commit https://github.com/tokio-rs/tracing/commit/55086231ec4aaeffcaab9932e696f40278f06bd1. Exact version 0.1.31 archive SHA-256 7490cfa5ec963746568740651ac6781f701c9c5ea257c58e057f3ba8cf69e8da. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.tree_magic_mini]]
+criteria = "safe-to-deploy"
+user-id = 2017 # Matt Brubeck (mbrubeck)
+start = "2025-11-14"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact tree_magic_mini 3.2.2 publisher mbrubeck/2017 verified at https://crates.io/api/v1/crates/tree_magic_mini/3.2.2. Exact version release commit 75bf1b01dc81d5c0b3377a3202792fa83097872c authored and committed by mbrubeck in the same project; https://github.com/mbrubeck/tree_magic/commit/75bf1b01dc81d5c0b3377a3202792fa83097872c This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
 [[trusted.try-lock]]
 criteria = "safe-to-deploy"
 user-id = 359 # Sean McArthur (seanmonstar)
@@ -816,6 +2086,13 @@ criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2021-10-02"
 end = "2027-10-14"
+
+[[trusted.unicode-properties]]
+criteria = "safe-to-deploy"
+user-id = 1139 # Manish Goregaokar (Manishearth)
+start = "2025-10-30"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact unicode-properties 0.1.4 publisher Manishearth/1139 verified at https://crates.io/api/v1/crates/unicode-properties/0.1.4. Manishearth merged the Unicode 18 release preparation PR17, official merge commit b5594806088d6492327228a74d05c881b9b3c042; https://github.com/unicode-rs/unicode-properties/pull/17 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
 
 [[trusted.untrusted]]
 criteria = "safe-to-deploy"
@@ -875,6 +2152,62 @@ user-id = 1 # Alex Crichton (alexcrichton)
 start = "2020-06-03"
 end = "2027-10-14"
 
+[[trusted.wayland-backend]]
+criteria = "safe-to-deploy"
+user-id = 4118 # Ian Douglas Scott (ids1024)
+start = "2026-08-14"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/wayland-rs exact version release commits authored/committed by ids1024 (05196740,72f7fe0d,661cf141,3a45d676,a3d7927d); current 2026-10-30 merge 9df23281 and release-tag push actor confirm direct project maintenance. crates.io exact version(s) 0.3.17 confirm ids1024/4118; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.wayland-client]]
+criteria = "safe-to-deploy"
+user-id = 4118 # Ian Douglas Scott (ids1024)
+start = "2026-07-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/wayland-rs exact version release commits authored/committed by ids1024 (05196740,72f7fe0d,661cf141,3a45d676,a3d7927d); current 2026-10-30 merge 9df23281 and release-tag push actor confirm direct project maintenance. crates.io exact version(s) 0.31.15 confirm ids1024/4118; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.wayland-csd-frame]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2023-09-16"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: rust-windowing/wayland-csd-frame exact release e9a510b1 by kchibisov; own manifest names Kirill. crates.io exact version(s) 0.3.0 confirm kchibisov/42583; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.wayland-protocols]]
+criteria = "safe-to-deploy"
+user-id = 4118 # Ian Douglas Scott (ids1024)
+start = "2026-06-19"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/wayland-rs exact version release commits authored/committed by ids1024 (05196740,72f7fe0d,661cf141,3a45d676,a3d7927d); current 2026-10-30 merge 9df23281 and release-tag push actor confirm direct project maintenance. crates.io exact version(s) 0.32.13 confirm ids1024/4118; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.wayland-protocols-experimental]]
+criteria = "safe-to-deploy"
+user-id = 4118 # Ian Douglas Scott (ids1024)
+start = "2025-07-29"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/wayland-rs exact version release commits authored/committed by ids1024 (05196740,72f7fe0d,661cf141,3a45d676,a3d7927d); current 2026-10-30 merge 9df23281 and release-tag push actor confirm direct project maintenance. crates.io exact version(s) 20250721.0.1 confirm ids1024/4118; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.wayland-scanner]]
+criteria = "safe-to-deploy"
+user-id = 4118 # Ian Douglas Scott (ids1024)
+start = "2026-07-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/wayland-rs exact version release commits authored/committed by ids1024 (05196740,72f7fe0d,661cf141,3a45d676,a3d7927d); current 2026-10-30 merge 9df23281 and release-tag push actor confirm direct project maintenance. crates.io exact version(s) 0.31.11 confirm ids1024/4118; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.wayland-sys]]
+criteria = "safe-to-deploy"
+user-id = 4118 # Ian Douglas Scott (ids1024)
+start = "2026-03-31"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: Smithay/wayland-rs exact version release commits authored/committed by ids1024 (05196740,72f7fe0d,661cf141,3a45d676,a3d7927d); current 2026-10-30 merge 9df23281 and release-tag push actor confirm direct project maintenance. crates.io exact version(s) 0.31.11 confirm ids1024/4118; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.webbrowser]]
+criteria = "safe-to-deploy"
+user-id = 3050 # Amod Malviya (amodm)
+start = "2026-10-31"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: amodm/webbrowser-rs exact 1.2.6 release commit 29065db6 authored/committed by amodm; current security-fix and release maintenance by same account. Live crates.io exact publisher amodm/3050 confirmed, published 2026-10-31. Upstream GHSA-j2mc-vg6q-w75p confirms <=1.2.5 vulnerable and 1.2.6 patched; owner reviewed the WSL command-injection fix and updated the lock under S-7 security exception. This window excludes old 1.2.4. Verified 2026-11-01."
+
 [[trusted.webpki-root-certs]]
 criteria = "safe-to-deploy"
 user-id = 2751 # Joe Birr-Pixton (ctz)
@@ -887,17 +2220,157 @@ user-id = 209038 # Daniel McCarney (cpu)
 start = "2024-08-07"
 end = "2027-10-26"
 
+[[trusted.weezl]]
+criteria = "safe-to-deploy"
+user-id = 11453 # Aurelia Molzer (197g)
+start = "2025-11-11"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: image-rs/weezl current release0.2.1 PR82 merge606f9c79b054176ed409152a4852b2e047460d2b by197g, with latest five release-preparation commits by197g. Live crates.io exact weezl 0.1.12 publisher 197g/11453 verified 2026-11-01; packaged manifest/VCS repository matched this project. Direct same-project release/merge authority, not organisation membership or cross-project account endorsement."
+
+[[trusted.wgpu]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms wgpu 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
+[[trusted.wgpu-core]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms wgpu-core 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
+[[trusted.wgpu-core-deps-apple]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms wgpu-core-deps-apple 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
+[[trusted.wgpu-core-deps-emscripten]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms wgpu-core-deps-emscripten 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
+[[trusted.wgpu-core-deps-wasm]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms wgpu-core-deps-wasm 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
+[[trusted.wgpu-core-deps-windows-linux-android]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms wgpu-core-deps-windows-linux-android 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
+[[trusted.wgpu-hal]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms wgpu-hal 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
+[[trusted.wgpu-naga-bridge]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms wgpu-naga-bridge 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
+[[trusted.wgpu-types]]
+criteria = "safe-to-deploy"
+user-id = 53780 # Connor Fitzgerald (cwfitzgerald)
+start = "2026-08-22"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms wgpu-types 30.0.1 publisher cwfitzgerald/53780, published 2026-08-22. This crate is in gfx-rs/wgpu; current https://github.com/gfx-rs/wgpu/blob/trunk/GOVERNANCE.md explicitly lists Connor Fitzgerald (@cwfitzgerald) in community leadership. Verified 2026-11-01."
+
 [[trusted.winapi-util]]
 criteria = "safe-to-deploy"
 user-id = 189 # Andrew Gallant (BurntSushi)
 start = "2020-01-11"
 end = "2027-10-14"
 
+[[trusted.windows]]
+criteria = "safe-to-deploy"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2025-10-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: microsoft/windows-rs current release authority kennykerr (2026 release tags74/73/72); current October 2026 maintenance including be2831da5cf6c3f7e6f88bf8b7222e46b5efd4cc. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact windows version(s) 0.62.2 publisher kennykerr/64539 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.windows-collections]]
+criteria = "safe-to-deploy"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2025-10-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: microsoft/windows-rs current release authority kennykerr (2026 release tags74/73/72); current October 2026 maintenance including be2831da5cf6c3f7e6f88bf8b7222e46b5efd4cc. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact windows-collections version(s) 0.3.2 publisher kennykerr/64539 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.windows-core]]
+criteria = "safe-to-deploy"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2025-10-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: microsoft/windows-rs current release authority kennykerr (2026 release tags74/73/72); current October 2026 maintenance including be2831da5cf6c3f7e6f88bf8b7222e46b5efd4cc. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact windows-core version(s) 0.62.2 publisher kennykerr/64539 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.windows-future]]
+criteria = "safe-to-deploy"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2025-10-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: microsoft/windows-rs current release authority kennykerr (2026 release tags74/73/72); current October 2026 maintenance including be2831da5cf6c3f7e6f88bf8b7222e46b5efd4cc. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact windows-future version(s) 0.3.2 publisher kennykerr/64539 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.windows-implement]]
+criteria = "safe-to-deploy"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2025-10-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: microsoft/windows-rs current release authority kennykerr (2026 release tags74/73/72); current October 2026 maintenance including be2831da5cf6c3f7e6f88bf8b7222e46b5efd4cc. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact windows-implement version(s) 0.60.2 publisher kennykerr/64539 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.windows-interface]]
+criteria = "safe-to-deploy"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2025-10-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: microsoft/windows-rs current release authority kennykerr (2026 release tags74/73/72); current October 2026 maintenance including be2831da5cf6c3f7e6f88bf8b7222e46b5efd4cc. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact windows-interface version(s) 0.59.3 publisher kennykerr/64539 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
 [[trusted.windows-link]]
 criteria = "safe-to-deploy"
 user-id = 64539 # Kenny Kerr (kennykerr)
 start = "2024-07-17"
 end = "2027-10-14"
+
+[[trusted.windows-native-keyring-store]]
+criteria = "safe-to-deploy"
+trusted-publisher = "github:open-source-cooperative/windows-native-keyring-store"
+start = "2026-05-24"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: GitHub trusted publisher open-source-cooperative/windows-native-keyring-store matched to the published crate repository and exact package metadata. Exact version 1.1.0 archive SHA-256 063426e76fdec7438d56bb777f67e318a84a25c707b07e575cb8b78e10c028f8. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.windows-numerics]]
+criteria = "safe-to-deploy"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2025-10-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: microsoft/windows-rs current release authority kennykerr (2026 release tags74/73/72); current October 2026 maintenance including be2831da5cf6c3f7e6f88bf8b7222e46b5efd4cc. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact windows-numerics version(s) 0.3.1 publisher kennykerr/64539 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.windows-result]]
+criteria = "safe-to-deploy"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2025-10-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: microsoft/windows-rs current release authority kennykerr (2026 release tags74/73/72); current October 2026 maintenance including be2831da5cf6c3f7e6f88bf8b7222e46b5efd4cc. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact windows-result version(s) 0.4.1 publisher kennykerr/64539 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
+
+[[trusted.windows-strings]]
+criteria = "safe-to-deploy"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2025-10-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: microsoft/windows-rs current release authority kennykerr (2026 release tags74/73/72); current October 2026 maintenance including be2831da5cf6c3f7e6f88bf8b7222e46b5efd4cc. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact windows-strings version(s) 0.5.1 publisher kennykerr/64539 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
 
 [[trusted.windows-sys]]
 criteria = "safe-to-deploy"
@@ -910,6 +2383,13 @@ criteria = "safe-to-deploy"
 user-id = 64539 # Kenny Kerr (kennykerr)
 start = "2022-09-09"
 end = "2027-10-14"
+
+[[trusted.windows-threading]]
+criteria = "safe-to-deploy"
+user-id = 64539 # Kenny Kerr (kennykerr)
+start = "2025-10-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: microsoft/windows-rs current release authority kennykerr (2026 release tags74/73/72); current October 2026 maintenance including be2831da5cf6c3f7e6f88bf8b7222e46b5efd4cc. Each exact crate packaged manifest/VCS belongs to this monorepo. Live crates.io exact windows-threading version(s) 0.2.1 publisher kennykerr/64539 verified 2026-11-01. Direct current project authority, not cross-project account endorsement."
 
 [[trusted.windows_aarch64_gnullvm]]
 criteria = "safe-to-deploy"
@@ -959,11 +2439,25 @@ user-id = 64539 # Kenny Kerr (kennykerr)
 start = "2021-10-27"
 end = "2027-10-14"
 
+[[trusted.winit]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2026-03-02"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance: live crates.io confirms winit 0.30.13 publisher kchibisov/42583. Current https://github.com/rust-windowing/winit/blob/master/.github/CODEOWNERS explicitly assigns XKB, Wayland and X11 ownership to kchibisov. Verified 2026-11-01."
+
 [[trusted.winnow]]
 criteria = "safe-to-deploy"
 user-id = 6743 # Ed Page (epage)
 start = "2023-02-22"
 end = "2027-10-14"
+
+[[trusted.wl-clipboard-rs]]
+criteria = "safe-to-deploy"
+user-id = 5538 # Ivan Molodetskikh (YaLTeR)
+start = "2026-09-28"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact wl-clipboard-rs 0.9.4 publisher YaLTeR/5538 verified at https://crates.io/api/v1/crates/wl-clipboard-rs/0.9.4. Same-project exact release commit 16b63adcbd2191a8c29c2a467342fc24b4ea82dc authored and committed by YaLTeR; other-author maintenance also committed by YaLTeR; https://github.com/YaLTeR/wl-clipboard-rs/commit/16b63adcbd2191a8c29c2a467342fc24b4ea82dc This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
 
 [[trusted.writeable]]
 criteria = "safe-to-deploy"
@@ -971,17 +2465,101 @@ user-id = 128408 # Shane F. Carr (sffc)
 start = "2022-08-04"
 end = "2027-10-14"
 
+[[trusted.x11-dl]]
+criteria = "safe-to-deploy"
+user-id = 100580 # AltF2 (AltF02)
+start = "2023-01-18"
+end = "2027-11-01"
+notes = "S-6 direct own-project release authority: exact 2.21.0 publisher AltF02/100580 and packaged release fced94ef6eb5935c892079a46812806f7b7a9237 match AltF02/x11-rs. The personal owner is unchanged and repository non-archived; owner merge ff57a942e5a4d35d8660362a8ca2ac0c02fa4852 is dated August 2023, later repository activity August 2024. Continuing authority is inferred from unchanged own-project ownership and release authority, not asserted recent maintenance cadence."
+
+[[trusted.x11rb]]
+criteria = "safe-to-deploy"
+user-id = 63221 # Uli Schlachter (psychon)
+start = "2025-08-29"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: psychon/x11rb exact release 1b73245a by psychon; project release procedure covers both crates and current 2026-10-30 generator maintenance corroborates role. crates.io exact version(s) 0.13.2 confirm psychon/63221; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.x11rb-protocol]]
+criteria = "safe-to-deploy"
+user-id = 63221 # Uli Schlachter (psychon)
+start = "2025-08-29"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: psychon/x11rb exact release 1b73245a by psychon; project release procedure covers both crates and current 2026-10-30 generator maintenance corroborates role. crates.io exact version(s) 0.13.2 confirm psychon/63221; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.xcursor]]
+criteria = "safe-to-deploy"
+user-id = 85082 # Samuele Esposito (esposm03)
+start = "2026-07-31"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: esposm03/xcursor-rs exact release 4760fa50 by esposm03; current own manifest names Samuele Esposito. crates.io exact version(s) 0.3.11 confirm esposm03/85082; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.xkbcommon-dl]]
+criteria = "safe-to-deploy"
+user-id = 42583 # Kirill Chibisov (kchibisov)
+start = "2024-02-11"
+end = "2027-11-01"
+notes = "S-6 direct project maintenance, not organisation membership: rust-windowing/xkbcommon-dl v0.4.2/v0.4.1/v0.4.0 releases by kchibisov. crates.io exact version(s) 0.4.2 confirm kchibisov/42583; verified 2026-11-01. Evidence is release/merge authority; no formal roster claimed."
+
+[[trusted.xkeysym]]
+criteria = "safe-to-deploy"
+user-id = 69526 # John Nunley (notgull)
+start = "2024-06-07"
+end = "2027-11-01"
+notes = "S-6 direct own-crate authority: exact 0.2.1 publisher notgull/69526, published 2024-06-07, and packaged revision/current upstream HEAD 77596eb8319f8d7a97db6477f307a94a0905c439 verified. Original personal upstream redirects to rust-windowing/xkeysym; live own-crate owners still include notgull/69526 and github:rust-windowing:common-types/7564. The unchanged release HEAD plus retained current ownership support same-project authority after transfer; no cross-crate account endorsement."
+
+[[trusted.xml-rs]]
+criteria = "safe-to-deploy"
+user-id = 988 # Kornel (kornelski)
+start = "2026-08-06"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: kornelski/xml-rs exact packaged commit33cdf417 authored/committed by kornelski; current September2026 other-contributor maintenance committed by kornelski. Live crates.io exact xml-rs 0.8.29 publisher kornelski/988 verified 2026-11-01; packaged manifest/VCS repository matched this project. Direct same-project release/merge authority, not organisation membership or cross-project account endorsement."
+
 [[trusted.yoke]]
 criteria = "safe-to-deploy"
 user-id = 1139 # Manish Goregaokar (Manishearth)
 start = "2021-05-01"
 end = "2027-10-14"
 
+[[trusted.yoke]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact yoke 0.8.4 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/yoke/0.8.4. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
 [[trusted.yoke-derive]]
 criteria = "safe-to-deploy"
 user-id = 166196 # Robert Bastian (robertbastian)
 start = "2023-01-26"
 end = "2027-10-14"
+
+[[trusted.zbus]]
+criteria = "safe-to-deploy"
+user-id = 6423 # Zeeshan Ali Khan (zeenix)
+start = "2026-08-09"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher zeenix/6423 is a current owner of this named crate at https://crates.io/api/v1/crates/zbus/owners. Exact version 5.19.0 archive SHA-256 5db4be7c075cb421e4b7ee645541604239bd243ba7c357511f4ff3a74b555907. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.zbus_macros]]
+criteria = "safe-to-deploy"
+user-id = 6423 # Zeeshan Ali Khan (zeenix)
+start = "2026-08-09"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher zeenix/6423 is a current owner of this named crate at https://crates.io/api/v1/crates/zbus_macros/owners. Exact version 5.19.0 archive SHA-256 2990635d09ade6df1868f72f8cac69a876a90981e8bd3c40b1be413f8dc88f40. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.zbus_names]]
+criteria = "safe-to-deploy"
+user-id = 6423 # Zeeshan Ali Khan (zeenix)
+start = "2026-10-16"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher zeenix/6423 is a current owner of this named crate at https://crates.io/api/v1/crates/zbus_names/owners. Exact version 4.3.5 archive SHA-256 812a12be4ead7a59e18ea8f047d08add0066b73bc62fc1467066a2472ae088dd. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.zcheapstr]]
+criteria = "safe-to-deploy"
+user-id = 6423 # Zeeshan Ali Khan (zeenix)
+start = "2026-08-10"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher zeenix/6423 is a current owner of this named crate at https://crates.io/api/v1/crates/zcheapstr/owners. Exact version 1.1.0 archive SHA-256 d1afec51604565183aeb5c54c20aeab286120d4e4460f7f76e3e8bb8c0d99473. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
 
 [[trusted.zerocopy]]
 criteria = "safe-to-deploy"
@@ -1027,14 +2605,70 @@ user-id = 1139 # Manish Goregaokar (Manishearth)
 start = "2021-04-19"
 end = "2027-10-14"
 
+[[trusted.zerovec]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact zerovec 0.11.9 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/zerovec/0.11.9. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
 [[trusted.zerovec-derive]]
 criteria = "safe-to-deploy"
 user-id = 128408 # Shane F. Carr (sffc)
 start = "2022-08-05"
 end = "2027-10-14"
 
+[[trusted.zerovec-derive]]
+criteria = "safe-to-deploy"
+user-id = 166196 # Robert Bastian (robertbastian)
+start = "2026-10-22"
+end = "2027-11-01"
+notes = "S-6 own-project authority checked 2026-11-01. Exact zerovec-derive 0.11.7 publisher robertbastian/166196 verified at https://crates.io/api/v1/crates/zerovec-derive/0.11.7. Robert Bastian authored the official ICU4X 2.4.0 release; same-project CODEOWNERS also grants component maintenance. This rule covers this named ICU4X crate only; https://github.com/unicode-org/icu4x/releases/tag/icu%402.4.0 This is publisher trust, not a fresh source audit. Includes future publications by this publisher for this crate within the stated dates; no native target, backend, feature or exemption approval."
+
+[[trusted.zlib-rs]]
+criteria = "safe-to-deploy"
+user-id = 256011 # Folkert de Vries (folkertdev)
+start = "2026-09-15"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance: trifectatechfoundation/zlib-rs exact 0.6.8 release0254e072 authored/committed by folkertdev; current October2026 maintenance commits by folkertdev. Live crates.io exact zlib-rs 0.6.8 publisher folkertdev/256011 verified 2026-11-01; packaged manifest/VCS repository matched this project. Direct same-project release/merge authority, not organisation membership or cross-project account endorsement."
+
 [[trusted.zmij]]
 criteria = "safe-to-deploy"
 user-id = 3618 # David Tolnay (dtolnay)
 start = "2025-12-18"
 end = "2027-10-14"
+
+[[trusted.zune-core]]
+criteria = "safe-to-deploy"
+user-id = 159371 # Caleb Etemesi (etemesi254)
+start = "2026-08-07"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance/release authority: etemesi254/zune-image actual current PR495/493/486 merger etemesi254 inOctober2026, commits33007f6e/24a891ae/95c0fa06. Exact packaged VCS belongs to same monorepo. Live exact crates.io zune-core 0.5.3 publisher etemesi254/159371 verified2026-11-01. Narrow same-project scope, not cross-project account endorsement or organisation membership. No target/native enablement."
+
+[[trusted.zune-jpeg]]
+criteria = "safe-to-deploy"
+user-id = 159371 # Caleb Etemesi (etemesi254)
+start = "2026-03-26"
+end = "2027-11-01"
+notes = "S-6 direct own-project maintenance/release authority: etemesi254/zune-image actual current PR495/493/486 merger etemesi254 inOctober2026, commits33007f6e/24a891ae/95c0fa06. Exact packaged VCS belongs to same monorepo. Live exact crates.io zune-jpeg 0.5.15 publisher etemesi254/159371 verified2026-11-01. Narrow same-project scope, not cross-project account endorsement or organisation membership. No target/native enablement."
+
+[[trusted.zvariant]]
+criteria = "safe-to-deploy"
+user-id = 6423 # Zeeshan Ali Khan (zeenix)
+start = "2026-10-16"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher zeenix/6423 is a current owner of this named crate at https://crates.io/api/v1/crates/zvariant/owners. Exact version 5.15.1 archive SHA-256 80bf6d6cd6a4b601acb64cfb8284cdc643fcfa75ef26ae3c46ec8aa4e8a1fbb7. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.zvariant_derive]]
+criteria = "safe-to-deploy"
+user-id = 6423 # Zeeshan Ali Khan (zeenix)
+start = "2026-10-16"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher zeenix/6423 is a current owner of this named crate at https://crates.io/api/v1/crates/zvariant_derive/owners. Exact version 5.15.1 archive SHA-256 ef2672456ba1cb54b5eaec136e63135b3c7495fb938e53b28a62e633496d486d. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."
+
+[[trusted.zvariant_utils]]
+criteria = "safe-to-deploy"
+user-id = 6423 # Zeeshan Ali Khan (zeenix)
+start = "2026-08-18"
+end = "2027-11-02"
+notes = "S-6 qualified publisher authority rechecked 2026-11-02: Exact crates.io publisher zeenix/6423 is a current owner of this named crate at https://crates.io/api/v1/crates/zvariant_utils/owners. Exact version 4.2.0 archive SHA-256 bad0294361a320b694a328460dc73add56c306150f5cb6bfafc44446120008a3. This is publisher trust, not a source-soundness or cryptographic audit; it includes future versions by this exact publisher for this named crate during these dates. It grants no native, FFI, feature or target activation scope. Evidence: supply-chain/credential-adoption.json; archive/source identity and native activation remain independent gates."

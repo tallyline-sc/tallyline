@@ -1,6 +1,6 @@
 # States: from the domain to the screen
 
-> **Doc type:** Living spec — draft (JavaFX handoff stage 2; ADR-0004 partly superseded by ADR-0005). Last reviewed: 2026-10-12.
+> **Doc type:** Living spec — draft (JavaFX handoff stage 2; ADR-0004 partly superseded by ADR-0005). Last reviewed: 2026-11-03.
 
 > **Note 2026-10-12:** [ADR-0005](../adr/0005-rust-and-egui.md) replaces JavaFX with egui. The state ids, their meaning and their plan sources stand. The JavaFX column below (pseudo-classes such as `:confidence-confirm`, `:row-selected`, and the style classes `tl-state-<id>`) names a CSS mechanism that no longer exists: in the egui rendition each state is a variant or flag on the widget (for example `Confidence`, `Deviation`, `ChipTone` of the Tallyline crate), keyed by the same state id, and the "Selection and focus in the review table (SP-9)" paragraph is a JavaFX finding (egui has no CSS pseudo-classes; the review table is our own work, ADR-0005 D3). Open point O-112 decides what of the crate is adopted; see [README.md](README.md), "egui rendition (ADR-0005)".
 
@@ -110,3 +110,35 @@ Found when version `1791537441-68f0` was checked against its brief and the plan 
 | 16 | `README.md` of the system still calls "unreviewed" a proposal | Decided 2026-10-09 (11 §A1) | Closed 2026-10-09 in `1791541897-0513`: "Unreviewed" is a listed domain term and has its own section |
 | 17 | `capture-ready` and `capture-refinery` lost their own table rows: they appear only in the capture summary line, without tokens or accessible text (`68f0` had `neutral-*` and "Capture ready to scan"); the refinery label reads "scan result: Refinery terminal – not supported" with a description folded into the label | Every state has a label, an icon, tokens and an accessible text (R-UI-4) | Closed 2026-10-09 in `1791542897-a5d3`: a new section "Capture states before and after the scan" gives `capture-waiting-version-data`, `capture-ready`, `capture-refinery` and `folder-polling` their own rows with `neutral-*` and an accessible text; the refinery label is "Refinery terminal – not supported" |
 | 18 | The ReleaseSplitNotice README gives the accessible name "Will be sent as 3 reports", while its preview and the boards say four | Defect 5 | Closed 2026-10-09 in `1791542897-a5d3`: the README says "Will be sent as 4 reports" |
+
+## Release update states (2026-11-01)
+
+The desktop shell draws release status with normal token-backed text and controls. A newer standard release has a persistent bordered notice with a version label, **Open release notes** and **Dismiss update notice**. Settings shows a distinct text status for not checked, no newer release and unavailable; none relies on colour alone. The setting is a labelled checkbox, off by default, and changes only after a successful save. Results never select another view, open a modal, request focus or change window state (R-UI-16). Dismissal waits for successful persistence and survives restarts; the same release stays hidden, while a different newer release can appear. A known available release survives unavailable checks and restarts without another request.
+
+## Settings control names (2026-11-01)
+
+The Game channel directory text input is associated with its visible catalogue label for accessibility metadata. The critical drawn Settings flow checks the input role and that exact name; upgrading the harness keeps its accessible-name validation enabled (R-OCR-20, R-UI-17a).
+
+## Reference browser states (2026-11-01)
+
+The reference browser uses normal token-backed labels and controls in every theme. Global text identifies the mapped UEX environment, an empty cache, usable cached data or offline retained records, with a separate static refresh label. Endpoint ages distinguish missing data from an unknown age after a reversed clock. Search fields have explicit accessible label associations and stable widget IDs so background status changes preserve keyboard focus. Terminal and commodity rows expose their UEX IDs alongside display text; selection never depends on colour alone. Channel mapping is independent of the optional witness and remains unchanged until persistence succeeds (R-CAP-3a, R-UI-8, R-UI-13, R-UI-16, R-UI-17).
+
+The shell shows one copy of reference status in every view, including the parameter endpoint age and at most 280 Unicode characters of literal UEX staff text. Markup and links have no active behaviour. A paused submission service leaves browser controls enabled; reference delivery recovery clears its own notice without suppressing a settings failure.
+
+## Manual attachment states (2026-11-02)
+
+The private-region editor component uses normal token-backed text and controls in every theme, with accessible labels on the source path, rectangle spin buttons and time input. A 100% source-scale scrollable preview uses nearest-neighbour texture sampling and an explicit contains-no-private-data action. Dated account-required/unknown/unavailable states, missing or changed files, uncertain time, unsupported HDR/colour, invalid geometry and storage failures have text plus an action; none relies on colour. Passive results never change focus, view or window state. Current Report ID/version/binding and account identity filter stale results. Manual Report composes the controls with accepted account state even offline. Passive updates preserve unfinished input and do not clear another Report's pending request. Native visual acceptance remains pending.
+
+## Manual numeric review states (2026-11-02)
+
+Manual Report composes price/status review with Reporting-owned counters and required-decision targets. Major/minor/no-reference states use existing theme tokens, text and semantic icons; stale Minor displays as Equal while retaining its unlowered comparison. Value approval opens only after an explicit action and requires a second explicit action in the dialog. F8/Shift+F8 records durable focus without approval, with stable widget identities across counter changes. Passive reference checks keep previous details visible with an updating notice, suspend approval and preserve keyboard focus; unfinished input delays admission. Failed checks wait for an explicit retry. Numeric review and attachment readiness remain separate from complete release readiness. Native visual/accessibility acceptance remains pending.
+
+## Existing widget rendition checkpoint (2026-11-03)
+
+Chips, deviation badges, fields and raised panels use small radii; minor badges have an outline. Toast tones are a closed `SemanticTone` enum with actual foreground/background/border tokens. Built-in button focus uses the 2 px focus ring; text-selection backgrounds remain separate from row selection. Exact manual-review values use grouped Mono text, positive delta signs, U+2212 and adjacent percent signs without changing domain decisions. Native walkthroughs, full state matrices and independent text-edit focus styling remain open. See [component adoption](components.md).
+
+## Shared credential feedback (2026-11-03)
+
+The existing `AccountState` distinguishes unconfigured, rejected and validated identities. No validated secret key, invalid key and not allowed use distinct approved `key_off`, `vpn_key_off` and `block` glyphs with critical foreground text; validated identities use `check_circle` and success foreground. Invalid input/token, update-required, connection and secure-store failures retain their typed messages and separate edit/key/update/cloud/store glyphs. Connection, update and store failures use caution foreground and never imply a banned account. Disabled, banned and RSI-verification distinctions from the archive cannot be inferred from this model.
+
+Secret key and own-token entry start masked, use explicit Show/Hide actions and reset visibility on replacement, validation or clearing. The key confusion hint stays immediately below its field. Complete fields and actions are vertically composed within the existing page scroll area; clipped controls and the Settings account expander reveal only on gained focus. A persistent credential input scope preserves keyboard focus when passive feedback inserts text without following the changed layout. Drawn contracts cover masking and actual painted output, accessible names, command lifetime/clearing/busy/fallback behaviour and minimum-size keyboard reachability at ordinary/double zoom across three themes. These checks do not establish native rendering, screen-reader or operating-system scaling acceptance.

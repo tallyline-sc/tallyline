@@ -1,0 +1,121 @@
+name: Core mutation
+
+on:
+  pull_request:
+  schedule:
+    - cron: '23 2 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: core-mutation-sharded-v1-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  mutation-shard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+    env:
+      MUTATION_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+      MUTATION_SHARD: ${{ matrix.shard }}/32
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          lfs: true
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Install the pinned Rust toolchain
+        run: rustup toolchain install
+
+      - name: Verify the compiler reports the pinned version
+        run: |
+          pinned=$(sed -n 's/^channel = "\(.*\)"$/\1/p' rust-toolchain.toml)
+          actual=$(rustc --version | cut -d' ' -f2)
+          test -n "$pinned"
+          test "$pinned" = "$actual"
+
+      - name: Guard the supply-chain configuration
+        run: cargo xtask guard
+
+      - name: Install pinned cargo-mutants
+        run: cargo xtask install-cargo-mutants
+
+      - name: Test mutations in pull request changes
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          git diff --no-ext-diff --unified=0 "$BASE_SHA...$HEAD_SHA" > "$RUNNER_TEMP/core.diff"
+          cargo xtask mutation --in-diff "$RUNNER_TEMP/core.diff" --shard "$MUTATION_SHARD"
+
+      - name: Test all core mutations nightly
+        if: github.event_name == 'schedule'
+        run: cargo xtask mutation --shard "$MUTATION_SHARD"
+
+      - name: Bind shard evidence to this source and workflow attempt
+        if: always()
+        env:
+          SHARD_INDEX: ${{ matrix.shard }}
+        run: |
+          directory="target/core-mutation/shard-${SHARD_INDEX}-of-32"
+          test -f "$directory/.tallyline-xtask-owner"
+          printf '%s\n' "$MUTATION_HEAD" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT" "$MUTATION_SHARD" > "$directory/identity.txt"
+
+      - name: Retain mutation reports and build logs
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: core-mutation-${{ github.run_id }}-${{ github.run_attempt }}-shard-${{ matrix.shard }}-of-32
+          path: |
+            target/core-mutation/shard-${{ matrix.shard }}-of-32/identity.txt
+            target/core-mutation/shard-${{ matrix.shard }}-of-32/all-selected-mutants.json
+            target/core-mutation/shard-${{ matrix.shard }}-of-32/selected-mutants.json
+            target/core-mutation/shard-${{ matrix.shard }}-of-32/mutants.out/*.json
+            target/core-mutation/shard-${{ matrix.shard }}-of-32/mutants.out/*.txt
+            target/core-mutation/shard-${{ matrix.shard }}-of-32/mutants.out/log/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  mutation:
+    if: always()
+    needs: mutation-shard
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Require every mutation shard to succeed
+        env:
+          SHARD_RESULT: ${{ needs.mutation-shard.result }}
+        run: test "$SHARD_RESULT" = success
+
+      - name: Check out the exact measured source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+          lfs: true
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Install the pinned Rust toolchain
+        run: rustup toolchain install
+
+      - name: Download every shard from this workflow attempt
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          pattern: core-mutation-${{ github.run_id }}-${{ github.run_attempt }}-shard-*-of-32
+          path: target/core-mutation-artifacts
+          merge-multiple: false
+          digest-mismatch: error
+
+      - name: Validate the exact complete selection and global mutation score
+        env:
+          MUTATION_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: cargo xtask mutation-aggregate target/core-mutation-artifacts "$MUTATION_HEAD" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT"

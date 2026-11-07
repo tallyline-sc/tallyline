@@ -1,0 +1,597 @@
+{
+  "schema_version": 1,
+  "endpoints": [
+    {
+      "endpoint": "game_versions",
+      "http_status": 200,
+      "fields": {
+        "$": [
+          "object"
+        ],
+        "data": [
+          "object"
+        ],
+        "data.live": [
+          "string"
+        ],
+        "data.ptu": [
+          "string"
+        ],
+        "http_code": [
+          "number"
+        ],
+        "message": [
+          "string"
+        ],
+        "status": [
+          "string"
+        ]
+      },
+      "status_codes": null
+    },
+    {
+      "endpoint": "commodities_status",
+      "http_status": 200,
+      "fields": {
+        "$": [
+          "object"
+        ],
+        "data": [
+          "object"
+        ],
+        "data.buy": [
+          "array"
+        ],
+        "data.buy[]": [
+          "object"
+        ],
+        "data.buy[].code": [
+          "number"
+        ],
+        "data.buy[].colors": [
+          "string"
+        ],
+        "data.buy[].name": [
+          "string"
+        ],
+        "data.buy[].name_abbr": [
+          "string"
+        ],
+        "data.buy[].name_short": [
+          "string"
+        ],
+        "data.buy[].percentage": [
+          "string"
+        ],
+        "data.buy[].percentage_end": [
+          "number"
+        ],
+        "data.buy[].percentage_start": [
+          "number"
+        ],
+        "data.sell": [
+          "array"
+        ],
+        "data.sell[]": [
+          "object"
+        ],
+        "data.sell[].code": [
+          "number"
+        ],
+        "data.sell[].colors": [
+          "string"
+        ],
+        "data.sell[].name": [
+          "string"
+        ],
+        "data.sell[].name_abbr": [
+          "string"
+        ],
+        "data.sell[].name_short": [
+          "string"
+        ],
+        "data.sell[].percentage": [
+          "string"
+        ],
+        "data.sell[].percentage_end": [
+          "number"
+        ],
+        "data.sell[].percentage_start": [
+          "number"
+        ],
+        "http_code": [
+          "number"
+        ],
+        "message": [
+          "string"
+        ],
+        "status": [
+          "string"
+        ]
+      },
+      "status_codes": {
+        "buy": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "sell": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      }
+    },
+    {
+      "endpoint": "data_parameters",
+      "http_status": 200,
+      "fields": {
+        "$": [
+          "object"
+        ],
+        "data": [
+          "object"
+        ],
+        "data.commodity": [
+          "object"
+        ],
+        "data.commodity.is_accepted": [
+          "number"
+        ],
+        "data.commodity.is_temporary_enabled": [
+          "number"
+        ],
+        "data.commodity.notification": [
+          "string"
+        ],
+        "data.commodity.price_variation": [
+          "number"
+        ],
+        "data.commodity.scu_variation": [
+          "number"
+        ],
+        "data.commodity.ttl": [
+          "number"
+        ],
+        "data.global": [
+          "object"
+        ],
+        "data.global.evaluation_period_days": [
+          "number"
+        ],
+        "data.global.game_version": [
+          "string"
+        ],
+        "data.global.game_version_ptu": [
+          "string"
+        ],
+        "data.global.is_accepting_ptu_reports": [
+          "number"
+        ],
+        "data.global.is_accepting_reports": [
+          "number"
+        ],
+        "data.global.is_datacenter_enabled": [
+          "number"
+        ],
+        "data.item": [
+          "object"
+        ],
+        "data.item.is_accepted": [
+          "number"
+        ],
+        "data.item.notification": [
+          "string"
+        ],
+        "data.item.price_variation": [
+          "number"
+        ],
+        "data.item.ttl": [
+          "number"
+        ],
+        "data.vehicle_buy": [
+          "object"
+        ],
+        "data.vehicle_buy.is_accepted": [
+          "number"
+        ],
+        "data.vehicle_buy.notification": [
+          "null"
+        ],
+        "data.vehicle_buy.price_variation": [
+          "number"
+        ],
+        "data.vehicle_buy.ttl": [
+          "number"
+        ],
+        "data.vehicle_rent": [
+          "object"
+        ],
+        "data.vehicle_rent.is_accepted": [
+          "number"
+        ],
+        "data.vehicle_rent.notification": [
+          "null"
+        ],
+        "data.vehicle_rent.price_variation": [
+          "number"
+        ],
+        "data.vehicle_rent.ttl": [
+          "number"
+        ],
+        "http_code": [
+          "number"
+        ],
+        "message": [
+          "string"
+        ],
+        "status": [
+          "string"
+        ]
+      },
+      "status_codes": null
+    },
+    {
+      "endpoint": "commodities",
+      "http_status": 200,
+      "fields": {
+        "$": [
+          "object"
+        ],
+        "data": [
+          "array"
+        ],
+        "data[]": [
+          "object"
+        ],
+        "data[].code": [
+          "string"
+        ],
+        "data[].date_added": [
+          "number"
+        ],
+        "data[].date_modified": [
+          "number"
+        ],
+        "data[].id": [
+          "number"
+        ],
+        "data[].id_item": [
+          "number"
+        ],
+        "data[].id_parent": [
+          "number"
+        ],
+        "data[].ids_moons": [
+          "null",
+          "string"
+        ],
+        "data[].ids_orbits": [
+          "null",
+          "string"
+        ],
+        "data[].ids_planets": [
+          "null",
+          "string"
+        ],
+        "data[].ids_poi": [
+          "null",
+          "string"
+        ],
+        "data[].ids_star_systems": [
+          "null",
+          "string"
+        ],
+        "data[].is_available": [
+          "number"
+        ],
+        "data[].is_available_live": [
+          "number"
+        ],
+        "data[].is_buggy": [
+          "number"
+        ],
+        "data[].is_buyable": [
+          "number"
+        ],
+        "data[].is_explosive": [
+          "number"
+        ],
+        "data[].is_extractable": [
+          "number"
+        ],
+        "data[].is_fuel": [
+          "number"
+        ],
+        "data[].is_harvestable": [
+          "number"
+        ],
+        "data[].is_illegal": [
+          "number"
+        ],
+        "data[].is_inert": [
+          "number"
+        ],
+        "data[].is_mineral": [
+          "number"
+        ],
+        "data[].is_pure": [
+          "number"
+        ],
+        "data[].is_raw": [
+          "number"
+        ],
+        "data[].is_refinable": [
+          "number"
+        ],
+        "data[].is_refined": [
+          "number"
+        ],
+        "data[].is_sellable": [
+          "number"
+        ],
+        "data[].is_temporary": [
+          "number"
+        ],
+        "data[].is_visible": [
+          "number"
+        ],
+        "data[].is_volatile_qt": [
+          "number"
+        ],
+        "data[].is_volatile_time": [
+          "number"
+        ],
+        "data[].kind": [
+          "string"
+        ],
+        "data[].name": [
+          "string"
+        ],
+        "data[].price_buy": [
+          "number"
+        ],
+        "data[].price_sell": [
+          "number"
+        ],
+        "data[].slug": [
+          "null",
+          "string"
+        ],
+        "data[].uuid": [
+          "null"
+        ],
+        "data[].weight_scu": [
+          "number"
+        ],
+        "data[].wiki": [
+          "null",
+          "string"
+        ],
+        "http_code": [
+          "number"
+        ],
+        "message": [
+          "string"
+        ],
+        "status": [
+          "string"
+        ]
+      },
+      "status_codes": null
+    },
+    {
+      "endpoint": "terminals",
+      "http_status": 200,
+      "fields": {
+        "$": [
+          "object"
+        ],
+        "data": [
+          "array"
+        ],
+        "data[]": [
+          "object"
+        ],
+        "data[].city_name": [
+          "null",
+          "string"
+        ],
+        "data[].code": [
+          "string"
+        ],
+        "data[].company_name": [
+          "null",
+          "string"
+        ],
+        "data[].contact_url": [
+          "null",
+          "string"
+        ],
+        "data[].date_added": [
+          "number"
+        ],
+        "data[].date_modified": [
+          "number"
+        ],
+        "data[].displayname": [
+          "string"
+        ],
+        "data[].faction_name": [
+          "null",
+          "string"
+        ],
+        "data[].fullname": [
+          "string"
+        ],
+        "data[].game_version": [
+          "null",
+          "string"
+        ],
+        "data[].has_docking_port": [
+          "number"
+        ],
+        "data[].has_freight_elevator": [
+          "number"
+        ],
+        "data[].has_loading_dock": [
+          "number"
+        ],
+        "data[].id": [
+          "number"
+        ],
+        "data[].id_city": [
+          "number"
+        ],
+        "data[].id_company": [
+          "number"
+        ],
+        "data[].id_faction": [
+          "number"
+        ],
+        "data[].id_moon": [
+          "number"
+        ],
+        "data[].id_orbit": [
+          "number"
+        ],
+        "data[].id_outpost": [
+          "number"
+        ],
+        "data[].id_planet": [
+          "number"
+        ],
+        "data[].id_poi": [
+          "number"
+        ],
+        "data[].id_space_station": [
+          "number"
+        ],
+        "data[].id_star_system": [
+          "number"
+        ],
+        "data[].is_affinity_influenceable": [
+          "number"
+        ],
+        "data[].is_auto_load": [
+          "number"
+        ],
+        "data[].is_available": [
+          "number"
+        ],
+        "data[].is_available_live": [
+          "number"
+        ],
+        "data[].is_cargo_center": [
+          "number"
+        ],
+        "data[].is_default_system": [
+          "number"
+        ],
+        "data[].is_food": [
+          "number"
+        ],
+        "data[].is_habitation": [
+          "number"
+        ],
+        "data[].is_jump_point": [
+          "number"
+        ],
+        "data[].is_medical": [
+          "number"
+        ],
+        "data[].is_nqa": [
+          "number"
+        ],
+        "data[].is_player_owned": [
+          "number"
+        ],
+        "data[].is_refinery": [
+          "number"
+        ],
+        "data[].is_refuel": [
+          "number"
+        ],
+        "data[].is_repair": [
+          "number"
+        ],
+        "data[].is_shop_fps": [
+          "number"
+        ],
+        "data[].is_shop_vehicle": [
+          "number"
+        ],
+        "data[].is_visible": [
+          "number"
+        ],
+        "data[].max_container_size": [
+          "number"
+        ],
+        "data[].mcs": [
+          "number"
+        ],
+        "data[].moon_name": [
+          "null",
+          "string"
+        ],
+        "data[].name": [
+          "string"
+        ],
+        "data[].nickname": [
+          "string"
+        ],
+        "data[].orbit_name": [
+          "null",
+          "string"
+        ],
+        "data[].outpost_name": [
+          "null",
+          "string"
+        ],
+        "data[].planet_name": [
+          "null",
+          "string"
+        ],
+        "data[].screenshot": [
+          "null",
+          "string"
+        ],
+        "data[].screenshot_author": [
+          "string"
+        ],
+        "data[].screenshot_full": [
+          "null",
+          "string"
+        ],
+        "data[].space_station_name": [
+          "null",
+          "string"
+        ],
+        "data[].star_system_name": [
+          "string"
+        ],
+        "data[].type": [
+          "string"
+        ],
+        "http_code": [
+          "number"
+        ],
+        "message": [
+          "string"
+        ],
+        "status": [
+          "string"
+        ]
+      },
+      "status_codes": null
+    }
+  ]
+}

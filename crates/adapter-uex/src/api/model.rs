@@ -4,6 +4,13 @@
 //! The values the UEX client returns and submits, translated from the UEX wire format.
 
 use serde::{Deserialize, Serialize};
+use tallyline_shared_kernel::api::model::PricePerScu;
+
+pub use crate::public_contract::{
+    PublicContractCode, PublicContractEndpoint, PublicContractError, PublicContractPayload,
+    PublicContractSchema, PublicContractSnapshot,
+};
+pub use tallyline_shared_kernel::api::model::ContainerSize;
 
 /// The current game versions of `GET /game_versions`.
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -57,57 +64,7 @@ pub enum TradedSide {
     Neither,
 }
 
-/// A container size of the documented set {1, 2, 4, 8, 16, 24, 32} SCU.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
-pub enum ContainerSize {
-    /// 1 SCU.
-    Scu1,
-    /// 2 SCU.
-    Scu2,
-    /// 4 SCU.
-    Scu4,
-    /// 8 SCU.
-    Scu8,
-    /// 16 SCU.
-    Scu16,
-    /// 24 SCU.
-    Scu24,
-    /// 32 SCU.
-    Scu32,
-}
-
-impl ContainerSize {
-    /// Returns the size for `scu`, `None` outside the documented set.
-    #[must_use]
-    pub fn from_scu(scu: u32) -> Option<Self> {
-        match scu {
-            1 => Some(Self::Scu1),
-            2 => Some(Self::Scu2),
-            4 => Some(Self::Scu4),
-            8 => Some(Self::Scu8),
-            16 => Some(Self::Scu16),
-            24 => Some(Self::Scu24),
-            32 => Some(Self::Scu32),
-            _ => None,
-        }
-    }
-
-    /// Returns the size in SCU.
-    #[must_use]
-    pub fn scu(self) -> u32 {
-        match self {
-            Self::Scu1 => 1,
-            Self::Scu2 => 2,
-            Self::Scu4 => 4,
-            Self::Scu8 => 8,
-            Self::Scu16 => 16,
-            Self::Scu24 => 24,
-            Self::Scu32 => 32,
-        }
-    }
-}
-
-/// The side, status and container sizes of one row of `GET /commodities_prices`.
+/// The exact price, side, status and container sizes of a commodity-price row.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct PriceRow {
     /// The terminal of the row.
@@ -116,6 +73,8 @@ pub struct PriceRow {
     pub commodity: CommodityId,
     /// The traded side.
     pub side: TradedSide,
+    /// The positive exact price, absent unless precisely one traded side exists.
+    pub price: Option<PricePerScu>,
     /// The status level of the traded side, `None` when it is 0 or the side is not single.
     pub status: Option<u8>,
     /// The container sizes of this row, in the order UEX sends them; empty when none are known.
@@ -221,3 +180,5 @@ pub struct SubmitSuccess {
     /// Server timestamp.
     pub date_added: i64,
 }
+pub use crate::server_time::ServerTimeTracker;
+pub use crate::submission::PreparedUexSubmission;

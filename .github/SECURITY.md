@@ -18,7 +18,7 @@ puts every user of the client at risk.
 
 The preferred channel is GitHub's **private vulnerability reporting**:
 
-> **[Report a vulnerability](https://github.com/greluc/tallyline/security/advisories/new)**
+> **[Report a vulnerability](https://github.com/tallyline-sc/tallyline/security/advisories/new)**
 
 That form gives us a private place to triage the finding, work on a fix with
 you, request a CVE and coordinate disclosure.
@@ -251,7 +251,7 @@ protected tag on protected `main` (S-15) and will publish:
   can check before you report a finding against a downloaded file:
 
   ```bash
-  gh attestation verify <downloaded-file> --repo greluc/tallyline
+  gh attestation verify <downloaded-file> --repo tallyline-sc/tallyline
   ```
 
 Whether the Windows installers will also be Authenticode-signed is still open

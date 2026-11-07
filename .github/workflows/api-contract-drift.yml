@@ -1,0 +1,64 @@
+name: Public UEX contract drift
+
+on:
+  schedule:
+    - cron: "31 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CARGO_TERM_COLOR: never
+
+jobs:
+  public-contract:
+    if: >-
+      github.repository == 'tallyline-sc/tallyline' &&
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'workflow_dispatch' || vars.TALLYLINE_UEX_DRIFT_ENABLED == 'true')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Install the pinned Rust toolchain
+        run: rustup toolchain install
+
+      - name: Verify the compiler reports the pinned version
+        run: |
+          pinned=$(sed -n 's/^channel = "\(.*\)"$/\1/p' rust-toolchain.toml)
+          actual=$(rustc --version | cut -d' ' -f2)
+          test -n "$pinned"
+          test "$pinned" = "$actual"
+
+      - name: Guard the supply-chain configuration
+        run: cargo xtask guard
+
+      - name: Compare five credential-free public samples
+        id: sample
+        shell: bash
+        run: |
+          set -o pipefail
+          cargo run --locked -p tallyline-adapter-uex --bin tallyline-uex-spike -- contract-check 2>&1 | tee "$RUNNER_TEMP/uex-contract-report.txt"
+
+      - name: Publish the value-free check summary
+        if: always() && steps.sample.outcome != 'skipped'
+        shell: bash
+        run: |
+          if test -f "$RUNNER_TEMP/uex-contract-report.txt"; then
+            {
+              echo '## Public UEX contract observation'
+              echo
+              echo '```text'
+              cat "$RUNNER_TEMP/uex-contract-report.txt"
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi

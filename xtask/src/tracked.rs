@@ -22,7 +22,7 @@ pub const LIST_ARGUMENTS: [&str; 5] = [
 
 const SNIFF_BYTES: u64 = 8192;
 
-const GIT_ENVIRONMENT: [&str; 16] = [
+const GIT_ENVIRONMENT: [&str; 17] = [
     "GIT_ALTERNATE_OBJECT_DIRECTORIES",
     "GIT_CONFIG",
     "GIT_CONFIG_PARAMETERS",
@@ -31,6 +31,7 @@ const GIT_ENVIRONMENT: [&str; 16] = [
     "GIT_DIR",
     "GIT_WORK_TREE",
     "GIT_IMPLICIT_WORK_TREE",
+    "GIT_INTERNAL_SUPER_PREFIX",
     "GIT_GRAFT_FILE",
     "GIT_INDEX_FILE",
     "GIT_NO_REPLACE_OBJECTS",

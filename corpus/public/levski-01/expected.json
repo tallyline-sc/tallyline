@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "id": "levski-01",
-  "verified": false,
+  "verified": true,
   "transcription": "Transcribed by Claude from the original screenshots on 2026-10-14; must be independently checked by a human before it counts as golden data.",
   "source": {
     "uploadedBy": "project owner",
@@ -4684,7 +4684,10 @@
             24,
             32
           ],
-          "expectedCommodityId": 37
+          "expectedCommodityId": 37,
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "Corrected 2026-11-01: the project owner confirmed that the container boxes and card are clipped at the bottom. Retained field values are transcription evidence only; this partial card produces no row."
         }
       ]
     },
@@ -4797,7 +4800,10 @@
             24,
             32
           ],
-          "expectedCommodityId": 41
+          "expectedCommodityId": 41,
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "Corrected 2026-11-01: the project owner confirmed that the container boxes and card are clipped at the bottom. Retained field values are transcription evidence only; this partial card produces no row."
         }
       ]
     },
@@ -4910,7 +4916,10 @@
             24,
             32
           ],
-          "expectedCommodityId": 92
+          "expectedCommodityId": 92,
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "Corrected 2026-11-01: the project owner confirmed that the container boxes and card are clipped at the bottom. Retained field values are transcription evidence only; this partial card produces no row."
         }
       ]
     },
@@ -5023,7 +5032,10 @@
             24,
             32
           ],
-          "expectedCommodityId": 51
+          "expectedCommodityId": 51,
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "Corrected 2026-11-01: the project owner confirmed that the container boxes and card are clipped at the bottom. Retained field values are transcription evidence only; this partial card produces no row."
         }
       ]
     },
@@ -7206,7 +7218,10 @@
             24,
             32
           ],
-          "expectedCommodityId": 15
+          "expectedCommodityId": 15,
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "Corrected 2026-11-01: the project owner confirmed that the container boxes and card are clipped at the bottom. Retained field values are transcription evidence only; this partial card produces no row."
         }
       ]
     },
@@ -7998,7 +8013,10 @@
             24,
             32
           ],
-          "expectedCommodityId": 37
+          "expectedCommodityId": 37,
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "Corrected 2026-11-01: the project owner confirmed that the container boxes and card are clipped at the bottom. Retained field values are transcription evidence only; this partial card produces no row."
         }
       ]
     },
@@ -8111,7 +8129,10 @@
             24,
             32
           ],
-          "expectedCommodityId": 41
+          "expectedCommodityId": 41,
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "Corrected 2026-11-01: the project owner confirmed that the container boxes and card are clipped at the bottom. Retained field values are transcription evidence only; this partial card produces no row."
         }
       ]
     },
@@ -8224,7 +8245,10 @@
             24,
             32
           ],
-          "expectedCommodityId": 92
+          "expectedCommodityId": 92,
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "Corrected 2026-11-01: the project owner confirmed that the container boxes and card are clipped at the bottom. Retained field values are transcription evidence only; this partial card produces no row."
         }
       ]
     },
@@ -8337,7 +8361,10 @@
             24,
             32
           ],
-          "expectedCommodityId": 51
+          "expectedCommodityId": 51,
+          "partial": true,
+          "partialEdge": "bottom",
+          "note": "Corrected 2026-11-01: the project owner confirmed that the container boxes and card are clipped at the bottom. Retained field values are transcription evidence only; this partial card produces no row."
         }
       ]
     },

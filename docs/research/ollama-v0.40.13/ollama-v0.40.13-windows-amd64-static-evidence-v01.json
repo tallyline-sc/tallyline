@@ -1,0 +1,1436 @@
+{
+  "schema_id": "tallyline.ollama-static-evidence",
+  "schema_version": 1,
+  "evidence_kind": "windows_amd64_cpu_partial_archive_static_review",
+  "observation_date_utc": "2026-11-05",
+  "upstream": {
+    "repository": "ollama/ollama",
+    "release_tag": "v0.40.13",
+    "release_id": 427123529,
+    "release_published_utc": "2026-10-28T19:55:04Z",
+    "release_immutable": false,
+    "source_revision": "04088e7c9d41cba5d33bafbf788d87a465c79d5b",
+    "asset": {
+      "id": 687142233,
+      "name": "ollama-windows-amd64.zip",
+      "archive_bytes": 1601969847,
+      "updated_utc": "2026-10-29T02:48:15Z",
+      "published_sha256": "7afa38624fa62ee5d8293422d0ab084c1bb4603134c7f4dafce11a033b57cc19",
+      "metadata_url": "https://api.github.com/repos/ollama/ollama/releases/assets/687142233",
+      "download_url": "https://github.com/ollama/ollama/releases/download/v0.40.13/ollama-windows-amd64.zip"
+    },
+    "native": {
+      "repository": "ggml-org/llama.cpp",
+      "tag": "b11963",
+      "revision": "39febd2adb947b70da35e95f9351b3bf58ad170a",
+      "ollama_compatibility_overlay_applies": true,
+      "pin_url": "https://github.com/ollama/ollama/blob/04088e7c9d41cba5d33bafbf788d87a465c79d5b/LLAMA_CPP_VERSION",
+      "integration_url": "https://github.com/ollama/ollama/blob/04088e7c9d41cba5d33bafbf788d87a465c79d5b/llama/server/CMakeLists.txt"
+    }
+  },
+  "acquisition_and_review": {
+    "scope": "Selected ZIP records and notice/native contents as data; no complete archive.",
+    "application_body_bytes": 29396850,
+    "decompressed_selected_member_bytes": 83611431,
+    "selected_member_count": 30,
+    "inspected_pe_count": 26,
+    "inspected_notice_count": 4,
+    "acquisition_receipt_sha256": "cc1236bc988c9aaf1fd058995a781973011cf7450d322624c40c8b865cb29a48",
+    "static_review_sha256": "b0c3eb446a2b619e350b9174fffd99cf8b9ac6fc04f35652d872964364efa16c",
+    "static_reader_sha256": "a76108cdb2345fce6f4d4dc4fb714e5fd169ca865a28c7f060bc4dc26559898f",
+    "local_headers_sizes_crcs_verified_against_pinned_directory": true,
+    "member_sha256_values_independently_rehashed": true,
+    "upstream_published_member_sha256_values_available": false
+  },
+  "members": [
+    {
+      "archive_path": "lib/ollama/CPP_HTTPLIB_LICENSE",
+      "kind": "notice_data",
+      "bytes": 1097,
+      "observed_sha256": "bb546eae5924d8ee842e0e567e6d533c5824bdebccf605f99a5b3429034e6697",
+      "source_expanded_declared_import_candidate": false,
+      "candidate_root_role": null,
+      "pe": null
+    },
+    {
+      "archive_path": "lib/ollama/ggml-base.dll",
+      "kind": "native_data",
+      "bytes": 821640,
+      "observed_sha256": "a2b78e7a90b361733ecaa6237c827345570144909b257c551737543be3987b30",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": null,
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-alderlake.dll",
+      "kind": "native_data",
+      "bytes": 1732488,
+      "observed_sha256": "849382e694abce7668f9521e5aae8e4249fb5e56da8379ffbc84132610368884",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-cannonlake.dll",
+      "kind": "native_data",
+      "bytes": 2019208,
+      "observed_sha256": "4b315a35aec350dc51bf4f76cefdaa39d236f14da07c72bc6fedcbc32a22e01b",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-cascadelake.dll",
+      "kind": "native_data",
+      "bytes": 1989512,
+      "observed_sha256": "0790d2a0285964d225047e9443592f8b28936b1b8ec8ff7f11bf69a64cdd0262",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-cooperlake.dll",
+      "kind": "native_data",
+      "bytes": 1987464,
+      "observed_sha256": "80d25416dea4c20490ef853a3228bc6c9bea81d5fd2164bb1215b9eb5efb4253",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-haswell.dll",
+      "kind": "native_data",
+      "bytes": 1740680,
+      "observed_sha256": "7cd4f29f47b7ff1d257dd747d5a66112c57c92ccdc8eab06fd9c4bb53385468e",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-icelake.dll",
+      "kind": "native_data",
+      "bytes": 1996680,
+      "observed_sha256": "9f05f14d8f0a3d790df07c3efcacd0cca67fce38baa191b1b2a703d1dd2bfa11",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-ivybridge.dll",
+      "kind": "native_data",
+      "bytes": 1618824,
+      "observed_sha256": "490ec8bb4c7d869f7b67519a8060834bfb88349b84f83e12e9beecc7bb28326b",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-piledriver.dll",
+      "kind": "native_data",
+      "bytes": 1624456,
+      "observed_sha256": "e54a77084c826da7c540dcac392cbbe6ecf53cc6717bd67e48907663798c875b",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-sandybridge.dll",
+      "kind": "native_data",
+      "bytes": 1637768,
+      "observed_sha256": "6037ddc1451d330a274e8e8e18663080f81b302067f1b994ada0a1ea8a632df7",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-sapphirerapids.dll",
+      "kind": "native_data",
+      "bytes": 2288520,
+      "observed_sha256": "7f24f63105b508f149c9134b2423be2e177419f02d4e84aee318ee41af4e087c",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-skylakex.dll",
+      "kind": "native_data",
+      "bytes": 2011528,
+      "observed_sha256": "3a7a9ccd10fc78d96eb519c325bd02c8ad55220e8b0cf2e5943a7b65fa12f9cf",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-sse42.dll",
+      "kind": "native_data",
+      "bytes": 1262984,
+      "observed_sha256": "631e9616d72b73711cfc1a0cb898b9393ebd7d72795e4fece27fc2f0d7bd378e",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-x64.dll",
+      "kind": "native_data",
+      "bytes": 1249160,
+      "observed_sha256": "c3563f4455a00633ee317b40b1c650a20bb71fda2b8dad8e7ffe39d2e5b0c954",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml-cpu-zen4.dll",
+      "kind": "native_data",
+      "bytes": 1994632,
+      "observed_sha256": "5e0a82e2df64fb1f1831af99f35e6bc778327fc849ffa5bf07777ad77df7e7ef",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_cpu_scoring_variant",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "advapi32.dll",
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libomp.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/ggml.dll",
+      "kind": "native_data",
+      "bytes": 49032,
+      "observed_sha256": "fae997d5919fe9118a817922b5d21a52306a73f49ebe6f8ab77b73338cf3b0ae",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "source_supported_backend_root",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/GO_LICENSE",
+      "kind": "notice_data",
+      "bytes": 182211,
+      "observed_sha256": "4285a95875d7a3ae3790910d59ee88f82339d0ba37b1cbadde4124113bd04308",
+      "source_expanded_declared_import_candidate": false,
+      "candidate_root_role": null,
+      "pe": null
+    },
+    {
+      "archive_path": "lib/ollama/libc++.dll",
+      "kind": "native_data",
+      "bytes": 1767816,
+      "observed_sha256": "286488f82c846d06039a2e1320bf487ca71c75baeefc673bd6da8e8b512b0b11",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": null,
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-multibyte-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "kernel32.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/libllama-common.dll",
+      "kind": "native_data",
+      "bytes": 4447624,
+      "observed_sha256": "6dfe433d465539640877f9465043053cd8a9110f19086fc20680bf0c88fa22d0",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": null,
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "ggml.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libllama.dll",
+          "libunwind.dll",
+          "shell32.dll",
+          "ws2_32.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/libllama-server-impl.dll",
+      "kind": "native_data",
+      "bytes": 3068296,
+      "observed_sha256": "457a7845ee2f95a8b30bf66da039aabafe263d78407519dd5797688840d6f3bf",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": null,
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-filesystem-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-locale-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "ggml.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libllama-common.dll",
+          "libllama.dll",
+          "libmtmd.dll",
+          "libunwind.dll",
+          "ws2_32.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/libllama.dll",
+      "kind": "native_data",
+      "bytes": 4008840,
+      "observed_sha256": "a9ccb9ae84f200579d1103a6d7cb67eb2e79342961497a74dc35d9c87894d9d9",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": null,
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "ggml.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/libmtmd.dll",
+      "kind": "native_data",
+      "bytes": 1685384,
+      "observed_sha256": "64de9eba97b8b648f7d3f1f5cbf1c1e3b730d9467b0dae8b41f1f40beb5ce39b",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": null,
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "ggml-base.dll",
+          "ggml.dll",
+          "kernel32.dll",
+          "libc++.dll",
+          "libllama.dll",
+          "libunwind.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/libomp.dll",
+      "kind": "native_data",
+      "bytes": 965000,
+      "observed_sha256": "4da15a28f6c9129190412326212232879cc64b5b7d799ccc4996c1f33ff6e971",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": null,
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-convert-l1-1-0.dll",
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "kernel32.dll",
+          "psapi.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/libunwind.dll",
+      "kind": "native_data",
+      "bytes": 107912,
+      "observed_sha256": "ea32664f375f23a24dd6582f4f436eeba91c56446523d9aaa02fc05ef1647d45",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": null,
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "kernel32.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/libwinpthread-1.dll",
+      "kind": "native_data",
+      "bytes": 390024,
+      "observed_sha256": "6f8fbd09b3f449dd2578ad7f6e9713acd00b76a46b8da3f3d8ba836a7ff291fc",
+      "source_expanded_declared_import_candidate": false,
+      "candidate_root_role": null,
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "kernel32.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "lib/ollama/LLAMA_CPP_LICENSE",
+      "kind": "notice_data",
+      "bytes": 1099,
+      "observed_sha256": "bcd8ec749126d45cb06737d0690295d73df4b6e7e194205bcf91190368f27285",
+      "source_expanded_declared_import_candidate": false,
+      "candidate_root_role": null,
+      "pe": null
+    },
+    {
+      "archive_path": "lib/ollama/LLAMA_CPP_VENDORS_LICENSE",
+      "kind": "notice_data",
+      "bytes": 7424,
+      "observed_sha256": "7547ae6372a35e7382898dd9f5519ebc16e93095f69c2466b5b74b617c33d4da",
+      "source_expanded_declared_import_candidate": false,
+      "candidate_root_role": null,
+      "pe": null
+    },
+    {
+      "archive_path": "lib/ollama/llama-server.exe",
+      "kind": "native_data",
+      "bytes": 22920,
+      "observed_sha256": "cc8ab10718d388e16dd64ffd9331f0dcecc53d7c2bb322d6b526dc6f0f01dd3c",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "helper_root",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "kernel32.dll",
+          "libllama-server-impl.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    },
+    {
+      "archive_path": "ollama.exe",
+      "kind": "native_data",
+      "bytes": 40931208,
+      "observed_sha256": "c1cca2937421d78877d5961746d25e33acd62e194d881f90fb63dca7f3e10f41",
+      "source_expanded_declared_import_candidate": true,
+      "candidate_root_role": "cli_root",
+      "pe": {
+        "machine_hex": "8664",
+        "optional_header_magic_hex": "020b",
+        "ordinary_import_modules": [
+          "api-ms-win-crt-environment-l1-1-0.dll",
+          "api-ms-win-crt-heap-l1-1-0.dll",
+          "api-ms-win-crt-math-l1-1-0.dll",
+          "api-ms-win-crt-private-l1-1-0.dll",
+          "api-ms-win-crt-runtime-l1-1-0.dll",
+          "api-ms-win-crt-stdio-l1-1-0.dll",
+          "api-ms-win-crt-string-l1-1-0.dll",
+          "api-ms-win-crt-time-l1-1-0.dll",
+          "api-ms-win-crt-utility-l1-1-0.dll",
+          "kernel32.dll"
+        ],
+        "delayed_import_modules": [],
+        "delay_directory_rva": 0,
+        "delay_directory_bytes": 0,
+        "bounded_raw_sections_and_import_rvas_parsed": true
+      }
+    }
+  ],
+  "candidate": {
+    "interpretation": "Source-expanded declared-import candidate; not an executed or complete dynamic load closure.",
+    "native_member_count": 25,
+    "native_bytes": 83029576,
+    "cpu_scoring_variant_count": 14,
+    "external_import_modules_unresolved": [
+      "advapi32.dll",
+      "api-ms-win-crt-convert-l1-1-0.dll",
+      "api-ms-win-crt-environment-l1-1-0.dll",
+      "api-ms-win-crt-filesystem-l1-1-0.dll",
+      "api-ms-win-crt-heap-l1-1-0.dll",
+      "api-ms-win-crt-locale-l1-1-0.dll",
+      "api-ms-win-crt-math-l1-1-0.dll",
+      "api-ms-win-crt-multibyte-l1-1-0.dll",
+      "api-ms-win-crt-private-l1-1-0.dll",
+      "api-ms-win-crt-runtime-l1-1-0.dll",
+      "api-ms-win-crt-stdio-l1-1-0.dll",
+      "api-ms-win-crt-string-l1-1-0.dll",
+      "api-ms-win-crt-time-l1-1-0.dll",
+      "api-ms-win-crt-utility-l1-1-0.dll",
+      "kernel32.dll",
+      "psapi.dll",
+      "shell32.dll",
+      "ws2_32.dll"
+    ],
+    "inspected_noncandidate_native_members": [
+      "lib/ollama/libwinpthread-1.dll"
+    ],
+    "winpthread_import_referrers": [],
+    "quantisation_import_referrers": [],
+    "source_scoring_loader_url": "https://github.com/ggml-org/llama.cpp/blob/39febd2adb947b70da35e95f9351b3bf58ad170a/ggml/src/ggml-backend-reg.cpp#L480",
+    "source_inference_target_url": "https://github.com/ggml-org/llama.cpp/blob/39febd2adb947b70da35e95f9351b3bf58ad170a/tools/server/CMakeLists.txt",
+    "source_quantisation_target_url": "https://github.com/ggml-org/llama.cpp/blob/39febd2adb947b70da35e95f9351b3bf58ad170a/tools/quantize/CMakeLists.txt"
+  },
+  "embedded_go_build_claim": {
+    "interpretation": "Embedded data claim, not source-to-binary authentication.",
+    "go_version": "go1.26.10",
+    "main_module": "github.com/ollama/ollama",
+    "target_os": "windows",
+    "target_architecture": "amd64",
+    "cgo_enabled": "1",
+    "vcs_revision": "04088e7c9d41cba5d33bafbf788d87a465c79d5b",
+    "vcs_commit_time": "2026-10-28T22:20:04Z",
+    "vcs_modified": "false",
+    "module_frame_sha256": "60ce9fa8d0244d649ade881ddb1077d6636855864b8f539c92841cadd3009e87",
+    "replacement_line_count": 0,
+    "declared_module_count": 58,
+    "modules": [
+      {
+        "module": "github.com/agnivade/levenshtein",
+        "version": "v1.1.1",
+        "embedded_go_sum": "h1:QY8M92nrzkmr798gCo3kmMyqXFzdQVpxLlGPRBij0P8="
+      },
+      {
+        "module": "github.com/aymanbagabas/go-osc52/v2",
+        "version": "v2.0.1",
+        "embedded_go_sum": "h1:HwpRHbFMcZLEVr42D4p7XBqjyuxQH5SMiErDT4WkJ2k="
+      },
+      {
+        "module": "github.com/bahlo/generic-list-go",
+        "version": "v0.2.0",
+        "embedded_go_sum": "h1:5sz/EEAK+ls5wF+NeqDpk5+iNdMDXrh3z3nPnH1Wvgk="
+      },
+      {
+        "module": "github.com/buger/jsonparser",
+        "version": "v1.1.2",
+        "embedded_go_sum": "h1:frqHqw7otoVbk5M8LlE/L7HTnIq2v9RX6EJ48i9AxJk="
+      },
+      {
+        "module": "github.com/charmbracelet/bubbletea",
+        "version": "v1.3.10",
+        "embedded_go_sum": "h1:otUDHWMMzQSB0Pkc87rm691KZ3SWa4KUlvF9nRvCICw="
+      },
+      {
+        "module": "github.com/charmbracelet/colorprofile",
+        "version": "v0.2.3-0.20250311203215-f60798e515dc",
+        "embedded_go_sum": "h1:4pZI35227imm7yK2bGPcfpFEmuY1gc2YSTShr4iJBfs="
+      },
+      {
+        "module": "github.com/charmbracelet/lipgloss",
+        "version": "v1.1.0",
+        "embedded_go_sum": "h1:vYXsiLHVkK7fp74RkV7b2kq9+zDLoEU4MZoFqR/noCY="
+      },
+      {
+        "module": "github.com/charmbracelet/x/ansi",
+        "version": "v0.10.1",
+        "embedded_go_sum": "h1:rL3Koar5XvX0pHGfovN03f5cxLbCF2YvLeyz7D2jVDQ="
+      },
+      {
+        "module": "github.com/charmbracelet/x/cellbuf",
+        "version": "v0.0.13-0.20250311204145-2c3ea96c31dd",
+        "embedded_go_sum": "h1:vy0GVL4jeHEwG5YOXDmi86oYw2yuYUGqz6a8sLwg0X8="
+      },
+      {
+        "module": "github.com/charmbracelet/x/term",
+        "version": "v0.2.1",
+        "embedded_go_sum": "h1:AQeHeLZ1OqSXhrAWpYUtZyX1T3zVxfpZuEQMIQaGIAQ="
+      },
+      {
+        "module": "github.com/containerd/console",
+        "version": "v1.0.3",
+        "embedded_go_sum": "h1:lIr7SlA5PxZyMV30bDW0MGbiOPXwc63yRuCP0ARubLw="
+      },
+      {
+        "module": "github.com/d4l3k/go-bfloat16",
+        "version": "v0.0.0-20211005043715-690c3bdd05f1",
+        "embedded_go_sum": "h1:cBzrdJPAFBsgCrDPnZxlp1dF2+k4r1kVpD7+1S1PVjY="
+      },
+      {
+        "module": "github.com/emirpasic/gods/v2",
+        "version": "v2.0.0-alpha",
+        "embedded_go_sum": "h1:dwFlh8pBg1VMOXWGipNMRt8v96dKAIvBehtCt6OtunU="
+      },
+      {
+        "module": "github.com/erikgeiser/coninput",
+        "version": "v0.0.0-20211004153227-1c3628e74d0f",
+        "embedded_go_sum": "h1:Y/CXytFA4m6baUTXGLOoWe4PQhGxaX0KpnayAqC48p4="
+      },
+      {
+        "module": "github.com/gabriel-vasile/mimetype",
+        "version": "v1.4.16",
+        "embedded_go_sum": "h1:5izNFuvA37st1dDRAcA7TtmngBmRgiIPDmTtiEvjx1E="
+      },
+      {
+        "module": "github.com/gin-contrib/cors",
+        "version": "v1.7.9",
+        "embedded_go_sum": "h1:69rz5YU6PW7XlQ4VPXacl77ldFiUvR0E0bmEqmbq86w="
+      },
+      {
+        "module": "github.com/gin-contrib/sse",
+        "version": "v1.1.2",
+        "embedded_go_sum": "h1:MU2fgl1RrdYTMcgJLtz2kJF+vPg3xrqaaKfUUU18tCo="
+      },
+      {
+        "module": "github.com/gin-gonic/gin",
+        "version": "v1.12.0",
+        "embedded_go_sum": "h1:b3YAbrZtnf8N//yjKeU2+MQsh2mY5htkZidOM7O0wG8="
+      },
+      {
+        "module": "github.com/go-playground/locales",
+        "version": "v0.14.2",
+        "embedded_go_sum": "h1:d8UmcrM6Nip0hfGZKLGpAvZH37XB4TS0xzK9B56YNCY="
+      },
+      {
+        "module": "github.com/go-playground/universal-translator",
+        "version": "v0.18.2",
+        "embedded_go_sum": "h1:LCsMLC9RzmbUMNUPVYD15dmcjwYAJhmX8mPZRW4rAVU="
+      },
+      {
+        "module": "github.com/go-playground/validator/v10",
+        "version": "v10.30.5",
+        "embedded_go_sum": "h1:YyCXvVShZbs2Sm3Mb53eNOlhRXctSOzW5QJAouCTZL4="
+      },
+      {
+        "module": "github.com/goccy/go-yaml",
+        "version": "v1.19.2",
+        "embedded_go_sum": "h1:PmFC1S6h8ljIz6gMRBopkjP1TVT7xuwrButHID66PoM="
+      },
+      {
+        "module": "github.com/google/uuid",
+        "version": "v1.6.0",
+        "embedded_go_sum": "h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0="
+      },
+      {
+        "module": "github.com/inconshreveable/mousetrap",
+        "version": "v1.1.0",
+        "embedded_go_sum": "h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8="
+      },
+      {
+        "module": "github.com/klauspost/compress",
+        "version": "v1.20.3",
+        "embedded_go_sum": "h1:zWNoFqq/lSuYQRim3dUXlXeA0IqwuZGicdG5ZTfY5j4="
+      },
+      {
+        "module": "github.com/leodido/go-urn",
+        "version": "v1.5.0",
+        "embedded_go_sum": "h1:pLqT2kq1zpHW/1D18QMjMpdtX7cekxqtJJjg5ANyWw0="
+      },
+      {
+        "module": "github.com/lucasb-eyer/go-colorful",
+        "version": "v1.2.0",
+        "embedded_go_sum": "h1:1nnpGOrhyZZuNyfu1QjKiUICQ74+3FNCN69Aj6K7nkY="
+      },
+      {
+        "module": "github.com/mailru/easyjson",
+        "version": "v0.7.7",
+        "embedded_go_sum": "h1:UGYAvKxe3sBsEDzO8ZeWOSlIQfWFlxbzLZe7hwFURr0="
+      },
+      {
+        "module": "github.com/mattn/go-isatty",
+        "version": "v0.0.24",
+        "embedded_go_sum": "h1:tGZZoVgT/KiqK1c8ocVLeDS8BSWMRd47J3Lbz7vsReI="
+      },
+      {
+        "module": "github.com/mattn/go-localereader",
+        "version": "v0.0.2-0.20220822084737-6bae6c923850",
+        "embedded_go_sum": "h1:3wTbcd6IAtyC45hpBhisgmnAl/+twARH7FyVSh5NbcY="
+      },
+      {
+        "module": "github.com/mattn/go-runewidth",
+        "version": "v0.0.16",
+        "embedded_go_sum": "h1:E5ScNMtiwvlvB5paMFdw9p4kSQzbXFikJ5SQO6TULQc="
+      },
+      {
+        "module": "github.com/mattn/go-sqlite3",
+        "version": "v1.14.52",
+        "embedded_go_sum": "h1:wVbm2Qnf4OXkqhBTSPuCRZDRnxfbVrrmiCEroVdog8U="
+      },
+      {
+        "module": "github.com/muesli/ansi",
+        "version": "v0.0.0-20230316100256-276c6243b2f6",
+        "embedded_go_sum": "h1:ZK8zHtRHOkbHy6Mmr5D264iyp3TiX5OmNcI5cIARiQI="
+      },
+      {
+        "module": "github.com/muesli/cancelreader",
+        "version": "v0.2.2",
+        "embedded_go_sum": "h1:3I4Kt4BQjOR54NavqnDogx/MIoWBFa0StPA8ELUXHmA="
+      },
+      {
+        "module": "github.com/muesli/termenv",
+        "version": "v0.16.0",
+        "embedded_go_sum": "h1:S5AlUN9dENB57rsbnkPyfdGuWIlkmzJjbFf0Tf5FWUc="
+      },
+      {
+        "module": "github.com/olekukonko/tablewriter",
+        "version": "v0.0.5",
+        "embedded_go_sum": "h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N7AbDhec="
+      },
+      {
+        "module": "github.com/pelletier/go-toml/v2",
+        "version": "v2.4.3",
+        "embedded_go_sum": "h1:GTRvJQutkOSftxIFD5xw9aepkYNuPWmVJpffdDPYVpY="
+      },
+      {
+        "module": "github.com/pkg/browser",
+        "version": "v0.0.0-20240102092130-5ac0b6a4141c",
+        "embedded_go_sum": "h1:+mdjkGKdHQG3305AYmdv1U2eRNDiU2ErMBj1gwrq8eQ="
+      },
+      {
+        "module": "github.com/quic-go/qpack",
+        "version": "v0.6.0",
+        "embedded_go_sum": "h1:g7W+BMYynC1LbYLSqRt8PBg5Tgwxn214ZZR34VIOjz8="
+      },
+      {
+        "module": "github.com/quic-go/quic-go",
+        "version": "v0.64.1",
+        "embedded_go_sum": "h1:BCNTP+6x6++OPKrGST2FR3f1tycx8O3QOA3QQv09g70="
+      },
+      {
+        "module": "github.com/rivo/uniseg",
+        "version": "v0.4.7",
+        "embedded_go_sum": "h1:WUdvkW8uEhrYfLC4ZzdpI2ztxP1I582+49Oc5Mq64VQ="
+      },
+      {
+        "module": "github.com/spf13/cobra",
+        "version": "v1.7.0",
+        "embedded_go_sum": "h1:hyqWnYt1ZQShIddO5kBpj3vu05/++x6tJ6dg8EC572I="
+      },
+      {
+        "module": "github.com/spf13/pflag",
+        "version": "v1.0.5",
+        "embedded_go_sum": "h1:iy+VFUOCP1a+8yFto/drg2CJ5u0yRoB7fZw3DKv/JXA="
+      },
+      {
+        "module": "github.com/ugorji/go/codec",
+        "version": "v1.3.2",
+        "embedded_go_sum": "h1:zkEASHHyEClGeURfgNT9PJZVfAbs9oEX9QXggwWNJbc="
+      },
+      {
+        "module": "github.com/wk8/go-ordered-map/v2",
+        "version": "v2.1.8",
+        "embedded_go_sum": "h1:5h/BUHu93oj4gIdvHHHGsScSTMijfx5PeYkE/fJgbpc="
+      },
+      {
+        "module": "github.com/x448/float16",
+        "version": "v0.8.4",
+        "embedded_go_sum": "h1:qLwI1I70+NjRFUR3zs1JPUCgaCXSh3SW62uAKT1mSBM="
+      },
+      {
+        "module": "github.com/xo/terminfo",
+        "version": "v0.0.0-20220910002029-abceb7e1c41e",
+        "embedded_go_sum": "h1:JVG44RsyaB9T2KIHavMF/ppJZNG9ZpyihvCd0w101no="
+      },
+      {
+        "module": "go.mongodb.org/mongo-driver/v2",
+        "version": "v2.9.2",
+        "embedded_go_sum": "h1:OCAdjI37pC/SVxucz/9CM8zD4jCdegtsY5QcKzYFCgE="
+      },
+      {
+        "module": "golang.org/x/crypto",
+        "version": "v0.58.0",
+        "embedded_go_sum": "h1:COkYLr4k7nDI4r6QtMML2AfzeIswWHAJthLS6K/M/54="
+      },
+      {
+        "module": "golang.org/x/image",
+        "version": "v0.47.0",
+        "embedded_go_sum": "h1:za/8gVz++PPZqmZJBNSISICN5Rrj5zixP/8K++fgmqo="
+      },
+      {
+        "module": "golang.org/x/mod",
+        "version": "v0.42.0",
+        "embedded_go_sum": "h1:ICeL3t2L30ljSPHHxDnR4fqVcBt/zR2zJAb9juavmQg="
+      },
+      {
+        "module": "golang.org/x/net",
+        "version": "v0.61.0",
+        "embedded_go_sum": "h1:RR+6j/BTBCrggOLugxa+66R8FvoN6MHlzDlZIbN9YFw="
+      },
+      {
+        "module": "golang.org/x/sync",
+        "version": "v0.24.0",
+        "embedded_go_sum": "h1:iqiDrGoDgyuvAKrhLQthUEzU/R378N78gXbBjxed7oA="
+      },
+      {
+        "module": "golang.org/x/sys",
+        "version": "v0.49.0",
+        "embedded_go_sum": "h1:XbzkgYJHdqh/8m2Uu0W/dQv8nktxx4BFHp1M0gROTXA="
+      },
+      {
+        "module": "golang.org/x/term",
+        "version": "v0.47.0",
+        "embedded_go_sum": "h1:cpyOwQkr2Nzxe2p6KnrTG7Ei2wtzjsuSjhpXXepZ/BM="
+      },
+      {
+        "module": "golang.org/x/text",
+        "version": "v0.43.0",
+        "embedded_go_sum": "h1:1QivrlhwAsnMOcqgOdl9my7s9OyZl8O5/UGUTJVXoWc="
+      },
+      {
+        "module": "google.golang.org/protobuf",
+        "version": "v1.36.12",
+        "embedded_go_sum": "h1:pJOKDDOyeXErUroCihFAd5LQuwXBSpVnKGrj5o/fwxc="
+      },
+      {
+        "module": "gopkg.in/yaml.v3",
+        "version": "v3.0.1",
+        "embedded_go_sum": "h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA="
+      }
+    ]
+  },
+  "notices": [
+    {
+      "archive_path": "lib/ollama/CPP_HTTPLIB_LICENSE",
+      "bytes": 1097,
+      "observed_sha256": "bb546eae5924d8ee842e0e567e6d533c5824bdebccf605f99a5b3429034e6697",
+      "strict_utf8_decoded": true,
+      "first_nonempty_line": "The MIT License (MIT)",
+      "component_headings": []
+    },
+    {
+      "archive_path": "lib/ollama/GO_LICENSE",
+      "bytes": 182211,
+      "observed_sha256": "4285a95875d7a3ae3790910d59ee88f82339d0ba37b1cbadde4124113bd04308",
+      "strict_utf8_decoded": true,
+      "first_nonempty_line": "Go licenses for Ollama and its dependencies.",
+      "component_headings": [
+        "github.com/agnivade/levenshtein/License.txt",
+        "github.com/aymanbagabas/go-osc52/v2/LICENSE",
+        "github.com/bahlo/generic-list-go/LICENSE",
+        "github.com/buger/jsonparser/LICENSE",
+        "github.com/charmbracelet/bubbletea/LICENSE",
+        "github.com/charmbracelet/colorprofile/LICENSE",
+        "github.com/charmbracelet/lipgloss/LICENSE",
+        "github.com/charmbracelet/x/ansi/LICENSE",
+        "github.com/charmbracelet/x/cellbuf/LICENSE",
+        "github.com/charmbracelet/x/term/LICENSE",
+        "github.com/containerd/console/LICENSE",
+        "github.com/d4l3k/go-bfloat16/LICENSE",
+        "github.com/emirpasic/gods/v2/LICENSE",
+        "github.com/erikgeiser/coninput/LICENSE",
+        "github.com/gabriel-vasile/mimetype/LICENSE",
+        "github.com/gin-contrib/cors/LICENSE",
+        "github.com/gin-contrib/sse/LICENSE",
+        "github.com/gin-gonic/gin/LICENSE",
+        "github.com/go-playground/locales/LICENSE",
+        "github.com/go-playground/universal-translator/LICENSE",
+        "github.com/go-playground/validator/v10/LICENSE",
+        "github.com/goccy/go-yaml/LICENSE",
+        "github.com/google/uuid/LICENSE",
+        "github.com/inconshreveable/mousetrap/LICENSE",
+        "github.com/klauspost/compress/internal/snapref/LICENSE",
+        "github.com/klauspost/compress/LICENSE",
+        "github.com/klauspost/compress/zstd/internal/xxhash/LICENSE.txt",
+        "github.com/ledongthuc/pdf/LICENSE",
+        "github.com/leodido/go-urn/LICENSE",
+        "github.com/lucasb-eyer/go-colorful/LICENSE",
+        "github.com/mailru/easyjson/LICENSE",
+        "github.com/mattn/go-isatty/LICENSE",
+        "github.com/mattn/go-localereader/LICENSE",
+        "github.com/mattn/go-runewidth/LICENSE",
+        "github.com/mattn/go-sqlite3/LICENSE",
+        "github.com/muesli/ansi/LICENSE",
+        "github.com/muesli/cancelreader/LICENSE",
+        "github.com/muesli/termenv/LICENSE",
+        "github.com/olekukonko/tablewriter/LICENSE.md",
+        "github.com/ollama/ollama/app/dialog/LICENSE",
+        "github.com/ollama/ollama/LICENSE",
+        "github.com/pelletier/go-toml/v2/LICENSE",
+        "github.com/pkg/browser/LICENSE",
+        "github.com/quic-go/qpack/LICENSE.md",
+        "github.com/quic-go/quic-go/LICENSE",
+        "github.com/rivo/uniseg/LICENSE.txt",
+        "github.com/spf13/cobra/LICENSE.txt",
+        "github.com/spf13/pflag/LICENSE",
+        "github.com/TheTitanrain/w32/LICENSE",
+        "github.com/tkrajina/go-reflector/reflector/LICENSE.txt",
+        "github.com/tkrajina/typescriptify-golang-structs/typescriptify/LICENSE.txt",
+        "github.com/ugorji/go/codec/LICENSE",
+        "github.com/wk8/go-ordered-map/v2/LICENSE",
+        "github.com/x448/float16/LICENSE",
+        "github.com/xo/terminfo/LICENSE",
+        "go.mongodb.org/mongo-driver/v2/LICENSE",
+        "golang.org/x/crypto/LICENSE",
+        "golang.org/x/image/LICENSE",
+        "golang.org/x/mod/semver/LICENSE",
+        "golang.org/x/net/LICENSE",
+        "golang.org/x/sync/LICENSE",
+        "golang.org/x/sys/LICENSE",
+        "golang.org/x/term/LICENSE",
+        "golang.org/x/text/LICENSE",
+        "google.golang.org/protobuf/LICENSE",
+        "gopkg.in/yaml.v3/LICENSE"
+      ]
+    },
+    {
+      "archive_path": "lib/ollama/LLAMA_CPP_LICENSE",
+      "bytes": 1099,
+      "observed_sha256": "bcd8ec749126d45cb06737d0690295d73df4b6e7e194205bcf91190368f27285",
+      "strict_utf8_decoded": true,
+      "first_nonempty_line": "MIT License",
+      "component_headings": []
+    },
+    {
+      "archive_path": "lib/ollama/LLAMA_CPP_VENDORS_LICENSE",
+      "bytes": 7424,
+      "observed_sha256": "7547ae6372a35e7382898dd9f5519ebc16e93095f69c2466b5b74b617c33d4da",
+      "strict_utf8_decoded": true,
+      "first_nonempty_line": "License for llama.cpp",
+      "component_headings": [
+        "License for cpp-httplib",
+        "License for hash-rotate-bits",
+        "License for hash-sha256",
+        "License for hash-xxhash",
+        "License for licenses-LICENSE-jsonhpp",
+        "License for llama.cpp",
+        "License for llamafile-sgemm"
+      ]
+    }
+  ],
+  "comparison_to_preserved_v0_40_14": {
+    "baseline_static_manifest_sha256": "a43bfb7738ded3c85ef9acc5dc4349129b599a386b33c2b43605c919c5ffffbe",
+    "native_files_compared": 26,
+    "native_sha256_matches": 0,
+    "native_size_matches": 25,
+    "ordinary_and_delayed_module_lists_match_for_all_compared_native_files": true,
+    "notice_sha256_matches": 4,
+    "explanation_of_native_hash_differences_established": false
+  },
+  "unresolved_evidence": {
+    "whole_archive_sha256_verified": false,
+    "source_to_binary_derivation_verified": false,
+    "native_runtime_hashes_bound_to_exact_compiler_and_source": false,
+    "exact_cgo_sqlite_implementation_and_native_flags_bound": false,
+    "complete_incorporated_component_notice_mapping_verified": false,
+    "actual_external_crt_and_win32_providers_resolved": false,
+    "complete_dynamic_loader_closure_verified": false,
+    "clean_install_cpu_only_execution_verified": false,
+    "product_payload_redistribution_admitted": false,
+    "application_rusqlite_approval_covers_this_ollama_payload": false,
+    "observed_upstream_qualifications": [
+      {
+        "module": "github.com/mattn/go-sqlite3",
+        "version": "v1.14.52",
+        "qualification": "Declared with CGO enabled; exact static native implementation/source/build mapping remains unresolved."
+      },
+      {
+        "module": "github.com/emirpasic/gods/v2",
+        "version": "v2.0.0-alpha",
+        "qualification": "Observed upstream alpha dependency, not a new project prerelease selection or exception."
+      }
+    ],
+    "missing_mapping_establishes_a_licence_violation": false
+  },
+  "scope": {
+    "target_code_executed_or_loaded": false,
+    "model_inference_performed": false,
+    "runtime_or_model_selected_for_product": false,
+    "accuracy_or_weak_hardware_acceptance_claimed": false,
+    "host_environment_or_profile_data_included": false,
+    "raw_tool_output_included": false
+  }
+}

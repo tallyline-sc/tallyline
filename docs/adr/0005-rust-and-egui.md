@@ -2,7 +2,7 @@
 
 > **Doc type:** Decision record — Accepted. Last reviewed: 2026-10-12.
 
-- **Status:** Accepted (2026-10-12). Amended by [ADR-0007](0007-ort-rc14-and-onnx-runtime-link-mode.md) (2026-10-14): the `ort` version in D2 is `2.0.0-rc.14`
+- **Status:** Accepted (2026-10-12); D7 superseded by [ADR-0011](0011-source-compiled-wix-packaging.md) (2026-11-01). Amended by [ADR-0007](0007-ort-rc14-and-onnx-runtime-link-mode.md) (2026-10-14): the `ort` version in D2 is `2.0.0-rc.14`
 - **Decider:** @greluc
 - **Supersedes:** [ADR-0001](../plan/03-language-decision.md) (Java 27 + JavaFX 27); the toolkit and build parts of [ADR-0004](0004-design-system.md) (§3, §4, §6, §7 and the JavaFX spikes)
 - **Amends:** the technology terms of [ADR-0002](0002-modules-by-bounded-context.md): "Gradle/JPMS module" reads as "Cargo workspace crate", `internal` package as `pub(crate)` module; the context cut itself is unchanged
@@ -78,7 +78,7 @@ A review of the Rust ecosystem on 2026-10-12 (primary pages of rten, tract, ocrs
 | O-109 | SQLite through `rusqlite` with bundled SQLite as a registered exception | decided 2026-10-12 (@greluc) |
 | O-110 | TLS provider (`ring` or `aws-lc-rs`), licence check, `rustls-platform-verifier` for the system store | open – default applied |
 | O-111 | R-UI-17 split; screen reader as a Could (`R-UI-17a`) | decided 2026-10-12 (@greluc) |
-| O-112 | Adopting the `tallyline-egui` crate: modified Apache-2.0 icon font (needs the owner's approval; ADR-0004 §5 chose path data), Python generators versus `xtask`, plain comments and missing docs in the delivered code, licence headers, source of truth for tokens (`ui/design-tokens/` DTCG versus the crate's `design/tokens.json`), retirement of `tools/design-system/*.java`, whether D1 to D11 of O-83 stand | decisions recorded 2026-10-12; crate recreated 2026-11-01, token reconciliation test added; dependency audits/vendor hashes and the icon-font rendering acceptance remain open because the original crate/font were unavailable |
+| O-112 | Adopting the `tallyline-egui` crate: modified Apache-2.0 icon font (needs the owner's approval; ADR-0004 §5 chose path data), Python generators versus `xtask`, plain comments and missing docs in the delivered code, licence headers, source of truth for tokens (`ui/design-tokens/` DTCG versus the crate's `design/tokens.json`), retirement of `tools/design-system/*.java`, whether D1 to D11 of O-83 stand | decisions recorded 2026-10-12; crate recreated 2026-11-01, token reconciliation test added; dependency audits/vendor hashes and icon-font rendering acceptance remained open because the original crate/font were unavailable. Status 2026-11-03: the exact historically approved subset is restored with hash-refusal and actual atlas-glyph contracts; reproducible derivation, native acceptance and O-107 magnified legibility remain unproved |
 | O-113 | wgpu backend; VRAM and GPU load next to the game measured in M4 (R-NF-3) | decided 2026-10-12 (@greluc); measurement open |
 | O-114 | UI test harness for egui (candidate `egui_kittest`) and the Fan Kit pinning tests | open |
 | O-115 | Native Wayland as a target (R-NF-1); clipboard monitoring stays A23 | decided 2026-10-12 (@greluc) |

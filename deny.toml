@@ -33,8 +33,22 @@ wildcards = "deny"
 allow-wildcard-paths = true
 highlight = "all"
 allow = []
-deny = []
-skip = []
+deny = [{ crate = "rust_decimal", wrappers = ["tallyline-shared-kernel"], reason = "Decimal arithmetic stays behind shared-kernel money and quantity value types." }, { crate = "rusqlite", wrappers = ["tallyline-adapter-storage"], reason = "SQLite connections and SQL belong only to adapter-storage." }, { crate = "libsqlite3-sys", wrappers = ["rusqlite"], reason = "The reviewed SQLite wrapper is the only direct FFI consumer." }]
+skip = [
+  { crate = "libloading@=0.8.9", reason = "Accepted ort rc.14 requires ^0.9 while ash0.38/wgpu-hal30 and existing desktop parents require ^0.8; ranges do not intersect. Exact reviewed runtime graph only; revisit2027-04-13 or before parent updates." },
+  { crate = "moxcms@=0.8.1", reason = "image0.25.10 requires ^0.8 while the direct ICC adapter uses latest eligible0.9.1; ranges do not intersect. Exact reviewed graph only; revisit2027-04-13 or before parent updates." },
+  { crate = "getrandom@=0.3.4", reason = "ahash requires ^0.3.1 while jobserver requires ^0.4; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+  { crate = "hashbrown@=0.16.1", reason = "AccessKit consumer/gpu-allocator require ^0.16 while wgpu/naga/indexmap require ^0.17; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+  { crate = "linux-raw-sys@=0.4.15", reason = "rustix0.38 requires ^0.4.14 while rustix1 requires ^0.12; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+  { crate = "miniz_oxide@=0.8.9", reason = "png0.18 requires ^0.8 while flate2 requires ^0.9; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+  { crate = "rustc-hash@=1.1.0", reason = "wgpu/naga require ^1.1 while type-map requires ^2; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+  { crate = "rustix@=0.38.44", reason = "winit/SCTK0.19 require ^0.38 while Wayland/current SCTK/polling require ^1; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+  { crate = "syn@=2.0.119", reason = "thiserror-impl1/num_enum/windows macros require ^2 while serde/futures/bytemuck/thiserror-impl2 require ^3; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+  { crate = "thiserror@=1.0.69", reason = "winit older SCTK/calloop require ^1 while wgpu/current SCTK require ^2; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+  { crate = "thiserror-impl@=1.0.69", reason = "thiserror1 and thiserror2 pin their matching derive implementation exactly; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+  { crate = "windows-sys@=0.52.0", reason = "winit/glutin require ^0.52 while eframe/mio/tokio require ^0.61; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+  { crate = "windows-sys@=0.59.0", reason = "rustix0.38.44 requires >=0.52, <=0.59 while current eframe/egui-winit/mio/tokio and the platform adapter require 0.61; ranges do not intersect. Exact reviewed desktop graph only; revisit 2027-04-13 or before parent updates." },
+]
 skip-tree = []
 
 [sources]

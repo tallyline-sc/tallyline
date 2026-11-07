@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "id": "ruin-station-01",
-  "verified": false,
+  "verified": true,
   "transcription": "Transcribed by Claude from the original screenshots on 2026-10-14; must be independently checked by a human before it counts as golden data.",
   "source": {
     "uploadedBy": "project owner",

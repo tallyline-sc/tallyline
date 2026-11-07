@@ -1,0 +1,9 @@
+# Fixed Small OCR data
+
+This directory contains the unchanged, approved PP-OCRv6 Small detector and recogniser ONNX data and canonical ordered dictionary. `provenance.json` records exact official source revisions, file/card/config hashes, licence evidence and the limits of the verification. `SHA256SUMS` is the public data checksum list; the reviewed self-contained `../../build.rs` is the build trust anchor.
+
+Model bytes use Git LFS, like the public corpus. A source checkout needs materialised LFS objects before building this crate; a pointer or changed file fails the build guard. Installation profiles must ship the actual data files, licence text and native runtime together. Runtime assembly/packaging and clean-OS acceptance remain separate work; users must not be asked to install later assets for the selected profile.
+
+The build verifies exact byte sizes and streaming SHA-256 without network, subprocesses, model conversion or inference. It emits public compile-time identities for the load verifier. `SmallOcrAssets::load` rechecks every data file with a bounded reader; it retains and decodes the same verified dictionary bytes. Model files must be verified again when opened for native inference because a filesystem path is not an immutable model buffer.
+
+The canonical dictionary has18,708 entries; it is never sorted, translated or deduplicated. The pinned PaddleX CTC decoder convention adds blank class0 and a final space, giving18,710 expected classes. This is not native output-shape or accuracy evidence. Tiny uses a separate dictionary and output alphabet; Medium shares the unchanged Small dictionary. Their external model data and typed research acceptance are recorded in `../research/`, without changing this baseline.

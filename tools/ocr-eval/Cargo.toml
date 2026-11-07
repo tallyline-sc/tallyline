@@ -1,0 +1,20 @@
+[package]
+name = "ocr-eval"
+default-run = "ocr-eval"
+version = "0.0.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+serde_json.workspace = true
+sha2.workspace = true
+tallyline-recognition.workspace = true
+tallyline-shared-kernel.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies.tallyline-adapter-files]
+path = "../../crates/adapter-files"

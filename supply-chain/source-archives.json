@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "archives": [
+    {
+      "component": "Eigen inside the approved ONNX Runtime 1.31.0",
+      "source_commit": "1d8b82b0740839c0de7f1242a3585e3390ff5f33",
+      "source_tree": "3de9ea2629ae2b4833ef3fb3844cd7a2e32f7020",
+      "upstream_pin_source": "https://github.com/microsoft/onnxruntime/blob/402979ac1bef89dcd55add41eaa7277c407599eb/cmake/deps.txt",
+      "url": "https://github.com/eigen-mirror/eigen/archive/1d8b82b0740839c0de7f1242a3585e3390ff5f33/eigen-1d8b82b0740839c0de7f1242a3585e3390ff5f33.zip",
+      "sha256": "6a60d76351f97132669daeeb721d6bf14b008101883ad2d687a3201c5c461eb0",
+      "upstream_legacy_sha1": "05b19b49e6fbb91246be711d801160528c135e34",
+      "verified_git_blobs": 1891,
+      "licence_files": [
+        "COPYING.APACHE",
+        "COPYING.BSD",
+        "COPYING.MINPACK",
+        "COPYING.MPL2",
+        "COPYING.README"
+      ],
+      "reviewed": "2026-11-02",
+      "evidence": "Newly computed source-duty SHA-256 after the existing ORT legacy checksum, ZIP commit comment and every primary-tree Git blob matched. No missing, extra, changed or linked files. This is not a publisher SHA-256 signature or a native version/activation change."
+    },
+    {
+      "component": "Existing approved ONNX Runtime 1.31.0 preferred source",
+      "source_commit": "402979ac1bef89dcd55add41eaa7277c407599eb",
+      "source_tree": "6ebffa882d87ca25e05568f369892e4036124e14",
+      "upstream_archive_sha256": "3381467e7b7b4b4b604eb75f10c595441f34ec8c828ff07f8bc4b53fe32586a4",
+      "prepared_archive": {
+        "file": "onnxruntime-preferred-source.tar.gz",
+        "sha256": "714e903395873f8c213f2877fa0d8eed185ccddbae525610a41dc4a59d1232f2",
+        "bytes": 278909979,
+        "verified_git_blobs": 11376,
+        "excluded_build_helper_binaries": [
+          "cmake/external/git.Win32.2.41.03.patch/msys-2.0.dll",
+          "cmake/external/git.Win32.2.41.03.patch/msys-gcc_s-1.dll",
+          "cmake/external/git.Win32.2.41.03.patch/patch.exe"
+        ],
+        "restored_git_blob_line_endings": [
+          "csharp/OnnxRuntime.CSharp.sln",
+          "csharp/OnnxRuntime.DesktopOnly.CSharp.sln",
+          "csharp/sample/Microsoft.ML.OnnxRuntime.FasterRcnnSample/Microsoft.ML.OnnxRuntime.FasterRcnnSample.sln",
+          "csharp/sample/Microsoft.ML.OnnxRuntime.ResNet50v2Sample/Microsoft.ML.OnnxRuntime.ResNet50v2Sample.sln",
+          "csharp/src/Microsoft.ML.OnnxRuntime/Microsoft.ML.OnnxRuntime.sln",
+          "csharp/test/Microsoft.AI.MachineLearning.Tests.Uwp/Microsoft.AI.MachineLearning.Tests.Uwp.sln",
+          "csharp/test/Microsoft.ML.OnnxRuntime.EndToEndTests.Mobile/Microsoft.ML.OnnxRuntime.EndToEndTests.Mobile.sln",
+          "csharp/test/Microsoft.ML.OnnxRuntime.EndToEndTests/Microsoft.ML.OnnxRuntime.EndToEndTests.sln",
+          "csharp/tools/MauiModelTester/MauiModelTester.sln"
+        ]
+      },
+      "licence_files": [
+        "LICENSE",
+        "ThirdPartyNotices.txt"
+      ],
+      "reviewed": "2026-11-02",
+      "evidence": "Newly computed source-duty hashes, not publisher SHA-256 signatures. Every retained file matches the primary upstream Git tree. Restore nine .sln export line endings to their Git blobs and exclude the three bundled MSYS/patch helper binaries. Canonical data-only source archive independently inspected without execution. Existing runtime identity and activation are unchanged.",
+      "primary_source": "https://github.com/microsoft/onnxruntime/tree/402979ac1bef89dcd55add41eaa7277c407599eb"
+    },
+    {
+      "component": "Standard-library source of the existing Rust 1.99.0 toolchain",
+      "source_commit": "b940084d7eb6a299eb4bfeb8e34901bc051e7ac4",
+      "url": "https://static.rust-lang.org/dist/2026-10-01/rust-src-1.99.0.tar.xz",
+      "sha256": "3f1f9b7ed48f4596fc87889b7b3c61747336a55c9c22db1ab0c697e0aadb77aa",
+      "sha256_source": "https://static.rust-lang.org/dist/channel-rust-1.99.0.toml",
+      "reviewed": "2026-11-02",
+      "evidence": "Exact checksum verified against the official pinned release channel manifest. Retain preferred source and source-specific licences without executing its installer or source. No toolchain update."
+    }
+  ]
+}

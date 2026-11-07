@@ -25,7 +25,8 @@ fn identity() -> ClientIdentity {
 }
 
 fn settings_for(server: &MockServer) -> Result<ReaderSettings, String> {
-    ReaderSettings::new(&format!("{}/2.0/", server.uri()), identity())
+    ReaderSettings::for_test_server(&format!("{}/2.0/", server.uri()), identity())
+        .map(ReaderSettings::with_expert_host_confirmation)
         .map_err(|error| format!("{error:?}"))
 }
 
@@ -324,6 +325,13 @@ async fn data_submit__screenshot_check_keeps_its_error_code() -> Outcome {
         )
         .await;
 
+    assert_eq!(
+        result
+            .as_ref()
+            .err()
+            .and_then(ReadError::screenshot_requirement),
+        Some(tallyline_submission::api::model::ScreenshotRequirement::Required)
+    );
     assert!(
         matches!(result, Err(ReadError::Rejected { code, data: None, .. }) if code == "screenshot_required")
     );
@@ -388,7 +396,13 @@ async fn r_api_5__an_html_answer_is_reported_as_not_json() -> Outcome {
 
     let versions = reader_for(&server)?.game_versions().await;
 
-    assert_eq!(versions, Err(ReadError::NotJson { http_status: 404 }));
+    assert_eq!(
+        versions,
+        Err(ReadError::NotJson {
+            http_status: 404,
+            cf_ray: None
+        })
+    );
     Ok(())
 }
 
@@ -799,4 +813,121 @@ fn credentials_are_masked_in_debug_output() {
 
     assert!(!rendered.contains(SECRET_KEY), "{rendered}");
     assert!(!rendered.contains(APP_TOKEN), "{rendered}");
+}
+
+#[test]
+fn r_api_3__base_urls_refuse_userinfo_fragments_and_queries() {
+    for base in [
+        "https://username@api.uexcorp.uk/2.0/",
+        "https://@api.uexcorp.uk/2.0/",
+        "https://username:password@api.uexcorp.uk/2.0/",
+        "https://api.uexcorp.uk/2.0/#fragment",
+        "https://api.uexcorp.uk/2.0/#",
+        "https://api.uexcorp.uk/2.0/?query=value",
+    ] {
+        assert_eq!(
+            ReaderSettings::new(base, identity()).err(),
+            Some(SettingsError::InvalidBaseUrl),
+            "{base}",
+        );
+    }
+}
+#[test]
+fn r_api_3__production_settings_reject_plain_http_even_on_loopback() {
+    for base in ["http://127.0.0.1:12345/2.0/", "http://localhost/2.0/"] {
+        assert_eq!(
+            ReaderSettings::new(base, identity()).err(),
+            Some(SettingsError::InsecureScheme)
+        );
+    }
+}
+#[tokio::test]
+async fn r_api_3__an_unconfirmed_expert_host_receives_no_credential_headers() -> Outcome {
+    let server = MockServer::start().await;
+    Mock::given(path("/2.0/user/"))
+        .respond_with(rejected(403, "invalid_secret_key", "not inspected"))
+        .mount(&server)
+        .await;
+    let settings = ReaderSettings::for_test_server(&format!("{}/2.0/", server.uri()), identity())
+        .map_err(|error| format!("{error:?}"))?;
+    let result = reader_with(&settings)?
+        .account(&SecretKey::new(SECRET_KEY))
+        .await;
+    assert_eq!(
+        result,
+        Err(ReadError::Transport(
+            "credentialled expert host requires explicit secret-key disclosure confirmation"
+                .to_owned()
+        ))
+    );
+    assert!(
+        server
+            .received_requests()
+            .await
+            .ok_or("missing local requests")?
+            .is_empty()
+    );
+    Ok(())
+}
+#[tokio::test]
+async fn r_api_3__a_non_json_response_retains_its_ray_without_html_or_other_headers() -> Outcome {
+    let server = MockServer::start().await;
+    Mock::given(path("/2.0/game_versions/"))
+        .respond_with(
+            ResponseTemplate::new(503)
+                .insert_header("cf-ray", "230b030023ae2822-SJC")
+                .insert_header("x-private-diagnostic", "private-header-sentinel")
+                .set_body_string("<html>private-body-sentinel</html>"),
+        )
+        .mount(&server)
+        .await;
+    let error = reader_for(&server)?
+        .game_versions()
+        .await
+        .err()
+        .ok_or("expected non-JSON error")?;
+    assert!(matches!(
+        error,
+        ReadError::NotJson {
+            http_status: 503,
+            ..
+        }
+    ));
+    let rendered = format!("{error:?}");
+    assert!(rendered.contains("230b030023ae2822-SJC"), "{rendered}");
+    assert!(!rendered.contains("private-body-sentinel"));
+    assert!(!rendered.contains("private-header-sentinel"));
+    Ok(())
+}
+#[tokio::test]
+async fn r_api_3_r_nf_4__malformed_oversized_and_reflected_credential_rays_are_omitted() -> Outcome
+{
+    for ray in [
+        "a".repeat(65),
+        "<script>sentinel</script>".to_owned(),
+        "abcd-SJCA".to_owned(),
+        "-SJC".to_owned(),
+        "deadbeefdeadbeef-SJC".to_owned(),
+        "DEADBEEFDEADBEEF-SJC".to_owned(),
+    ] {
+        let server = MockServer::start().await;
+        Mock::given(path("/2.0/user/"))
+            .respond_with(
+                ResponseTemplate::new(503)
+                    .insert_header("cf-ray", ray.as_str())
+                    .set_body_string("<html>private</html>"),
+            )
+            .mount(&server)
+            .await;
+        assert_eq!(
+            reader_for(&server)?
+                .account(&SecretKey::new("deadbeefdeadbeef"))
+                .await,
+            Err(ReadError::NotJson {
+                http_status: 503,
+                cf_ray: None
+            })
+        );
+    }
+    Ok(())
 }

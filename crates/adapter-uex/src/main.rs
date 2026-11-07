@@ -3,7 +3,7 @@
 
 //! The UEX API spike: read-only GET calls and explicitly invoked `data_submit` dry runs.
 //!
-//! Usage: `tallyline-uex-spike [--host uk|space] <command>` with the commands `game-versions`,
+//! Usage: `tallyline-uex-spike [--confirm-expert-host] [--host uk|space] <command>` with the commands `game-versions`,
 //! `status-levels`, `prices <id_terminal>`, `account`, `report-access` and
 //! `dry-run <id_terminal> <id_commodity> <price_buy> <status_buy> <scu_buy> \
 //! <game_version> <date_added> \
@@ -12,8 +12,19 @@
 //! also read the app token from
 //! `TALLYLINE_UEX_APP_TOKEN`. Nothing is written to disk, and neither a credential, the personal
 //! data of an answer nor the message text of a UEX error is printed.
+//! `contract-snapshot` reads the fixed public routes and prints only field/type and code metadata.
+//! `contract-check` compares those samples with the bundled metadata baseline.
 
 #![forbid(unsafe_code)]
+
+mod contract_cli;
+
+#[cfg(test)]
+#[expect(
+    non_snake_case,
+    reason = "Requirement tags use a double underscore separator."
+)]
+mod contract_cli_tests;
 
 use std::env;
 use std::io::{self, Write};
@@ -21,7 +32,7 @@ use std::process::ExitCode;
 
 use tallyline_adapter_uex::api::model::{PriceRow, StatusLevel, TerminalId};
 use tallyline_adapter_uex::api::{
-    AppToken, ClientIdentity, ReadError, ReaderSettings, SecretKey, UexReader,
+    AppToken, ClientIdentity, EXPERT_HOST_WARNING, ReadError, ReaderSettings, SecretKey, UexReader,
 };
 
 const UK_HOST: &str = "https://api.uexcorp.uk/2.0/";
@@ -29,8 +40,8 @@ const SPACE_HOST: &str = "https://api.uexcorp.space/2.0/";
 const SECRET_KEY_VARIABLE: &str = "TALLYLINE_UEX_SECRET_KEY";
 const APP_TOKEN_VARIABLE: &str = "TALLYLINE_UEX_APP_TOKEN";
 const SCREENSHOT_PATH_VARIABLE: &str = "TALLYLINE_UEX_SCREENSHOT_PATH";
-const USAGE: &str = "usage: tallyline-uex-spike [--host uk|space] \
-                     game-versions | status-levels | prices <id_terminal> | account | report-access | \
+const USAGE: &str = "usage: tallyline-uex-spike [--confirm-expert-host] [--host uk|space] \
+                     game-versions | status-levels | prices <id_terminal> | account | report-access | contract-snapshot | contract-check | \
                      dry-run <id_terminal> <id_commodity> <price_buy> <status_buy> <scu_buy> \
                      <game_version> <date_added> \
                      [container_sizes|-] [invalid_commodity_id]";
@@ -55,11 +66,22 @@ enum Command {
 }
 
 fn main() -> ExitCode {
-    let arguments: Vec<String> = env::args().skip(1).collect();
+    let mut arguments: Vec<String> = env::args().skip(1).collect();
+    let public_command = contract_cli::command(&arguments);
+    let expert_confirmed = arguments
+        .first()
+        .is_some_and(|argument| argument == "--confirm-expert-host");
+    if expert_confirmed {
+        arguments.remove(0);
+    }
     let mut stdout = io::stdout().lock();
-    let outcome = match parse(&arguments) {
-        Ok((host, command)) => run(host, &command, &mut stdout),
-        Err(message) => Err(message),
+    let outcome = match public_command {
+        Some(Ok(mode)) => contract_cli::run(mode, &mut stdout),
+        Some(Err(message)) => Err(message),
+        None => match parse(&arguments) {
+            Ok((host, command)) => run(host, &command, expert_confirmed, &mut stdout),
+            Err(message) => Err(message),
+        },
     };
     match outcome {
         Ok(()) => ExitCode::SUCCESS,
@@ -178,23 +200,52 @@ fn parse_u64(value: &str) -> Result<u64, String> {
     value.parse::<u64>().map_err(|_| USAGE.to_owned())
 }
 
-fn run(host: &str, command: &Command, out: &mut impl Write) -> Result<(), String> {
+fn run(
+    host: &str,
+    command: &Command,
+    expert_confirmed: bool,
+    out: &mut impl Write,
+) -> Result<(), String> {
     if matches!(command, Command::DryRun { .. }) && host != UK_HOST {
         return Err("data_submit dry runs require the primary .uk host".to_owned());
     }
-    let identity = ClientIdentity::new("tallyline-uex-spike", env!("CARGO_PKG_VERSION"));
-    let settings = ReaderSettings::new(host, identity).map_err(|error| format!("{error:?}"))?;
-    let reader = UexReader::new(&settings).map_err(|error| format!("{error:?}"))?;
-    let runtime = tokio::runtime::Builder::new_current_thread()
-        .enable_all()
-        .build()
-        .map_err(|error| error.to_string())?;
+    let credentialled = matches!(
+        command,
+        Command::Account | Command::ReportAccess | Command::DryRun { .. }
+    );
+    if host != UK_HOST && credentialled {
+        if !expert_confirmed {
+            return Err("credentialled expert host requires --confirm-expert-host; the selected host receives your secret key and app token".to_owned());
+        }
+        writeln!(out, "{EXPERT_HOST_WARNING}").map_err(|error| error.to_string())?;
+        out.flush().map_err(|error| error.to_string())?;
+    }
+    let (reader, settings, runtime) = build_reader(host, expert_confirmed)?;
     let lines = runtime.block_on(lines(&reader, &settings, command))?;
     writeln!(out, "host: {host}").map_err(|error| error.to_string())?;
     for line in lines {
         writeln!(out, "{line}").map_err(|error| error.to_string())?;
     }
     Ok(())
+}
+
+fn build_reader(
+    host: &str,
+    expert_confirmed: bool,
+) -> Result<(UexReader, ReaderSettings, tokio::runtime::Runtime), String> {
+    let identity = ClientIdentity::new("tallyline-uex-spike", env!("CARGO_PKG_VERSION"));
+    let settings = ReaderSettings::new(host, identity).map_err(|error| format!("{error:?}"))?;
+    let settings = if expert_confirmed {
+        settings.with_expert_host_confirmation()
+    } else {
+        settings
+    };
+    let reader = UexReader::new(&settings).map_err(|error| format!("{error:?}"))?;
+    let runtime = tokio::runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()
+        .map_err(|error| error.to_string())?;
+    Ok((reader, settings, runtime))
 }
 
 async fn lines(
@@ -405,7 +456,11 @@ fn describe(error: ReadError) -> String {
                     id_terminal,
                     id_commodity,
                 }) => format!(", report terminal {id_terminal}, commodity {id_commodity}"),
-                Some(tallyline_adapter_uex::api::RejectedData::Other) | None => String::new(),
+                Some(
+                    tallyline_adapter_uex::api::RejectedData::Other
+                    | tallyline_adapter_uex::api::RejectedData::QuotaReset { .. },
+                )
+                | None => String::new(),
             };
             format!("UEX refused the request: HTTP {http_status}, code {code}{detail}")
         }

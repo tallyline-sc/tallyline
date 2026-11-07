@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Report a security vulnerability
-    url: https://github.com/greluc/tallyline/security/advisories/new
+    url: https://github.com/tallyline-sc/tallyline/security/advisories/new
     about: >-
       Never report a security problem in a public issue. Use GitHub's
       private vulnerability reporting; .github/SECURITY.md explains the

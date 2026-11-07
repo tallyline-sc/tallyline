@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "id": "pyro-gateway-stanton-01",
-  "verified": false,
+  "verified": true,
   "transcription": "Transcribed by Claude from the uploaded screenshots on 2026-10-08; must be independently checked by a human before it counts as golden data.",
   "source": {
     "uploadedBy": "project owner",
@@ -18,7 +18,6 @@
   "captures": {
     "buy-1.jpg": {
       "side": "BUY",
-      "section": "IN STOCK",
       "cards": [
         {
           "screenOrder": 1,
@@ -32,7 +31,9 @@
             4,
             8,
             16
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 2,
@@ -46,7 +47,9 @@
             24,
             32
           ],
-          "dimmed": true
+          "dimmed": true,
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 3,
@@ -59,7 +62,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 4,
@@ -72,18 +77,58 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 5,
           "partial": true,
-          "note": "only top edge visible; must not produce a row"
+          "note": "only top edge visible; must not produce a row",
+          "section": "IN STOCK",
+          "expectedCommodityId": null,
+          "partialEdge": "bottom"
+        }
+      ],
+      "capturedAt": null,
+      "conditions": {
+        "fileResolution": "2000x1125",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": null,
+        "gameVersion": null,
+        "container": "jpeg",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "originalFile": null,
+        "originalSha256": null,
+        "ladder": null
+      },
+      "sectionHeaders": [
+        {
+          "name": "IN STOCK",
+          "expanded": true,
+          "beforeCard": 1,
+          "y": null
         }
       ]
     },
     "buy-2.jpg": {
       "side": "BUY",
-      "section": null,
       "cards": [
         {
           "screenOrder": 1,
@@ -99,7 +144,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 2,
@@ -115,7 +162,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 3,
@@ -131,7 +180,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 4,
@@ -147,18 +198,51 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 5,
           "partial": true,
-          "note": "only top edge visible"
+          "note": "only top edge visible",
+          "section": "IN STOCK",
+          "expectedCommodityId": null,
+          "partialEdge": "bottom"
         }
-      ]
+      ],
+      "capturedAt": null,
+      "conditions": {
+        "fileResolution": "2000x1125",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": null,
+        "gameVersion": null,
+        "container": "jpeg",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "originalFile": null,
+        "originalSha256": null,
+        "ladder": null
+      },
+      "sectionHeaders": []
     },
     "buy-3.jpg": {
       "side": "BUY",
-      "section": null,
       "cards": [
         {
           "screenOrder": 1,
@@ -174,7 +258,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 2,
@@ -190,7 +276,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 3,
@@ -206,7 +294,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 4,
@@ -222,13 +312,43 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         }
-      ]
+      ],
+      "capturedAt": null,
+      "conditions": {
+        "fileResolution": "2000x1125",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": null,
+        "gameVersion": null,
+        "container": "jpeg",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "originalFile": null,
+        "originalSha256": null,
+        "ladder": null
+      },
+      "sectionHeaders": []
     },
     "buy-4.jpg": {
       "side": "BUY",
-      "section": null,
       "cards": [
         {
           "screenOrder": 1,
@@ -244,7 +364,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 2,
@@ -260,7 +382,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 3,
@@ -276,7 +400,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 4,
@@ -292,13 +418,43 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN STOCK",
+          "expectedCommodityId": null
         }
-      ]
+      ],
+      "capturedAt": null,
+      "conditions": {
+        "fileResolution": "2000x1125",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": null,
+        "gameVersion": null,
+        "container": "jpeg",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "originalFile": null,
+        "originalSha256": null,
+        "ladder": null
+      },
+      "sectionHeaders": []
     },
     "sell-1.jpg": {
       "side": "SELL",
-      "section": "IN DEMAND",
       "cards": [
         {
           "screenOrder": 1,
@@ -314,7 +470,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN DEMAND",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 2,
@@ -330,7 +488,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN DEMAND",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 3,
@@ -346,7 +506,9 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN DEMAND",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 4,
@@ -362,13 +524,54 @@
             16,
             24,
             32
-          ]
+          ],
+          "section": "IN DEMAND",
+          "expectedCommodityId": null
         },
         {
           "screenOrder": 5,
           "partial": true,
           "name": "HUMAN FOOD BARS",
-          "note": "price line cut at bottom edge (looks like 490/SCU); card bottom not visible -> must be treated as partial, not sent"
+          "note": "price line cut at bottom edge (looks like 490/SCU); card bottom not visible -> must be treated as partial, not sent",
+          "section": "IN DEMAND",
+          "expectedCommodityId": null,
+          "partialEdge": "bottom"
+        }
+      ],
+      "capturedAt": null,
+      "conditions": {
+        "fileResolution": "2000x1125",
+        "gameResolution": null,
+        "displayResolution": null,
+        "windowMode": null,
+        "fovSetting": null,
+        "renderer": null,
+        "upscaler": null,
+        "gammaBrightnessContrast": null,
+        "windowsHdr": null,
+        "gameHdr": null,
+        "refWhiteNits": null,
+        "peakNits": null,
+        "windowsSdrContentBrightness": null,
+        "captureMethod": null,
+        "captureToolVersion": null,
+        "captureToolOptions": null,
+        "os": null,
+        "channel": null,
+        "gameVersion": null,
+        "container": "jpeg",
+        "transfer": null,
+        "sourceFidelity": "reencoded-unknown",
+        "originalFile": null,
+        "originalSha256": null,
+        "ladder": null
+      },
+      "sectionHeaders": [
+        {
+          "name": "IN DEMAND",
+          "expanded": true,
+          "beforeCard": 1,
+          "y": null
         }
       ]
     }
@@ -380,5 +583,11 @@
     "IRON card is dimmed although not at the viewport edge; 4 SCU available < smallest container size 8 (hypothesis: dimmed = not buyable in any container size).",
     "Sell side: green 'VERY LOW INVENTORY' bar/text, buy side: red 'VERY LOW INVENTORY' - status colours are inverted between sides.",
     "Sell side shows SCU together with an inventory status (e.g. 1,482 SCU, VERY LOW INVENTORY) - indication that the number is the terminal stock (see assumption A10)."
-  ]
+  ],
+  "expectedTerminalId": null,
+  "measured": {
+    "priceCapHeightPx": null,
+    "displayHeightFraction": null,
+    "textHeightBand": null
+  }
 }

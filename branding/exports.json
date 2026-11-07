@@ -1,0 +1,142 @@
+[
+  {
+    "name": "tallyline-avatar-dark.png",
+    "bytes": 22154,
+    "sha256": "f7c65ea96dc5a6150732f25e1ca46676da3f5d7a5bbe04035fd6d1c3d345c1cc"
+  },
+  {
+    "name": "tallyline-avatar-dark.svg",
+    "bytes": 539,
+    "sha256": "c6c70d4f7b25d898618a4e1b38aa7d522fbc5fb5e8050ebe44b5361d5e0f40d2"
+  },
+  {
+    "name": "tallyline-avatar-light.png",
+    "bytes": 18967,
+    "sha256": "fe5e360abbe0d4e51cf05ed7b75ef1dc8b2b353b2dcc9efa6100e1d655836ed2"
+  },
+  {
+    "name": "tallyline-avatar-light.svg",
+    "bytes": 539,
+    "sha256": "a73f75ffa3afbf4a338c778173973781c371fc433e2884e70a7bfbc340944427"
+  },
+  {
+    "name": "tallyline-icon-128.png",
+    "bytes": 2524,
+    "sha256": "c9aaa63605b51d8fb98b12cd63ed1bc287763d6a60c794e38ca4e2229efd0fd2"
+  },
+  {
+    "name": "tallyline-icon-16.png",
+    "bytes": 637,
+    "sha256": "dbc2751c3e43c840a0818228224123ab1eadb7fb1becb37107b56acd06a3f7a6"
+  },
+  {
+    "name": "tallyline-icon-24.png",
+    "bytes": 839,
+    "sha256": "54d4025e4cf0cb302e6af7488d30e7557de9ada5e75dad37fe22bbc029c464bf"
+  },
+  {
+    "name": "tallyline-icon-256.png",
+    "bytes": 5272,
+    "sha256": "d0ed9a91e6e5fd79633352b1f319e8f2c96c0ff1159c371a9354857ab5d8108f"
+  },
+  {
+    "name": "tallyline-icon-32.png",
+    "bytes": 910,
+    "sha256": "07c8a5b41f4aae13ccf6e16a0faf465b1858ecd7c948e7fe8407985be4b8f20a"
+  },
+  {
+    "name": "tallyline-icon-48.png",
+    "bytes": 1321,
+    "sha256": "0ac059efbe7ac88c676645745fa6356490dea268bc999faf6a63ad01f376e504"
+  },
+  {
+    "name": "tallyline-icon-64.png",
+    "bytes": 1441,
+    "sha256": "18401d847267d75fc5007e2a0830c110d573ed443e2a21bdffbd97cf748d310e"
+  },
+  {
+    "name": "tallyline-logo-dark.png",
+    "bytes": 11176,
+    "sha256": "555197499c061e46c150e4d9dd1a39c9d342a90cdf63a6cb770645a47955030c"
+  },
+  {
+    "name": "tallyline-logo-dark.svg",
+    "bytes": 461,
+    "sha256": "65b8e574f186a9323277b0dbdc1e7b6bc8da8bdcdfa86298a426359c3a4b1ccd"
+  },
+  {
+    "name": "tallyline-logo-light.png",
+    "bytes": 8948,
+    "sha256": "deef4f07e450414594d435a28e8defe2062e2059f34e5ef39526d75371894a3c"
+  },
+  {
+    "name": "tallyline-logo-light.svg",
+    "bytes": 461,
+    "sha256": "e849fa786113603d35e239e792ce62176928d363b6ed66a187c4b15ae09fc4a9"
+  },
+  {
+    "name": "tallyline-mark-black.png",
+    "bytes": 2823,
+    "sha256": "fbf403f073ad1091c674a6a244a880c168c7ec10f1767f1d7d7f181265c49306"
+  },
+  {
+    "name": "tallyline-mark-black.svg",
+    "bytes": 404,
+    "sha256": "7289764acbfa37c21d7a71a09d7751115abb4be6f083199a02ccd4f28056c229"
+  },
+  {
+    "name": "tallyline-mark-white.png",
+    "bytes": 2999,
+    "sha256": "a2fc2e804119768ada6a7b0fc885ec08c421117419f6b9317eafb0aaac92ff5c"
+  },
+  {
+    "name": "tallyline-mark-white.svg",
+    "bytes": 404,
+    "sha256": "99e16dc1ccb4ef14ae605989b5a047e2c9821d3aec4dd4649251c01babff2d7e"
+  },
+  {
+    "name": "tallyline-social-preview-dark.png",
+    "bytes": 64633,
+    "sha256": "e677b38a438f3a3522eee5258a6442ea7a372e8e6e8b46335242be9751113b50"
+  },
+  {
+    "name": "tallyline-social-preview-dark.svg",
+    "bytes": 63563,
+    "sha256": "0944a94721657aeda7dcd4d365c5d0ea5ad014384e03c7806f235914129e9f45"
+  },
+  {
+    "name": "tallyline-social-preview-light.png",
+    "bytes": 63409,
+    "sha256": "5221982280da117d08ace12808d3c57d237474c151250d51493f80581db77cc3"
+  },
+  {
+    "name": "tallyline-social-preview-light.svg",
+    "bytes": 63563,
+    "sha256": "7606c6ed87c0debb62b82c6f45903b13a96deb66d6e94e42dcfd17057d6be6a8"
+  },
+  {
+    "name": "tallyline-wordmark-dark.png",
+    "bytes": 19770,
+    "sha256": "cf5a8d9d0c33ec7ca2c178496b20be16c8f2b01839ba7e6c56bac2c314740e7a"
+  },
+  {
+    "name": "tallyline-wordmark-dark.svg",
+    "bytes": 5046,
+    "sha256": "8aa2cf25eef9e3134de4937f466a27eecacddf56f8594020fd76cf3395ef3050"
+  },
+  {
+    "name": "tallyline-wordmark-light.png",
+    "bytes": 16466,
+    "sha256": "29696bdbf128a0e19acf57af98f12f2f132585855f69929b233d5db59afa6c87"
+  },
+  {
+    "name": "tallyline-wordmark-light.svg",
+    "bytes": 5046,
+    "sha256": "ff676a838144492dc4d8d9ad6ac2cd901d82a8201d44de799df8192659c3c947"
+  },
+  {
+    "name": "tallyline.ico",
+    "bytes": 13062,
+    "sha256": "13c3bf7fd049940f4ae4ec656ca548491ad22aa5760ef2562a2d072cad4b2879"
+  }
+]

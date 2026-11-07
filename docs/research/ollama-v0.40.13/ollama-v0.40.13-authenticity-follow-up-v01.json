@@ -1,0 +1,638 @@
+{
+  "schema": "tallyline.ollama-historical-authenticity-publication.v1",
+  "observed_date_utc": "2026-11-06",
+  "publication_status": "Proposal; root canonical and fresh standards/spec reviews deferred.",
+  "project_publication_base_commit": "0518f05902754fe62d75d283a061083fe6d48ab3",
+  "scope": "Static historical v0.40.13 evidence only; no package/native/model selection, execution admission or new mandatory attestation gate.",
+  "primary_sources": {
+    "source_commit": "https://api.github.com/repos/ollama/ollama/git/commits/04088e7c9d41cba5d33bafbf788d87a465c79d5b",
+    "workflow": "https://github.com/ollama/ollama/blob/04088e7c9d41cba5d33bafbf788d87a465c79d5b/.github/workflows/release.yaml",
+    "build_script": "https://github.com/ollama/ollama/blob/04088e7c9d41cba5d33bafbf788d87a465c79d5b/scripts/build_windows.ps1",
+    "run": "https://github.com/ollama/ollama/actions/runs/40804853596",
+    "packaging_job": "https://github.com/ollama/ollama/actions/runs/40804853596/job/123227543258",
+    "packaging_log": "https://api.github.com/repos/ollama/ollama/actions/jobs/123227543258/logs",
+    "cli_job": "https://github.com/ollama/ollama/actions/runs/40804853596/job/123221275658",
+    "cpu_job": "https://github.com/ollama/ollama/actions/runs/40804853596/job/123221275826",
+    "release_job": "https://github.com/ollama/ollama/actions/runs/40804853596/job/123231303644",
+    "release": "https://api.github.com/repos/ollama/ollama/releases/427123529",
+    "asset": "https://api.github.com/repos/ollama/ollama/releases/assets/687142233"
+  },
+  "research_inputs": [
+    {
+      "file": "gh-attestation-receipts-v01.json",
+      "bytes": 2276,
+      "sha256": "a6ce50246ff4d44272bbf89b63feeada6e62bb184122933617a2470929547c1e"
+    },
+    {
+      "file": "member-package-log-matches-v01.jsonl",
+      "bytes": 19469,
+      "sha256": "1f42d183592fca13f11d1b81c3465fb9212c42efa1350120717ef7e63665e845"
+    },
+    {
+      "file": "retained-member-integrity-v01.json",
+      "bytes": 9428,
+      "sha256": "295e52e58dab9c6b5a4f353317ad29aefbc088309e8050b81d225d6fcadf4c77"
+    },
+    {
+      "file": "runtime-authenticity-evidence-v02.json",
+      "bytes": 14700,
+      "sha256": "fa8b43ae2a6a3cd1726c1a0a1e542b14122a484e8a6d6bd6b93419f58102c0be"
+    },
+    {
+      "file": "runtime-authenticity-findings-v01.md",
+      "bytes": 10655,
+      "sha256": "bee3c1b6f9f2d423fa5ee7917163177f3a40922ecbbef22da290726f37f67f83"
+    },
+    {
+      "file": "synthetic-trial-capsule-checklist-v01.md",
+      "bytes": 4382,
+      "sha256": "963242d662b849a570b501678e90c5e15bc21b31c41354b170a1f9fbfed9dae0"
+    }
+  ],
+  "public_baseline": {
+    "file": "ollama-v0.40.13-windows-amd64-static-evidence-v01.json",
+    "sha256": "d110257d028634ae9865f8ab8e62201f1992d85877dd5f69f1a33bb458c98eaa",
+    "matches_immutable_publication_base": true
+  },
+  "source": {
+    "commit": "04088e7c9d41cba5d33bafbf788d87a465c79d5b",
+    "tree": "71dd60c1bc96f4b6622f4decbd7a7224499b7531",
+    "github_reported_commit_verified": true,
+    "local_commit_signature_verified": false,
+    "workflow_sha256": "58057f8af09fbeb305126a66523bdd785f0b7dcd061b675e13d5b8679c34c860",
+    "workflow_bytes": 37359,
+    "workflow_blob": "35901ec78878773d49720065bda3f2c0a7857a73"
+  },
+  "run": {
+    "id": 40804853596,
+    "attempt": 1,
+    "head_sha": "04088e7c9d41cba5d33bafbf788d87a465c79d5b",
+    "packaging_job": 123227543258,
+    "release_job": 123231303644,
+    "cli_job": 123221275658,
+    "cpu_job": 123221275826,
+    "hashes_after_logged_signing": true,
+    "identifiers_are_cryptographic_immutability_guarantees": false
+  },
+  "retained": {
+    "members": 30,
+    "bytes": 83611431,
+    "candidate_members_including_cli": 25,
+    "candidate_bytes": 83029576,
+    "all_sizes_and_sha256_rechecked_inertly": true,
+    "complete_loader_closure_verified": false,
+    "member_records": [
+      {
+        "archive_path": "lib/ollama/CPP_HTTPLIB_LICENSE",
+        "bytes": 1097,
+        "sha256": "bb546eae5924d8ee842e0e567e6d533c5824bdebccf605f99a5b3429034e6697",
+        "candidate": false,
+        "hash_line": 7746,
+        "path_line": 7747,
+        "hash_observed_utc": "2026-10-29T02:40:13.2934201Z",
+        "path_observed_utc": "2026-10-29T02:40:13.2934915Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-base.dll",
+        "bytes": 821640,
+        "sha256": "a2b78e7a90b361733ecaa6237c827345570144909b257c551737543be3987b30",
+        "candidate": true,
+        "hash_line": 7750,
+        "path_line": 7751,
+        "hash_observed_utc": "2026-10-29T02:40:13.2950663Z",
+        "path_observed_utc": "2026-10-29T02:40:13.2951354Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-alderlake.dll",
+        "bytes": 1732488,
+        "sha256": "849382e694abce7668f9521e5aae8e4249fb5e56da8379ffbc84132610368884",
+        "candidate": true,
+        "hash_line": 7754,
+        "path_line": 7755,
+        "hash_observed_utc": "2026-10-29T02:40:13.2978015Z",
+        "path_observed_utc": "2026-10-29T02:40:13.2978969Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-cannonlake.dll",
+        "bytes": 2019208,
+        "sha256": "4b315a35aec350dc51bf4f76cefdaa39d236f14da07c72bc6fedcbc32a22e01b",
+        "candidate": true,
+        "hash_line": 7758,
+        "path_line": 7759,
+        "hash_observed_utc": "2026-10-29T02:40:13.3007504Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3008499Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-cascadelake.dll",
+        "bytes": 1989512,
+        "sha256": "0790d2a0285964d225047e9443592f8b28936b1b8ec8ff7f11bf69a64cdd0262",
+        "candidate": true,
+        "hash_line": 7762,
+        "path_line": 7763,
+        "hash_observed_utc": "2026-10-29T02:40:13.3036547Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3037575Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-cooperlake.dll",
+        "bytes": 1987464,
+        "sha256": "80d25416dea4c20490ef853a3228bc6c9bea81d5fd2164bb1215b9eb5efb4253",
+        "candidate": true,
+        "hash_line": 7766,
+        "path_line": 7767,
+        "hash_observed_utc": "2026-10-29T02:40:13.3065809Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3066779Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-haswell.dll",
+        "bytes": 1740680,
+        "sha256": "7cd4f29f47b7ff1d257dd747d5a66112c57c92ccdc8eab06fd9c4bb53385468e",
+        "candidate": true,
+        "hash_line": 7770,
+        "path_line": 7771,
+        "hash_observed_utc": "2026-10-29T02:40:13.3092065Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3093015Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-icelake.dll",
+        "bytes": 1996680,
+        "sha256": "9f05f14d8f0a3d790df07c3efcacd0cca67fce38baa191b1b2a703d1dd2bfa11",
+        "candidate": true,
+        "hash_line": 7774,
+        "path_line": 7775,
+        "hash_observed_utc": "2026-10-29T02:40:13.3121595Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3123698Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-ivybridge.dll",
+        "bytes": 1618824,
+        "sha256": "490ec8bb4c7d869f7b67519a8060834bfb88349b84f83e12e9beecc7bb28326b",
+        "candidate": true,
+        "hash_line": 7778,
+        "path_line": 7779,
+        "hash_observed_utc": "2026-10-29T02:40:13.3147889Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3148779Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-piledriver.dll",
+        "bytes": 1624456,
+        "sha256": "e54a77084c826da7c540dcac392cbbe6ecf53cc6717bd67e48907663798c875b",
+        "candidate": true,
+        "hash_line": 7782,
+        "path_line": 7783,
+        "hash_observed_utc": "2026-10-29T02:40:13.3173222Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3174132Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-sandybridge.dll",
+        "bytes": 1637768,
+        "sha256": "6037ddc1451d330a274e8e8e18663080f81b302067f1b994ada0a1ea8a632df7",
+        "candidate": true,
+        "hash_line": 7786,
+        "path_line": 7787,
+        "hash_observed_utc": "2026-10-29T02:40:13.3198516Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3199516Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-sapphirerapids.dll",
+        "bytes": 2288520,
+        "sha256": "7f24f63105b508f149c9134b2423be2e177419f02d4e84aee318ee41af4e087c",
+        "candidate": true,
+        "hash_line": 7790,
+        "path_line": 7791,
+        "hash_observed_utc": "2026-10-29T02:40:13.323073Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3231674Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-skylakex.dll",
+        "bytes": 2011528,
+        "sha256": "3a7a9ccd10fc78d96eb519c325bd02c8ad55220e8b0cf2e5943a7b65fa12f9cf",
+        "candidate": true,
+        "hash_line": 7794,
+        "path_line": 7795,
+        "hash_observed_utc": "2026-10-29T02:40:13.3260374Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3261266Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-sse42.dll",
+        "bytes": 1262984,
+        "sha256": "631e9616d72b73711cfc1a0cb898b9393ebd7d72795e4fece27fc2f0d7bd378e",
+        "candidate": true,
+        "hash_line": 7798,
+        "path_line": 7799,
+        "hash_observed_utc": "2026-10-29T02:40:13.3281426Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3282291Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-x64.dll",
+        "bytes": 1249160,
+        "sha256": "c3563f4455a00633ee317b40b1c650a20bb71fda2b8dad8e7ffe39d2e5b0c954",
+        "candidate": true,
+        "hash_line": 7802,
+        "path_line": 7803,
+        "hash_observed_utc": "2026-10-29T02:40:13.3302749Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3303554Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml-cpu-zen4.dll",
+        "bytes": 1994632,
+        "sha256": "5e0a82e2df64fb1f1831af99f35e6bc778327fc849ffa5bf07777ad77df7e7ef",
+        "candidate": true,
+        "hash_line": 7806,
+        "path_line": 7807,
+        "hash_observed_utc": "2026-10-29T02:40:13.3332155Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3332953Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/ggml.dll",
+        "bytes": 49032,
+        "sha256": "fae997d5919fe9118a817922b5d21a52306a73f49ebe6f8ab77b73338cf3b0ae",
+        "candidate": true,
+        "hash_line": 7810,
+        "path_line": 7811,
+        "hash_observed_utc": "2026-10-29T02:40:13.3339794Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3340561Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/GO_LICENSE",
+        "bytes": 182211,
+        "sha256": "4285a95875d7a3ae3790910d59ee88f82339d0ba37b1cbadde4124113bd04308",
+        "candidate": false,
+        "hash_line": 7814,
+        "path_line": 7815,
+        "hash_observed_utc": "2026-10-29T02:40:13.334821Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3348882Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/libc++.dll",
+        "bytes": 1767816,
+        "sha256": "286488f82c846d06039a2e1320bf487ca71c75baeefc673bd6da8e8b512b0b11",
+        "candidate": true,
+        "hash_line": 7818,
+        "path_line": 7819,
+        "hash_observed_utc": "2026-10-29T02:40:13.3374963Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3375832Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/libllama-common.dll",
+        "bytes": 4447624,
+        "sha256": "6dfe433d465539640877f9465043053cd8a9110f19086fc20680bf0c88fa22d0",
+        "candidate": true,
+        "hash_line": 7822,
+        "path_line": 7823,
+        "hash_observed_utc": "2026-10-29T02:40:13.3434081Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3434907Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/libllama-server-impl.dll",
+        "bytes": 3068296,
+        "sha256": "457a7845ee2f95a8b30bf66da039aabafe263d78407519dd5797688840d6f3bf",
+        "candidate": true,
+        "hash_line": 7830,
+        "path_line": 7831,
+        "hash_observed_utc": "2026-10-29T02:40:13.3484868Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3485872Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/libllama.dll",
+        "bytes": 4008840,
+        "sha256": "a9ccb9ae84f200579d1103a6d7cb67eb2e79342961497a74dc35d9c87894d9d9",
+        "candidate": true,
+        "hash_line": 7834,
+        "path_line": 7835,
+        "hash_observed_utc": "2026-10-29T02:40:13.3537605Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3538496Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/libmtmd.dll",
+        "bytes": 1685384,
+        "sha256": "64de9eba97b8b648f7d3f1f5cbf1c1e3b730d9467b0dae8b41f1f40beb5ce39b",
+        "candidate": true,
+        "hash_line": 7838,
+        "path_line": 7839,
+        "hash_observed_utc": "2026-10-29T02:40:13.3563843Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3564788Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/libomp.dll",
+        "bytes": 965000,
+        "sha256": "4da15a28f6c9129190412326212232879cc64b5b7d799ccc4996c1f33ff6e971",
+        "candidate": true,
+        "hash_line": 7842,
+        "path_line": 7843,
+        "hash_observed_utc": "2026-10-29T02:40:13.3784486Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3785319Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/libunwind.dll",
+        "bytes": 107912,
+        "sha256": "ea32664f375f23a24dd6582f4f436eeba91c56446523d9aaa02fc05ef1647d45",
+        "candidate": true,
+        "hash_line": 7846,
+        "path_line": 7847,
+        "hash_observed_utc": "2026-10-29T02:40:13.3792505Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3793242Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/libwinpthread-1.dll",
+        "bytes": 390024,
+        "sha256": "6f8fbd09b3f449dd2578ad7f6e9713acd00b76a46b8da3f3d8ba836a7ff291fc",
+        "candidate": false,
+        "hash_line": 7850,
+        "path_line": 7851,
+        "hash_observed_utc": "2026-10-29T02:40:13.3802687Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3803405Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/llama-server.exe",
+        "bytes": 22920,
+        "sha256": "cc8ab10718d388e16dd64ffd9331f0dcecc53d7c2bb322d6b526dc6f0f01dd3c",
+        "candidate": true,
+        "hash_line": 7866,
+        "path_line": 7867,
+        "hash_observed_utc": "2026-10-29T02:40:13.3827735Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3828475Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/LLAMA_CPP_LICENSE",
+        "bytes": 1099,
+        "sha256": "bcd8ec749126d45cb06737d0690295d73df4b6e7e194205bcf91190368f27285",
+        "candidate": false,
+        "hash_line": 7854,
+        "path_line": 7855,
+        "hash_observed_utc": "2026-10-29T02:40:13.3808863Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3809554Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "lib/ollama/LLAMA_CPP_VENDORS_LICENSE",
+        "bytes": 7424,
+        "sha256": "7547ae6372a35e7382898dd9f5519ebc16e93095f69c2466b5b74b617c33d4da",
+        "candidate": false,
+        "hash_line": 7858,
+        "path_line": 7859,
+        "hash_observed_utc": "2026-10-29T02:40:13.3814977Z",
+        "path_observed_utc": "2026-10-29T02:40:13.3815774Z",
+        "exact_adjacent_path_hash_match": true
+      },
+      {
+        "archive_path": "ollama.exe",
+        "bytes": 40931208,
+        "sha256": "c1cca2937421d78877d5961746d25e33acd62e194d881f90fb63dca7f3e10f41",
+        "candidate": true,
+        "hash_line": 7742,
+        "path_line": 7743,
+        "hash_observed_utc": "2026-10-29T02:40:13.2921069Z",
+        "path_observed_utc": "2026-10-29T02:40:13.292195Z",
+        "exact_adjacent_path_hash_match": true
+      }
+    ]
+  },
+  "archive": {
+    "asset_id": 687142233,
+    "bytes": 1601969847,
+    "sha256": "7afa38624fa62ee5d8293422d0ab084c1bb4603134c7f4dafce11a033b57cc19",
+    "metadata_package_and_release_job_agree": true,
+    "whole_archive_acquired": false,
+    "whole_archive_rehashed": false,
+    "digest_alone_binds_partial_members": false,
+    "release_immutable": false
+  },
+  "build_observations": {
+    "cli_go_version": "1.26.10",
+    "cli_cgo_enabled": "1",
+    "cli_setup_go_env": {
+      "CC": "gcc",
+      "CXX": "g++",
+      "CGO_CFLAGS": "-O3",
+      "CGO_CPPFLAGS": "",
+      "CGO_CXXFLAGS": "-O3",
+      "CGO_LDFLAGS": "-O2 -g"
+    },
+    "compiler_report": "clang version 18.1.8; LLVM source 3b5b5c1ec4a3095ab096dd780e84d7ab81f3d7ff",
+    "compiler_archive_name": "llvm-mingw-20240619-ucrt-x86_64.zip",
+    "compiler_archive_bytes_or_hash_verified": false,
+    "cli_script_recipe": "go build -trimpath with stripped release/version ldflags",
+    "recipe_is_complete_actual_command_trace": false,
+    "cpu_cmake_report": {
+      "C": "Clang 18.1.8",
+      "CXX": "Clang 18.1.8",
+      "ASM": "Clang with GNU-like command-line",
+      "build_type": "Release",
+      "OpenMP": "-fopenmp=libomp, version 5.1"
+    },
+    "cpu_upstream_ccache_restore_report": "Cache not found for exact CPU vendor key; this is an upstream log observation only.",
+    "all_effective_flags_and_object_inputs_recovered": false
+  },
+  "attestation_checks": [
+    {
+      "subject": "cli",
+      "endpoint": "https://api.github.com/orgs/ollama/attestations/sha256:c1cca2937421d78877d5961746d25e33acd62e194d881f90fb63dca7f3e10f41?per_page=1",
+      "observed_utc": "2026-11-06T17:54:32.7023824+01:00",
+      "http_status": 404,
+      "elapsed_ms": 582,
+      "time_limit_ms": 25000,
+      "stdout_limit_bytes": 65536,
+      "stderr_limit_bytes": 8192,
+      "stdout_bytes": 1365,
+      "stdout_sha256": "a4fed9e32a75e510ab39a10b0b7cfb2aa39c51c5ccca2672b508b35c9e93d5b1",
+      "stderr_bytes": 25,
+      "stderr_sha256": "d2c8985c89b29a842ac4946d13bdbc297709f44f20bb968faf9682664b211db6",
+      "timed_out": false,
+      "cap_exceeded": false,
+      "pagination_followed": false,
+      "authenticated_get": true,
+      "bundle_obtained": false,
+      "universal_absence_proven": false
+    },
+    {
+      "subject": "archive",
+      "endpoint": "https://api.github.com/orgs/ollama/attestations/sha256:7afa38624fa62ee5d8293422d0ab084c1bb4603134c7f4dafce11a033b57cc19?per_page=1",
+      "observed_utc": "2026-11-06T17:54:33.3199702+01:00",
+      "http_status": 404,
+      "elapsed_ms": 624,
+      "time_limit_ms": 25000,
+      "stdout_limit_bytes": 65536,
+      "stderr_limit_bytes": 8192,
+      "stdout_bytes": 1366,
+      "stdout_sha256": "b4c301b1c5590a15865ee6db0c8aa86f66f4658c94b0ab35159b376c13dc6df0",
+      "stderr_bytes": 25,
+      "stderr_sha256": "d2c8985c89b29a842ac4946d13bdbc297709f44f20bb968faf9682664b211db6",
+      "timed_out": false,
+      "cap_exceeded": false,
+      "pagination_followed": false,
+      "authenticated_get": true,
+      "bundle_obtained": false,
+      "universal_absence_proven": false
+    }
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "All 30 retained exact path/hash pairs, including 25 candidate native members and CLI, agree with adjacent official post-signing packaging records.",
+      "proof": [
+        "/retained/member_records",
+        "/run",
+        "/primary_sources/packaging_job"
+      ],
+      "limit": "Official project-controlled build-output consistency, not independently verified signed or reproducible provenance."
+    },
+    {
+      "id": "C2",
+      "claim": "Published ZIP digest agrees with packaging and release-job records.",
+      "proof": [
+        "/archive",
+        "/primary_sources/asset",
+        "/primary_sources/release_job"
+      ],
+      "limit": "Whole ZIP not acquired or rehashed; its digest alone does not bind partial members."
+    },
+    {
+      "id": "C3",
+      "claim": "Actual source-associated logs add bounded Go/CGo/compiler observations.",
+      "proof": [
+        "/build_observations",
+        "/primary_sources/cli_job",
+        "/primary_sources/cpu_job"
+      ],
+      "limit": "All effective flags, native objects/patches/build tags and compiler bytes remain unresolved."
+    },
+    {
+      "id": "C4",
+      "claim": "Two authenticated digest attestation lookups returned 404 without a bundle.",
+      "proof": [
+        "/attestation_checks"
+      ],
+      "limit": "No accessible bundle from these checks; universal absence is not established."
+    },
+    {
+      "id": "C5",
+      "claim": "Admission and product controls remain under ADR-0013 and S-23–S-27.",
+      "proof": [
+        "https://github.com/tallyline-sc/tallyline/blob/0518f05902754fe62d75d283a061083fe6d48ab3/docs/adr/0013-conditional-ollama-delivery.md",
+        "https://github.com/tallyline-sc/tallyline/blob/0518f05902754fe62d75d283a061083fe6d48ab3/docs/plan/10-supply-chain-security.md"
+      ],
+      "limit": "No new mandatory crypto-attestation/native gate; user installation only avoids redistribution."
+    }
+  ],
+  "unresolved": {
+    "cryptographic_publisher_or_build_attestation": true,
+    "exact_compiler_toolchain_bytes": true,
+    "all_cgo_build_tags_flags_patches": true,
+    "complete_native_assembler_and_notice_mapping": true,
+    "native_and_alpha_research_admission": true,
+    "complete_existing_model_profile_identity": true,
+    "owned_synthetic_trial_command_and_acceptance": true,
+    "ort_prerequisite": true,
+    "physical_weak_pc_evidence": true
+  },
+  "verification_limits": {
+    "cryptographically_verified_provenance_attestation": false,
+    "local_authenticode_verification": false,
+    "source_to_binary_derivation_verified": false,
+    "native_or_model_executed": false,
+    "runtime_admission_granted": false,
+    "recognition_or_physical_weak_pc_acceptance": false,
+    "raw_logs_included": false,
+    "response_bodies_included": false
+  },
+  "build_observation_line_mapping": {
+    "cli_job": 123221275658,
+    "cli_lines": [
+      {
+        "line": 187,
+        "value": "go version go1.26.10 windows/amd64"
+      },
+      {
+        "line": 191,
+        "value": "CC=gcc"
+      },
+      {
+        "line": 192,
+        "value": "CGO_CFLAGS=-O3"
+      },
+      {
+        "line": 193,
+        "value": "CGO_CPPFLAGS="
+      },
+      {
+        "line": 194,
+        "value": "CGO_CXXFLAGS=-O3"
+      },
+      {
+        "line": 195,
+        "value": "CGO_ENABLED=1"
+      },
+      {
+        "line": 197,
+        "value": "CGO_LDFLAGS=-O2 -g"
+      },
+      {
+        "line": 198,
+        "value": "CXX=g++"
+      },
+      {
+        "line": 255,
+        "value": "Clang 18.1.8; LLVM source 3b5b5c1ec4a3095ab096dd780e84d7ab81f3d7ff"
+      },
+      {
+        "line": 286,
+        "value": "CGO_CFLAGS: -O3"
+      },
+      {
+        "line": 287,
+        "value": "CGO_CXXFLAGS: -O3"
+      }
+    ],
+    "cpu_job": 123221275826,
+    "cpu_lines": [
+      {
+        "line": 266,
+        "value": "CMAKE_BUILD_TYPE=Release"
+      },
+      {
+        "line": 274,
+        "value": "C compiler: Clang 18.1.8"
+      },
+      {
+        "line": 275,
+        "value": "CXX compiler: Clang 18.1.8"
+      },
+      {
+        "line": 289,
+        "value": "ASM compiler: Clang with GNU-like command-line"
+      },
+      {
+        "line": 299,
+        "value": "OpenMP_C: -fopenmp=libomp, version 5.1"
+      }
+    ],
+    "raw_log_text_included": false
+  }
+}

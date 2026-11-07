@@ -1,0 +1,191 @@
+[[absence]]
+crate = "clipboard-win"
+version = "5.4.3"
+source = "https://github.com/DoumanAsh/clipboard-win/tree/ed27008ae5d1f10cfbb266de039f0fb35fd05a56"
+reason = "Reviewed published sources and the omitted upstream BSL-1.0 LICENSE at the published VCS commit; neither names a copyright holder. Cargo authors are not substituted for ownership."
+
+[[absence]]
+crate = "error-code"
+version = "3.4.0"
+source = "https://github.com/DoumanAsh/error-code/tree/e4615e514db3ff64f5f1b328b4865b20a3dcdbc3"
+reason = "Reviewed the published Rust sources and BSL-1.0 LICENSE; neither contains a named copyright-holder notice. Cargo authors are not substituted for ownership."
+
+[[absence]]
+crate = "zmij"
+version = "1.0.23"
+source = "https://github.com/dtolnay/zmij/tree/7b7cc48b58028e8af7be87e94c0c1c8936f1a57c"
+reason = "Reviewed the published sources and Apache-2.0/MIT texts; neither supplies a named holder for this crate. The generic Apache template and Cargo authors are not ownership evidence."
+
+[[absence]]
+crate = "x11-dl"
+version = "2.21.0"
+source = "https://github.com/AltF02/x11-rs/tree/fced94ef6eb5935c892079a46812806f7b7a9237/x11-dl"
+reason = "Reviewed the published Rust sources and Apache-2.0/MIT texts; neither names a holder. Symbol names containing copyright are API data, and Cargo authors are not substituted for ownership."
+
+[[absence]]
+crate = "allocator-api2"
+version = "0.2.21"
+source = "https://crates.io/crates/allocator-api2/0.2.21"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: 63cd7fcc2f8854b5821c7054d026e8a4647acde1, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "codespan-reporting"
+version = "0.13.1"
+source = "https://crates.io/crates/codespan-reporting/0.13.1"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: ef354877a16c83e678051830b260a8f9a53778bd, path codespan-reporting. This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "fdeflate"
+version = "0.3.7"
+source = "https://crates.io/crates/fdeflate/0.3.7"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: c365c7e6ffa81feb2e1fb762eed7299f05c9b0ca, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "glow"
+version = "0.17.0"
+source = "https://crates.io/crates/glow/0.17.0"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: 0983efbc97fa4815f18990ef2a59540ede94f6f6, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "half"
+version = "2.7.1"
+source = "https://crates.io/crates/half/2.7.1"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: 8cc891f3e4aad956eca7fa79b1f42f87ecd141ae, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "itoa"
+version = "1.0.18"
+source = "https://crates.io/crates/itoa/1.0.18"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: af77385d0daf4d0e949e81f2588be2e44f69f086, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "khronos-egl"
+version = "6.0.0"
+source = "https://crates.io/crates/khronos-egl/6.0.0"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: 5605af04fb91ca3e5cc314ac374d21c452bb6855, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "once_cell"
+version = "1.21.4"
+source = "https://crates.io/crates/once_cell/1.21.4"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: 80fe900b21f6d76c1a2ed74d3343e8a3a88c46d0, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "pin-project-lite"
+version = "0.2.17"
+source = "https://crates.io/crates/pin-project-lite/0.2.17"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: 3bdf763446aa78f90e3bdac1ef583e014832ab4c, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "rustc-hash"
+version = "2.1.3"
+source = "https://crates.io/crates/rustc-hash/2.1.3"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: c13e7ccca705e6255387a2ebc6dca142d6881621, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "serde_core"
+version = "1.0.229"
+source = "https://crates.io/crates/serde_core/1.0.229"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: 7fc3b4c30c94f73a96ebd1553f2b090d928fc3a8, path serde_core. This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "serde"
+version = "1.0.229"
+source = "https://crates.io/crates/serde/1.0.229"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: 7fc3b4c30c94f73a96ebd1553f2b090d928fc3a8, path serde. This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "smol_str"
+version = "0.2.2"
+source = "https://crates.io/crates/smol_str/0.2.2"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: aea39b4974f55e9380556272b1335e2f6fd13cc7, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "thiserror"
+version = "2.0.21"
+source = "https://crates.io/crates/thiserror/2.0.21"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: b1827ee06f81a7d7f954e676771e19a97f9f8e3b, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "unicode-general-category"
+version = "1.1.0"
+source = "https://crates.io/crates/unicode-general-category/1.1.0"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: cb2d8a62f035c33d6971b99322aae65f3cea7c88, path . This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "spirv"
+version = "0.4.0+sdk-1.4.341.0"
+source = "https://github.com/gfx-rs/rspirv/tree/8afc3d0ac8e158128cd1410bb2e4b4c26ab11bb4/spirv"
+reason = "Reviewed the complete published package copyright/SPDX marker search and the omitted upstream Apache-2.0 LICENSE at its published VCS revision. Neither provides a named holder; the Apache template is not ownership evidence. This is attribution review, not a security audit."
+
+[[absence]]
+crate = "polling"
+version = "3.11.0"
+source = "https://crates.io/crates/polling/3.11.0"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: f404d08dd2a61994ac5fe0ed663bc051bd94c053. This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "thiserror"
+version = "1.0.69"
+source = "https://crates.io/crates/thiserror/1.0.69"
+reason = "Reviewed published licence texts and searched the complete published package for copyright, Unicode copyright and SPDX copyright markers on 2026-11-01. Only standard licence grant/template prose is present; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS metadata: 41938bd3a03a70d34ed8e53d99c89c770c7c9c41. This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "endi"
+version = "1.1.1"
+source = "https://github.com/zeenix/endi/tree/226224559725a9ef0e0687b3a54eca9ad6a5a6c7"
+reason = "Reviewed complete published LICENSE-MIT and searched all published files for copyright, (c), Unicode copyright and SPDX copyright markers on 2026-11-02. The MIT text contains the standard grant/obligations but names no holder; only licence prose refers to copyright. Cargo authors are not ownership evidence and no attribution is invented. Exact archive/source evidence is in credential-adoption.json. This is attribution review, not a source security audit."
+
+[[absence]]
+crate = "event-listener"
+version = "5.4.2"
+source = "https://crates.io/crates/event-listener/5.4.2"
+reason = "Reviewed published MIT grant (byte-identical to the fully read endi1.1.1 MIT grant), Apache licence/template and complete published package copyright/(c)/Unicode/SPDX marker search on 2026-11-02. No named copyright holder is supplied; standard Apache grant and unfilled template prose are not ownership evidence. Cargo authors are not invented as holders. Published VCS revision 77004ac77dcef7884bf71a99c276a50f83a7fa4e. This is attribution review, not a security audit; all original legal texts remain bundled."
+
+[[absence]]
+crate = "event-listener-strategy"
+version = "0.5.4"
+source = "https://crates.io/crates/event-listener-strategy/0.5.4"
+reason = "Reviewed published MIT grant (byte-identical to the fully read endi1.1.1 MIT grant), Apache licence/template and complete published package copyright/(c)/Unicode/SPDX marker search on 2026-11-02. No named copyright holder is supplied; standard Apache grant and unfilled template prose are not ownership evidence. Cargo authors are not invented as holders. Published VCS revision f533c437e8a6561e9b625c3ee036a8ea7d19375c. This is attribution review, not a security audit; all original legal texts remain bundled."
+
+[[absence]]
+crate = "ordered-stream"
+version = "0.2.0"
+source = "https://crates.io/crates/ordered-stream/0.2.0"
+reason = "Reviewed published MIT grant (byte-identical to the fully read endi1.1.1 MIT grant), Apache licence/template and complete published package copyright/(c)/Unicode/SPDX marker search on 2026-11-02. No named copyright holder is supplied; standard Apache grant and unfilled template prose are not ownership evidence. Cargo authors are not invented as holders. Published VCS revision 5c58ca1a3d680c2406f0c6a1520c3476c27048aa. This is attribution review, not a security audit; all original legal texts remain bundled."
+
+[[absence]]
+crate = "fastrand"
+version = "2.5.0"
+source = "https://crates.io/crates/fastrand/2.5.0"
+reason = "Reviewed complete published MIT grant, Apache text where supplied and all package copyright/Unicode/SPDX markers on 2026-11-02. Only standard licence grant/obligation or unfilled template prose is supplied; no named copyright holder is stated. Cargo authors and token/code examples are not invented as attribution. Published VCS revision 7a1cc2c69ebde6cb3442809213db3fe19a2cb0ba. This is attribution review, not a security audit. The existing locked identity is newly included in the Linux normal graph by the credential dependency foundation; original legal texts remain bundled."
+
+[[absence]]
+crate = "proc-macro2"
+version = "1.0.107"
+source = "https://crates.io/crates/proc-macro2/1.0.107"
+reason = "Reviewed complete published MIT grant, Apache text where supplied and all package copyright/Unicode/SPDX markers on 2026-11-02. Only standard licence grant/obligation or unfilled template prose is supplied; no named copyright holder is stated. Cargo authors and token/code examples are not invented as attribution. Published VCS revision ed8a5497669cd63db33bf24646f261b012bbbc4a. This is attribution review, not a security audit. The existing locked identity is newly included in the Linux normal graph by the credential dependency foundation; original legal texts remain bundled."
+
+[[absence]]
+crate = "quote"
+version = "1.0.47"
+source = "https://crates.io/crates/quote/1.0.47"
+reason = "Reviewed complete published MIT grant, Apache text where supplied and all package copyright/Unicode/SPDX markers on 2026-11-02. Only standard licence grant/obligation or unfilled template prose is supplied; no named copyright holder is stated. Cargo authors and token/code examples are not invented as attribution. Published VCS revision 723dcb47d3f0ddc896e17287c8a8d3f2ea2317d5. This is attribution review, not a security audit. The existing locked identity is newly included in the Linux normal graph by the credential dependency foundation; original legal texts remain bundled."
+
+[[absence]]
+crate = "syn"
+version = "3.0.9"
+source = "https://crates.io/crates/syn/3.0.9"
+reason = "Reviewed complete published MIT grant, Apache text where supplied and all package copyright/Unicode/SPDX markers on 2026-11-02. Only standard licence grant/obligation or unfilled template prose is supplied; no named copyright holder is stated. Cargo authors and token/code examples are not invented as attribution. Published VCS revision 7c44a5565b4421035101cc16184e9af08ab5fc77. This is attribution review, not a security audit. The existing locked identity is newly included in the Linux normal graph by the credential dependency foundation; original legal texts remain bundled."
+
+[[absence]]
+crate = "winnow"
+version = "1.0.4"
+source = "https://crates.io/crates/winnow/1.0.4"
+reason = "Reviewed complete published MIT grant, Apache text where supplied and all package copyright/Unicode/SPDX markers on 2026-11-02. Only standard licence grant/obligation or unfilled template prose is supplied; no named copyright holder is stated. Cargo authors and token/code examples are not invented as attribution. Published VCS revision 7539ec0fc27144bfdcf9a68b0dbbec48bd0d5bae. This is attribution review, not a security audit. The existing locked identity is newly included in the Linux normal graph by the credential dependency foundation; original legal texts remain bundled."
+
+[[absence]]
+crate = "zvariant_utils"
+version = "4.2.0"
+source = "https://crates.io/crates/zvariant_utils/4.2.0"
+reason = "Reviewed complete published LICENSE grant and all published files, including hidden files, for copyright, (c), Unicode and SPDX copyright markers on 2026-11-02. Only standard MIT grant/obligation prose names copyright; no named holder is supplied. Cargo authors are not ownership evidence. Published VCS revision 0f4db6980bc1566278618a46c9ffa7f5f025c18a, path zvariant_utils. This is attribution review, not a security audit; the complete original grant remains bundled."

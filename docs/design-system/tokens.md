@@ -1,6 +1,6 @@
 # Design tokens
 
-> **Doc type:** Living spec — draft (JavaFX handoff stage 2; ADR-0004 partly superseded by ADR-0005). Last reviewed: 2026-10-12.
+> **Doc type:** Living spec — draft (JavaFX handoff stage 2; ADR-0004 partly superseded by ADR-0005). Last reviewed: 2026-11-03.
 
 > **Note 2026-10-12:** [ADR-0005](../adr/0005-rust-and-egui.md) replaces JavaFX with egui. The token files, their schema, the conversion rules and the values below stand until open point O-112 (adoption of the `tallyline-egui` crate) says otherwise. The section "JavaFX mapping" and the Java scripts under "Regenerating" describe a superseded mechanism: the egui rendition maps the same tokens to `egui::Style`, `TextStyle` and per-face font families, and an `xtask` task replaces the Java scripts once O-112 is settled. See [README.md](README.md), "egui rendition (ADR-0005)".
 
@@ -82,3 +82,7 @@ The colour values per theme are in the theme files; their contrast results are i
 ## Regenerating
 
 > Removed 2026-10-12 (ADR-0005 D12, O-112): the Java scripts `ConvertTokens.java`, `ValidateTokens.java` and `Contrast.java` that converted a Claude Design export into `ui/design-tokens/`, validated it and wrote the contrast section of the accessibility report are gone from the repository and stay in the Git history. Their replacement is an `xtask` task, built in M0 together with the reconciliation of `ui/design-tokens/` and the `design/tokens.json` of the Tallyline egui crate. Until then the token files below are edited only together with the documents they change, and a new system version is converted in the same commit.
+
+## egui typography and alpha checkpoint (2026-11-03)
+
+Corrected 2026-11-03: resolved Rust scrims preserve source alpha: dark 204, light 230 and high contrast 255 out of 255. The requested manual-value modal consumes this token. All 20 type styles register their exact face/size. Current reference-browser headings, review and confirmation headings, required-decision emphasis, action labels and existing widgets select semantic `TypeStyle::text` roles with explicit line heights. Current price/SCU labels use `numerals-strong`, reference/delta details use `numerals`, and confirmation values use `numerals-large`. Other standard egui labels retain natural line height. `FontFace` shares names with the separate-file loader. Action labels explicitly select the named button face, size and line height because egui 0.37's default atomic button provider otherwise selects Body. Existing approved font/licence bytes are unchanged. See [component adoption](components.md).

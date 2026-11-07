@@ -5,7 +5,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
-      day: monday
+    allow:
+      - dependency-type: all
     cooldown:
       default-days: 7
     open-pull-requests-limit: 5
@@ -19,7 +20,8 @@ updates:
     directory: /
     schedule:
       interval: weekly
-      day: monday
+    allow:
+      - dependency-type: all
     cooldown:
       default-days: 7
     open-pull-requests-limit: 5

@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "target": "x86_64-pc-windows-msvc",
+  "owner": "tallyline-adapter-platform",
+  "windows_sys": "0.61.2",
+  "windows_link": "0.2.1",
+  "scope_sha256": "e08cf0be1beb9ffd515751ff1e299de4c53b08aeac34a8a85e8c42740f288330",
+  "declared_features": [
+    "Win32_Security",
+    "Win32_System_JobObjects",
+    "Win32_System_Pipes",
+    "Win32_System_IO"
+  ],
+  "resolved_features": [
+    "Wdk",
+    "Wdk_Foundation",
+    "Wdk_Storage",
+    "Wdk_Storage_FileSystem",
+    "Wdk_System",
+    "Wdk_System_IO",
+    "Win32",
+    "Win32_Foundation",
+    "Win32_Graphics",
+    "Win32_Graphics_Dwm",
+    "Win32_Networking",
+    "Win32_Networking_WinSock",
+    "Win32_Security",
+    "Win32_Security_Credentials",
+    "Win32_Security_Cryptography",
+    "Win32_Storage",
+    "Win32_Storage_FileSystem",
+    "Win32_System",
+    "Win32_System_Com",
+    "Win32_System_IO",
+    "Win32_System_JobObjects",
+    "Win32_System_LibraryLoader",
+    "Win32_System_Pipes",
+    "Win32_System_SystemServices",
+    "Win32_System_Threading",
+    "Win32_System_WindowsProgramming",
+    "Win32_UI",
+    "Win32_UI_Input",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_UI_Shell",
+    "Win32_UI_WindowsAndMessaging",
+    "default"
+  ],
+  "permitted_declarations": [
+    {
+      "owner": "mio",
+      "owner_version": "1.2.4",
+      "owner_source": "registry+https://github.com/rust-lang/crates.io-index",
+      "workspace_member": false,
+      "dependency": {
+        "name": "windows-sys",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "req": "^0.61",
+        "kind": null,
+        "rename": null,
+        "optional": false,
+        "uses_default_features": true,
+        "features": [
+          "Wdk_Foundation",
+          "Wdk_Storage_FileSystem",
+          "Wdk_System_IO",
+          "Win32_Foundation",
+          "Win32_Networking_WinSock",
+          "Win32_Storage_FileSystem",
+          "Win32_Security",
+          "Win32_System_IO",
+          "Win32_System_WindowsProgramming"
+        ],
+        "target": "cfg(windows)",
+        "registry": null
+      }
+    },
+    {
+      "owner": "os_pipe",
+      "owner_version": "1.2.3",
+      "owner_source": "registry+https://github.com/rust-lang/crates.io-index",
+      "workspace_member": false,
+      "dependency": {
+        "name": "windows-sys",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "req": ">=0.28, <=0.61",
+        "kind": null,
+        "rename": null,
+        "optional": false,
+        "uses_default_features": true,
+        "features": [
+          "Win32_Foundation",
+          "Win32_System_Pipes",
+          "Win32_Security"
+        ],
+        "target": "cfg(windows)",
+        "registry": null
+      }
+    },
+    {
+      "owner": "polling",
+      "owner_version": "3.11.0",
+      "owner_source": "registry+https://github.com/rust-lang/crates.io-index",
+      "workspace_member": false,
+      "dependency": {
+        "name": "windows-sys",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "req": "^0.61",
+        "kind": null,
+        "rename": null,
+        "optional": false,
+        "uses_default_features": true,
+        "features": [
+          "Wdk_Foundation",
+          "Wdk_Storage_FileSystem",
+          "Win32_Foundation",
+          "Win32_Networking_WinSock",
+          "Win32_Security",
+          "Win32_Storage_FileSystem",
+          "Win32_System_IO",
+          "Win32_System_LibraryLoader",
+          "Win32_System_Threading",
+          "Win32_System_WindowsProgramming"
+        ],
+        "target": "cfg(windows)",
+        "registry": null
+      }
+    },
+    {
+      "owner": "socket2",
+      "owner_version": "0.6.5",
+      "owner_source": "registry+https://github.com/rust-lang/crates.io-index",
+      "workspace_member": false,
+      "dependency": {
+        "name": "windows-sys",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "req": ">=0.60, <0.62",
+        "kind": null,
+        "rename": null,
+        "optional": false,
+        "uses_default_features": true,
+        "features": [
+          "Win32_Foundation",
+          "Win32_Networking_WinSock",
+          "Win32_System_IO",
+          "Win32_System_Threading",
+          "Win32_System_WindowsProgramming"
+        ],
+        "target": "cfg(windows)",
+        "registry": null
+      }
+    },
+    {
+      "owner": "tallyline-adapter-platform",
+      "owner_version": "0.1.0",
+      "owner_source": null,
+      "workspace_member": true,
+      "dependency": {
+        "name": "windows-sys",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "req": "=0.61.2",
+        "kind": null,
+        "rename": null,
+        "optional": false,
+        "uses_default_features": false,
+        "features": [
+          "Win32_Security",
+          "Win32_System_JobObjects",
+          "Win32_System_Pipes",
+          "Win32_System_IO"
+        ],
+        "target": "x86_64-pc-windows-msvc",
+        "registry": null
+      }
+    },
+    {
+      "owner": "uds_windows",
+      "owner_version": "1.2.1",
+      "owner_source": "registry+https://github.com/rust-lang/crates.io-index",
+      "workspace_member": false,
+      "dependency": {
+        "name": "windows-sys",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "req": ">=0.60, <0.62",
+        "kind": null,
+        "rename": null,
+        "optional": false,
+        "uses_default_features": true,
+        "features": [
+          "Win32_Networking_WinSock",
+          "Win32_Foundation",
+          "Win32_System_Threading",
+          "Win32_System_IO"
+        ],
+        "target": "cfg(windows)",
+        "registry": null
+      }
+    },
+    {
+      "owner": "winit",
+      "owner_version": "0.30.13",
+      "owner_source": "registry+https://github.com/rust-lang/crates.io-index",
+      "workspace_member": false,
+      "dependency": {
+        "name": "windows-sys",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "req": "^0.52.0",
+        "kind": null,
+        "rename": null,
+        "optional": false,
+        "uses_default_features": true,
+        "features": [
+          "Win32_Devices_HumanInterfaceDevice",
+          "Win32_Foundation",
+          "Win32_Globalization",
+          "Win32_Graphics_Dwm",
+          "Win32_Graphics_Gdi",
+          "Win32_Media",
+          "Win32_System_Com_StructuredStorage",
+          "Win32_System_Com",
+          "Win32_System_LibraryLoader",
+          "Win32_System_Ole",
+          "Win32_Security",
+          "Win32_System_SystemInformation",
+          "Win32_System_SystemServices",
+          "Win32_System_Threading",
+          "Win32_System_WindowsProgramming",
+          "Win32_UI_Accessibility",
+          "Win32_UI_Controls",
+          "Win32_UI_HiDpi",
+          "Win32_UI_Input_Ime",
+          "Win32_UI_Input_KeyboardAndMouse",
+          "Win32_UI_Input_Pointer",
+          "Win32_UI_Input_Touch",
+          "Win32_UI_Shell",
+          "Win32_UI_TextServices",
+          "Win32_UI_WindowsAndMessaging"
+        ],
+        "target": "cfg(target_os = \"windows\")",
+        "registry": null
+      }
+    },
+    {
+      "owner": "zbus",
+      "owner_version": "5.19.0",
+      "owner_source": "registry+https://github.com/rust-lang/crates.io-index",
+      "workspace_member": false,
+      "dependency": {
+        "name": "windows-sys",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "req": "^0.61",
+        "kind": null,
+        "rename": null,
+        "optional": false,
+        "uses_default_features": true,
+        "features": [
+          "Win32_Foundation",
+          "Win32_Security_Authorization",
+          "Win32_System_Memory",
+          "Win32_System_WindowsProgramming",
+          "Win32_Networking",
+          "Win32_Networking_WinSock",
+          "Win32_NetworkManagement",
+          "Win32_NetworkManagement_IpHelper",
+          "Win32_System_IO",
+          "Win32_System_Threading"
+        ],
+        "target": "cfg(windows)",
+        "registry": null
+      }
+    }
+  ]
+}

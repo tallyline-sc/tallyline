@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "reviewed": "2026-11-02",
+  "scope": "Approved Small baseline data identities only; no runtime inference, measured accuracy or reproducible converter claim.",
+  "models": [
+    {
+      "file": "PP-OCRv6_small_det.onnx",
+      "source": "https://huggingface.co/PaddlePaddle/PP-OCRv6_small_det_onnx/resolve/28fe5895c24fd108c19eb3e8479f4ab385fbfc62/inference.onnx",
+      "revision": "28fe5895c24fd108c19eb3e8479f4ab385fbfc62",
+      "sha256": "d73e0058b7a8086bbd57f3d10b8bcd4ff95363f67e06e2762b5e814fe9c9410e",
+      "bytes": 9880512,
+      "licence": "Apache-2.0",
+      "model_card": "https://huggingface.co/PaddlePaddle/PP-OCRv6_small_det_onnx/blob/28fe5895c24fd108c19eb3e8479f4ab385fbfc62/README.md",
+      "model_card_sha256": "e9403667f0f92055d8ce9e73a2beb1002fc489d9342697db74039eb7178bb5fb",
+      "modified_by_tallyline": false
+    },
+    {
+      "file": "PP-OCRv6_small_rec.onnx",
+      "source": "https://huggingface.co/PaddlePaddle/PP-OCRv6_small_rec_onnx/resolve/b8f84f0b80c529de40b4fbb3544b84fa7233a513/inference.onnx",
+      "revision": "b8f84f0b80c529de40b4fbb3544b84fa7233a513",
+      "sha256": "5435fd747c9e0efe15a96d0b378d5bd157e9492ed8fd80edf08f30d02fa24634",
+      "bytes": 21159378,
+      "licence": "Apache-2.0",
+      "model_card": "https://huggingface.co/PaddlePaddle/PP-OCRv6_small_rec_onnx/blob/b8f84f0b80c529de40b4fbb3544b84fa7233a513/README.md",
+      "model_card_sha256": "7d46dbd183ac09bd5a2e6b4577dcb29240751b1c00eb6813eca308d529f86806",
+      "modified_by_tallyline": false
+    }
+  ],
+  "dictionary": {
+    "file": "ppocrv6_dict.txt",
+    "source": "https://github.com/PaddlePaddle/PaddleOCR/blob/dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/ppocr/utils/dict/ppocrv6_dict.txt",
+    "revision": "dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf",
+    "sha256": "b5f2bfe2bdd9448429e3e82b51c789775d9b42f2403d082b00662eb77e401c5d",
+    "bytes": 74947,
+    "ordered_entries": 18708,
+    "model_config_source": "https://huggingface.co/PaddlePaddle/PP-OCRv6_small_rec_onnx/blob/b8f84f0b80c529de40b4fbb3544b84fa7233a513/inference.yml",
+    "model_config_sha256": "ab078671bb49f06228eadccd34f1bb501e157f7a047095ffb943ba81512c77d1",
+    "model_config_entries_match_every_index": true,
+    "append_space": true,
+    "blank_class": 0,
+    "expected_recognition_classes": 18710,
+    "native_output_shape_verified": false,
+    "modified_by_tallyline": false
+  },
+  "licence": {
+    "file": "supply-chain/notices/paddleocr/LICENSE",
+    "source": "https://github.com/PaddlePaddle/PaddleOCR/blob/dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf/LICENSE",
+    "sha256": "3840c5c0c61c294264d2dd77b8777be6ddd90121ef4e0e64abcd22edea581d6e",
+    "project_notice": "Copyright (c) 2016 PaddlePaddle Authors. All Rights Reserved."
+  },
+  "conversion": {
+    "performed_by_tallyline": false,
+    "reproducible_upstream_export_recipe_verified": false
+  }
+}

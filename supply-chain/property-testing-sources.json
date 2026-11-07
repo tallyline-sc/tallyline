@@ -1,0 +1,154 @@
+[
+  {
+    "name": "proptest",
+    "version": "1.12.0",
+    "published_at": "2026-10-10T18:18:05.623491Z",
+    "latest_eligible_stable": "1.12.0",
+    "verified_on": "2026-11-03",
+    "archive_sha256": "b8530004ccb15eae51c7e40009fbe317f341f804db54dc033eec1c50be28cfa0",
+    "repository": "https://github.com/proptest-rs/proptest",
+    "upstream_commit": "70cf37d46b7d83393b6ed94c611f8c52209f585d",
+    "published_by": {
+      "id": 336629,
+      "login": "rexmas",
+      "name": "Rex",
+      "avatar": "https://avatars.githubusercontent.com/u/4276518?v=4",
+      "url": "https://github.com/rexmas",
+      "github_username_matches": true,
+      "created_at": "2013-04-27T23:08:56Z"
+    },
+    "trusted_publishing_identity": null,
+    "future_publisher_trust": false,
+    "selected_licence": "MIT",
+    "criterion": "safe-to-run"
+  },
+  {
+    "name": "chacha20",
+    "version": "0.10.2",
+    "published_at": "2026-08-27T17:51:13.045493Z",
+    "latest_eligible_stable": "0.10.2",
+    "verified_on": "2026-11-03",
+    "archive_sha256": "65c35e4b699c7e15ccbe7ee35c005e4fc0a278d22238a2857e6ce2dadeda1b06",
+    "repository": "https://github.com/RustCrypto/stream-ciphers",
+    "upstream_commit": "6b236b758a0279f64d777797514813b2cb572c8b",
+    "published_by": null,
+    "trusted_publishing_identity": {
+      "provider": "github",
+      "repository": "RustCrypto/stream-ciphers",
+      "run_id": "33100500097",
+      "sha": "6b236b758a0279f64d777797514813b2cb572c8b"
+    },
+    "future_publisher_trust": false,
+    "selected_licence": "MIT",
+    "criterion": "safe-to-run"
+  },
+  {
+    "name": "core_detect",
+    "version": "1.0.0",
+    "published_at": "2021-05-09T16:36:07.524627Z",
+    "latest_eligible_stable": "1.0.0",
+    "verified_on": "2026-11-03",
+    "archive_sha256": "7f8f80099a98041a3d1622845c271458a2d73e688351bf3cb999266764b81d48",
+    "repository": "https://github.com/thomcc/core_detect",
+    "upstream_commit": "a0f957776563806e7d20978471676e0db72892ba",
+    "published_by": {
+      "id": 4357,
+      "login": "thomcc",
+      "name": "Thom Chiovoloni",
+      "avatar": "https://avatars.githubusercontent.com/u/860665?v=4",
+      "url": "https://github.com/thomcc",
+      "github_username_matches": true,
+      "created_at": "2011-06-20T02:14:06Z"
+    },
+    "trusted_publishing_identity": null,
+    "future_publisher_trust": false,
+    "selected_licence": "MIT",
+    "criterion": "safe-to-run"
+  },
+  {
+    "name": "rand",
+    "version": "0.10.3",
+    "published_at": "2026-09-20T06:37:47.850624Z",
+    "latest_eligible_stable": "0.10.3",
+    "verified_on": "2026-11-03",
+    "archive_sha256": "65c9fb96cbc91e3478eaae79a69fcd3f1ae4ad052e471fe6732fff548984b4af",
+    "repository": "https://github.com/rust-random/rand",
+    "upstream_commit": "9e7d328f60d6372ae22927f37d1a816fc980f25e",
+    "published_by": null,
+    "trusted_publishing_identity": {
+      "provider": "github",
+      "repository": "rust-random/rand",
+      "run_id": "35494690553",
+      "sha": "9e7d328f60d6372ae22927f37d1a816fc980f25e"
+    },
+    "future_publisher_trust": false,
+    "selected_licence": "MIT",
+    "criterion": "safe-to-run"
+  },
+  {
+    "name": "rand_core",
+    "version": "0.10.1",
+    "published_at": "2026-04-13T15:26:43.049921Z",
+    "latest_eligible_stable": "0.10.1",
+    "verified_on": "2026-11-03",
+    "archive_sha256": "63b8176103e19a2643978565ca18b50549f6101881c443590420e4dc998a3c69",
+    "repository": "https://github.com/rust-random/rand_core",
+    "upstream_commit": "5cd7df496d0bff1d95534ac8b66a2610f5bf7808",
+    "published_by": null,
+    "trusted_publishing_identity": {
+      "provider": "github",
+      "repository": "rust-random/rand_core",
+      "run_id": "24350942053",
+      "sha": "5cd7df496d0bff1d95534ac8b66a2610f5bf7808"
+    },
+    "future_publisher_trust": false,
+    "selected_licence": "MIT",
+    "criterion": "safe-to-deploy"
+  },
+  {
+    "name": "rand_xorshift",
+    "version": "0.5.0",
+    "published_at": "2026-02-02T08:15:36.556285Z",
+    "latest_eligible_stable": "0.5.0",
+    "verified_on": "2026-11-03",
+    "archive_sha256": "60aa6af80be32871323012e02e6e65f8a7cc7890931ae421d217ad8fe0df2ccf",
+    "repository": "https://github.com/rust-random/rngs",
+    "upstream_commit": "1172d82adc728aaf0c56b8e6b703876b51c041a3",
+    "published_by": {
+      "id": 1234,
+      "login": "dhardy",
+      "name": "Diggory Hardy",
+      "avatar": "https://avatars.githubusercontent.com/u/134893?v=4",
+      "url": "https://github.com/dhardy",
+      "github_username_matches": true,
+      "created_at": "2009-10-04T15:54:11Z"
+    },
+    "trusted_publishing_identity": null,
+    "future_publisher_trust": false,
+    "selected_licence": "MIT",
+    "criterion": "safe-to-run"
+  },
+  {
+    "name": "unarray",
+    "version": "0.1.4",
+    "published_at": "2022-11-30T17:09:42.91653Z",
+    "latest_eligible_stable": "0.1.4",
+    "verified_on": "2026-11-03",
+    "archive_sha256": "eaea85b334db583fe3274d12b4cd1880032beab409c0d774be044d4480ab9a94",
+    "repository": "https://github.com/cameron1024/unarray",
+    "upstream_commit": "0151bf12f216a1dc64f5e531a8a0bb8e6bdf09ca",
+    "published_by": {
+      "id": 129002,
+      "login": "cameron1024",
+      "name": "Cameron Mcloughlin",
+      "avatar": "https://avatars.githubusercontent.com/u/29902409?v=4",
+      "url": "https://github.com/cameron1024",
+      "github_username_matches": true,
+      "created_at": "2017-07-04T21:10:21Z"
+    },
+    "trusted_publishing_identity": null,
+    "future_publisher_trust": false,
+    "selected_licence": "Apache-2.0",
+    "criterion": "safe-to-run"
+  }
+]

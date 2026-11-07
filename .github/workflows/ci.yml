@@ -16,7 +16,8 @@ concurrency:
 env:
   CARGO_TERM_COLOR: always
   DENY_VERSION: 0.20.2
-  VET_VERSION: 0.10.2
+  VET_VERSION: 0.10.3
+  LLVM_COV_VERSION: 0.9.1
 
 jobs:
   check:
@@ -28,9 +29,13 @@ jobs:
       matrix:
         include:
           - os: windows-latest
+            llvm-cov-target: x86_64-pc-windows-msvc
+            llvm-cov-sha256: 15eefd5b90fcdd4006b727c6e710d70a61aff509fcd7bb37f9c2a35c4f024948
             deny-target: x86_64-pc-windows-msvc
             deny-sha256: 975a22143262fd27476d19ee00c7af67978426e40e1dee94eed6bbade1cf87dc
-          - os: ubuntu-latest
+          - os: ubuntu-24.04
+            llvm-cov-target: x86_64-unknown-linux-musl
+            llvm-cov-sha256: 3fca950394a3c49457657c158b1619cec8dfd2647ae5b48746734c0ab969a522
             deny-target: x86_64-unknown-linux-musl
             deny-sha256: 9f12ed4c49936e09b48bf862b595cde2fe64fcbd9d74dfacac6131ca824c8d5f
     steps:
@@ -38,10 +43,28 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
+          lfs: true
+
+      - name: Install the pinned Linux software renderer
+        if: runner.os == 'Linux'
+        shell: bash
+        env:
+          MESA_VERSION: 25.2.8-0ubuntu0.24.04.4
+          MESA_SHA256: a4ec58cb952b4e2a8b7c7a9b4ea80fa3d2914e347ad13b11dfb67518b409fb57
+        run: |
+          archive="$RUNNER_TEMP/mesa-vulkan-drivers_${MESA_VERSION}_amd64.deb"
+          curl --fail --silent --show-error --location --output "$archive" "https://archive.ubuntu.com/ubuntu/pool/main/m/mesa/mesa-vulkan-drivers_${MESA_VERSION}_amd64.deb"
+          echo "${MESA_SHA256}  ${archive}" | sha256sum --check -
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends --allow-downgrades "$archive"
+          test "$(dpkg-query -W -f='${Version}' mesa-vulkan-drivers)" = "$MESA_VERSION"
+          test -f /usr/share/vulkan/icd.d/lvp_icd.json
+          echo 'VK_DRIVER_FILES=/usr/share/vulkan/icd.d/lvp_icd.json' >> "$GITHUB_ENV"
+          echo 'WGPU_BACKEND=vulkan' >> "$GITHUB_ENV"
 
       - name: Install the pinned Rust toolchain
         shell: bash
-        run: rustup toolchain install
+        run: rustup toolchain install --component llvm-tools-preview
 
       - name: Verify the compiler reports the pinned version
         shell: bash
@@ -50,6 +73,22 @@ jobs:
           actual=$(rustc --version | cut -d' ' -f2)
           test -n "$pinned"
           test "$pinned" = "$actual"
+
+      - name: Install pinned cargo-llvm-cov
+        timeout-minutes: 3
+        shell: bash
+        env:
+          LLVM_COV_TARGET: ${{ matrix.llvm-cov-target }}
+          LLVM_COV_SHA256: ${{ matrix.llvm-cov-sha256 }}
+        run: |
+          cd "$RUNNER_TEMP"
+          archive="cargo-llvm-cov-${LLVM_COV_TARGET}.tar.gz"
+          curl --disable --fail --silent --show-error --location --proto =https --proto-redir =https --connect-timeout 30 --max-time 120 --retry 3 --retry-max-time 20 --max-filesize 67108864 --output "$archive" "https://github.com/taiki-e/cargo-llvm-cov/releases/download/v${LLVM_COV_VERSION}/${archive}"
+          echo "${LLVM_COV_SHA256}  ${archive}" | sha256sum --check -
+          mkdir cargo-llvm-cov
+          tar -xzf "$archive" -C cargo-llvm-cov
+          test "$(PATH="$(pwd)/cargo-llvm-cov:$PATH" cargo --locked llvm-cov --version)" = "cargo-llvm-cov ${LLVM_COV_VERSION}"
+          echo "$RUNNER_TEMP/cargo-llvm-cov" >> "$GITHUB_PATH"
 
       - name: Install cargo-deny at the pinned version
         shell: bash
@@ -72,6 +111,12 @@ jobs:
       - name: Guard the supply-chain configuration
         run: cargo xtask guard
 
+      - name: Install pinned cargo-mutants
+        run: cargo xtask install-cargo-mutants
+
+      - name: Fetch the complete locked dependency graph
+        run: cargo fetch --locked
+
       - name: Verify the vendor hash list against a clean vendor
         run: cargo xtask vendor-hashes verify
 
@@ -90,6 +135,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
+          lfs: true
 
       - name: Install the pinned Rust toolchain
         run: rustup toolchain install

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "source_inputs": {
+    "Cargo.lock": "bd58df9276bc167f340c6e9abd0204beebcc6757893c4cd0564eff5c7c6d6d6c",
+    "NOTICE": "40e8f4ce90323ebecde6f46726c76872c436b5921c19c48cc1625c5b49661b39",
+    "supply-chain/notices.toml": "62897d7775f6106f4514b96d130b3775f324df0a02ba9d905349bbe7a7d87a25",
+    "Cargo.toml": "0342f294f512f1c06c3260ae9400f2d65bb88dc5ffcc2f7713ceecd65b6ddb84",
+    "crates/adapter-files/Cargo.toml": "a1b47d81c64d797149d68d9b9a6f8fc359144cc317fbdc435d0c32e0071a4aa8",
+    "crates/adapter-ocr/Cargo.toml": "be7c86c279822954cf8b6610d79bc631d1e7bbb57702f2178e8ee0384ee6b435",
+    "crates/adapter-platform/Cargo.toml": "0e92312c30ff112459f55ad8f0c370f4b85a64bcb720f459a38c7ba7110a836f",
+    "crates/adapter-storage/Cargo.toml": "7d9955872d65e94cd9d2fc3780e0244f630309591cab747e4fac33630442c5de",
+    "crates/adapter-uex/Cargo.toml": "cb0c60e031d9fe851ad219c7ab599bb07c30007b311d305f99eb895ab8374420",
+    "crates/app/Cargo.toml": "eb1f7d08b0c84add062bb82bda1f46cb251e276cb492d461092c5dfc36f14e3a",
+    "crates/egui/Cargo.toml": "2ed8a975e4da9aa268dc021cea896f3316e2605d0f545aad0ba8d23375221a9b",
+    "crates/game/Cargo.toml": "13c7f3f89c6f97b7acb978f1e60fedbee078aa6965f35469ee19dc9f4deb9d64",
+    "crates/reference-data/Cargo.toml": "5637afce81ff3272b6d91fbed5a5ae582556558945400008ed9959baf2b30fd3",
+    "crates/reporting/Cargo.toml": "24b7c64490023815d8f1c83d56e586e352390f8b8658395fab2a32b01f5bee13",
+    "crates/shared-kernel/Cargo.toml": "191aed52719cb99e10366c9f8a497be0b56c6aeec823b01cf09ef5e38ce6596d",
+    "crates/submission/Cargo.toml": "8a04bf0e4db0354f3707ac97be94c1f21f9deec6ad507c0ec1a3d6e6831905e0",
+    "crates/ui/Cargo.toml": "fdd23150f0b79df09b111a2bd973e62092aaf177ad6bb2da48dbaa94a4d6c4d6",
+    "crates/workflows/Cargo.toml": "7d0455b2fab63605b68a3c70320ccb62c96fecd3b97ad7e6c8abc94bc755c9b0",
+    "tools/ocr-eval/Cargo.toml": "f150e29f8c12c6c31c262253095cca031a2f84fa9aac7d775ee311b53128b2ca",
+    "xtask/Cargo.toml": "de901941742c4fa7dd73512cd792d59dd892863c6a09cdac125d3cd53aee2811",
+    "crates/recognition/Cargo.toml": "831534172ae613ebb85aba6b1dc99c41e4dbb0f317c55595de741754ed67e0e6",
+    "crates/adapter-vlm/Cargo.toml": "3344d8bc0bac0d7bedc8291c5f25ce198cb09915b53d5c458ca45198539fa8ba"
+  },
+  "targets": {
+    "windows": {
+      "target": "x86_64-pc-windows-msvc",
+      "catalogue_sha256": "e2373f0e0c034bf0bbb4c3ea0b6f393a7c372a2db05616cc482d9efb22f8010e",
+      "components": 219
+    },
+    "linux": {
+      "target": "x86_64-unknown-linux-gnu",
+      "catalogue_sha256": "90fd3e951fcf5862c63a06651bc4329ee9b07dbd47c6ff78162815ce5e32d3a7",
+      "components": 273
+    }
+  }
+}

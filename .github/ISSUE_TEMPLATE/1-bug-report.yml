@@ -9,7 +9,7 @@ body:
       value: |
         Thank you for the report. Please fill in as much as you can.
 
-        **Never report a security problem here.** Use [private vulnerability reporting](https://github.com/greluc/tallyline/security/advisories/new) instead.
+        **Never report a security problem here.** Use [private vulnerability reporting](https://github.com/tallyline-sc/tallyline/security/advisories/new) instead.
 
         **This issue is public.** Anyone can read it and open its attachments without logging in. Never include your UEX secret key, an app token or an unredacted screenshot (CURRENT BALANCE, player names, chat).
 

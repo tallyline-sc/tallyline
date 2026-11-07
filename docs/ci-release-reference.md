@@ -1,0 +1,43 @@
+# CI and release reference: P4KX
+
+> **Doc type:** Living reference — reviewed implementation guidance. Last reviewed: 2026-11-01.
+
+The owner selected [P4KX](https://github.com/p4kx-org/p4kx) as the build/release reference on 2026-11-01 and requested upstream issues for improvements supported by Tallyline's existing implementation. This comparison inspected P4KX at [`b712ca12a8449e2934de213584b164231f00ac84`](https://github.com/p4kx-org/p4kx/tree/b712ca12a8449e2934de213584b164231f00ac84); the reverse comparison was checked again at [`4d0f5ae52e71f8269c882da72b0e91ad60012a18`](https://github.com/p4kx-org/p4kx/tree/4d0f5ae52e71f8269c882da72b0e91ad60012a18). Recommendations below are implementation work, not evidence of completed or faster Tallyline workflows.
+
+## Build and release
+
+P4KX's [release workflow](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/.github/workflows/release.yml) separates packaging, SBOM, scanning, attestation, assembly and publication. Apply that explicit artifact dependency graph to issues #97 and #98 under [S-11 to S-18](plan/10-supply-chain-security.md) and [the release process](release-process.md):
+
+- Build Windows/Linux binaries and dependency SBOMs without release secrets. Prepare verified tools before protected packaging adds the token data file; run no Cargo or project build code afterwards. Publication downloads finished outputs and performs the duties already assigned to it by S-14.
+- Attest the final package bytes. Validate an allowlisted manifest covering MSI, ZIP, deb, tar.gz, SBOMs, legal material and Corresponding Source; reject missing, duplicate, unexpected or mixed-version assets. Include shipped runtime/model/dictionary assets in the inventory rather than assuming Cargo covers them.
+- Derive release identity from the signed `vMAJOR.MINOR.PATCH` tag, with one strict parser and checked MSI limits. P4KX already checks its tag against the workspace version in [release-note generation](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/xtask/src/changelog.rs#L79); a workflow regex alone does not explain its complete guard. Verify Tallyline's signed-tag/protected-main requirements separately from `gh release create --verify-tag`.
+- Assemble sorted `SHA256SUMS` over final assets with stable relative names. Normalise archive order, timestamps, modes and ownership and compare repeated fixture assemblies. These checks do not establish reproducible compiler or MSI output.
+- Adapt the real [MSI lifecycle checks](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/.github/scripts/check-msi.ps1): install, launch, upgrade, verify one product registration and retained user data, uninstall package-owned files. Verify ZIP and Linux installed/unpacked launches too. A synthetic next-version MSI tests upgrade mechanics; database migration/backup/downgrade checks remain separate.
+
+The owner independently selected self-built WiX 7.0.1. P4KX's official-binary installation and `-acceptEula wix7` are not the acquisition route for Tallyline. Translate required helper behaviour into Rust xtask; do not copy PowerShell/Python product helpers. VirusTotal uploads are outside the authorised data-flow inventory and are not part of the adaptation.
+
+## CI reliability and performance
+
+P4KX's [test workflow](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/.github/workflows/tests.yml) builds a nextest archive once per OS and distributes it to test partitions; its [CI workflow](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/.github/workflows/ci.yml) retains doctests and a final aggregate gate. Measure Tallyline compilation, execution, queue and artifact costs before selecting this optimisation or a shard count. Preserve requirement tracing, coverage, mutation testing and same-run/OS/architecture artifact provenance. A future aggregate gate must reject failure, cancellation and unexpected skips of required jobs.
+
+Retain bounded timeouts, no retry masking and isolation of process/global-state tests. A nextest group coordinates one runner, not other shards. The shared P4KX [linker, cache and Dev Drive setup](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/.github/actions/setup-rust/action.yml) is a performance candidate requiring measurements and source/licence review. S-37 excludes release cache actions, including lookup-only calls. Keep exact compiler/tool pins and the latest-stable update policy; the template's versions are not proof of today's latest releases.
+
+Strengthen rendered-test evidence using P4KX's [adapter assertions](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/crates/p4kx-render/src/gpu/tests.rs#L55): require and report the actual CPU adapter/backend, fail when a mandatory renderer is unavailable, and make optional skips visible. Installing Mesa or setting an environment variable alone proves no rendered test ran. CPU rendering does not replace native X11/Wayland launches or M4 GPU/VRAM measurements.
+
+## Further M1–M5 applications
+
+| P4KX evidence | Apply within the existing Tallyline slice |
+| --- | --- |
+| [Serialised schema/negative tests](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/crates/p4kx-export/tests/record_json_schema.rs#L94) | Test actual reference/config/export outputs, malformed inputs and migration states with independently expected fixtures. Schema generation can share a modelling mistake with the serialiser. |
+| [Differential verification](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/docs/differential-verification.md) | Freeze reference snapshots and clocks for M2/M3 replay, report missing classes and mutate comparison fixtures. OCR truth remains independently human verified; never bless recognition output as truth. |
+| [Bounded sound workers](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/crates/p4kx-extraction/src/sound_workers.rs) | Test bounded admission, cancellation while queued/waiting/running and durable recovery for intake, OCR and VLM. Size limits from Tallyline's requirements; byte leases alone do not measure native peak memory. |
+| [Pure process parsing](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/crates/p4kx-guard/src/process.rs) and [XDG resolution](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/docs/adr/0329-one-platform-module-decides-the-profile-cache-and-data-folders-and-linux-follows-xdg.md) | Keep one platform owner with pure directory/process inputs and bounded reads. Tallyline requires Toolhelp, unknown=running, hysteresis and prompt VLM cancellation; P4KX's warning-only Windows behaviour serves a different purpose. |
+| [Small release-check port](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/crates/p4kx-update/src/lib.rs) | Reuse the existing HTTP adapter for an optional, at-most-daily update notice, fake-clock scheduling, contained failures and validated links. Disabled means no request; no executable update installation. |
+
+No complete P4KX diagnostic-export contract was established by this survey. Tallyline retains its own allowlist, preview, redaction and deletion requirements; no new upload service follows from this reference.
+
+## Provenance and upstream feedback
+
+P4KX declares `MIT OR Apache-2.0`; its actual [MIT](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/LICENSE-MIT), [Apache](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/LICENSE-APACHE) and [third-party notices](https://github.com/p4kx-org/p4kx/blob/b712ca12a8449e2934de213584b164231f00ac84/THIRD-PARTY-NOTICES.md) were inspected. This comparison copies no implementation. Any subsequent source/configuration adaptation must review that file's provenance, preserve applicable copyright/licence/modification notices and record exact origin in NOTICE and REUSE metadata. Do not import third-party notices for components that do not ship.
+
+Created [P4KX #1042](https://github.com/p4kx-org/p4kx/issues/1042) after checking current main and open/closed issues and pull requests: pin the executed Rust and nextest versions, with actual-version assertions. Tallyline already has an exact compiler pin and CI assertion; its nextest archive design remains a recommendation. No hosted failure or compromise was claimed. Do not duplicate the existing unknown-process-state [#1030](https://github.com/p4kx-org/p4kx/issues/1030), or report the already implemented tag/version guard as missing.

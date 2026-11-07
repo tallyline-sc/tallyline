@@ -1,0 +1,685 @@
+{
+  "schema": 1,
+  "status": "approved",
+  "reviewed_on": "2026-11-01",
+  "revisit_by": "2027-04-13",
+  "targets": [
+    "x86_64-pc-windows-msvc",
+    "x86_64-unknown-linux-gnu"
+  ],
+  "packages": [
+    {
+      "name": "concurrent-queue",
+      "version": "2.5.0",
+      "archive_sha256": "4ca0197aee26d1ae37445ee532fefce43251d24cc7c166799f4d46817f1d3973",
+      "full_features": [
+        "default",
+        "std"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": null
+      },
+      "files": {
+        "src/lib.rs": "dc69f8a48cc28fe73ea1be88d77cd1aba98947d5a673019e61c630cc04c537ad"
+      },
+      "licence": "Apache-2.0 OR MIT",
+      "scope": "x86 lock-not full memory fence; active only if this crate becomes reachable on x86_64. Absent on both supported graphs."
+    },
+    {
+      "name": "cpufeatures",
+      "version": "0.3.1",
+      "archive_sha256": "5ca28b0ae3115b884660db4118d803791fd6756b6e88f39c0f3f7859060d7566",
+      "full_features": [],
+      "targets": {
+        "x86_64-pc-windows-msvc": [],
+        "x86_64-unknown-linux-gnu": []
+      },
+      "files": {
+        "src/loongarch64.rs": "215c691fd67d63739ee802807f75b682b8d6cae4a56c278e3402df48c9fcf49c"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "scope": "LoongArch CPUCFG instruction in loongarch64.rs; cfg(target_arch = loongarch64), inactive on both x86_64 targets."
+    },
+    {
+      "name": "getrandom",
+      "version": "0.3.4",
+      "archive_sha256": "899def5c37c4fd7b2664648c28120ecec138e4d395b459e5ca34f9cce2dd77fd",
+      "full_features": [],
+      "targets": {
+        "x86_64-pc-windows-msvc": [],
+        "x86_64-unknown-linux-gnu": []
+      },
+      "files": {
+        "src/backends/linux_raw.rs": "2647e9492e46afdb1838c824094f6ab6e14fb4a82fa8274bea8dd2d4151f32dd",
+        "src/backends/rndr.rs": "bc06a88e3314a06494b6fe70bdae684fe45f9a6a63d28c61dbd90f66595424d0"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "scope": "linux_raw syscall and AArch64 RNDR backends. Both inactive: defaults use Windows system RNG or Linux libc getrandom/file fallback. getrandom_backend=linux_raw/rndr overrides are outside this scope."
+    },
+    {
+      "name": "getrandom",
+      "version": "0.4.3",
+      "archive_sha256": "300e883d756b2e4ec94e02791f39b04b522276138852cfc41d9fb7e904106099",
+      "full_features": [
+        "std",
+        "sys_rng"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": [
+          "std",
+          "sys_rng"
+        ],
+        "x86_64-unknown-linux-gnu": [
+          "std",
+          "sys_rng"
+        ]
+      },
+      "files": {
+        "src/backends/linux_raw.rs": "94f6a494edd6ab99eca1989294b1064b58ba502f401b642aedbc3b97e98c0bf7",
+        "src/backends/rndr.rs": "edded389094deef0207fdf08acdf9c2e10d9ae8576cc64f7af21333cab0d0448"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "scope": "linux_raw syscall and AArch64 RNDR backends. Both inactive: defaults use Windows system RNG or Linux libc getrandom/file fallback. getrandom_backend=linux_raw/rndr overrides are outside this scope. Owner-approved 2026-11-03 std,sys_rng test-profile extension; sys_rng only forwards to the existing entropy functions. Archive, backend, assembly and build-script identities remain unchanged; approval provenance is in property-testing.json."
+    },
+    {
+      "name": "half",
+      "version": "2.7.1",
+      "archive_sha256": "6ea2d84b969582b4b1864a92dc5d27cd2b77b622a8d79306834f1be5ba20d84b",
+      "full_features": [
+        "alloc",
+        "default",
+        "num-traits",
+        "std"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": [
+          "alloc",
+          "default",
+          "num-traits",
+          "std"
+        ],
+        "x86_64-unknown-linux-gnu": [
+          "alloc",
+          "default",
+          "num-traits",
+          "std"
+        ]
+      },
+      "files": {
+        "src/binary16/arch/aarch64.rs": "c86b1c3d421ba4dffdc5174bc0274fac32a96bff82cfaf95670376ca1b7e1a72"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "scope": "AArch64 FP16 conversion assembly; aarch64 module excluded on both x86_64 targets. x86 conversions use Rust intrinsics."
+    },
+    {
+      "name": "libm",
+      "version": "0.2.16",
+      "archive_sha256": "b6d2cec3eae94f9f509c767b45932f1ada8350c4bdb85af2fcab4a3c14807981",
+      "full_features": [
+        "arch",
+        "default"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": [
+          "arch",
+          "default"
+        ],
+        "x86_64-unknown-linux-gnu": [
+          "arch",
+          "default"
+        ]
+      },
+      "files": {
+        "src/math/arch/aarch64.rs": "deb850d77df93beed6dcfcaf67c7665256ae49fc5019fdebc180714ec840cd80",
+        "src/math/arch/i586.rs": "fe087a006d5efc385c3ab877cb60de7b674681760728d2ef7ca231e7c313b51b",
+        "src/math/arch/x86.rs": "9d305f59b9886689be7920ae1543bb588738a1d7173a9a8e5a74eae0cf3b0b2a",
+        "src/math/arch/x86/fma.rs": "c5fb77e560e1012f211532c5668c8b8022d04d55a2489419a32e843c16267ad9"
+      },
+      "licence": "MIT",
+      "scope": "arch feature enables x86 SSE sqrt and runtime-dispatched FMA/FMA4 routines on both x86_64 targets; other assembly targets excluded."
+    },
+    {
+      "name": "objc2",
+      "version": "0.5.3",
+      "archive_sha256": "19d5490aaf8f1d7cf7688dfa9b0ce07900e168852c45cd2c03f534dfd27cfd0b",
+      "full_features": [
+        "alloc",
+        "default",
+        "relax-sign-encoding",
+        "std"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": null
+      },
+      "files": {
+        "src/rc/id.rs": "82f97d62db5d87b2f39c5024f23cfc2444bf62d71be63c575310876ff95262c1",
+        "src/runtime/retain_release_fast.rs": "068120634aadefe88ad171ac74b7a121186a74f461bbd9c3ae497fa116f8171f"
+      },
+      "licence": "MIT",
+      "scope": "Apple retain/release runtime calls, including register-specific assembly fast paths; both exact versions absent on both supported graphs. No Apple target approval requested."
+    },
+    {
+      "name": "objc2",
+      "version": "0.6.5",
+      "archive_sha256": "08849bbd4767dfae9457696856ae1c84fe4e0281bbe4a7abff2d0e06fb7981f8",
+      "full_features": [
+        "alloc",
+        "default",
+        "std"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": null
+      },
+      "files": {
+        "src/rc/retained.rs": "2878abed2de7a6e4e0dbccae825a73901bc840e010022e473db81655407c7ca2",
+        "src/runtime/retain_release_fast.rs": "0abc01b25d42902d7083cebed12b0fb1a72b9733679c7892fe7c3ebbeea36b6e"
+      },
+      "licence": "MIT",
+      "scope": "Apple retain/release runtime calls, including register-specific assembly fast paths; both exact versions absent on both supported graphs. No Apple target approval requested."
+    },
+    {
+      "name": "parking_lot",
+      "version": "0.12.5",
+      "archive_sha256": "93857453250e3077bd71ff98b6a65ea6621a19bb0f559a85248955ac12c45a1a",
+      "full_features": [
+        "default"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": [
+          "default"
+        ],
+        "x86_64-unknown-linux-gnu": [
+          "default"
+        ]
+      },
+      "files": {
+        "src/elision.rs": "7070a29080f4c7d3b2c9b6e51a0d8230ebc8e56e4790aaeda1747b6c073a7438"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "scope": "x86 hardware lock elision assembly requires hardware-lock-elision; feature absent on both supported targets, hence inactive."
+    },
+    {
+      "name": "portable-atomic",
+      "version": "1.15.0",
+      "archive_sha256": "05c8b63e8d9609db387f0324918f81d68fe27748f084ef092fb35954d0539a85",
+      "full_features": [
+        "default",
+        "fallback",
+        "require-cas"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": null
+      },
+      "files": {
+        "build.rs": "9d0b1e071715580497aadb918d4b3b124ee366ba66f15ac05a3d8045f0bc2cf0",
+        "src/imp/atomic128/aarch64.rs": "8fe3bebbf1a7991b35e6ffeb796ff872bc15edcdbbdcf7a5835cb2b1ce149542",
+        "src/imp/atomic128/powerpc64.rs": "f1831b186b89049aba31be4c4cd37b5572554f2655944d5cfc04ab5654691715",
+        "src/imp/atomic128/riscv64.rs": "115c4d8bc0fed79973bc12462f506121c7e612f3cf14cc627a0d024c3a131387",
+        "src/imp/atomic128/s390x.rs": "b657e6f3e48d12b79dfaf7dec5268d2558967c14288e097bb37e40d49b9b6eba",
+        "src/imp/atomic128/x86_64.rs": "19c67a75d8ee1392aae67f49b88a3b69e78acce5004280c7a7be33051774c8ed",
+        "src/imp/atomic64/arm_linux.rs": "e4857c2c7240b73a3e3c9bb092b1251d9b71a44617cc43345ffd14bf11ee5f65",
+        "src/imp/atomic64/riscv32.rs": "c8e00a15c0524fc94b0df7946fcd84b6779eb01bfe48f06bf6f4f84039c00337",
+        "src/imp/avr.rs": "085cdcc03d7ffb85c491f3939e0bcc3ae1e78738acadf09472f547a0b9d7c8fc",
+        "src/imp/detect/aarch64_aa64reg.rs": "77d6b3a2fafbdeb881c671379d0be0a330b46d78c8252d074c97ed44b1138123",
+        "src/imp/detect/x86_64.rs": "8b315b61a409d3350b19c02e98a741f4c1c1e3861e6792594137267f4595eeb1",
+        "src/imp/float/aarch64.rs": "b3d69ef526252b8ee99662f2059898cfa6cb99e1c969828225a2be99de2d45df",
+        "src/imp/interrupt/armv4t.rs": "6fb9e7d01f7fb483bc6bec07916fdcba8563b605b53bd87c5310662da04e55a4",
+        "src/imp/interrupt/armv6m.rs": "364a38f18ffb2b3cd836700dff6a390d9542f0f2a3eda07bc63bc8868dafaad1",
+        "src/imp/interrupt/avr.rs": "252569da4b194f91d7f52c6480a869e26679dc74c30a3a8fcd6568a39b90440d",
+        "src/imp/interrupt/msp430.rs": "a7131a478fca956de4ca569f340641da2eb6a5cbd86a05a854f1231dd24e62d1",
+        "src/imp/interrupt/riscv.rs": "32a0291b174310385f850c19283d583852b128cb9c037633c8a5e872245842bc",
+        "src/imp/interrupt/xtensa.rs": "7c877f42c237d7ff6564776ee9c4afa5b8143d4fb6b39b4ac869e5e357189b4f",
+        "src/imp/msp430.rs": "16635485eeca1c1c4b866253eefc1f39fa6121c84c16ec389b904c03fa9cdb55",
+        "src/imp/riscv.rs": "72c05a835e13b007ff587ec2fd35f619c32b74f18f0aa544fc304456ad5d255a",
+        "src/imp/x86.rs": "4c11976fccadc618d68d6aba4caf744d2859f60f63c6fb08f626f2a2561e6b52",
+        "src/lib.rs": "8fac4257f626a2669a44dd74a966677b368647fd883e32d8db79c57a06af6895",
+        "src/utils.rs": "9211b8295c0ec7dc02592731264a0d5516622541126ddd768006d79ef6749dfe"
+      },
+      "licence": "Apache-2.0 OR MIT",
+      "scope": "Architecture atomic operations and CPU detection, including x86_64 128-bit cmpxchg16b. Package absent on both supported graphs; no activation is approved."
+    },
+    {
+      "name": "redox_syscall",
+      "version": "0.4.1",
+      "archive_sha256": "4722d768eff46b75989dd134e5c353f0d6296e5aaa3132e776cbdb56be7731aa",
+      "full_features": [],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": null
+      },
+      "files": {
+        "src/arch/aarch64.rs": "9b4cf7da1f001ce54bfd01b7a001dbc8043c1ef89823781a2a1070e2c096a9ce",
+        "src/arch/riscv64.rs": "20bf9a8db779059773b113643d0cb3737fbb5d57f45ee39b8ae9d3396b6ef636",
+        "src/arch/x86_64.rs": "fd80c9a412d07c85f2b942f36de364edfff7cd49f6c00c043e69becb7c76119f",
+        "src/arch/x86.rs": "cf01f4d798e8861ad5b9429714c947e2d7c53a3cb9a13d53dc7a38e4bdad4101",
+        "src/io/mmio.rs": "ab64f0bee9d13ebcfc21d0125f6c973f460f582cbc3d566d00491fe1ac714127",
+        "src/io/pio.rs": "9ee6f2229b700d1c45b4c8c6242bd99fe69634e16dcd5843d9e8d1c958047406"
+      },
+      "licence": "MIT",
+      "scope": "Redox syscall, privileged port/MMIO and signal ABI assembly. All three versions absent on both supported graphs; no Redox target approval requested."
+    },
+    {
+      "name": "redox_syscall",
+      "version": "0.5.18",
+      "archive_sha256": "ed2bf2547551a7053d6fdfafda3f938979645c44812fbfcda098faae3f1a362d",
+      "full_features": [
+        "default",
+        "userspace"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": null
+      },
+      "files": {
+        "src/arch/aarch64.rs": "e85730a8487ff9123edca228d5a9a8518d1b2e98566aa5a27e9c0bccedcc85b3",
+        "src/arch/riscv64.rs": "aaad15159d498e70c58f2dbd225be59b97284ca8a6bd0e5ec16184ad8b530d8b",
+        "src/arch/x86_64.rs": "98de45c6f06c153498511b93ba2fa6bacf02901bc75320d267c2454eb36be471",
+        "src/arch/x86.rs": "9c1d13d45c433b13ced9cf72847e4089a50e9aa8b17e4b82b9fc1f82f304637f",
+        "src/io/mmio.rs": "5432e5716157cd8ad5a6c861e1dbd1810e9ccc962b1184fccac80ab1530d8a91",
+        "src/io/pio.rs": "45f17910323031d137e8297c8235286cebdc30ae47c9e5b4ceda31ea3d6e71eb",
+        "src/sigabi.rs": "a1c5961831ff7d9f8e317baa6ea9f7ff1d3c8787263c4bd6ad582f3898afe847"
+      },
+      "licence": "MIT",
+      "scope": "Redox syscall, privileged port/MMIO and signal ABI assembly. All three versions absent on both supported graphs; no Redox target approval requested."
+    },
+    {
+      "name": "redox_syscall",
+      "version": "0.9.5",
+      "archive_sha256": "580c875845b41ecb1564ad1ae4703044cef774145e3d7a94dc2b3fa7c97868fd",
+      "full_features": [
+        "default",
+        "userspace"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": null
+      },
+      "files": {
+        "src/arch/aarch64.rs": "55038555d33f4bdbd8cad98aadbb2bc51de2e6aac0c563944d2df9ee41baec6e",
+        "src/arch/riscv64.rs": "362cd8c24810cdf1b2cb23293564d074a25b0a38b0b420773ca31f4cce63f525",
+        "src/arch/x86_64.rs": "c7a50e8e188f86cdab378a934a87ba70e7fdac58492e13e2f2206af4b7edb5f5",
+        "src/arch/x86.rs": "521468c4c0f49d2d5ec9227ccc425c860372626bc7f9be01bebb6f3dc9cad96f",
+        "src/io/mmio_ptr.rs": "5534a8e119b00173e33824e894f749137e7e6f692a1585be608b735333685f76",
+        "src/io/mmio.rs": "f067b339e7e74c97f65cdf3511a12322b7ed989f16b719672d10ba603435ec63",
+        "src/io/pio.rs": "0868ef740ac4e2e3dcc7069d525ffb7b07456b8f5bd57134f433786998863f82",
+        "src/sigabi.rs": "755a846552f11527068baf69872b2cb86f21d886f977520243252ef0982b2665"
+      },
+      "licence": "MIT",
+      "scope": "Redox syscall, privileged port/MMIO and signal ABI assembly. All three versions absent on both supported graphs; no Redox target approval requested."
+    },
+    {
+      "name": "rustix",
+      "version": "0.38.44",
+      "archive_sha256": "fdb5bc1ae2baa591800df16c9ca78619bf65c0488b41b96ccec5d11220d8c154",
+      "full_features": [
+        "alloc",
+        "default",
+        "event",
+        "fs",
+        "libc-extra-traits",
+        "pipe",
+        "process",
+        "shm",
+        "std",
+        "system",
+        "thread",
+        "use-libc-auxv"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": [
+          "alloc",
+          "default",
+          "event",
+          "fs",
+          "libc-extra-traits",
+          "pipe",
+          "process",
+          "shm",
+          "std",
+          "system",
+          "thread",
+          "use-libc-auxv"
+        ]
+      },
+      "files": {
+        "build.rs": "7cc60a1a80836bff6c4f82dd938049dcec84736100bb81ebe6ac84513b0f4a45",
+        "src/backend/linux_raw/arch/aarch64.rs": "2a255c9135bc8a321c180f52b88eb2b158bc9170cd222149caeae63c24587d44",
+        "src/backend/linux_raw/arch/arm.rs": "165bccb5883d0136e55d42091183765f83d86e9d37a7cb2cec9ae8af32774db6",
+        "src/backend/linux_raw/arch/mips.rs": "aca20118a73063e4f2f8e7b261b1266d216e826df2a98cad99c53c40b0971af4",
+        "src/backend/linux_raw/arch/mips32r6.rs": "a7ebd0886e2e0d3b39996778fb665b68738f8a67d67b47e43fdba7e7cabb6d1a",
+        "src/backend/linux_raw/arch/mips64.rs": "ba947f286522b8034d509887cff8183cca34766aed5d37c91667dba22e2f608a",
+        "src/backend/linux_raw/arch/mips64r6.rs": "27de08ce1003a48f1d8b84746e724e8766b980e4ddc4febb6e20eb31067fb137",
+        "src/backend/linux_raw/arch/powerpc64.rs": "dfb001f8636a5e46d728900b0804fe6c374e5e18a6f0e76d7d62e0c07da74477",
+        "src/backend/linux_raw/arch/riscv64.rs": "41d33242d941030f46077dc2b1bc4c7913fe7630d693a5a7eef966bcf38f9d8b",
+        "src/backend/linux_raw/arch/s390x.rs": "5b30beb99a543c87c77428e488575bf9b6e7f07d790df573e7be38ad5dd314a6",
+        "src/backend/linux_raw/arch/thumb.rs": "2fd979ab421248c0a4c592bc0cefee63edc26528f469b71b63eaed35356e42e8",
+        "src/backend/linux_raw/arch/x86_64.rs": "e929036a1f3cf93ba538f4523b241605cc7b5e61f84ffe6d9d5cdbcb6f73e543",
+        "src/backend/linux_raw/arch/x86.rs": "8fba9762bb0e8bb9a71890cdf413441aa52d2bf41690ec0ef01c97ac11759a5b",
+        "src/backend/linux_raw/runtime/tls.rs": "6316060560a112c2e9cd9807cdba6e8c91414113a04a739160929ae9a67bba1f",
+        "src/backend/linux_raw/vdso_wrappers.rs": "fbb0213fa4f2d785e7b318fb4b3cbabe6030cccaa952665f0f03a78348e65ae1"
+      },
+      "licence": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "scope": "Linux raw x86_64 syscall and vDSO paths active on Linux GNU in both versions; absent Windows. build.rs also contains a string-only Arm compiler probe, which is an indicator, not x86 runtime assembly."
+    },
+    {
+      "name": "rustix",
+      "version": "1.1.6",
+      "archive_sha256": "e5e76742e5294153d4dde1207dbec5bdd81eef6fabdc0d2118babadabfd858aa",
+      "full_features": [
+        "alloc",
+        "default",
+        "event",
+        "fs",
+        "net",
+        "pipe",
+        "process",
+        "shm",
+        "std",
+        "system",
+        "time"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": [
+          "alloc",
+          "default",
+          "event",
+          "fs",
+          "net",
+          "pipe",
+          "process",
+          "shm",
+          "std",
+          "system",
+          "time"
+        ]
+      },
+      "files": {
+        "build.rs": "f7609b919173e7121493266d0f89db724a1e47bb105ebd05397f869639603eec",
+        "src/backend/linux_raw/arch/aarch64.rs": "12bb15064d25f0ed08e9eb8842c7dd570393222365b5a33206adc97406d2c061",
+        "src/backend/linux_raw/arch/arm.rs": "7cd435fa38fa553243e8d7c14294e90b948e9a2d21b5313e3b21493f3fb8f7e5",
+        "src/backend/linux_raw/arch/mips.rs": "4eb5e66070576b0978a7c0dc1d8f13fa29928cf022389cd66badcb7f3f5f014a",
+        "src/backend/linux_raw/arch/mips32r6.rs": "5a8a53e4af865ab1bfe2fe5c90f9c735d75fbbad49e59fc6e2b2436adc064797",
+        "src/backend/linux_raw/arch/mips64.rs": "a934ec7c25d59ea468196ca8b6c2b3bcf6068068f2a6ecfd1fa332905224580b",
+        "src/backend/linux_raw/arch/mips64r6.rs": "6bbe6e21e7fd4d88e0efd12f172ec25eb1ac78c7d50a509f302b2d3400aabff0",
+        "src/backend/linux_raw/arch/powerpc.rs": "30d33ca1e28e6e1a7745daa8e6063ff7eade5aea4468863fab3673bc006a3920",
+        "src/backend/linux_raw/arch/powerpc64.rs": "63074ee358ba97fcad955355b399b72e90390462139c57d6b3fddcf290592b72",
+        "src/backend/linux_raw/arch/riscv64.rs": "4cfeea0a45f5c43e26e2d6dd917f03489a2377bb88db619d9a921b0f4fc72655",
+        "src/backend/linux_raw/arch/s390x.rs": "797396e13e97feecb6eed9a9bc89017ab1faef381272ad013e144611681288d9",
+        "src/backend/linux_raw/arch/thumb.rs": "e5752ddd79820e783c6c8c977fca34e584908bc000e21ff5177872a7042c2d69",
+        "src/backend/linux_raw/arch/x86_64.rs": "823327d5f16bd33c586b2641817169d216f308d15a4b70eb3a77432623aa3b16",
+        "src/backend/linux_raw/arch/x86.rs": "c66e964b02413b1f9f843a845defb03b72f7c936dc1d35e53010870562bcd034",
+        "src/backend/linux_raw/vdso_wrappers.rs": "cf31e9520c46293e05f1cba001269d9b56db6e3114326ea132e095903a310e9a"
+      },
+      "licence": "Apache-2.0 WITH LLVM-exception OR Apache-2.0 OR MIT",
+      "scope": "Linux raw x86_64 syscall and vDSO paths active on Linux GNU in both versions; absent Windows. build.rs also contains a string-only Arm compiler probe, which is an indicator, not x86 runtime assembly."
+    },
+    {
+      "name": "sha2",
+      "version": "0.11.1",
+      "archive_sha256": "47d7069beb7d6ac7b9acd1039986e73443f24234f41074da099d6f994ac9ad19",
+      "full_features": [
+        "alloc",
+        "default",
+        "oid"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": [
+          "alloc",
+          "default",
+          "oid"
+        ],
+        "x86_64-unknown-linux-gnu": [
+          "alloc",
+          "default",
+          "oid"
+        ]
+      },
+      "files": {
+        "src/sha256/loongarch64_asm.rs": "eda57073e3dbcadca88e908dd261a2782b2bb89c06f1b97468a6ffd1cad407ff",
+        "src/sha256/riscv_zknh/unroll.rs": "089ce9eef00052b04d922927bf1ce4e8f79eeb8793c6c106a6a3567404fa5de3",
+        "src/sha512/loongarch64_asm.rs": "e66005dc654c69248834e05377eb3580d6a689960edcbd276ca08af7d3721354",
+        "src/sha512/riscv_zknh/unroll.rs": "5d265d187e9be2dee3860a8565ea9dc95f8ce205d38061d54c1ff824d423eb8a"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "scope": "RISC-V Zknh and LoongArch hash instruction modules; excluded on both x86_64 targets. x86 SHA/AVX2 implementation uses Rust intrinsics.",
+      "resolved_targets": {
+        "x86_64-unknown-linux-gnu": [
+          "alloc",
+          "default",
+          "oid"
+        ],
+        "x86_64-pc-windows-msvc": []
+      }
+    },
+    {
+      "name": "zeroize",
+      "version": "1.9.1",
+      "archive_sha256": "e13084392c5e4bc371903e2935a5eaeed24905a7511356b883835e18a78f6879",
+      "full_features": [
+        "alloc",
+        "default"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": [
+          "alloc",
+          "default"
+        ],
+        "x86_64-unknown-linux-gnu": [
+          "alloc",
+          "default"
+        ]
+      },
+      "files": {
+        "src/barrier.rs": "99d5495396318717a050570dc6e6cfbdba77f218689c9fac513e1060499453be"
+      },
+      "licence": "Apache-2.0 OR MIT",
+      "scope": "optimization_barrier uses a comment-only asm template with register input and readonly/preserves_flags/nostack on both x86_64 targets. It emits no machine instruction but is literally assembler under ADR-0005 D1."
+    },
+    {
+      "name": "zlib-rs",
+      "version": "0.6.8",
+      "archive_sha256": "b268e58e7c693d7c271f93ffc4ba3b380412554231c85bf61ca7af91042a4112",
+      "full_features": [
+        "rust-allocator",
+        "std"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": [
+          "rust-allocator",
+          "std"
+        ],
+        "x86_64-unknown-linux-gnu": [
+          "rust-allocator",
+          "std"
+        ]
+      },
+      "files": {
+        "src/crc32/acle.rs": "39f76291407a81de27e666dd654538e6a2cdb69287e9a1231d893e8348cc693a",
+        "src/crc32/loongarch.rs": "b7962a29415a9d641b0e365a164a4bc242faf7988c2a1672be5393eed8cd1c3f"
+      },
+      "licence": "Zlib",
+      "scope": "CRC assembly only in AArch64 ACLE and LoongArch modules, excluded on both x86_64 targets. x86 CRC uses Rust intrinsics."
+    },
+    {
+      "name": "zmij",
+      "version": "1.0.23",
+      "archive_sha256": "29666d0abbfad1e3dc4dcf6144730dd3a3ab225bbbdac83319345b1b44ccfc1b",
+      "full_features": [],
+      "targets": {
+        "x86_64-pc-windows-msvc": [],
+        "x86_64-unknown-linux-gnu": []
+      },
+      "files": {
+        "src/lib.rs": "0bdb8cd6a8835af08b5ca60956df283732f1b5aa940c750b1ec5dc78bf245b61"
+      },
+      "licence": "MIT",
+      "scope": "Comment-only register/compiler barriers in float formatting on x86_64 (also AArch64); active on both supported targets and emit no machine instructions."
+    },
+    {
+      "name": "windows-native-keyring-store",
+      "version": "1.1.0",
+      "archive_sha256": "063426e76fdec7438d56bb777f67e318a84a25c707b07e575cb8b78e10c028f8",
+      "full_features": [],
+      "targets": {
+        "x86_64-pc-windows-msvc": [],
+        "x86_64-unknown-linux-gnu": null
+      },
+      "resolved_targets": {
+        "x86_64-pc-windows-msvc": [],
+        "x86_64-unknown-linux-gnu": null
+      },
+      "files": {
+        "src/lib.rs": "5b4068c0e4e5fb728e31d0228821d73dfbd2bfb3a4a797356c7bfab5a09aa002",
+        "src/store.rs": "ee47aa2b1a615dde2d566b0e7db4770986a24c7e29fcb724ecbaefde6c720098",
+        "src/tests.rs": "3fcb08ed96b924612c802425f6de743c173dc03766ec573c1686a2a69be86e27",
+        "src/utils.rs": "87704f2a4c55e18630ae830bd96de3c031cd17a6f365ee1d22925dab120c607e",
+        "src/cred.rs": "64c7a692bf61a192f5e76962b2d47ef55a528a054a699682538189c004ed15df"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "scope": "Credential Manager generic Local persistence; CredReadW/CredWriteW/CredDeleteW/CredFree/GetLastError; fixed ASCII app target; ordered single bounded non-empty binary bundle; search/default features disabled.",
+      "approval": "Exact bounded owner native approval; source/hash reconciliation 2026-11-02; not a human source audit; revisit 2027-04-13"
+    },
+    {
+      "name": "cmov",
+      "version": "0.5.4",
+      "archive_sha256": "0c9ea0ac24bc397ab3c98583a3c9ba74fa56b09a4449bbe172b9b1ddb016027a",
+      "full_features": [],
+      "targets": {
+        "x86_64-pc-windows-msvc": [],
+        "x86_64-unknown-linux-gnu": []
+      },
+      "resolved_targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": []
+      },
+      "files": {
+        "src/backends/aarch64.rs": "85bb0412d6d387b9ff7112a9969a3e4432fd517db4b263e9a5ad8b43fb32d0e7",
+        "src/backends/soft.rs": "6d2dacbc9307dd6386f351778ad329b93a9b03a3de0ebd85f9ab18b34791753a",
+        "src/backends/x86.rs": "db21dfca86f27d4c333e521ead6309fde8f27d2e4319047cbc8a3e9be8975ead"
+      },
+      "licence": "Apache-2.0 OR MIT",
+      "scope": "x86_64 normal backend: test/xor/cmov conditional moves in src/backends/x86.rs; AArch64 and soft/ARM asm excluded. No Miri/custom cfg workaround.",
+      "approval": "Exact bounded owner native approval; source/hash reconciliation 2026-11-02; not a human source audit; revisit 2027-04-13"
+    },
+    {
+      "name": "event-listener",
+      "version": "5.4.2",
+      "archive_sha256": "5a23add41df1562121a9393cb065eab5146a1242410f23a644851e90cfd669d2",
+      "full_features": [
+        "default",
+        "parking",
+        "std"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": [
+          "default",
+          "parking",
+          "std"
+        ]
+      },
+      "resolved_targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": [
+          "default",
+          "parking",
+          "std"
+        ]
+      },
+      "files": {
+        "src/notify.rs": "bb5b9d495941f5513621df5f4d0264e838d0d5e97f75398d9aaabb31a946c43b"
+      },
+      "licence": "Apache-2.0 OR MIT",
+      "scope": "x86_64 !miri !loom notification fence: lock not qword ptr local UnsafeCell in src/notify.rs; no software selector feature.",
+      "approval": "Exact bounded owner native approval; source/hash reconciliation 2026-11-02; not a human source audit; revisit 2027-04-13"
+    },
+    {
+      "name": "num-bigint",
+      "version": "0.4.8",
+      "archive_sha256": "c89e69e7e0f03bea5ef08013795c25018e101932225a656383bd384495ecc367",
+      "full_features": [
+        "std"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": [
+          "std"
+        ]
+      },
+      "resolved_targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": [
+          "std"
+        ]
+      },
+      "files": {
+        "src/biguint/division.rs": "ded96527f0c3f3172ddd8dacfb98d27b32545ea4c64fe7a59af2c5c209324f5a"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "scope": "x86_64 !miri div_wide register div assembly in src/biguint/division.rs; num and secret-service constrain ^0.4. No no-asm Cargo feature.",
+      "approval": "Exact bounded owner native approval; source/hash reconciliation 2026-11-02; not a human source audit; revisit 2027-04-13"
+    },
+    {
+      "name": "zbus",
+      "version": "5.19.0",
+      "archive_sha256": "5db4be7c075cb421e4b7ee645541604239bd243ba7c357511f4ff3a74b555907",
+      "full_features": [
+        "blocking-api",
+        "tokio"
+      ],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": [
+          "blocking-api",
+          "tokio"
+        ]
+      },
+      "resolved_targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": [
+          "blocking-api",
+          "tokio"
+        ]
+      },
+      "files": {
+        "src/win32.rs": "554951caeaf3b9463f6c47e59f06cc2e07b964791a028e49686f187e5b984ca6",
+        "src/address/mod.rs": "14bfbfa71f7b17f7340d891ced5f4535bd2ef01b156f296df1da1f751b69536d",
+        "src/connection/builder.rs": "60c04930d8e581f349951ad95322f21ac9bc9cbdddb2fe9cfee3d02ac1999fdb",
+        "src/connection/handshake/client.rs": "5af34ba455924f1775bd70591a514af3baf2aa93c466b471d17248759547e586",
+        "src/connection/socket/unix.rs": "eea690019fb8b735bfdb05e8914276fd81414d7ca6cb79a088d47fdb1c75732b",
+        "src/fdo/peer.rs": "ef20cbbc68ba97d8e616947e5bb1dc44964134d9aa35eaf7d45a7ecfcf771e92"
+      },
+      "licence": "MIT",
+      "scope": "Linux Tokio local UDS async client only; rustix ancillary descriptor sendmsg/recvmsg compiled; direct libc/NSS/SO_PEERPIDFD peer helpers must remain uncalled. Never zbus peer_creds/peer_credentials, blocking API, TCP, unixexec, server or p2p. Mandatory compiled blocking-api feature from secret-service is not runtime permission.",
+      "approval": "Exact bounded owner native approval; source/hash reconciliation 2026-11-02; not a human source audit; revisit 2027-04-13"
+    },
+    {
+      "name": "signal-hook-registry",
+      "version": "1.4.8",
+      "archive_sha256": "c4db69cba1110affc0e9f7bcd48bbf87b3f4fc7c61fc9155afd4c469eb3d6c1b",
+      "full_features": [],
+      "targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": []
+      },
+      "resolved_targets": {
+        "x86_64-pc-windows-msvc": null,
+        "x86_64-unknown-linux-gnu": []
+      },
+      "files": {
+        "src/half_lock.rs": "b73a0c35a86ce08f583c241b6fab5ad5b5e2cfef93491af12c5f24251ad76e91",
+        "src/lib.rs": "71c67afdcaab442cc75955a6a17e5eb4e17fb725e0db7f8d1930023c680a7204",
+        "tests/unregister_signal.rs": "5baeebbde2bd7e63ae9a1f1e476d33f0bfd368c1edcdab3677de6a62b04f5118"
+      },
+      "licence": "MIT OR Apache-2.0",
+      "scope": "Linux libc signal/sigaction/raise surfaces compiled via upstream zbus -> Tokio process feature; no application process launch or signal registration is authorised by this proposal.",
+      "approval": "Exact bounded owner native approval; source/hash reconciliation 2026-11-02; not a human source audit; revisit 2027-04-13"
+    }
+  ]
+}
